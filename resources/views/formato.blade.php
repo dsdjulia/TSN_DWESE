@@ -64,6 +64,12 @@
                     </select>
                 </div>
 
+                {{-- Organo biopsiado --}}
+                <div class="mb-4">
+                    <label for="organo_biopsia">Organo Biopsiado (Opcional)</label>
+                    <input type="text" id="organo_biopsia" name="organo_biopsia" class="bg-slate-200 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-slate-500 focus:border-slate-500">
+                </div>
+
                 <!-- Fecha de recolección -->
                 <div class="mb-4">
                     <label for="fecha_recoleccion" class="block text-gray-700 font-medium">Fecha de Recolección</label>

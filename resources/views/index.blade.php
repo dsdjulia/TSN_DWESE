@@ -21,13 +21,6 @@
     </head>
     
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        
-        @foreach ($muestras as $m)
-            <div>
-                id: {{$m->id}} fecha: {{$m->fecha}} 
-                tipo:{{$m->tipo->nombre}}
-            </div>
-        @endforeach
-
+        <h1 class="text-2xl">Proyecto Subida de Nota Laravel</h1>
     </body>
 </html>

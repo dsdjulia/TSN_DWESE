@@ -17,6 +17,6 @@ class User extends Model
     ];
 
     public function muestras(){
-        return $this->hasMany(Muestras::class, 'idUser', 'id');
+        return $this->hasMany(Muestra::class, 'idUser', 'id');
     }
 }

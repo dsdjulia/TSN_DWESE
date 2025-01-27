@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Tipo_naturaleza extends Model
+class Sede extends Model
 {
     use HasFactory;
     
-    protected $table = "tipo_naturalezas"; 
+    protected $table = "sedes"; 
 
     protected $fillable = [
         'codigo',
@@ -17,6 +17,6 @@ class Tipo_naturaleza extends Model
     ];
 
     public function muestra(){
-        return $this->hasMany(Muestra::class, 'idTipoNaturaleza', 'id');
+        return $this->hasMany(Muestra::class, 'idSede', 'id');
     }
 }

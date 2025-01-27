@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Imagenes extends Model
+class Imagen extends Model
 {
     use HasFactory;
     
@@ -17,7 +17,7 @@ class Imagenes extends Model
         'idMuestra',
     ];
 
-    public function muestras(){
-        return $this->belongsTo(Tipo_naturaleza::class, 'idMuestra', 'id');
+    public function muestra(){
+        return $this->belongsTo(Muestra::class, 'idMuestra', 'id');
     }
 }

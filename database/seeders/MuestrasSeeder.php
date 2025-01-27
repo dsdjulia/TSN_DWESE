@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Muestra;
+use App\Models\Muestras;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MuestraSeeder extends Seeder
+class MuestrasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Muestra::factory(100)->create();
+        Muestras::factory(100)->create();
 
     }
 }

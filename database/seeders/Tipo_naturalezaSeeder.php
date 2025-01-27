@@ -2,22 +2,22 @@
 
 namespace Database\Seeders;
 
-use App\Models\Tipo;
+use App\Models\Tipo_naturaleza;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TipoSeeder extends Seeder
+class Tipo_naturalezaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Tipo::factory()->create([
+        Tipo_naturaleza::factory()->create([
             'codigo' => 'B',
             'nombre' => 'Biopsia',
         ]);
 
-        Tipo::factory(100)->create();
+        Tipo_naturaleza::factory(100)->create();
     }
 }

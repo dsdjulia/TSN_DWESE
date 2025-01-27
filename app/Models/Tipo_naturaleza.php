@@ -6,11 +6,11 @@ use App\Models\Muestra;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Tipo extends Model
+class Tipo_naturaleza extends Model
 {
     use HasFactory;
     
-    protected $table = "tipo"; 
+    protected $table = "tipo_naturalezas"; 
 
     protected $fillable = [
         'codigo',
@@ -18,6 +18,6 @@ class Tipo extends Model
     ];
 
     public function muestras(){
-        return $this->hasMany(Muestra::class, 'idTipo', 'id');
+        return $this->hasMany(Muestras::class, 'idTipoNaturaleza', 'id');
     }
 }

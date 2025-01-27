@@ -11,11 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo', function (Blueprint $table) {
+        Schema::create('muestras', function (Blueprint $table) {
             $table->id();
             $table->string('codigo');
-            $table->string('nombre');
+            $table->string('descripcionCalidad');
+            $table->date('fecha');
+            $table->string('organo');
             $table->timestamps();
+
+            
+            $table->unsignedBigInteger('idTipoNaturaleza');
+
+            $table->foreign('idTipoNaturaleza')->references('id')->on('tipo_naturalezas');
         });
     }
 
@@ -24,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo');
+        Schema::dropIfExists('muestras');
     }
 };

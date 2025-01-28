@@ -20,7 +20,7 @@ class Calidad extends Model
         return $this->hasMany(Muestra::class, 'idCalidad', 'id');
     }
 
-    public function tipoEstudio(){
-        return $this->belongsTo(Tipo_estudio::class, 'idTipoEstudio', 'id');
+    public function tipoEstudios(){
+        return $this->HasMany(Calidad::class, 'idCalidad', 'id');
     }
 }

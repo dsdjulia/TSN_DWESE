@@ -15,8 +15,8 @@ class Tipo_estudio extends Model
         'nombre',
     ];
 
-    public function calidades(){
-        return $this->hasMany(Calidad::class, 'idTipoEstudio', 'id');
+    public function calidad(){
+        return $this->belongsTo(Tipo_estudio::class, 'idCalidad', 'id');
     }
 
     public function interpretaciones(){

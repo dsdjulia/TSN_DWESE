@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->timestamps();
+
+            $table->unsignedBigInteger('tipoCalidad');
+
+            $table->foreign('idCalidad')->references('id')->on('calidades');
+
         });
     }
 

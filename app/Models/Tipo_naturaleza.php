@@ -16,7 +16,7 @@ class Tipo_naturaleza extends Model
         'nombre',
     ];
 
-    public function muestra(){
+    public function muestras(){
         return $this->hasMany(Muestra::class, 'idTipoNaturaleza', 'id');
     }
 }

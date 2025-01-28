@@ -14,9 +14,15 @@ class User extends Model
 
     protected $fillable = [
         'email',
+        'idSede',
     ];
+
+    public function sede(){
+        return $this->belongsTo(Sede::class, 'idSede', 'id');
+    }
 
     public function muestras(){
         return $this->hasMany(Muestra::class, 'idUser', 'id');
     }
+
 }

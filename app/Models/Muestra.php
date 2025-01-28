@@ -43,7 +43,12 @@ class Muestra extends Model
 
 
 
-    public function imagen(){
+    public function imagenes(){
         return $this->hasMany(Imagen::class, 'idMuestra', 'id');
+    }
+
+
+    public function interpretaciones(){
+        return $this->belongsToMany(Interpretacion::class);
     }
 }

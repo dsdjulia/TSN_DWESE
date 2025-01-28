@@ -16,7 +16,11 @@ class Sede extends Model
         'nombre',
     ];
 
-    public function muestra(){
+    public function muestras(){
         return $this->hasMany(Muestra::class, 'idSede', 'id');
+    }
+
+    public function users(){
+        return $this->hasMany(User::class, 'idSede', 'id');
     }
 }

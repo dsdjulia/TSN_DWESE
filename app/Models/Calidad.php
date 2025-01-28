@@ -16,7 +16,7 @@ class Calidad extends Model
         'idTipoEstudio'
     ];
 
-    public function muestra(){
+    public function muestras(){
         return $this->hasMany(Muestra::class, 'idCalidad', 'id');
     }
 

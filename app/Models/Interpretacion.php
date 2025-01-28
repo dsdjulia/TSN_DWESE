@@ -19,4 +19,9 @@ class Interpretacion extends Model
     public function tipoEstudio(){
         return $this->belongsTo(Tipo_estudio::class, 'idTipoEstudio', 'id');
     }
+
+
+    public function muestras(){
+        return $this->belongsToMany(Muestra::class);
+    }
 }

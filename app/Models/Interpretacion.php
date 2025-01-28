@@ -20,8 +20,7 @@ class Interpretacion extends Model
         return $this->belongsTo(Tipo_estudio::class, 'idTipoEstudio', 'id');
     }
 
-
-    public function muestras(){
-        return $this->belongsToMany(Muestra::class);
+    public function muestras_interpretaciones(){
+        return $this->hasMany(Muestra_Interpretacion::class, 'idInterpretacion', 'id');
     }
 }

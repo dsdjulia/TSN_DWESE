@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->timestamps();
 
-            $table->unsignedBigInteger('tipoCalidad');
+            $table->unsignedBigInteger('idCalidad');
 
             $table->foreign('idCalidad')->references('id')->on('calidades');
 

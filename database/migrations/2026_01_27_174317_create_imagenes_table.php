@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('zoom');
             $table->timestamps();
 
+            $table->unsignedBigInteger('idMuestra');
+
             $table->foreign('idMuestra')->references('id')->on('muestras');
         });
     }

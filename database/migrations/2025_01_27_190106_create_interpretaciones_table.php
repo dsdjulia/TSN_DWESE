@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('texto');
             $table->timestamps();
+
+            $table->unsignedBigInteger('idTipoEstudio');
+
+            $table->foreign('idTipoEstudio')->references('id')->on('tipo_estudios');
         });
     }
 

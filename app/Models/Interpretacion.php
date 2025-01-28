@@ -13,6 +13,7 @@ class Interpretacion extends Model
 
     protected $fillable = [
         'texto',
+        'idTipoEstudio',
     ];
 
     public function tipoEstudio(){

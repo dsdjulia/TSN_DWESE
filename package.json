@@ -21,6 +21,8 @@
         "vite": "^6.0"
     },
     "dependencies": {
+        "@cloudinary/react": "^1.13.1",
+        "@cloudinary/url-gen": "^1.21.0",
         "sweetalert2": "^11.15.10"
     }
 }

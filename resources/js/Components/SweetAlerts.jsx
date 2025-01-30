@@ -1,6 +1,9 @@
 import React from 'react'
 import Swal from 'sweetalert2'
+
 // rafce para escribir la estructura
+// https://sweetalert2.github.io/#usage
+
 
 const SweetAlerts = () => {
 

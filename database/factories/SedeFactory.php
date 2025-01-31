@@ -17,7 +17,8 @@ class SedeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'codigo' => fake()->numberBetween(1, 10),
+            'nombre' => fake()->name(),
         ];
     }
 }

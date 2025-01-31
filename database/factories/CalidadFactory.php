@@ -17,7 +17,8 @@ class CalidadFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre' => fake()->name(),
+            'idTipoEstudio' => fake()->numberBetween(1,10),
         ];
     }
 }

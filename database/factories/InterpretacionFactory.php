@@ -17,7 +17,8 @@ class InterpretacionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'texto' => fake()->Str::random(50),
+            'idTipoEstudio'=>fake()->numberBetween(1,10),
         ];
     }
 }

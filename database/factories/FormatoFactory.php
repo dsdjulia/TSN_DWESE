@@ -17,7 +17,8 @@ class FormatoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'codigo'=>fake()->numberBetween(1,200),
+            'nombre' =>fake()->name(),
         ];
     }
 }

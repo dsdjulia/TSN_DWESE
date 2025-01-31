@@ -20,7 +20,11 @@ class MuestraFactory extends Factory
     {
         return [
             'fecha' => fake()->date(),
-            'idTipo' => fake()->numberBetween(1,4),
+            'idTipoNaturaleza' => fake()->numberBetween(1, 4),
+            'idUser' => fake()->numberBetween(1, 4),
+            'idFormato' => fake()->numberBetween(1, 4),
+            'idSede' => fake()->numberBetween(1, 4),
+            'idCalidad' => fake()->numberBetween(1, 4),
         ];
     }
 }

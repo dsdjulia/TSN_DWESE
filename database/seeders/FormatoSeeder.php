@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Formato;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class FormatoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Formato::factory(100)->create();
     }
 }

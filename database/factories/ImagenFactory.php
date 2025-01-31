@@ -17,7 +17,9 @@ class ImagenFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'ruta' =>fake()->Str::random(20),
+            'zoom' =>fake()->regexify('[x]{2, 4, 6}'),
+            'idMuestra' =>fake()->numberBetween(1,10),
         ];
     }
 }

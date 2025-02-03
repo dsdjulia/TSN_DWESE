@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/muestras', [MuestraController::class, 'mostrar'])->name('muestras');
-Route::get('/sedes', [SedeController::class, 'mostrar'])->name('sedes');
+Route::get('/sedes', [SedeController::class, 'getJson'])->name('sedes');
 
 
 Route::get('/test', function () {

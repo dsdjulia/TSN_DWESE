@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class SedeController extends Controller
 {
-    //
-    public function mostrar(){
-        $sedes = Sede::all();
-        return view('welcome')->with(["sedes" => $sedes]);
+    public function getJson(){
+        return response()->json(Sede::all());
     }
 }

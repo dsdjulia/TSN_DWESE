@@ -22,7 +22,7 @@ class Muestra_Interpretacion extends Model
         return $this->belongsTo(Muestra::class, 'idMuestra', 'id');
     }
 
-   public function interpretacion(){
-        return $this->belongsTo(Interpretacion::class, 'idInterpretacion', 'id');
-   }
+    public function interpretacion(){
+            return $this->belongsTo(Interpretacion::class, 'idInterpretacion', 'id');
+    }
 }

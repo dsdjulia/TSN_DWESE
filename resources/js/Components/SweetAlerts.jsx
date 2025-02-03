@@ -1,22 +1,18 @@
-import React from 'react'
+import React from 'react';
+import Swal from 'sweetalert2';
 
 const AlertFailed = () => {
-
-    function error(){
+    function error() {
         Swal.fire({
             title: 'Error al enviar el formulario',
             text: 'Complete todos los campos',
             icon: 'error',
             confirmButtonText: 'Volver'
-        })
+        });
     }
 
-  return (
-    <div>
-        {error()}
-    </div>
-  )
-}
+    return <>{error()}</>;
+};
 
 const AlertSuccess = () => {
     function success() {
@@ -29,15 +25,13 @@ const AlertSuccess = () => {
         });
     }
 
-    return (
-        <div>
-            {success()}
-        </div>
-    );
+    return <>{success()}</>;
 };
 
-SweetAlerts.AlertSuccess = AlertSuccess;
-SweetAlerts.AlertFailed = AlertFailed;
+// Crear un objeto para exportar
+const SweetAlerts = {
+    AlertSuccess,
+    AlertFailed
+};
 
-
-export default SweetAlerts
+export default SweetAlerts;

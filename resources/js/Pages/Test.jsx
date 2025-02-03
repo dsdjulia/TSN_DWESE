@@ -1,12 +1,11 @@
 import React from "react";
-import SweetAlertsFailed from "../Components/SweetAlertsFailed";
-import SweetAlertsSuccess from "../Components/SweetAlertsSuccess";
+import SweetAlerts from "@/Components/SweetAlerts";
 
 const TestPage = () => {
   return (
     <div>
       <h1>Esta es una página de prueba</h1>
-      <SweetAlertsFailed/>
+      <button onClick={<SweetAlerts></SweetAlerts>}> Boton ejemplo</button>
     </div>
   );
 };

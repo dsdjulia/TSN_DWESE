@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TipoController;
+use App\Models\Muestra;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/muestras', [TipoController::class, 'mostrar']);
+Route::get('/muestras', [MuestraController::class, 'mostrar']);
 
 Route::get('/test', function () {
     return Inertia::render('Test');

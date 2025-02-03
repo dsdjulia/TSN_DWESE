@@ -3,13 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tipo>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Imagen>
  */
-class TipoFactory extends Factory
+class ImagenFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +17,9 @@ class TipoFactory extends Factory
     public function definition(): array
     {
         return [
-            'codigo' => fake()->numberBetween(1,200),
-            'nombre' => fake()->name(),
+            'ruta' =>fake()->Str::random(20),
+            'zoom' =>fake()->regexify('[x]{2, 4, 6}'),
+            'idMuestra' =>fake()->numberBetween(1,10),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Tipo_estudio;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,8 @@ class InterpretacionFactory extends Factory
     public function definition(): array
     {
         return [
-            'texto' => fake()->Str::random(50),
-            'idTipoEstudio'=>fake()->numberBetween(1,10),
+            'texto' => fake()->text(),
+            'idTipoEstudio'=> Tipo_estudio::all()->random()->id,
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Muestra;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,9 @@ class ImagenFactory extends Factory
     public function definition(): array
     {
         return [
-            'ruta' =>fake()->Str::random(20),
+            'ruta' =>fake()->text(),
             'zoom' =>fake()->regexify('[x]{2, 4, 6}'),
-            'idMuestra' =>fake()->numberBetween(1,10),
+            'idMuestra' => Muestra::all()->random()->id,
         ];
     }
 }

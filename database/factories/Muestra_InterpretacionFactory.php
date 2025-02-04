@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Interpretacion;
+use App\Models\Muestra;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +19,9 @@ class Muestra_InterpretacionFactory extends Factory
     public function definition(): array
     {
         return [
-            'descripcion' =>fake()->Str::random(100),
-            'idMuestra'=>fake()->numberBetween(1,10),
-            'idInterpretacion'=>fake()->numberBetween(1,10),
+            'descripcion' =>fake()->text(),
+            'idMuestra'=> Muestra::all()->random()->id,
+            'idInterpretacion'=> Interpretacion::all()->random()->id,
         ];
     }
 }

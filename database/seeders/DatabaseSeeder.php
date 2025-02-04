@@ -16,16 +16,16 @@ class DatabaseSeeder extends Seeder
     {
         
         $this->call([
-            CalidadSeeder::class,
-            FormatoSeeder::class,
-            ImagenSeeder::class,
-            InterpretacionSeeder::class,
-            Muestra_InterpretacionSeeder::class,
-            MuestraSeeder::class,
-            SedeSeeder::class,
             Tipo_estudioSeeder::class,
             Tipo_naturalezaSeeder::class,
+            FormatoSeeder::class,
+            SedeSeeder::class,
+            CalidadSeeder::class,
             UserSeeder::class,
+            MuestraSeeder::class,
+            InterpretacionSeeder::class,
+            Muestra_InterpretacionSeeder::class,
+            ImagenSeeder::class,
         ]);
       
     }

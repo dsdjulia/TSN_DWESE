@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Tipo_estudio;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +19,7 @@ class CalidadFactory extends Factory
     {
         return [
             'nombre' => fake()->name(),
-            'idTipoEstudio' => fake()->numberBetween(1,10),
+            'idTipoEstudio' => Tipo_estudio::all()->random()->id,
         ];
     }
 }

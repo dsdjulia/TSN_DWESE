@@ -2,6 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Calidad;
+use App\Models\Formato;
+use App\Models\Sede;
+use App\Models\Tipo_naturaleza;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -19,12 +24,15 @@ class MuestraFactory extends Factory
     public function definition(): array
     {
         return [
+            'codigo' => fake()->numberBetween(1,100),
+            'descripcionCalidad' => fake()->text(),
             'fecha' => fake()->date(),
-            'idTipoNaturaleza' => fake()->numberBetween(1, 4),
-            'idUser' => fake()->numberBetween(1, 4),
-            'idFormato' => fake()->numberBetween(1, 4),
-            'idSede' => fake()->numberBetween(1, 4),
-            'idCalidad' => fake()->numberBetween(1, 4),
+            'organo' => fake()->name(),
+            'idTipoNaturaleza' => Tipo_naturaleza::all()->random()->id,
+            'idUser' => User::all()->random()->id,
+            'idFormato' => Formato::all()->random()->id,
+            'idSede' => Sede::all()->random()->id,
+            'idCalidad' => Calidad::all()->random()->id,
         ];
     }
 }

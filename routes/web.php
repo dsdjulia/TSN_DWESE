@@ -27,10 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/muestras', [MuestraController::class, 'mostrar'])->name('muestras');
-Route::get('/getJsonMuestras', [MuestraController::class, 'getJson'])->name('muestras');
-
-
 
 Route::get('/sedes', [SedeController::class, 'getJson'])->name('sedes');
 

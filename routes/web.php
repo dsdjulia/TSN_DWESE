@@ -22,11 +22,11 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/muestras', function () {
-    return Inertia::render('Muestras');
+    return Inertia::render('proyecto/Muestras');
 });
 
 Route::get('/referencia', function () {
-    return Inertia::render('Referencia');
+    return Inertia::render('proyecto/Referencia');
 });
 
 Route::get('/nuevaMuestra',[proyectoController::class, 'insercion']) -> name('proyecto.insercion');

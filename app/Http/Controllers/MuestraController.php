@@ -40,7 +40,7 @@ class MuestraController extends Controller
             $muestra = Muestra::create($data);
             return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra], 201);
         }
-        
+
     }
 
     function updateMuestra(Request $request , $idMuestra){

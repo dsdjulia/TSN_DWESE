@@ -1,11 +1,13 @@
 <?php
 
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\SedeController;
+use App\Http\Controllers\TipoController;
+use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\proyectoController;
-use App\Http\Controllers\TipoController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/',[proyectoController::class, 'index']) -> name('proyecto.index');
 
@@ -25,7 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-<<<<<<< HEAD
 Route::get('/muestras', [MuestraController::class, 'mostrar'])->name('muestras');
 Route::get('/getJsonMuestras', [MuestraController::class, 'getJson'])->name('muestras');
 
@@ -33,8 +34,6 @@ Route::get('/getJsonMuestras', [MuestraController::class, 'getJson'])->name('mue
 
 Route::get('/sedes', [SedeController::class, 'getJson'])->name('sedes');
 
-=======
->>>>>>> ce3ae84fb99402323a7ccc25974aff7428f6270a
 
 Route::get('/test', function () {
     return Inertia::render('Test');

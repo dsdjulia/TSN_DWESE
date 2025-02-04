@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImagenController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -9,6 +10,7 @@ use Illuminate\Container\Attributes\Auth;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\proyectoController;
+use App\Http\Controllers\UserController;
 
 /* Route::get('/',[proyectoController::class, 'index']) -> name('proyecto.index'); */
 
@@ -51,10 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-Route::get('/sedes', [SedeController::class, 'getJson'])->name('sedes');
-
 
 Route::get('/test', function () {
     return Inertia::render('/Test');

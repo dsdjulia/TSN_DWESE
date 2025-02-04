@@ -9,27 +9,27 @@ use Illuminate\Support\Facades\Validator;
 
 class MuestraController extends Controller
 {
-    //
-    function mostrar(){
+
+    public function getAllJson(){
         $muestras = Muestra::all();
-        return view('welcome')->with(["muestras" => $muestras]);
-    }
-    
-    function getJson(){
-        $JsonMuestras = Muestra::all();
-        return response()->json($JsonMuestras);
+        return response()->json($muestras);
     }
 
-    function insertMuestra(Request $request){
+    public function getMuestraJson($id){
+        $muestra = Muestra::find($id);
+        return response()->json($muestra);
+    }
+
+    public function insertMuestra(Request $request){
 
         $data = [
             'codigoMuestra' => $request->input('codigo_muestra'),
-            'descripcion' => $request->input('descripcion'),
             'fecha' => $request->input('fecha'),
             'naturaleza' => $request->input('naturaleza_muestra'),
             'formato' => $request->input('formato'),
             'calidad' => $request->input('calidad_muestra'),
-            'interpretacion' => $request->input('interpretacion')
+            'interpretacion' => $request->input('interpretacion'),
+            'descripcion' => $request->input('descripcion'),
         ];
 
         $validacion = $this->validatorMuestras($data);
@@ -43,7 +43,7 @@ class MuestraController extends Controller
 
     }
 
-    function updateMuestra(Request $request , $idMuestra){
+    public function updateMuestra(Request $request , $idMuestra){
         $muestra = Muestra::find($idMuestra);
 
         if (!$muestra) {
@@ -52,12 +52,12 @@ class MuestraController extends Controller
 
         $data = [
             'codigoMuestra' => $request->input('codigo_muestra'),
-            'descripcion' => $request->input('descripcion'),
             'fecha' => $request->input('fecha'),
             'naturaleza' => $request->input('naturaleza_muestra'),
             'formato' => $request->input('formato'),
             'calidad' => $request->input('calidad_muestra'),
-            'interpretacion' => $request->input('interpretacion')
+            'interpretacion' => $request->input('interpretacion'),
+            'descripcion' => $request->input('descripcion'),
         ];
 
         $validator = $this->validatorMuestras($data);
@@ -72,7 +72,7 @@ class MuestraController extends Controller
 
     }
 
-    function deleteMuestra($idMuestra){
+    public function deleteMuestra($idMuestra){
         $muestra = Muestra::find($idMuestra);
 
         if(!$muestra){
@@ -83,7 +83,7 @@ class MuestraController extends Controller
         return response()->json(["message" => "Muestra eliminada con éxito"], 200);
     }
 
-    function validatorMuestras($datos){
+    public function validatorMuestras($datos){
         $validator = Validator::make($datos,[
             'codigoMuestra' => 'required|between:1,8|string',
             'descripcion' => 'required|between:1,50|string',
@@ -97,11 +97,7 @@ class MuestraController extends Controller
             'codigoMuestra.required' => 'El código es obligatorio',
             'codigoMuestra.between' => 'El código debe tener entre 1 y 8 carácteres',
             'codigoMuestra.string' => 'El código debe ser una cadena de texto',
-
-            'descripcion.required' => 'La descripción es obligatoria',
-            'descripcion.between' => 'La descripción debe tener entre 1 y 50 carácteres',
-            'descripcion.string' => 'La descripción debe ser una cadena de texto',
-
+            
             'fecha.required' => 'La fecha es obligatoria',
             'fecha.date' => 'La fecha debe ser una fecha',
             'fecha.date_format' => 'La fecha debe estar en formato dd-mm-yyyy',
@@ -118,9 +114,13 @@ class MuestraController extends Controller
             
             'interpretacion.required' => 'La interpretación es obligatoria',
             'interpretacion.string' => 'La interpretación debe ser una cadena de texto',
+
+            'descripcion.required' => 'La descripción es obligatoria',
+            'descripcion.between' => 'La descripción debe tener entre 1 y 50 carácteres',
+            'descripcion.string' => 'La descripción debe ser una cadena de texto',
             
         ]);
-
+        
         return $validator;
     }
 }

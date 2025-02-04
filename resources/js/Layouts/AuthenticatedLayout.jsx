@@ -25,19 +25,19 @@ export default function AuthenticatedLayout({ header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
-                                    href="/public/"
+                                    href="../public/"
                                     active={route().current('dashboard')}
                                 >
                                     Inicio
                                 </NavLink>
                                 <NavLink
-                                   href="/public/muestras"
+                                   href="../public/muestras"
                                     active={route().current('dashboard')}
                                 >
                                     Muestras
                                 </NavLink>
                                 <NavLink
-                                    href="/public/referencia"
+                                    href="../public/referencia"
                                     active={route().current('dashboard')}
                                 >
                                     Referencia
@@ -48,10 +48,10 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
                             <div className="relative ms-3 flex items-center gap-1">
                                 <button type="button" className="inline-flex flex-col items-start rounded-md border border-transparent bg-white px-3 py-2 text-sm font-bold leading-4 text-gray-900 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none justify-start" >
-                                    <img className='w-10 mr-2' src="/public/notificaciones.webp" alt="notificaciones" />
+                                    <img className='w-10 mr-2' src="../public/notificaciones.webp" alt="notificaciones" />
                                 </button>
                                 <div className='block-relative' >
-                                    <img className='object-cover w-12 h-12 rounded-full custom-position' src="/public/usuario.webp" alt="foto usuario" />
+                                    <img className='object-cover w-12 h-12 rounded-full custom-position' src="../public/usuario.webp" alt="foto usuario" />
                                 </div>
                                 <Dropdown>
                                     <Dropdown.Trigger>

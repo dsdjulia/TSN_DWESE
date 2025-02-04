@@ -50,7 +50,15 @@ class MuestraController extends Controller
             return response()->json(["error" => "Muestra no encontrada"], 404);
         }
 
-        $data = $request->all();
+        $data = [
+            'codigoMuestra' => $request->input('codigo_muestra'),
+            'descripcion' => $request->input('descripcion'),
+            'fecha' => $request->input('fecha'),
+            'naturaleza' => $request->input('naturaleza_muestra'),
+            'formato' => $request->input('formato'),
+            'calidad' => $request->input('calidad_muestra'),
+            'interpretacion' => $request->input('interpretacion')
+        ];
 
         $validator = $this->validatorMuestras($data);
 

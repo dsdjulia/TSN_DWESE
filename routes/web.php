@@ -57,7 +57,8 @@ Route::get('/sedes', [SedeController::class, 'getJson'])->name('sedes');
 
 
 Route::get('/test', function () {
-    return Inertia::render('Test');
-});
+    return Inertia::render('/Test');
+})->middleware(['auth', 'verified'])->name('test');
+
 
 require __DIR__.'/auth.php';

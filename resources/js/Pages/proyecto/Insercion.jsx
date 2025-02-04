@@ -81,7 +81,7 @@ export default function Insercion({ auth }) {
                             >
                                 Naturaleza de la muestra
                             </label>
-                            <select
+                            <select //! SEGUN LO QUE SELECCIONEMOS AQUI
                                 id="naturaleza_muestra"
                                 name="naturaleza_muestra"
                                 class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -176,7 +176,7 @@ export default function Insercion({ auth }) {
                             >
                                 Calidad de la muestra
                             </label>
-                            <select
+                            <select //! AQUI
                                 id="calidad_muestra"
                                 name="calidad_muestra"
                                 class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -203,7 +203,7 @@ export default function Insercion({ auth }) {
                             >
                                 Interpretación
                             </label>
-                            <select
+                            <select //! AQUI
                                 id="interpretacion"
                                 name="interpretacion"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm mb-6"

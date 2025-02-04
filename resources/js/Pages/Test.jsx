@@ -1,6 +1,5 @@
 import React from "react";
-/* import SweetAlertsFailed from "../Components/SweetAlertsFailed";
-import SweetAlertsSuccess from "../Components/SweetAlertsSuccess"; */
+
 
 const TestPage = () => {
   return (

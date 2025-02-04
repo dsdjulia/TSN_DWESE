@@ -1,11 +1,17 @@
 import React from "react";
-import SweetAlerts from "@/Components/SweetAlerts";
+import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../Components/SweetAlerts";
+
 
 const TestPage = () => {
   return (
     <div>
       <h1>Esta es una página de prueba</h1>
-      <button onClick={<SweetAlerts></SweetAlerts>}> Boton ejemplo</button>
+      <button onClick={showErrorAlert}> Boton Alerta</button>
+      <button onClick={showSuccessAlert}> Boton Success</button>
+      
+      <button onClick={() => showModificableAlert('Titulo ejemplo', 'texto ejemplo', 'success')}> Alerta Modificable</button> 
+      {/* Si no usas () => Se ejecuta directamente */}
+
     </div>
   );
 };

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\TipoController;
+use Illuminate\Container\Attributes\Auth;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\proyectoController;
@@ -16,9 +17,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+Route::get('/muestras', function () {
+    return Inertia::render('Muestras');
+});
 
-Route::get('/muestras',[proyectoController::class, 'muestras']) -> name('proyecto.muestras');
-Route::get('/referencia',[proyectoController::class, 'referencia']) -> name('proyecto.referencia');
+Route::get('/referencia', function () {
+    return Inertia::render('Referencia');
+});
+
 Route::get('/nuevaMuestra',[proyectoController::class, 'insercion']) -> name('proyecto.insercion');
 
 Route::middleware('auth')->group(function () {

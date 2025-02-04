@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import React from "react";
 
 export default function ModalEliminar({ id }) {
@@ -7,12 +8,12 @@ export default function ModalEliminar({ id }) {
                 <h2>¿Eliminar Muestra?</h2>
 
                 <div className="flex justify-around mt-4">
-                    <button className="px-4 py-2 bg-red-400 text-white rounded-lg shadow-md hover:bg-red-500">
+                    <Link href="../eliminar" className="px-4 py-2 bg-red-400 text-white rounded-lg shadow-md hover:bg-red-500">
                         Eliminar
-                    </button>
-                    <button class="text-gray-700 hover:underline focus:outline-none">
+                    </Link>
+                    <Link href="../cerrar" class="text-gray-700 hover:underline focus:outline-none">
                         Cancelar
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>

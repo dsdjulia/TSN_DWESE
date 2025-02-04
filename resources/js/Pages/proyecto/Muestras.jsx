@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 
 export default function Muestras({auth}) {
@@ -46,21 +46,21 @@ export default function Muestras({auth}) {
                 <td className="p-2">{muestra.tipo}</td>
                 <td className="p-2">{muestra.fecha}</td>
                 <td className="p-2 flex space-x-2 justify-center">
-                  <button className="text-blue-500 hover:text-blue-700" onClick>
+                  <Link href="../editar" className="text-blue-500 hover:text-blue-700" onClick>
                     <img className="w-8" src="../public/icono-editar.png" alt="editar" />
-                  </button>
-                  <button className="text-red-500 hover:text-red-700">
-                    <img className="w-8" src="/public/icono-borrar.webp" alt="borrar" />
-                  </button>
+                  </Link>
+                  <Link href="../eliminar" className="text-red-500 hover:text-red-700">
+                    <img className="w-8" src="../public/icono-borrar.webp" alt="borrar" />
+                  </Link>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className="flex justify-start mt-4">
-          <a href="/public/nuevaMuestra" className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]">
+          <Link href="../nuevaMuestra" className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]">
             Nueva Muestra
-          </a>
+          </Link>
         </div>
       </div>
     </div>

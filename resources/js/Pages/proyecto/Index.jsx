@@ -2,9 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
 import { Head, Link } from "@inertiajs/react";
 
-
-
-export default function Index({ auth}) {
+export default function Index({ auth }) {
     /* Esto nos permite acceder al controlador proyectos y al usuario autenticado */
 
     return (
@@ -23,15 +21,18 @@ export default function Index({ auth}) {
                         ¡Hola de nuevo! Bienvenido al archivo de muestras MEDAC
                     </h1>
                     <div className="flex space-x-4">
-
-                       <Link href="muestras" className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
+                        <Link
+                            href="../muestras"
+                            className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
                         >
-                            Ver Muestras</Link>
-                        <a href="public/nuevaMuestra" className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
+                            Ver Muestras
+                        </Link>
+                        <Link
+                            href="../nuevaMuestra"
+                            className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
                         >
                             Nueva Muestra
-                        </a>
-
+                        </Link>
                     </div>
                 </div>
             </div>

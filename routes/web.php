@@ -15,6 +15,22 @@ use App\Http\Controllers\proyectoController;
 Route::get('/', function () {
     return Inertia::render('proyecto/Index');
 })->middleware(['auth', 'verified'])->name('index');
+Route::get('/index', function () {
+    return Inertia::render('proyecto/Index');
+})->middleware(['auth', 'verified'])->name('index');
+
+
+Route::get('/nuevaMuestra', function () {
+    return Inertia::render('proyecto/Insercion');
+})->middleware(['auth', 'verified'])->name('nuevamuestra');
+
+Route::get('/muestras', function () {
+    return Inertia::render('proyecto/Muestras');
+})->middleware(['auth', 'verified'])->name('muestras');
+
+Route::get('/referencia', function () {
+    return Inertia::render('proyecto/Referencia');
+})->middleware(['auth', 'verified'])->name('nuevamuestra');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -29,7 +45,6 @@ Route::get('/referencia', function () {
     return Inertia::render('proyecto/Referencia');
 });
 
-Route::get('/nuevaMuestra',[proyectoController::class, 'insercion']) -> name('proyecto.insercion');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

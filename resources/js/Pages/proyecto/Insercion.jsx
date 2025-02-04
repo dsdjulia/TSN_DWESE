@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function Insercion({ auth }) {
     const calidadesBucal = {
@@ -248,7 +248,7 @@ export default function Insercion({ auth }) {
                         <div className="mt-4 space-x-4 flex">
                             <div class="relative w-auto h-32 inline-block">
                                 <img
-                                    src="/public/muestra1.png"
+                                    src="../public/muestra1.png"
                                     alt="Imagen 1"
                                     class="w-auto h-32 object-cover rounded-lg"
                                 />
@@ -258,7 +258,7 @@ export default function Insercion({ auth }) {
                             </div>
                             <div class="relative w-auto h-32 inline-block">
                                 <img
-                                    src="/public/muestra2.png"
+                                    src="../public/muestra2.png"
                                     alt="Imagen 2"
                                     class="w-auto h-32 object-cover rounded-lg"
                                 />
@@ -268,7 +268,7 @@ export default function Insercion({ auth }) {
                             </div>
                             <div class="relative w-auto h-32 inline-block">
                                 <img
-                                    src="/public/muestra3.png"
+                                    src="../public/muestra3.png"
                                     alt="Imagen 3"
                                     class="w-auto h-32 object-cover rounded-lg"
                                 />
@@ -278,9 +278,10 @@ export default function Insercion({ auth }) {
                             </div>
                         </div>
                         <div className="flex justify-start mt-4">
-                            <button className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]">
+                            <Link href="../guardar" className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]">
                                 Guardar Muestra
-                            </button>
+                            </Link>
+
                         </div>
                     </div>
                 </div>

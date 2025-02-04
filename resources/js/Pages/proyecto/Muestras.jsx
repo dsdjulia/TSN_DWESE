@@ -47,7 +47,7 @@ export default function Muestras({auth}) {
                 <td className="p-2">{muestra.fecha}</td>
                 <td className="p-2 flex space-x-2 justify-center">
                   <button className="text-blue-500 hover:text-blue-700" onClick>
-                    <img className="w-8" src="/public/icono-editar.png" alt="editar" />
+                    <img className="w-8" src="../public/icono-editar.png" alt="editar" />
                   </button>
                   <button className="text-red-500 hover:text-red-700">
                     <img className="w-8" src="/public/icono-borrar.webp" alt="borrar" />

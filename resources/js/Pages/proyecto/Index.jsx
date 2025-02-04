@@ -1,7 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
-import { Head } from "@inertiajs/react";
-
+import { Head, Link } from "@inertiajs/react";
 
 
 
@@ -24,11 +23,11 @@ export default function Index({ auth}) {
                         ¡Hola de nuevo! Bienvenido al archivo de muestras MEDAC
                     </h1>
                     <div className="flex space-x-4">
-                        <a href="/public/muestras" className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
+
+                       <Link href="muestras" className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
                         >
-                            Ver Muestras
-                        </a>
-                        <a href="/public/nuevaMuestra" className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
+                            Ver Muestras</Link>
+                        <a href="public/nuevaMuestra" className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
                         >
                             Nueva Muestra
                         </a>

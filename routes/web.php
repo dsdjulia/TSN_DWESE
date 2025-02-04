@@ -37,6 +37,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+Route::get('/muestras', function () {
+    return Inertia::render('proyecto/Muestras');
+});
+
+Route::get('/referencia', function () {
+    return Inertia::render('proyecto/Referencia');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -1,7 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
-import { Head } from "@inertiajs/react";
-
+import { Head, Link } from "@inertiajs/react";
 
 
 

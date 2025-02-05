@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class SedeController extends Controller
 {
-    public function getJson(){
-        $sedesJson =  response()->json(Sede::all());
-        return Inertia::render('Welcome',['sedes' => $sedesJson]);
+    public function getSedeJson($id){
+        $sede = Sede::find($id);
+        return response()->json($sede);
     }
 }

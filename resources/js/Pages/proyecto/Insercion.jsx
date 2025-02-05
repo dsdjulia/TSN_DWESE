@@ -1,32 +1,65 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import React from "react";
+import React, { useState } from "react";
 import { Head, Link } from "@inertiajs/react";
 
+
 export default function Insercion({ auth }) {
-    const calidadesBucal = {
-        B1: "Muestra válida para examen",
-        B2: "Muestra válida para examen aunque limitada por cantidad insuficiente de células",
-        B3: "Muestra válida para examen aunque limitada por presencia de sangre",
-        B4: "Muestra válida para examen aunque limitada por contaminación con alimentos",
-        B5: "Muestra válida para examen aunque limitada por contaminación con saliva",
-        B6: "Muestra válida para examen aunque limitada por presencia de material extraño",
-        B7: "Muestra no valorable por ...",
-        B8: "Muestra no valorable por contaminación con microorganismos",
-        B9: "Muestra no valorable por ...",
-        B10: "Muestra no valorable por daño mecánico durante la toma",
+
+
+    const citologicoCervicoVaginal = {
+
+        calidad: {
+            c1: 'Toma válida para examen.',
+            c2: 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
+            c3: 'Toma válida para examen aunque limitada por hemorragia.',
+            c4: 'Toma válida para examen aunque limitada por escasez de células.',
+            c5: 'Toma válida para examen aunque limitada por intensa citolisis.',
+            c6: 'Toma válida para examen aunque limitada por...',
+            c7: 'Toma no valorable por desecación.',
+            c8: 'Toma no valorable por ausencia de células...',
+            c9: 'Toma no valorable por...'
+        },
+        interpretacion: {
+            "1.1": 'Predominio de células epiteliales escamosas superficiales.',
+            "1.2": 'Predominio de células epiteliales escamosas intermedias.',
+            "1.3": 'Predominio de células epiteliales escamosas parabasales.',
+            "1.4": 'Polinucleares neutrófilos.',
+            "1.5": 'Hematíes.',
+            "1.6": 'Células endocervicales en exocervix.',
+            "1.7": 'Células metaplásicas en exocérvix.',
+            "1.8": 'Células metaplásicas inmaduras.',
+            "1.9": 'Células reactivas.',
+            "1.10": 'Células endometriales en mujer ≥ de 40 años.',
+            "1.11": 'Alteraciones celulares sugerentes con HPV.',
+            "1.12": 'Alteraciones celulares sugerentes de Herpes.',
+            "1.13": 'Células neoplásicas.',
+            "1.14": 'Células superficiales e intermedias con cambios atípicos.',
+            "1.15": 'Células intermedias y parabasales con algunos cambios atípicos.',
+            "1.16": 'Células parabasales con algunos cambios atípicos.',
+            "1.17": 'Células escamosas de significado incierto.',
+            "1.18": 'Células epiteliales glandulares de significado incierto.',
+            "1.19": 'Estructuras micóticas correspondientes a Candida albicans.',
+            "1.20": 'Estructuras micóticas correspondientes a Candida glabrata.',
+            "1.21": 'Estructuras bacterianas con disposición característica de actinomyces.',
+            "1.22": 'Estructuras bacterianas correspondiente de Gardnerella vaginalis.',
+            "1.23": 'Estructuras bacterianas de naturaleza cocácea.',
+            "1.24": 'Estructuras bacterianas sugerentes de Leptothrix.',
+            "1.25": 'Estructuras correspondientes a Trichomonas vaginalis.',
+            "1.26": 'Células histiocitarias multinucleadas.',
+            "1.27": 'Células epiteliales de tipo escamoso con intensos cambios atípicos.',
+            "1.28": 'Presencia de epitelio endometrial sin cambios atípicos.',
+            "1.29": 'Células epiteliales de apariencia glandular con núcleos amplios e irregulares.'
+        }
     };
 
-    const interpretacionesBucal = {
-        5.1: "Presencia de células epiteliales escamosas",
-        5.2: "Presencia de células epiteliales cilíndricas",
-        5.3: "Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos)",
-        5.4: "Presencia de células glandulares",
-        5.5: "Presencia de células metaplásicas",
-        5.6: "Presencia de células atípicas sugestivas de neoplasia",
-        5.7: "Presencia de microorganismos (bacterias, hongos, levaduras)",
-        5.8: "Presencia de células anormales con cambios citológicos",
-        5.9: "Ausencia de células significativas para el análisis",
-    };
+    // Ahora debo sacar esto del metodo
+
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState(citologicoCervicoVaginal.calidad) // Aquí modifico la selección
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState(citologicoCervicoVaginal.interpretacion) // Aquí modifico la selección
+
+    const handleSelect = (seleccion) => {
+        console.log(seleccion.target.value);
+    }
 
     return (
         <AuthenticatedLayout
@@ -81,7 +114,7 @@ export default function Insercion({ auth }) {
                             >
                                 Naturaleza de la muestra
                             </label>
-                            <select
+                            <select onChange={handleSelect} //! SEGUN LO QUE SELECCIONEMOS AQUI
                                 id="naturaleza_muestra"
                                 name="naturaleza_muestra"
                                 class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -176,7 +209,7 @@ export default function Insercion({ auth }) {
                             >
                                 Calidad de la muestra
                             </label>
-                            <select
+                            <select //! AQUI
                                 id="calidad_muestra"
                                 name="calidad_muestra"
                                 class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -185,7 +218,7 @@ export default function Insercion({ auth }) {
                                     Seleccione calidad de muestra
                                 </option>
 
-                                {Object.entries(calidadesBucal).map(
+                                {Object.entries(calidadSeleccionada).map(
                                     ([key, contenido]) => (
                                         <option value={key}>
                                             <strong>{contenido}</strong>{" "}
@@ -203,7 +236,7 @@ export default function Insercion({ auth }) {
                             >
                                 Interpretación
                             </label>
-                            <select
+                            <select //! AQUI
                                 id="interpretacion"
                                 name="interpretacion"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm mb-6"
@@ -211,7 +244,7 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione interpretación
                                 </option>
-                                {Object.entries(interpretacionesBucal).map(
+                                {Object.entries(interpretacionSeleccionada).map(
                                     (
                                         [
                                             key,

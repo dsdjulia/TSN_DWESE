@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImagenController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -9,6 +10,7 @@ use Illuminate\Container\Attributes\Auth;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\proyectoController;
+use App\Http\Controllers\UserController;
 
 /* Route::get('/',[proyectoController::class, 'index']) -> name('proyecto.index'); */
 
@@ -43,14 +45,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+<<<<<<< HEAD
 
 Route::get('/sedes', [SedeController::class, 'getJson'])->name('sedes');
 Route::get('/guardar', [SedeController::class, 'getJson'])->name('guardar');
 Route::get('/eliminar', [SedeController::class, 'getJson'])->name('eliminar');
 
 
+=======
+>>>>>>> b1ae962be82de85272f9a968f3f3a08b22e862b1
 Route::get('/test', function () {
-    return Inertia::render('Test');
-});
+    return Inertia::render('/Test');
+})->middleware(['auth', 'verified'])->name('test');
+
 
 require __DIR__.'/auth.php';

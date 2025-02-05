@@ -180,25 +180,25 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un órgano biopsiado
                                 </option>
-                                <option value="corazon">Corazón</option>
-                                <option value="bazo">Bazo</option>
-                                <option value="higado">Hígado</option>
-                                <option value="feto">Feto</option>
-                                <option value="estomago">Estómago</option>
-                                <option value="cerebro">Cerebro</option>
-                                <option value="rinon">Riñón</option>
-                                <option value="lengua">Lengua</option>
-                                <option value="utero">Útero</option>
-                                <option value="ovario">Ovario</option>
-                                <option value="intestino">Intestino</option>
-                                <option value="trompa_falopio">
+                                <option value="BC">Corazón</option>
+                                <option value="BB">Bazo</option>
+                                <option value="BH">Hígado</option>
+                                <option value="BF">Feto</option>
+                                <option value="BES">Estómago</option>
+                                <option value="BCB">Cerebro</option>
+                                <option value="BR">Riñón</option>
+                                <option value="BL">Lengua</option>
+                                <option value="BU">Útero</option>
+                                <option value="BO">Ovario</option>
+                                <option value="BI">Intestino</option>
+                                <option value="BTF">
                                     Trompa de Falopio
                                 </option>
-                                <option value="esofago">Esófago</option>
-                                <option value="pancreas">Páncreas</option>
-                                <option value="testiculo">Testículo</option>
-                                <option value="piel">Piel</option>
-                                <option value="pulmon">Pulmón</option>
+                                <option value="BEF">Esófago</option>
+                                <option value="BPA">Páncreas</option>
+                                <option value="BT">Testículo</option>
+                                <option value="BPI">Piel</option>
+                                <option value="BP">Pulmón</option>
                             </select>
                         </div>
 

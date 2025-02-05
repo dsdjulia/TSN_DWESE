@@ -18,7 +18,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
-                                <Link href={route('index')}>
+                                <Link href="../public/index">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
@@ -51,7 +51,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                     <img className='w-10 mr-2' src="../public/notificaciones.webp" alt="notificaciones" />
                                 </button>
                                 <div className='block-relative' >
-                                    <img className='object-cover w-12 h-12 rounded-full custom-position' src="../public/usuario.webp" alt="foto usuario" />
+                                    <img className='object-cover w-12 h-12 rounded-full custom-position' src="../public/user.png" alt="foto usuario" />
                                 </div>
                                 <Dropdown>
                                     <Dropdown.Trigger>

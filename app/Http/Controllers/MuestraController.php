@@ -21,7 +21,6 @@ class MuestraController extends Controller
     }
 
     public function insertMuestra(Request $request){
-
         $data = [
             'codigoMuestra' => $request->input('codigo_muestra'),
             'fecha' => $request->input('fecha'),
@@ -40,7 +39,6 @@ class MuestraController extends Controller
             $muestra = Muestra::create($data);
             return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra], 201);
         }
-
     }
 
     public function updateMuestra(Request $request , $idMuestra){

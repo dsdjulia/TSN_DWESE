@@ -13,6 +13,6 @@ class InterpretacionSeeder extends Seeder
      */
     public function run(): void
     {
-        Interpretacion::factory(100)->create();
+        Interpretacion::factory(10)->create();
     }
 }

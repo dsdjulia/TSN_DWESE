@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idMuestra');
             $table->unsignedBigInteger('idInterpretacion');
 
-            $table->foreign('idMuestra')->references('id')->on('muestras');
-            $table->foreign('idInterpretacion')->references('id')->on('interpretaciones');
+            $table->foreign('idMuestra')->references('id')->on('muestras')->onDelete('cascade');
+            $table->foreign('idInterpretacion')->references('id')->on('interpretaciones')->onDelete('cascade');
 
         });
     }

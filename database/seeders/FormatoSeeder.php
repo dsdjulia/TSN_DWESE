@@ -13,6 +13,6 @@ class FormatoSeeder extends Seeder
      */
     public function run(): void
     {
-        Formato::factory(100)->create();
+        Formato::factory(10)->create();
     }
 }

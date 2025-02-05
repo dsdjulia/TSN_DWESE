@@ -187,8 +187,8 @@ export default function Insercion({ auth }) {
     const [biopsiaHidden, setBiopsiaHidden] = useState('hidden') // Aquí modifico la selección
     const [calidadHidden, setCalidadHidden] = useState('hidden') // Aquí modifico la selección
 
-    const [calidadSeleccionada, setCalidadSeleccionada] = useState(datos.CV.calidad) // Aquí modifico la selección
-    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState(datos.CV.interpretacion) // Aquí modifico la selección
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState('') // Aquí modifico la selección
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') // Aquí modifico la selección
 
     const handleSelect = (seleccion) => {
         const clave = seleccion.target.value

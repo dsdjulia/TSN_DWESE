@@ -242,7 +242,6 @@ export default function Insercion({ auth }) {
                                 class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                                 multiple
                             />
-
                         </div>
 
                         <div className="mt-4 space-x-4 flex">
@@ -278,10 +277,12 @@ export default function Insercion({ auth }) {
                             </div>
                         </div>
                         <div className="flex justify-start mt-4">
-                            <Link href="../guardar" className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]">
-                                Guardar Muestra
+                            <Link
+                                href={route("guardar")}
+                                className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
+                            >
+                                Guardar muestra
                             </Link>
-
                         </div>
                     </div>
                 </div>

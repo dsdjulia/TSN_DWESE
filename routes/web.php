@@ -22,7 +22,7 @@ Route::get('/index', function () {
 
 Route::get('/nuevaMuestra', function () {
     return Inertia::render('proyecto/Insercion');
-})->middleware(['auth', 'verified'])->name('nuevamuestra');
+})->middleware(['auth', 'verified'])->name('nuevaMuestra');
 
 Route::get('/muestras', function () {
     return Inertia::render('proyecto/Muestras');
@@ -30,20 +30,11 @@ Route::get('/muestras', function () {
 
 Route::get('/referencia', function () {
     return Inertia::render('proyecto/Referencia');
-})->middleware(['auth', 'verified'])->name('nuevamuestra');
+})->middleware(['auth', 'verified'])->name('referencia');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::get('/muestras', function () {
-    return Inertia::render('proyecto/Muestras');
-});
-
-Route::get('/referencia', function () {
-    return Inertia::render('proyecto/Referencia');
-});
 
 
 Route::middleware('auth')->group(function () {
@@ -54,6 +45,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/sedes', [SedeController::class, 'getJson'])->name('sedes');
+Route::get('/guardar', [SedeController::class, 'getJson'])->name('guardar');
+Route::get('/eliminar', [SedeController::class, 'getJson'])->name('eliminar');
 
 
 Route::get('/test', function () {

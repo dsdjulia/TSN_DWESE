@@ -22,13 +22,13 @@ export default function Index({ auth }) {
                     </h1>
                     <div className="flex space-x-4">
                         <Link
-                            href="../muestras"
+                            href={route('muestras')}
                             className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
                         >
                             Ver Muestras
                         </Link>
                         <Link
-                            href="../nuevaMuestra"
+                            href={route('nuevaMuestra')}
                             className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
                         >
                             Nueva Muestra

@@ -1,6 +1,7 @@
+import { Link } from "@inertiajs/react";
 import React from "react";
 
-export default function ModalModificar({ id }) {
+export default function ModalModificar({id, onClose}) {
     const calidadesBucal = {
         B1: "Muestra válida para examen",
         B2: "Muestra válida para examen aunque limitada por cantidad insuficiente de células",
@@ -27,6 +28,7 @@ export default function ModalModificar({ id }) {
     };
 
     return (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
         <div class="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-2/3 shadow-gray-500">
             <div class="space-y-4">
                 <h2>Modificar Muestra</h2>
@@ -171,6 +173,7 @@ export default function ModalModificar({ id }) {
                     </select>
                 </div>
 
+
                 <hr className="my-4 border-gray-300 mb-10 mt-10" />
 
                 <div>
@@ -192,7 +195,7 @@ export default function ModalModificar({ id }) {
                 <div className="mt-4 space-x-4 flex">
                     <div class="relative w-auto h-32 inline-block">
                         <img
-                            src="/public/muestra1.png"
+                            src="../public/muestra1.png"
                             alt="Imagen 1"
                             class="w-auto h-32 object-cover rounded-lg"
                         />
@@ -202,7 +205,7 @@ export default function ModalModificar({ id }) {
                     </div>
                     <div class="relative w-auto h-32 inline-block">
                         <img
-                            src="/public/muestra2.png"
+                            src="../public/muestra2.png"
                             alt="Imagen 2"
                             class="w-auto h-32 object-cover rounded-lg"
                         />
@@ -212,7 +215,7 @@ export default function ModalModificar({ id }) {
                     </div>
                     <div class="relative w-auto h-32 inline-block">
                         <img
-                            src="/public/muestra3.png"
+                            src="../public/muestra3.png"
                             alt="Imagen 3"
                             class="w-auto h-32 object-cover rounded-lg"
                         />
@@ -221,15 +224,16 @@ export default function ModalModificar({ id }) {
                         </a>
                     </div>
                 </div>
-                <div className="flex justify-around mt-4">
-                    <button className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]">
+                <div className="flex justify-start gap-8 mt-4">
+                    <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]" href={route('guardar')+"/"+id}>
                         Guardar Muestra
-                    </button>
-                    <button class="text-gray-700 hover:underline focus:outline-none">
+                    </Link>
+                    <button class="text-red-700 hover:underline focus:outline-none " onClick={onClose}>
                         Cancelar
                     </button>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

@@ -1,7 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
 import { Head, Link } from "@inertiajs/react";
-
+import { useState } from "react";
+import ModalModificar from "./ModalModificar";
+import ModalEliminar from "./ModalEliminar";
 
 export default function Muestras({auth}) {
   const muestras = [
@@ -9,8 +11,8 @@ export default function Muestras({auth}) {
     { id: 2, nombre: 'María López', tipo: 'Esputo', fecha: '2024-02-01' },
     { id: 3, nombre: 'Carlos Gómez', tipo: 'Sangre', fecha: '2024-02-02' }
   ];
-
-
+  const [modificarAbierto, setModificarAbierto] = useState(false);
+  const [eliminarAbierto, setEliminarAbierto] = useState(false);
 
 
   return (
@@ -46,12 +48,12 @@ export default function Muestras({auth}) {
                 <td className="p-2">{muestra.tipo}</td>
                 <td className="p-2">{muestra.fecha}</td>
                 <td className="p-2 flex space-x-2 justify-center">
-                  <Link href="../editar" className="text-blue-500 hover:text-blue-700" onClick>
+                  <button className="text-blue-500 hover:text-blue-700" onClick={() => setModificarAbierto(true)} >
                     <img className="w-8" src="../public/icono-editar.png" alt="editar" />
-                  </Link>
-                  <Link href="../eliminar" className="text-red-500 hover:text-red-700">
+                  </button>
+                  <button onClick={() => setEliminarAbierto(true)} className="text-red-500 hover:text-red-700" >
                     <img className="w-8" src="../public/icono-borrar.webp" alt="borrar" />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}
@@ -64,6 +66,7 @@ export default function Muestras({auth}) {
         </div>
       </div>
     </div>
-
+    {modificarAbierto && <ModalModificar onClose={() => setModificarAbierto(false)} />}
+    {eliminarAbierto && <ModalEliminar onClose={() => setEliminarAbierto(false)} />}
     </AuthenticatedLayout>);
 }

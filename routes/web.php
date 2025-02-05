@@ -45,6 +45,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+Route::get('/sedes', [SedeController::class, 'getJson'])->name('sedes');
+Route::get('/guardar', [SedeController::class, 'getJson'])->name('guardar');
+Route::get('/eliminar', [SedeController::class, 'getJson'])->name('eliminar');
+
+
 Route::get('/test', function () {
     return Inertia::render('/Test');
 })->middleware(['auth', 'verified'])->name('test');

@@ -13,11 +13,11 @@ class Tipo_naturalezaSeeder extends Seeder
      */
     public function run(): void
     {
-        Tipo_naturaleza::factory()->create([
+        /* Tipo_naturaleza::factory()->create([
             'codigo' => 'B',
             'nombre' => 'Biopsia',
-        ]);
+        ]); */
 
-        Tipo_naturaleza::factory(100)->create();
+        Tipo_naturaleza::factory(10)->create();
     }
 }

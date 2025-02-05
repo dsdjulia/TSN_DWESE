@@ -82,7 +82,7 @@ class MuestraController extends Controller
     }
 
     public function validatorMuestras($datos){
-        $validator = Validator::make($datos,[
+        $validator = Validator::make($datos, [
             'codigoMuestra' => 'required|between:1,8|string',
             'descripcion' => 'required|between:1,50|string',
             'fecha' => 'required|date|date_format:d-m-Y',

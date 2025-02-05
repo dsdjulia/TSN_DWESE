@@ -179,7 +179,7 @@ export default function Insercion({ auth }) {
             }
         }
     };
-    
+
 
 
     // Ahora debo sacar esto del metodo
@@ -224,13 +224,13 @@ export default function Insercion({ auth }) {
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */
             header={
-                <h2 classNameName="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                     Nueva Muestra
                 </h2> /* heredamos el header e introducimos este texto */
             }
         >
             <Head title="Insercion" />
-            <div classNameName="flex flex-col items-center justify-center min-h-screen bg-[#e5eaf0] pb-10">
+            <div className="flex flex-col items-center justify-center min-h-screen bg-[#e5eaf0] pb-10">
                 <div className="p-6  mx-auto space-y-6 bg-white border rounded-md shadow-lg w-2/3 m-10 mb-2">
                     <div className="space-y-4">
                         <div>
@@ -398,7 +398,7 @@ export default function Insercion({ auth }) {
                         </div>
 
                         <div className={calidadHidden}>
-                            <label 
+                            <label
                                     for="detalles_calidad_muestra"
                                     className="block text-sm font-semibold text-gray-700"
                                     >
@@ -417,7 +417,7 @@ export default function Insercion({ auth }) {
                             <select //! AQUI
                                 id="interpretacion"
                                 name="interpretacion"
-                                classNameName="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm mb-6"
+                                className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm mb-6"
                             >
                                 <option value="">
                                     Seleccione interpretación
@@ -437,7 +437,7 @@ export default function Insercion({ auth }) {
                             </select>
                         </div>
 
-                        <hr classNameName="my-4 border-gray-300" />
+                        <hr className="my-4 border-gray-300" />
 
                         <div>
                             <label
@@ -455,7 +455,7 @@ export default function Insercion({ auth }) {
                             />
                         </div>
 
-                        <div classNameName="mt-4 space-x-4 flex">
+                        <div className="mt-4 space-x-4 flex">
                             <div className="relative w-auto h-32 inline-block">
                                 <img
                                     src="../public/muestra1.png"
@@ -490,7 +490,7 @@ export default function Insercion({ auth }) {
                         <div classNameName="flex justify-start mt-4">
                             <Link
                                 href={route("guardar")}
-                                classNameName="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
+                                className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
                             >
                                 Guardar muestra
                             </Link>

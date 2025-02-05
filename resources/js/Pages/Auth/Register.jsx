@@ -11,7 +11,7 @@ export default function Register() {
         email: "",
         password: "",
         password_confirmation: "",
-        sede: ""
+        idSede: ""
     });
 
     const submit = (e) => {
@@ -104,19 +104,19 @@ export default function Register() {
                 </div>
                 <div>
                     <InputLabel
-                        htmlFor="sede"
+                        htmlFor="idSede"
                         value="Sede Medac"
                         className="mt-4"
                     />
                     <TextInput
-                        id="sede"
-                        type="sede"
-                        name="sede"
-                        value={data.sede}
+                        id="idSede"
+                        type="idSede"
+                        name="idSede"
+                        value={data.idSede}
                         className="mt-1 block w-full h-10 border-gray-300 border"
                         autoComplete="medac arena"
                         onChange={(e) =>
-                            setData("password_confirmation", e.target.value)
+                            setData("idSede", e.target.value)
                         }
                         required
                     />

@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/test', function () {
-    return Inertia::render('/Test');
+    return Inertia::render('Test');
 })->middleware(['auth', 'verified'])->name('test');
 
 

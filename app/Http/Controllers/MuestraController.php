@@ -31,9 +31,8 @@ class MuestraController extends Controller
         $data = [
             'codigo' => $request->input(key: 'codigoMuestra'),
             'fecha' => $request->input('fecha'),
-            'idTipoEstudio' => $request->input('tipoEstudio'),
             'organo' => $request->input('organo'),
-            'idTipoNaturaleza' => $request->input('naturaleza'),
+            'tipoNaturaleza' => $request->input('naturaleza'),
             'idFormato' => $request->input('formato'),
             'idCalidad' => $request->input('calidad'),
             'descripcionCalidad' => $request->input('descripcionCalidad'),

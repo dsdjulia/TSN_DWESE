@@ -204,14 +204,18 @@ export default function Insercion({ auth }) {
         const clave = seleccion.target.value
         console.log(clave);
 
-        if (clave == 'B'|| clave == 'BV'){
+        if (clave == 'B'|| clave == 'BV'){ // Evaluamos si es una biopsia
             setBiopsiaHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
 
-        } else {
+        } else if(clave in datos){ // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
             setBiopsiaHidden('hidden')
             setCalidadSeleccionada(datos[clave].calidad)
             setInterpretacionSeleccionada(datos[clave].interpretacion)
 
+        } else { // Si no tiene propiedades lo dejamos vacio
+            setBiopsiaHidden('hidden')
+            setCalidadSeleccionada('')
+            setInterpretacionSeleccionada('')
         }
 
     }
@@ -232,9 +236,8 @@ export default function Insercion({ auth }) {
     const [form, setForm] = useState({
         codigoMuestra: "",
         fecha: "",
-        tipoEstudio: "",
+        tipoNaturaleza: "",
         organo: "",
-        naturaleza: "",
         formato: "",
         calidad: "",
         descripcionCalidad: "",
@@ -257,7 +260,10 @@ export default function Insercion({ auth }) {
     }
 
     const handleDeletePhoto = (seleccion) => {
+
         const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
+        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img !== photoDeleted)); // quito del array la imagen eliminada
+    }   
 
         seleccion.target.parentElement.remove();
 
@@ -335,11 +341,11 @@ export default function Insercion({ auth }) {
                                 for="naturaleza_muestra"
                                 className="block text-sm font-semibold text-gray-700"
                             >
-                                Tipo de naturaleza0
+                                Tipo de naturaleza
                             </label>
                             <select onChange={(e) => { handleSelect(e); handleData(e); }}
-                                id="tipoEstudio"
-                                name="tipoEstudio"
+                                id="tipoNaturaleza"
+                                name="tipoNaturaleza"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                             >
                                 <option value="">
@@ -395,28 +401,6 @@ export default function Insercion({ auth }) {
                                 <option value="BP">Pulmón</option>
                             </select>
                         </div>
-                        {/* <div>
-                            <label
-                                for="naturaleza_muestra"
-                                className="block text-sm font-semibold text-gray-700"
-                            >
-                                Naturaleza de la muestra
-                            </label>
-                            <select
-                                id="naturaleza"
-                                name="naturaleza"
-                                className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                                onChange={handleData}
-                            >
-                                <option value="">
-                                    Seleccione la naturaleza de la muestra
-                                </option>
-
-                                <option value="ES">Semen</option>
-                                <option value="I">Improntas</option>
-                                <option value="F">Frotis</option>
-                            </select>
-                        </div> */}
 
                         <div>
                             <label
@@ -536,6 +520,8 @@ export default function Insercion({ auth }) {
                                 multiple
                             />
                         </div>
+                        
+                        <div className="mt-4 flex flex-wrap gap-4" id="containerImages">
 
                         <div className="mt-4 flex flex-wrap gap-4">
                             {/* Aqui voy añadiendo las nuevas fotos, falta borrarlas del array*/}

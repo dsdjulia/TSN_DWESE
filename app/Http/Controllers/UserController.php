@@ -35,7 +35,7 @@ class UserController extends Controller
             'updated_at' => date("Y-m-d"),
         ];
 
-        $validacion = $this->validatorUser($data);
+        $validacion = $this->validatorUserInsert($data);
 
         if($validacion->fails()){
             return response()->json(["error" => $validacion -> errors()]);
@@ -60,7 +60,7 @@ class UserController extends Controller
             'updated_at' => date("Y-m-d"),
         ];
 
-        $validator = $this->validatorUser($data);
+        $validator = $this->validatorUserUpdate($data);
 
         if ($validator->fails()) {
             return response()->json(["error" => $validator->errors()]);
@@ -84,7 +84,7 @@ class UserController extends Controller
     }
 
 
-    public function validatorUser($datos){
+    public function validatorUserInsert($datos){
         $validator = Validator::make($datos ,[
             'name' => 'required|max:255|string',
             'email' => 'required|email|unique:'.User::class,
@@ -105,6 +105,29 @@ class UserController extends Controller
             'password.string' => 'La contraseña debe ser un texto válido.',
         
             'idSede.required' => 'El ID de la sede es obligatorio.',
+            'idSede.regex' => 'El código de sede debe ser un número entre 1 y 15.',
+        ]);
+
+        return $validator;
+    }
+
+    public function validatorUserUpdate($datos){
+        $validator = Validator::make($datos ,[
+            'name' => 'max:255|string',
+            'email' => 'email|unique:'.User::class,
+            'password' => 'min:4|string',
+            'idSede' => ['regex:/^(1[0-5]|[1-9])$/'],
+        ],
+        [
+            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'name.string' => 'El nombre debe ser un texto válido.',
+
+            'email.email' => 'El correo electrónico debe tener un formato válido.',
+            'email.unique' => 'Este correo electrónico ya está registrado.',
+        
+            'password.min' => 'La contraseña debe tener al menos 4 caracteres.',
+            'password.string' => 'La contraseña debe ser un texto válido.',
+        
             'idSede.regex' => 'El código de sede debe ser un número entre 1 y 15.',
         ]);
 

@@ -17,15 +17,15 @@ Route::get('/imagen/{id}', [ImagenController::class, 'getImagenJson'])->name('im
 
 
 // CRUD Muestras
-Route::get('/allMuestras', [MuestraController::class, 'getAllJson'])->name('MuestrasController.getAllJson');
+Route::get('/muestras', [MuestraController::class, 'getAllJson'])->name('MuestrasController.getAllJson');
 Route::get('/muestra/{id}', [MuestraController::class, 'getMuestraJson'])->name('MuestrasController.getMuestraJson');
-Route::delete('/delete/{id}', [MuestraController::class, 'deleteMuestra'])->name('MuestrasController.deleteMuestra');
-Route::post('/createMuestra', [MuestraController::class, 'insertMuestra'])->name('MuestrasController.insertarMuestra');
-Route::patch('/updateMuestra/{id}', [MuestraController::class, 'updateMuestra'])->name('MuestrasController.updateMuestra');
+Route::post('/muestra', [MuestraController::class, 'insertMuestra'])->name('MuestrasController.insertarMuestra');
+Route::delete('/muestra/{id}', [MuestraController::class, 'deleteMuestra'])->name('MuestrasController.deleteMuestra');
+Route::patch('/muestra/{id}', [MuestraController::class, 'updateMuestra'])->name('MuestrasController.updateMuestra');
 
 // CRUD Usuarios
-Route::get('/allUsers', [UserController::class, 'getAllJson'])->name('UserController.getAllJson');
+Route::get('/users', [UserController::class, 'getAllJson'])->name('UserController.getAllJson');
 Route::get('/user/{id}', [UserController::class, 'getUserJson'])->name('UserController.getUserJson');
+Route::post('/user', [UserController::class, 'insertUser'])->name('UserController.insertUser');
 Route::delete('/user/{id}', [UserController::class, 'deleteUser'])->name('UserController.deleteUser');
-Route::post('/createUser', [UserController::class, 'insertUser'])->name('UserController.insertUser');
-Route::patch('/updateUser/{id}', [UserController::class, 'updateUser'])->name('UserController.updateUser');
+Route::patch('/user/{id}', [UserController::class, 'updateUser'])->name('UserController.updateUser');

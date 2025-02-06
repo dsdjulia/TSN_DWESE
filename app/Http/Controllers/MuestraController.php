@@ -32,8 +32,8 @@ class MuestraController extends Controller
         $data = [
             // Request
             'codigo' => $request->input('codigo'),
-            'tipoNaturaleza' => $request->input('tipoNaturaleza'),
-            'idTipoNaturaleza' => $request->input('idTipoNaturaleza'), // hecho
+            'idTipoEstudio' => $request->input('idTipoEstudio'),
+            'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
             'idFormato' => $request->input('idFormato'),
             'idCalidad' => $request->input('idCalidad'),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
@@ -71,7 +71,7 @@ class MuestraController extends Controller
         $data = [
             // Request
             'codigo' => $request->input('codigo'),
-            'tipoNaturaleza' => $request->input('tipoNaturaleza'),
+            'idTipoEstudio' => $request->input('idTipoEstudio'),
             'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
             'idFormato' => $request->input('idFormato'),
             'idCalidad' => $request->input('idCalidad'),
@@ -111,53 +111,18 @@ class MuestraController extends Controller
     public function validatorMuestrasInsert($datos){
         $validator = Validator::make($datos, [
             'codigo' => 'required|string|min:1|max:8',
-            'idUser' => 'required|string',
-            'idSede' => 'required|string',
-            'tipoNaturaleza' => 'required|string',
+            'idTipoEstudio' => 'required|string|', 
             'idTipoNaturaleza' => 'required|string',
             'idFormato' => 'required|string',
             'idCalidad' => 'required|string',
             'descripcionCalidad' => 'required|string|max:50',
             'organo' => 'string',
             'fecha' => 'required|date_format:Y-m-d',
+
+            'idUser' => 'required|string',
+            'idSede' => 'required|string',
             'created_at' =>' date_format:Y-m-d',
             'updated_at' => 'date_format:Y-m-d',
-        ],
-        [
-            'codigo.required' => 'El código es obligatorio.',
-            'codigo.string' => 'El código debe ser una cadena de texto.',
-            'codigo.min' => 'El código debe tener al menos 1 carácter.',
-            'codigo.max' => 'El código no debe exceder los 8 caracteres.',
-            
-            'idUser.required' => 'El ID de usuario es obligatorio.',
-            'idUser.string' => 'El ID de usuario debe ser una cadena de texto.',
-            
-            'idSede.required' => 'El ID de la sede es obligatorio.',
-            'idSede.string' => 'El ID de la sede debe ser una cadena de texto.',
-            
-            'tipoNaturaleza.required' => 'El tipo de naturaleza es obligatorio.',
-            'tipoNaturaleza.string' => 'El tipo de naturaleza debe ser una cadena de texto.',
-            
-            'idTipoNaturaleza.required' => 'El ID del tipo de naturaleza es obligatorio.',
-            'idTipoNaturaleza.string' => 'El ID del tipo de naturaleza debe ser una cadena de texto.',
-            
-            'idFormato.required' => 'El ID del formato es obligatorio.',
-            'idFormato.string' => 'El ID del formato debe ser una cadena de texto.',
-            
-            'idCalidad.required' => 'El ID de calidad es obligatorio.',
-            'idCalidad.string' => 'El ID de calidad debe ser una cadena de texto.',
-            
-            'descripcionCalidad.required' => 'La descripción de calidad es obligatoria.',
-            'descripcionCalidad.string' => 'La descripción de calidad debe ser una cadena de texto.',
-            'descripcionCalidad.max' => 'La descripción de calidad no debe superar los 50 caracteres.',
-            
-            'organo.string' => 'El órgano debe ser una cadena de texto.',
-            
-            'fecha.required' => 'La fecha es obligatoria.',
-            'fecha.date_format' => 'La fecha debe estar en el formato YYYY-MM-DD.',
-            
-            'created_at.date_format' => 'La fecha de creación debe estar en el formato YYYY-MM-DD.',
-            'updated_at.date_format' => 'La fecha de actualización debe estar en el formato YYYY-MM-DD.',
         ]);
         
         return $validator;
@@ -165,46 +130,18 @@ class MuestraController extends Controller
 
     public function validatorMuestrasUpdate($datos){
         $validator = Validator::make($datos, [
-            'codigo' => 'string|min:1|max:8',
-            'idUser' => 'string',
-            'idSede' => 'string',
-            'tipoNaturaleza' => 'string',
-            'idTipoNaturaleza' => 'string',
-            'idFormato' => 'string',
-            'idCalidad' => 'string',
-            'descripcionCalidad' => 'string|max:50',
+            'codigo' => 'required|string|min:1|max:8',
+            'idTipoEstudio' => 'required|string|', 
+            'idTipoNaturaleza' => 'required|string',
+            'idFormato' => 'required|string',
+            'idCalidad' => 'required|string',
+            'descripcionCalidad' => 'required|string|max:50',
             'organo' => 'string',
-            'fecha' => 'date_format:Y-m-d',
-            'created_at' =>' date_format:Y-m-d',
+            'fecha' => 'required|date_format:Y-m-d',
+
+            'idUser' => 'required|string',
+            'idSede' => 'required|string',
             'updated_at' => 'date_format:Y-m-d',
-        ],
-        [
-            'codigo.string' => 'El código debe ser una cadena de texto.',
-            'codigo.min' => 'El código debe tener al menos 1 carácter.',
-            'codigo.max' => 'El código no debe exceder los 8 caracteres.',
-            
-            'idUser.string' => 'El ID de usuario debe ser una cadena de texto.',
-            
-            'idSede.string' => 'El ID de la sede debe ser una cadena de texto.',
-            
-            'tipoNaturaleza.string' => 'El tipo de naturaleza debe ser una cadena de texto.',
-            
-            'idTipoNaturaleza.string' => 'El ID del tipo de naturaleza debe ser una cadena de texto.',
-            
-            'idFormato.string' => 'El ID del formato debe ser una cadena de texto.',
-            
-            'idCalidad.string' => 'El ID de calidad debe ser una cadena de texto.',
-            
-            'descripcionCalidad.string' => 'La descripción de calidad debe ser una cadena de texto.',
-            'descripcionCalidad.max' => 'La descripción de calidad no debe superar los 50 caracteres.',
-            
-            'organo.string' => 'El órgano debe ser una cadena de texto.',
-            
-            'fecha.date_format' => 'La fecha debe estar en el formato YYYY-MM-DD.',
-            
-            'created_at.date_format' => 'La fecha de creación debe estar en el formato YYYY-MM-DD.',
-            'updated_at.date_format' => 'La fecha de actualización debe estar en el formato YYYY-MM-DD.',
-            
         ]);
         
         return $validator;

@@ -14,7 +14,7 @@ class MuestraSeeder extends Seeder
     public function run(): void
     {
         Muestra::create([
-            'codigo' => 'A',
+            'codigo' => 'EX2004',
             'idUser' => 1,
             'idSede' => 1,
             'idTipoNaturaleza' => 1,

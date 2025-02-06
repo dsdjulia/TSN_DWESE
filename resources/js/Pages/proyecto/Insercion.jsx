@@ -289,7 +289,7 @@ export default function Insercion({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */
-
+            header={'insercion'}
         >
             <Head title="Insercion" />
             <div className="flex flex-col items-center justify-center min-h-screen bg-[#e5eaf0] pb-10">

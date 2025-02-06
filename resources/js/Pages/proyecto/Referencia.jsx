@@ -31,7 +31,7 @@ export default function Muestras({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */
-           
+            header={'referencia'}
         >
             <Head title="Referencia" />
 

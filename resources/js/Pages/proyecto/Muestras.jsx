@@ -18,7 +18,7 @@ export default function Muestras({auth}) {
   return (
     <AuthenticatedLayout
                 user={auth.user} /* Comprobamos que este autenticado */
-            
+                header={'muestras'}
             >
 
             <Head title="Muestras"/>

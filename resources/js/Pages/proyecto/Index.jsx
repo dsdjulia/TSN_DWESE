@@ -8,9 +8,7 @@ export default function Index({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */
-            header={<h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white ">
-                Inicio
-            </h1>}
+            header={'index'}
         >
             <Head title="Inicio" />
             <div className="flex items-center justify-center min-h-screen bg-[url('/public/fondo-inicio.jpg')] bg-cover bg-slate-50">

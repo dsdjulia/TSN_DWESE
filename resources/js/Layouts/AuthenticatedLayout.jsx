@@ -24,21 +24,22 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+
                                 <NavLink
                                     href={route('index')}
-                                    active={route().current('dashboard')}
+                                    active={header === 'index'}
                                 >
                                     Inicio
                                 </NavLink>
                                 <NavLink
                                     href={route('muestras')}
-                                    active={route().current('dashboard')}
+                                    active={header === 'muestras'}
                                 >
                                     Muestras
                                 </NavLink>
                                 <NavLink
                                     href={route('nuevaMuestra')}
-                                    active={route().current('dashboard')}
+                                    active={header === 'insercion'}
                                 >
                                     Añadir muestra
                                 </NavLink>
@@ -169,14 +170,6 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 </div>
             </nav>
-
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex text-center align-middle justify-center text-slate-800 md:text-">
-                        {header}
-                    </div>
-                </header>
-            )}
 
             <main>{children}</main>
         </div>

@@ -29,8 +29,10 @@ class UserController extends Controller
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'idSede' => $request->input('idSede'),
             'password' => Hash::make($request->input('password')),
-            'idSede' => $request->input('idSede') ,
+            'created_at' => date("Y-m-d"),
+            'updated_at' => date("Y-m-d"),
         ];
 
         $validacion = $this->validatorUser($data);
@@ -54,7 +56,8 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'idSede' => $request->input('idSede') ,
+            'idSede' => $request->input('idSede'),
+            'updated_at' => date("Y-m-d"),
         ];
 
         $validator = $this->validatorUser($data);

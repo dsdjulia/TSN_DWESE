@@ -29,24 +29,29 @@ class MuestraController extends Controller
 
     public function insertMuestra(Request $request){
         $data = [
-            'codigo' => $request->input(key: 'codigoMuestra'),
-            'fecha' => $request->input('fecha'),
-            'organo' => $request->input('organo'),
-            'tipoNaturaleza' => $request->input('naturaleza'),
-            'idFormato' => $request->input('formato'),
-            'idCalidad' => $request->input('calidad'),
+            'codigo' => $request->input('codigo'),
+            'idUser' => $request->input('idUser'),
+            'idSede' => $request->input('idSede'),
+            'tipoNaturaleza' => $request->input('tipoNaturaleza'),
+            'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
+            'idFormato' => $request->input('idFormato'),
+            'idCalidad' => $request->input('idCalidad'),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
-            'interpretacion' => $request->input('interpretacion'),
+            'organo' => $request->input('organo'),
+            'fecha' => $request->input('fecha'),
+            'created_at' => date("Y-m-d"),
+            'updated_at' => date("Y-m-d"),
+
         ];
 
-        // $validacion = $this->validatorMuestras($data);
+        $validacion = $this->validatorMuestrasInsert($data);
 
-        // if($validacion->fails()){
-        //     return response()->json(["error" => $validacion -> errors()]);
-        // }else{
-        //     $muestra = Muestra::create($data);
-        //     return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
-        // }
+        if($validacion->fails()){
+            return response()->json(["error" => $validacion -> errors()]);
+        }else{
+            $muestra = Muestra::create($data);
+            return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
+        }
 
         $muestra = Muestra::create($data);
 
@@ -61,16 +66,19 @@ class MuestraController extends Controller
 
         $data = [
             'codigo' => $request->input('codigo'),
+            'idUser' => $request->input('idUser'),
+            'idSede' => $request->input('idSede'),
+            'tipoNaturaleza' => $request->input('tipoNaturaleza'),
+            'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
+            'idFormato' => $request->input('idFormato'),
+            'idCalidad' => $request->input('idCalidad'),
+            'descripcionCalidad' => $request->input('descripcionCalidad'),
             'organo' => $request->input('organo'),
             'fecha' => $request->input('fecha'),
-            'naturaleza' => $request->input('naturaleza'),
-            'formato' => $request->input('formato'),
-            'calidad' => $request->input('calidad'),
-            'interpretacion' => $request->input('interpretacion'),
-            'descripcion' => $request->input('descripcion'),
+            'updated_at' => date("Y-m-d"),
         ];
 
-        $validator = $this->validatorMuestras($data);
+        $validator = $this->validatorMuestrasUpdate($data);
 
         if ($validator->fails()) {
             return response()->json(["error" => $validator->errors()]);
@@ -93,45 +101,102 @@ class MuestraController extends Controller
         return response()->json(["message" => "Muestra eliminada con éxito"]);
     }
 
-    public function validatorMuestras($datos){
+    public function validatorMuestrasInsert($datos){
         $validator = Validator::make($datos, [
             'codigo' => 'required|string|min:1|max:8',
+            'idUser' => 'required|string',
+            'idSede' => 'required|string',
+            'tipoNaturaleza' => 'required|string',
+            'idTipoNaturaleza' => 'required|string',
+            'idFormato' => 'required|string',
+            'idCalidad' => 'required|string',
+            'descripcionCalidad' => 'required|string|max:50',
             'organo' => 'string',
-            'descripcion' => 'required|string|min:1|max:50',
             'fecha' => 'required|date_format:Y-m-d',
-            'naturaleza' => 'required|string|min:1|max:2',
-            'formato' => 'required|string',
-            'calidad' => 'required|string',
-            'interpretacion' => 'required|string'
+            'created_at' =>' date_format:Y-m-d',
+            'updated_at' => 'date_format:Y-m-d',
         ],
         [
-            'codigo.required' => 'El código es obligatorio',
+            'codigo.required' => 'El código es obligatorio.',
+            'codigo.string' => 'El código debe ser una cadena de texto.',
             'codigo.min' => 'El código debe tener al menos 1 carácter.',
-            'codigo.max' => 'El código no puede tener más de 8 caracteres.',
-            'codigo.string' => 'El código debe ser una cadena de texto',
+            'codigo.max' => 'El código no debe exceder los 8 caracteres.',
             
-            'organo.string' => 'El código debe ser una cadena de texto',
+            'idUser.required' => 'El ID de usuario es obligatorio.',
+            'idUser.string' => 'El ID de usuario debe ser una cadena de texto.',
+            
+            'idSede.required' => 'El ID de la sede es obligatorio.',
+            'idSede.string' => 'El ID de la sede debe ser una cadena de texto.',
+            
+            'tipoNaturaleza.required' => 'El tipo de naturaleza es obligatorio.',
+            'tipoNaturaleza.string' => 'El tipo de naturaleza debe ser una cadena de texto.',
+            
+            'idTipoNaturaleza.required' => 'El ID del tipo de naturaleza es obligatorio.',
+            'idTipoNaturaleza.string' => 'El ID del tipo de naturaleza debe ser una cadena de texto.',
+            
+            'idFormato.required' => 'El ID del formato es obligatorio.',
+            'idFormato.string' => 'El ID del formato debe ser una cadena de texto.',
+            
+            'idCalidad.required' => 'El ID de calidad es obligatorio.',
+            'idCalidad.string' => 'El ID de calidad debe ser una cadena de texto.',
+            
+            'descripcionCalidad.required' => 'La descripción de calidad es obligatoria.',
+            'descripcionCalidad.string' => 'La descripción de calidad debe ser una cadena de texto.',
+            'descripcionCalidad.max' => 'La descripción de calidad no debe superar los 50 caracteres.',
+            
+            'organo.string' => 'El órgano debe ser una cadena de texto.',
+            
+            'fecha.required' => 'La fecha es obligatoria.',
+            'fecha.date_format' => 'La fecha debe estar en el formato YYYY-MM-DD.',
+            
+            'created_at.date_format' => 'La fecha de creación debe estar en el formato YYYY-MM-DD.',
+            'updated_at.date_format' => 'La fecha de actualización debe estar en el formato YYYY-MM-DD.',
+        ]);
+        
+        return $validator;
+    }
 
-            'fecha.required' => 'La fecha es obligatoria',
-            'fecha.date' => 'La fecha debe ser una fecha',
-            'fecha.date_format' => 'La fecha debe estar en formato dd-mm-yyyy',
+    public function validatorMuestrasUpdate($datos){
+        $validator = Validator::make($datos, [
+            'codigo' => 'string|min:1|max:8',
+            'idUser' => 'string',
+            'idSede' => 'string',
+            'tipoNaturaleza' => 'string',
+            'idTipoNaturaleza' => 'string',
+            'idFormato' => 'string',
+            'idCalidad' => 'string',
+            'descripcionCalidad' => 'string|max:50',
+            'organo' => 'string',
+            'fecha' => 'date_format:Y-m-d',
+            'created_at' =>' date_format:Y-m-d',
+            'updated_at' => 'date_format:Y-m-d',
+        ],
+        [
+            'codigo.string' => 'El código debe ser una cadena de texto.',
+            'codigo.min' => 'El código debe tener al menos 1 carácter.',
+            'codigo.max' => 'El código no debe exceder los 8 caracteres.',
             
-            'naturaleza.required' => 'La naturaleza es obligatoria',
-            'naturaleza.between' => 'La naturaleza debe tener entre 1 y 2 carácteres',
-            'naturaleza.string' => 'La naturaleza debe ser una cadena de texto',
+            'idUser.string' => 'El ID de usuario debe ser una cadena de texto.',
             
-            'formato.required' => 'El formato es obligatorio',
-            'formato.string' => 'El formato debe ser una cadena de texto',
+            'idSede.string' => 'El ID de la sede debe ser una cadena de texto.',
             
-            'calidad.required' => 'La calidad es obligatoria',
-            'calidad.string' => 'La calidad debe ser una cadena de texto',
+            'tipoNaturaleza.string' => 'El tipo de naturaleza debe ser una cadena de texto.',
             
-            'interpretacion.required' => 'La interpretación es obligatoria',
-            'interpretacion.string' => 'La interpretación debe ser una cadena de texto',
-
-            'descripcion.required' => 'La descripción es obligatoria',
-            'descripcion.between' => 'La descripción debe tener entre 1 y 50 carácteres',
-            'descripcion.string' => 'La descripción debe ser una cadena de texto',
+            'idTipoNaturaleza.string' => 'El ID del tipo de naturaleza debe ser una cadena de texto.',
+            
+            'idFormato.string' => 'El ID del formato debe ser una cadena de texto.',
+            
+            'idCalidad.string' => 'El ID de calidad debe ser una cadena de texto.',
+            
+            'descripcionCalidad.string' => 'La descripción de calidad debe ser una cadena de texto.',
+            'descripcionCalidad.max' => 'La descripción de calidad no debe superar los 50 caracteres.',
+            
+            'organo.string' => 'El órgano debe ser una cadena de texto.',
+            
+            'fecha.date_format' => 'La fecha debe estar en el formato YYYY-MM-DD.',
+            
+            'created_at.date_format' => 'La fecha de creación debe estar en el formato YYYY-MM-DD.',
+            'updated_at.date_format' => 'La fecha de actualización debe estar en el formato YYYY-MM-DD.',
             
         ]);
         

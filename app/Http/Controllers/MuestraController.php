@@ -32,16 +32,16 @@ class MuestraController extends Controller
         $data = [
             // Request
             'codigo' => $request->input('codigo'),
-            'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
-            'idFormato' => $request->input('idFormato'),
-            'idCalidad' => $request->input('idCalidad'),
+            'idTipoNaturaleza' => intval($request->input('idTipoNaturaleza')),
+            'idFormato' => intval($request->input('idFormato')),
+            'idCalidad' => intval($request->input('idCalidad')),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
-            'organo' => $request->input('organo'),
+            'organo' => intval($request->input('organo')),
             'fecha' => $request->input('fecha'),
             
             // Local Storage
-            'idUser' => $request->input('idUser'),
-            'idSede' => $request->input('idSede'),
+            'idUser' => intval($request->input('idUser')),
+            'idSede' => intval($request->input('idSede')),
             'created_at' => date("Y-m-d"),
             'updated_at' => date("Y-m-d"),
 
@@ -70,16 +70,16 @@ class MuestraController extends Controller
         $data = [
             // Request
             'codigo' => $request->input('codigo'),
-            'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
-            'idFormato' => $request->input('idFormato'),
-            'idCalidad' => $request->input('idCalidad'),
+            'idTipoNaturaleza' => intval($request->input('idTipoNaturaleza')),
+            'idFormato' => intval($request->input('idFormato')),
+            'idCalidad' => intval($request->input('idCalidad')),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
-            'organo' => $request->input('organo'),
+            'organo' => intval($request->input('organo')),
             'fecha' => $request->input('fecha'),
             
             // Local Storage
-            'idUser' => $request->input('idUser'),
-            'idSede' => $request->input('idSede'),
+            'idUser' => intval($request->input('idUser')),
+            'idSede' => intval($request->input('idSede')),
             'updated_at' => date("Y-m-d"),
         ];
 
@@ -109,15 +109,15 @@ class MuestraController extends Controller
     public function validatorMuestrasInsert($datos){
         $validator = Validator::make($datos, [
             'codigo' => 'required|string|min:1|max:8',
-            'idTipoNaturaleza' => 'required|string',
-            'idFormato' => 'required|string',
-            'idCalidad' => 'required|string',
+            'idTipoNaturaleza' => 'required|integer',
+            'idFormato' => 'required|integer',
+            'idCalidad' => 'required|integer',
             'descripcionCalidad' => 'required|string|max:50',
-            'organo' => 'string',
+            'organo' => 'nullable|integer',
             'fecha' => 'required|date_format:Y-m-d',
 
-            'idUser' => 'required|string',
-            'idSede' => 'required|string',
+            'idUser' => 'required|integer',
+            'idSede' => 'required|integer',
             'created_at' =>' date_format:Y-m-d',
             'updated_at' => 'date_format:Y-m-d',
         ]);

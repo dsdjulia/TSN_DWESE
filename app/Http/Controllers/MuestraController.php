@@ -28,17 +28,21 @@ class MuestraController extends Controller
     }
 
     public function insertMuestra(Request $request){
+
         $data = [
+            // Request
             'codigo' => $request->input('codigo'),
-            'idUser' => $request->input('idUser'),
-            'idSede' => $request->input('idSede'),
             'tipoNaturaleza' => $request->input('tipoNaturaleza'),
-            'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
+            'idTipoNaturaleza' => $request->input('idTipoNaturaleza'), // hecho
             'idFormato' => $request->input('idFormato'),
             'idCalidad' => $request->input('idCalidad'),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
             'organo' => $request->input('organo'),
             'fecha' => $request->input('fecha'),
+            
+            // Local Storage
+            'idUser' => $request->input('idUser'),
+            'idSede' => $request->input('idSede'),
             'created_at' => date("Y-m-d"),
             'updated_at' => date("Y-m-d"),
 

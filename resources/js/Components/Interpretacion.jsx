@@ -1,6 +1,6 @@
 import React from "react";
 
-const Interpretacion = ({ id, onRemove }) => {
+const Interpretacion = ({ id, onRemove, interpretaciones }) => {
     return (
         <div className="mb-4">
 
@@ -12,8 +12,18 @@ const Interpretacion = ({ id, onRemove }) => {
                 >
                     <option value="">Seleccione interpretación</option>
                     {/* Opciones dinámicas aquí */}
-                    <option value="1">Interpretación 1</option>
-                    <option value="2">Interpretación 2</option>
+                    {Object.entries(interpretaciones).map(
+                                    (
+                                        [
+                                            key,
+                                            contenido,
+                                        ] /* esto funciona en react como for(let key in Json) en javascript  */
+                                    ) => (
+                                        <option value={key}>
+                                            {contenido}
+                                        </option>
+                                    )
+                                )}
                 </select>
                 <button
                     onClick={() => onRemove(id)}

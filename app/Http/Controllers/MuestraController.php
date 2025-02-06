@@ -13,7 +13,7 @@ class MuestraController extends Controller
     public function getAllJson(){
         $muestras = Muestra::all();
         if (!$muestras) {
-            return response()->json(["error" => "No hay muestras registradas"], 404);
+            return response()->json(["error" => "No hay muestras registradas"]);
         }
         return response()->json($muestras);
     }
@@ -22,7 +22,7 @@ class MuestraController extends Controller
         $muestra = Muestra::find($id);
 
         if (!$muestra) {
-            return response()->json(["error" => "Muestra no encontrada"], 404);
+            return response()->json(["error" => "Muestra no encontrada"]);
         }
         return response()->json($muestra);
     }
@@ -38,14 +38,13 @@ class MuestraController extends Controller
             'descripcion' => $request->input('descripcion'),
         ];
 
-
         $validacion = $this->validatorMuestras($data);
 
         if($validacion->fails()){
-            return response()->json(["error" => $validacion -> errors() -> first()],400);
+            return response()->json(["error" => $validacion -> errors()]);
         }else{
             $muestra = Muestra::create($data);
-            return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra], 201);
+            return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
         }
     }
 
@@ -53,7 +52,7 @@ class MuestraController extends Controller
         $muestra = Muestra::find($idMuestra);
 
         if (!$muestra) {
-            return response()->json(["error" => "Muestra no encontrada"], 404);
+            return response()->json(["error" => "Muestra no encontrada"]);
         }
 
         $data = [
@@ -70,12 +69,12 @@ class MuestraController extends Controller
         $validator = $this->validatorMuestras($data);
 
         if ($validator->fails()) {
-            return response()->json(["error" => $validator->errors()], 400);
+            return response()->json(["error" => $validator->errors()]);
         }
 
         $muestra->update($data);
 
-        return response()->json(["message" => "Muestra actualizada con éxito", "muestra" => $muestra], 200);
+        return response()->json(["message" => "Muestra actualizada con éxito", "muestra" => $muestra]);
 
     }
 
@@ -83,17 +82,17 @@ class MuestraController extends Controller
         $muestra = Muestra::find($idMuestra);
 
         if(!$muestra){
-            return response()->json(["error" => "Muestra no encontrada"], 404);
+            return response()->json(["error" => "Muestra no encontrada"]);
         }
 
         $muestra->delete();
-        return response()->json(["message" => "Muestra eliminada con éxito"], 200);
+        return response()->json(["message" => "Muestra eliminada con éxito"]);
     }
 
     public function validatorMuestras($datos){
         $validator = Validator::make($datos, [
             'codigo' => 'required|string|min:1|max:8',
-            'organo' => 'required|string',
+            'organo' => 'string',
             'descripcion' => 'required|string|min:1|max:50',
             'fecha' => 'required|date_format:Y-m-d',
             'naturaleza' => 'required|string|min:1|max:2',
@@ -103,10 +102,10 @@ class MuestraController extends Controller
         ],
         [
             'codigo.required' => 'El código es obligatorio',
-            'codigo.between' => 'El código debe tener entre 1 y 8 carácteres',
+            'codigo.min' => 'El código debe tener al menos 1 carácter.',
+            'codigo.max' => 'El código no puede tener más de 8 caracteres.',
             'codigo.string' => 'El código debe ser una cadena de texto',
             
-            'organo.required' => 'El organo es obligatorio',
             'organo.string' => 'El código debe ser una cadena de texto',
 
             'fecha.required' => 'La fecha es obligatoria',

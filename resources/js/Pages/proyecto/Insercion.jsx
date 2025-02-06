@@ -489,7 +489,8 @@ export default function Insercion({ auth }) {
                         </div>
                         <div classNameName="flex justify-start mt-4">
                             <Link
-                                href={route("guardar")}
+                                method="post"
+                                href={route("MuestrasController.insertarMuestra")}
                                 className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
                             >
                                 Guardar muestra

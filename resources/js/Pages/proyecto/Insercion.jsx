@@ -211,12 +211,11 @@ export default function Insercion({ auth }) {
 
     const handleCalidad = (seleccion) => {
 
-        console.log(seleccion.target.value);
-        const claveCalidad = seleccion.target.value
-        claveCalidad.length
-        console.log(claveCalidad);
 
-        if (claveCalidad === 6){ // Compruebo que el penultimo sea un punto
+        const textoCalidad = seleccion.target.options[seleccion.target.selectedIndex].text
+        console.log(textoCalidad[textoCalidad.length - 2]);
+
+        if (textoCalidad[textoCalidad.length - 2] === '.'){ // Compruebo que el penultimo sea un punto
             setCalidadHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
 
         } else {
@@ -415,7 +414,7 @@ const handleSubmit = () => {
                             >
                                 Calidad de la muestra
                             </label>
-                            <select onChange={(e) => { handleSelect(e); handleData(e); }}//! AQUI
+                            <select onChange={(e) => { handleCalidad(e); handleData(e); }}//! AQUI
                                 id="calidad"
                                 name="calidad"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"

@@ -17,6 +17,7 @@ class Tipo_estudioFactory extends Factory
     public function definition(): array
     {
         return [
+            'codigo' => fake()->name(),
             'nombre'=>fake()->name(),
         ];
     }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('calidades', function (Blueprint $table) {
             $table->id();
+            $table->String('codigo');
             $table->string('nombre');
             $table->timestamps();
 

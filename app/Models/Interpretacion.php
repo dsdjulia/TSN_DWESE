@@ -12,6 +12,7 @@ class Interpretacion extends Model
     protected $table = "interpretaciones"; 
 
     protected $fillable = [
+        'codigo',
         'texto',
         'idTipoEstudio',
     ];

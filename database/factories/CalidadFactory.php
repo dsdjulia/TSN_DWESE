@@ -18,6 +18,7 @@ class CalidadFactory extends Factory
     public function definition(): array
     {
         return [
+            'codigo' => fake()->name(),
             'nombre' => fake()->name(),
             'idTipoEstudio' => Tipo_estudio::all()->random()->id,
         ];

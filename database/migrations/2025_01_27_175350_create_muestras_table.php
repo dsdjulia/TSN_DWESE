@@ -14,17 +14,18 @@ return new class extends Migration
         Schema::create('muestras', function (Blueprint $table) {
             $table->id();
             $table->string('codigo');
-            $table->string('descripcionCalidad');
-            $table->date('fecha');
-            $table->string('organo');
-            $table->timestamps();
 
-            
             $table->unsignedBigInteger('idTipoNaturaleza');
             $table->unsignedBigInteger('idUser');
             $table->unsignedBigInteger('idFormato');
             $table->unsignedBigInteger('idSede');
             $table->unsignedBigInteger('idCalidad');
+
+            $table->string('descripcionCalidad');
+            $table->date('fecha');
+            $table->string('organo');
+
+            $table->timestamps();
 
             $table->foreign('idTipoNaturaleza')->references('id')->on('tipo_naturalezas');
             $table->foreign('idUser')->references('id')->on('users');

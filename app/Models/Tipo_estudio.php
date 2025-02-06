@@ -12,6 +12,7 @@ class Tipo_estudio extends Model
     protected $table = "tipo_estudios"; 
 
     protected $fillable = [
+        'codigo',
         'nombre',
     ];
 

@@ -18,6 +18,7 @@ class InterpretacionFactory extends Factory
     public function definition(): array
     {
         return [
+            'codigo' => fake()->name(),
             'texto' => fake()->text(),
             'idTipoEstudio'=> Tipo_estudio::all()->random()->id,
         ];

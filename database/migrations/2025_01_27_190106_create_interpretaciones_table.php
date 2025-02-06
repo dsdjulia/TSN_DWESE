@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('interpretaciones', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo');
             $table->string('texto');
             $table->timestamps();
 

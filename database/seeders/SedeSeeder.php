@@ -13,6 +13,28 @@ class SedeSeeder extends Seeder
      */
     public function run(): void
     {
-        Sede::factory(10)->create();
+        $sedes = [
+            ['nombre' => 'Albacete', 'codigo' => 'A'],
+            ['nombre' => 'Alicante', 'codigo' => 'AL'],
+            ['nombre' => 'Alicante II', 'codigo' => 'ALII'],
+            ['nombre' => 'Almería', 'codigo' => 'I'],
+            ['nombre' => 'Córdoba', 'codigo' => 'C'],
+            ['nombre' => 'Leganés', 'codigo' => 'L'],
+            ['nombre' => 'Granada', 'codigo' => 'G'],
+            ['nombre' => 'Huelva', 'codigo' => 'H'],
+            ['nombre' => 'Jerez', 'codigo' => 'J'],
+            ['nombre' => 'Madrid', 'codigo' => 'M'],
+            ['nombre' => 'Málaga', 'codigo' => 'MG'],
+            ['nombre' => 'Murcia', 'codigo' => 'MU'],
+            ['nombre' => 'Sevilla', 'codigo' => 'S'],
+            ['nombre' => 'Valencia', 'codigo' => 'V'],
+            ['nombre' => 'Zaragoza', 'codigo' => 'Z'],
+        ];
+
+        foreach ($sedes as $sede) {
+            Sede::create($sede);
+        }
+
+        /*Sede::factory(10)->create();*/
     }
 }

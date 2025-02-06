@@ -14,6 +14,7 @@ class Muestra extends Model
     protected $fillable = [
         'codigo',
         'fecha',
+        'organo',
         'idTipoNaturaleza',
         'idUser',
         'idFormato',

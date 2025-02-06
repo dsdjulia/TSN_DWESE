@@ -211,9 +211,7 @@ export default function Insercion({ auth }) {
 
     const handleCalidad = (seleccion) => {
 
-
         const textoCalidad = seleccion.target.options[seleccion.target.selectedIndex].text
-        console.log(textoCalidad[textoCalidad.length - 2]);
 
         if (textoCalidad[textoCalidad.length - 2] === '.'){ // Compruebo que el penultimo sea un punto
             setCalidadHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
@@ -242,12 +240,16 @@ export default function Insercion({ auth }) {
         console.log(form);
     }
 
-const handleSubmit = () => {
-    console.log(form);
-    router.post('api/createMuestra', form)
-    showSuccessAlert()
+    const handlePhoto = (seleccion) => {
+        seleccion.target.parentElement.remove();
+    }   
 
-}
+    const handleSubmit = () => {
+        console.log(form);
+        router.post('api/createMuestra', form)
+        showSuccessAlert()
+
+    }
 
 
     return (
@@ -500,7 +502,7 @@ const handleSubmit = () => {
                                     alt="Imagen 1"
                                     className="w-auto h-32 object-cover rounded-lg"
                                 />
-                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
+                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer" onClick={handlePhoto}>
                                     X
                                 </a>
                             </div>
@@ -510,7 +512,7 @@ const handleSubmit = () => {
                                     alt="Imagen 2"
                                     className="w-auto h-32 object-cover rounded-lg"
                                 />
-                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
+                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer" onClick={handlePhoto}>
                                     X
                                 </a>
                             </div>
@@ -520,7 +522,7 @@ const handleSubmit = () => {
                                     alt="Imagen 3"
                                     className="w-auto h-32 object-cover rounded-lg"
                                 />
-                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
+                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer" onClick={handlePhoto}>
                                     X
                                 </a>
                             </div>

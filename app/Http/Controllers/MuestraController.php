@@ -29,23 +29,28 @@ class MuestraController extends Controller
 
     public function insertMuestra(Request $request){
         $data = [
-            'codigoMuestra' => $request->input('codigoMuestra'),
+            'codigo' => $request->input(key: 'codigoMuestra'),
             'fecha' => $request->input('fecha'),
-            'naturaleza' => $request->input('naturaleza'),
-            'formato' => $request->input('formato'),
-            'calidad' => $request->input('calidad'),
+            'idTipoEstudio' => $request->input('tipoEstudio'),
+            'organo' => $request->input('organo'),
+            'idTipoNaturaleza' => $request->input('naturaleza'),
+            'idFormato' => $request->input('formato'),
+            'idCalidad' => $request->input('calidad'),
+            'descripcionCalidad' => $request->input('descripcionCalidad'),
             'interpretacion' => $request->input('interpretacion'),
-            'descripcion' => $request->input('descripcion'),
         ];
 
-        $validacion = $this->validatorMuestras($data);
+        // $validacion = $this->validatorMuestras($data);
 
-        if($validacion->fails()){
-            return response()->json(["error" => $validacion -> errors()]);
-        }else{
-            $muestra = Muestra::create($data);
-            return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
-        }
+        // if($validacion->fails()){
+        //     return response()->json(["error" => $validacion -> errors()]);
+        // }else{
+        //     $muestra = Muestra::create($data);
+        //     return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
+        // }
+
+        $muestra = Muestra::create($data);
+
     }
 
     public function updateMuestra(Request $request , $idMuestra){

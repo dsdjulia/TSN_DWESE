@@ -1,7 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useState } from "react";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { buscarEstudio } from "@/Components/ListaIC";
+import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
+
 
 export default function Insercion({ auth }) {
 
@@ -217,8 +219,34 @@ export default function Insercion({ auth }) {
         } else {
             setCalidadHidden('hidden')
         }
-
     }
+
+
+    const [form, setForm] = useState({
+        codigoMuestra: "",
+        fecha: "",
+        tipoEstudio: "",
+        organo: "",
+        naturaleza: "",
+        formato: "",
+        calidad: "",
+        descripcionCalidad: "",
+        interpretacion: "",
+        descripcion: "",
+    });
+
+    const handleData = (e) => {
+        setForm({...form , [e.target.name]: e.target.value}) // uso ...form para no eliminar los demas datos al modificar
+        console.log(form);
+    }
+
+const handleSubmit = () => {
+    console.log(form);
+    router.post('api/createMuestra', form)
+    showSuccessAlert()
+
+}
+
 
     return (
         <AuthenticatedLayout
@@ -242,10 +270,11 @@ export default function Insercion({ auth }) {
                             </label>
                             <input
                                 type="text"
-                                id="codigo_muestra"
-                                name="codigo_muestra"
+                                id="codigoMuestra"
+                                name="codigoMuestra"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                                 placeholder="Introduce el código de muestra"
+                                onChange={handleData}
                             ></input>
                         </div>
                         <div>
@@ -260,6 +289,7 @@ export default function Insercion({ auth }) {
                                 id="fecha"
                                 name="fecha"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                                onChange={handleData}
                             ></input>
                         </div>
                     </div>
@@ -273,9 +303,9 @@ export default function Insercion({ auth }) {
                             >
                                 Tipo de estudio
                             </label>
-                            <select onChange={handleSelect} //! SEGUN LO QUE SELECCIONEMOS AQUI
-                                id="naturaleza_muestra"
-                                name="naturaleza_muestra"
+                            <select onChange={(e) => { handleSelect(e); handleData(e); }} //! SEGUN LO QUE SELECCIONEMOS AQUI
+                                id="tipoEstudio"
+                                name="tipoEstudio"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                             >
                                 <option value="">
@@ -296,9 +326,10 @@ export default function Insercion({ auth }) {
                                 Órgano biopsiado
                             </label>
                             <select
-                                id="organo_biopsiado"
-                                name="organo_biopsiado"
+                                id="organo"
+                                name="organo"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                                onChange={handleData}
                             >
                                 <option value="">
                                     Seleccione un órgano biopsiado
@@ -332,9 +363,10 @@ export default function Insercion({ auth }) {
                                 Naturaleza de la muestra
                             </label>
                             <select //! SEGUN LO QUE SELECCIONEMOS AQUI
-                                id="naturaleza_muestra"
-                                name="naturaleza_muestra"
+                                id="naturaleza"
+                                name="naturaleza"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                                onChange={handleData}
                             >
                                 <option value="">
                                     Seleccione la naturaleza de la muestra
@@ -358,6 +390,7 @@ export default function Insercion({ auth }) {
                                 id="formato"
                                 name="formato"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                                onChange={handleData}
                             >
                                 <option value="">
                                     Seleccione el formato de recepción de la
@@ -377,9 +410,9 @@ export default function Insercion({ auth }) {
                             >
                                 Calidad de la muestra
                             </label>
-                            <select onChange={handleCalidad}//! AQUI
-                                id="calidad_muestra"
-                                name="calidad_muestra"
+                            <select onChange={(e) => { handleSelect(e); handleData(e); }}//! AQUI
+                                id="calidad"
+                                name="calidad"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                             >
                                 <option value="">
@@ -404,7 +437,7 @@ export default function Insercion({ auth }) {
                                     >
                                     Calidad de la muestra
                                 </label>
-                            <input type="text" className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"></input>
+                            <input type="text" className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm" name="descripcionCalidad" onChange={handleData}></input>
                         </div>
 
                         <div>
@@ -418,6 +451,7 @@ export default function Insercion({ auth }) {
                                 id="interpretacion"
                                 name="interpretacion"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm mb-6"
+                                onChange={handleData}
                             >
                                 <option value="">
                                     Seleccione interpretación
@@ -446,7 +480,7 @@ export default function Insercion({ auth }) {
                             >
                                 Añadir imágenes
                             </label>
-                            <input
+                            <input //! AQUI FALTA CONTROLAR LAS IMAGENES
                                 type="file"
                                 id="imagenes"
                                 name="imagenes"
@@ -487,11 +521,12 @@ export default function Insercion({ auth }) {
                                 </a>
                             </div>
                         </div>
-                        <div classNameName="flex justify-start mt-4">
+                        <div className="flex justify-start mt-4">
                             <Link
                                 method="post"
                                 href={route("MuestrasController.insertarMuestra")}
                                 className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
+                                onClick={handleSubmit}
                             >
                                 Guardar muestra
                             </Link>

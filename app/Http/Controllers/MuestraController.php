@@ -36,7 +36,7 @@ class MuestraController extends Controller
             'idFormato' => intval($request->input('idFormato')),
             'idCalidad' => intval($request->input('idCalidad')),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
-            'organo' => intval($request->input('organo')),
+            'organo' => $request->input('organo'),
             'fecha' => $request->input('fecha'),
             
             // Local Storage
@@ -47,7 +47,7 @@ class MuestraController extends Controller
 
         ];
 
-        $validacion = $this->validatorMuestrasInsert($data);
+        $validacion = $this->validatorMuestras($data);
 
         if($validacion->fails()){
             return response()->json(["error" => $validacion -> errors()]);
@@ -74,7 +74,7 @@ class MuestraController extends Controller
             'idFormato' => intval($request->input('idFormato')),
             'idCalidad' => intval($request->input('idCalidad')),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
-            'organo' => intval($request->input('organo')),
+            'organo' => $request->input('organo'),
             'fecha' => $request->input('fecha'),
             
             // Local Storage
@@ -83,7 +83,7 @@ class MuestraController extends Controller
             'updated_at' => date("Y-m-d"),
         ];
 
-        $validator = $this->validatorMuestrasUpdate($data);
+        $validator = $this->validatorMuestras($data);
 
         if ($validator->fails()) {
             return response()->json(["error" => $validator->errors()]);
@@ -106,38 +106,20 @@ class MuestraController extends Controller
         return response()->json(["message" => "Muestra eliminada con éxito"]);
     }
 
-    public function validatorMuestrasInsert($datos){
+    public function validatorMuestras($datos){
         $validator = Validator::make($datos, [
             'codigo' => 'required|string|min:1|max:8',
-            'idTipoNaturaleza' => 'required|integer',
-            'idFormato' => 'required|integer',
-            'idCalidad' => 'required|integer',
+            'idTipoNaturaleza' => 'required|integer|between:1,10',
+            'idFormato' => 'required|integer|between:1,3',
+            'idCalidad' => 'required|integer|between:1,45',
             'descripcionCalidad' => 'required|string|max:50',
-            'organo' => 'nullable|integer',
+            'organo' => 'nullable|string',
             'fecha' => 'required|date_format:Y-m-d',
 
             'idUser' => 'required|integer',
-            'idSede' => 'required|integer',
-            'created_at' =>' date_format:Y-m-d',
-            'updated_at' => 'date_format:Y-m-d',
-        ]);
-        
-        return $validator;
-    }
-
-    public function validatorMuestrasUpdate($datos){
-        $validator = Validator::make($datos, [
-            'codigo' => 'required|string|min:1|max:8',
-            'idTipoNaturaleza' => 'required|string',
-            'idFormato' => 'required|string',
-            'idCalidad' => 'required|string',
-            'descripcionCalidad' => 'required|string|max:50',
-            'organo' => 'string',
-            'fecha' => 'required|date_format:Y-m-d',
-
-            'idUser' => 'required|string',
-            'idSede' => 'required|string',
-            'updated_at' => 'date_format:Y-m-d',
+            'idSede' => 'required|integer|between:1,15',
+            'created_at' =>' nullable|date_format:Y-m-d',
+            'updated_at' => 'nullable|date_format:Y-m-d',
         ]);
         
         return $validator;

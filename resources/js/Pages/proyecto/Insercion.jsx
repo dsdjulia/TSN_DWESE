@@ -242,7 +242,6 @@ export default function Insercion({ auth }) {
         calidad: "",
         descripcionCalidad: "",
         interpretacion: "",
-        descripcion: "",
     });
 
     const handleData = (e) => {

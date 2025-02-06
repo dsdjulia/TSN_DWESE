@@ -14,7 +14,6 @@ export default function Muestras({auth}) {
   const [modificarAbierto, setModificarAbierto] = useState(false);
   const [eliminarAbierto, setEliminarAbierto] = useState(false);
 
-
   return (
     <AuthenticatedLayout
                 user={auth.user} /* Comprobamos que este autenticado */
@@ -61,7 +60,7 @@ export default function Muestras({auth}) {
         </div>
       </div>
       <div className="w-5/6 flex justify-end  mt-2 ">
-            <div className="flex items-center justify-between bg-white rounded-md w-1/6 h-10 p-1"> {/* seccion paginacion */}
+            <div className="flex items-center justify-between bg-white rounded-md w-1/5 h-10 p-1"> {/* seccion paginacion */}
                 <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
                     <img className="" src="../public/primeraPag.png" alt="1" />
                 </button>
@@ -69,7 +68,7 @@ export default function Muestras({auth}) {
                     <img className="" src="../public/pagAtras.png" alt="1" />
                 </button>
 
-                <p className="text-5xl text-gray-200 mb-6">...</p>
+                <p className="text-gray-300"><span>1</span> ... <span>18</span></p>
                 <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
                     <img className="" src="../public/pagAlante.png" alt="1" />
                 </button>

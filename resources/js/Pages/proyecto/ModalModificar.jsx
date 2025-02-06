@@ -225,9 +225,9 @@ export default function ModalModificar({id, onClose}) {
                     </div>
                 </div>
                 <div className="flex justify-start gap-8 mt-4">
-                    <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]" href={route('guardar')+"/"+id}>
+                    {/* <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]" href={route('guardar')+"/"+id}>
                         Guardar Muestra
-                    </Link>
+                    </Link> */}
                     <button class="text-red-700 hover:underline focus:outline-none " onClick={onClose}>
                         Cancelar
                     </button>

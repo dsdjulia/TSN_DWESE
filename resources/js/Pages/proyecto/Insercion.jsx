@@ -263,9 +263,6 @@ export default function Insercion({ auth }) {
         const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
         setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img !== photoDeleted)); // quito del array la imagen eliminada
 
-        seleccion.target.parentElement.remove();
-
-        //todo Falta sacarla la imagen eliminada del array
     }
 
     const handleSubmit = () => {
@@ -492,6 +489,7 @@ export default function Insercion({ auth }) {
                                 key={item.id}
                                 id={item.id}
                                 onRemove={eliminarInterpretacion}
+                                interpretaciones={interpretacionSeleccionada}
                             />
                         ))}
 

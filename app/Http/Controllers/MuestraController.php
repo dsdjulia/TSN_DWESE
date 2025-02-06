@@ -12,24 +12,32 @@ class MuestraController extends Controller
 
     public function getAllJson(){
         $muestras = Muestra::all();
+        if (!$muestras) {
+            return response()->json(["error" => "No hay muestras registradas"], 404);
+        }
         return response()->json($muestras);
     }
 
     public function getMuestraJson($id){
         $muestra = Muestra::find($id);
+
+        if (!$muestra) {
+            return response()->json(["error" => "Muestra no encontrada"], 404);
+        }
         return response()->json($muestra);
     }
 
     public function insertMuestra(Request $request){
         $data = [
-            'codigoMuestra' => $request->input('codigo_muestra'),
+            'codigoMuestra' => $request->input('codigoMuestra'),
             'fecha' => $request->input('fecha'),
-            'naturaleza' => $request->input('naturaleza_muestra'),
+            'naturaleza' => $request->input('naturaleza'),
             'formato' => $request->input('formato'),
-            'calidad' => $request->input('calidad_muestra'),
+            'calidad' => $request->input('calidad'),
             'interpretacion' => $request->input('interpretacion'),
             'descripcion' => $request->input('descripcion'),
         ];
+
 
         $validacion = $this->validatorMuestras($data);
 
@@ -49,11 +57,12 @@ class MuestraController extends Controller
         }
 
         $data = [
-            'codigoMuestra' => $request->input('codigo_muestra'),
+            'codigo' => $request->input('codigo'),
+            'organo' => $request->input('organo'),
             'fecha' => $request->input('fecha'),
-            'naturaleza' => $request->input('naturaleza_muestra'),
+            'naturaleza' => $request->input('naturaleza'),
             'formato' => $request->input('formato'),
-            'calidad' => $request->input('calidad_muestra'),
+            'calidad' => $request->input('calidad'),
             'interpretacion' => $request->input('interpretacion'),
             'descripcion' => $request->input('descripcion'),
         ];
@@ -61,7 +70,7 @@ class MuestraController extends Controller
         $validator = $this->validatorMuestras($data);
 
         if ($validator->fails()) {
-            return response()->json(["error" => $validator->errors()->first()], 400);
+            return response()->json(["error" => $validator->errors()], 400);
         }
 
         $muestra->update($data);
@@ -83,19 +92,23 @@ class MuestraController extends Controller
 
     public function validatorMuestras($datos){
         $validator = Validator::make($datos, [
-            'codigoMuestra' => 'required|between:1,8|string',
-            'descripcion' => 'required|between:1,50|string',
-            'fecha' => 'required|date|date_format:d-m-Y',
-            'naturaleza' => 'required|between:1,2|string',
+            'codigo' => 'required|string|min:1|max:8',
+            'organo' => 'required|string',
+            'descripcion' => 'required|string|min:1|max:50',
+            'fecha' => 'required|date_format:Y-m-d',
+            'naturaleza' => 'required|string|min:1|max:2',
             'formato' => 'required|string',
             'calidad' => 'required|string',
-            'interpretacion' =>'required|string'
+            'interpretacion' => 'required|string'
         ],
         [
-            'codigoMuestra.required' => 'El código es obligatorio',
-            'codigoMuestra.between' => 'El código debe tener entre 1 y 8 carácteres',
-            'codigoMuestra.string' => 'El código debe ser una cadena de texto',
+            'codigo.required' => 'El código es obligatorio',
+            'codigo.between' => 'El código debe tener entre 1 y 8 carácteres',
+            'codigo.string' => 'El código debe ser una cadena de texto',
             
+            'organo.required' => 'El organo es obligatorio',
+            'organo.string' => 'El código debe ser una cadena de texto',
+
             'fecha.required' => 'La fecha es obligatoria',
             'fecha.date' => 'La fecha debe ser una fecha',
             'fecha.date_format' => 'La fecha debe estar en formato dd-mm-yyyy',

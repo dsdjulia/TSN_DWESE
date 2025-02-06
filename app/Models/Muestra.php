@@ -12,6 +12,7 @@ class Muestra extends Model
     protected $table = "muestras"; 
 
     protected $fillable = [
+        'codigo',
         'fecha',
         'idTipoNaturaleza',
         'idUser',

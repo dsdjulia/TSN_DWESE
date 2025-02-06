@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class SedeController extends Controller
 {
-    public function getSedeJson($id){
+    public function getJson($id){
         $sede = Sede::find($id);
         return response()->json($sede);
     }

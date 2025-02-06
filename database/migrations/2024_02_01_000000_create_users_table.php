@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('idSede')->references('id')->on('sedes');
+            $table->foreign('idSede')->references('id')->on('sedes')->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

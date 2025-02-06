@@ -48,6 +48,8 @@ Route::get('/test', function () {
     return Inertia::render('Test');
 })->middleware(['auth', 'verified'])->name('test');
 
+Route::get('/guardar',[MuestraController::class, 'guardar']) -> name('guardar');
+Route::get('/eliminar',[MuestraController::class, 'eliminar']) -> name('eliminar');
 
 require __DIR__.'/auth.php';
 

@@ -13,10 +13,22 @@ class Tipo_naturalezaSeeder extends Seeder
      */
     public function run(): void
     {
-        /* Tipo_naturaleza::factory()->create([
-            'codigo' => 'B',
-            'nombre' => 'Biopsia',
-        ]); */
+        /* $tiposNaturaleza = [
+            ['codigo' => 'B', 'nombre' => 'Biopsias'],
+            ['codigo' => 'BV', 'nombre' => 'Biopsias veterinarias'],
+            ['codigo' => 'CB', 'nombre' => 'Cavidad bucal'],
+            ['codigo' => 'CV', 'nombre' => 'Citología vaginal'],
+            ['codigo' => 'EX', 'nombre' => 'Extensión sanguínea'],
+            ['codigo' => 'O', 'nombre' => 'Orinas'],
+            ['codigo' => 'E', 'nombre' => 'Esputos'],
+            ['codigo' => 'ES', 'nombre' => 'Semen'],
+            ['codigo' => 'I', 'nombre' => 'Improntas'],
+            ['codigo' => 'F', 'nombre' => 'Frotis'],
+        ];
+
+        foreach ($tiposNaturaleza as $tipo) {
+            Tipo_naturaleza::create($tipo);
+        } */
 
         Tipo_naturaleza::factory(10)->create();
     }

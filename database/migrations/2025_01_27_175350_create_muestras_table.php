@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('codigo');
 
-            $table->unsignedBigInteger('idTipoNaturaleza');
             $table->unsignedBigInteger('idUser');
-            $table->unsignedBigInteger('idFormato');
             $table->unsignedBigInteger('idSede');
+            $table->unsignedBigInteger('idTipoNaturaleza');
+            $table->unsignedBigInteger('idFormato');
             $table->unsignedBigInteger('idCalidad');
 
             $table->string('descripcionCalidad');
-            $table->date('fecha');
             $table->string('organo');
+            $table->date('fecha');
 
             $table->timestamps();
 

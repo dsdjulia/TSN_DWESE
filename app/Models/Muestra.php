@@ -13,13 +13,14 @@ class Muestra extends Model
 
     protected $fillable = [
         'codigo',
-        'fecha',
-        'organo',
-        'idTipoNaturaleza',
         'idUser',
-        'idFormato',
         'idSede',
+        'idTipoNaturaleza',
+        'idFormato',
         'idCalidad',
+        'descripcionCalidad',
+        'organo',
+        'fecha',
     ];
 
 

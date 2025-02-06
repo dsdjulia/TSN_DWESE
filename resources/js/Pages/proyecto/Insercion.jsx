@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Head, Link, router } from "@inertiajs/react";
 import { buscarEstudio } from "@/Components/ListaIC";
 import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
+import Interpretacion from "@/Components/Interpretacion";
 
 
 export default function Insercion({ auth }) {
@@ -181,7 +182,7 @@ export default function Insercion({ auth }) {
             }
         }
     };
-    
+
 
 
 
@@ -249,11 +250,11 @@ export default function Insercion({ auth }) {
 
     const handlePhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
         const urlImagen = photo.target.files[0]
-        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]) 
+        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)])
 
         console.log(arrayImagenes);
 
-    }   
+    }
 
     const handleDeletePhoto = (seleccion) => {
         const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
@@ -261,7 +262,7 @@ export default function Insercion({ auth }) {
         seleccion.target.parentElement.remove();
 
         //todo Falta sacarla la imagen eliminada del array
-    }   
+    }
 
     const handleSubmit = () => {
         console.log(form);
@@ -270,6 +271,16 @@ export default function Insercion({ auth }) {
 
     }
 
+
+    const [interpretaciones, setInterpretaciones] = useState([]);
+
+    const agregarInterpretacion = () => {
+        setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
+    };
+
+    const eliminarInterpretacion = (id) => {
+        setInterpretaciones(interpretaciones.filter(item => item.id !== id));
+    };
 
     return (
         <AuthenticatedLayout
@@ -475,7 +486,7 @@ export default function Insercion({ auth }) {
                             <select
                                 id="interpretacion"
                                 name="interpretacion"
-                                className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm mb-6"
+                                className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm "
                                 onChange={handleData}
                             >
                                 <option value="">
@@ -495,6 +506,15 @@ export default function Insercion({ auth }) {
                                 )}
                             </select>
                         </div>
+                        {interpretaciones.map(item => (
+                            <Interpretacion
+                                key={item.id}
+                                id={item.id}
+                                onRemove={eliminarInterpretacion}
+                            />
+                        ))}
+
+                        <button className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 mb-6 font-bold text-gray-700" onClick={agregarInterpretacion}>Añadir interpretación</button>
 
                         <hr className="my-4 border-gray-300" />
 
@@ -513,10 +533,10 @@ export default function Insercion({ auth }) {
                                 multiple
                             />
                         </div>
-                        
+
                         <div className="mt-4 flex flex-wrap gap-4">
                             {/* Aqui voy añadiendo las nuevas fotos, falta borrarlas del array*/}
-                            {arrayImagenes.map((photo) => ( 
+                            {arrayImagenes.map((photo) => (
                                 <div className="relative w-auto h-32 inline-block">
                                     <img
                                         src={photo}

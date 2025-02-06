@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Calidad extends Model
 {
     use HasFactory;
-    
-    protected $table = "calidades"; 
+
+    protected $table = "calidades";
 
     protected $fillable = [
         'codigo',
-        'nombre',
+        'nombre',  
         'idTipoEstudio'
     ];
 

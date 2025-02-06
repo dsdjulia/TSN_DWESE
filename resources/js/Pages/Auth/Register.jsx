@@ -14,9 +14,10 @@ export default function Register() {
         idSede: ""
     });
 
+  
     const submit = (e) => {
         e.preventDefault();
-
+        console.log(data); // Esto mostrará los datos antes de enviarlos
         post(route("register"), {
             onFinish: () => reset("password", "password_confirmation"),
         });
@@ -110,7 +111,7 @@ export default function Register() {
                     />
                     <TextInput
                         id="idSede"
-                        type="idSede"
+                        type="text"
                         name="idSede"
                         value={data.idSede}
                         className="mt-1 block w-full h-10 border-gray-300 border"

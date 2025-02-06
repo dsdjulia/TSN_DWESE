@@ -3,6 +3,7 @@ import React from "react";
 import { Head } from "@inertiajs/react";
 
 export default function Muestras({ auth }) {
+    
     const calidadesBucal = {
         B1: "Muestra válida para examen",
         B2: "Muestra válida para examen aunque limitada por cantidad insuficiente de células",

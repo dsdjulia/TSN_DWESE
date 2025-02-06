@@ -9,7 +9,7 @@ import Interpretacion from "@/Components/Interpretacion";
 export default function Insercion({ auth }) {
 
     const datos = {
-        CV: {
+        C: {
             calidad: {
                 1: 'Toma válida para examen.',
                 2: 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
@@ -53,7 +53,7 @@ export default function Insercion({ auth }) {
                 29: 'Células epiteliales de apariencia glandular con núcleos amplios e irregulares.'
             }
         },
-        EX: {
+        H: {
             calidad: {
                 1: 'Muestra válida para examen.',
                 2: 'Muestra válida para examen aunque limitada por lipemia.',
@@ -88,7 +88,7 @@ export default function Insercion({ auth }) {
                 20: 'Presencia de parásitos intraeritrocitarios.'
             }
         },
-        O: {
+        U: {
             calidad: {
                 1: 'Muestra válida para examen.',
                 2: 'Muestra válida para examen aunque limitada por turbidez.',
@@ -157,7 +157,7 @@ export default function Insercion({ auth }) {
                 11: 'Ausencia de células significativas para el análisis.'
             }
         },
-        CB: {
+        B: {
             calidad: {
                 1: 'Muestra válida para examen.',
                 2: 'Muestra válida para examen aunque limitada por cantidad insuficiente de células.',
@@ -352,6 +352,29 @@ export default function Insercion({ auth }) {
                                 <option value="ES">Semen</option>
                                 <option value="I">Improntas</option>
                                 <option value="F">Frotis</option>
+
+                            </select>
+                        </div>
+                        <div>
+                            <label
+                                for="naturaleza_muestra"
+                                className="block text-sm font-semibold text-gray-700"
+                            >
+                                Tipo de estudio
+                            </label>
+                            <select onChange={(e) => { handleSelect(e); handleData(e); }}
+                                id="tipoEstudio"
+                                name="tipoEstudio"
+                                className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                            >
+                                <option value="">
+                                    Seleccione un tipo de estudio
+                                </option>
+                                <option value="C">Citológico cérvico - vaginal</option>
+                                <option value="H">Hematológico completo</option>
+                                <option value="U">Microscópico y químico de orina</option>
+                                <option value="E">Citológico de esputo</option>
+                                <option value="EX">Citológico bucal</option>
 
                             </select>
                         </div>

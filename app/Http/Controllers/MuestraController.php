@@ -69,9 +69,8 @@ class MuestraController extends Controller
         }
 
         $data = [
+            // Request
             'codigo' => $request->input('codigo'),
-            'idUser' => $request->input('idUser'),
-            'idSede' => $request->input('idSede'),
             'tipoNaturaleza' => $request->input('tipoNaturaleza'),
             'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
             'idFormato' => $request->input('idFormato'),
@@ -79,6 +78,10 @@ class MuestraController extends Controller
             'descripcionCalidad' => $request->input('descripcionCalidad'),
             'organo' => $request->input('organo'),
             'fecha' => $request->input('fecha'),
+            
+            // Local Storage
+            'idUser' => $request->input('idUser'),
+            'idSede' => $request->input('idSede'),
             'updated_at' => date("Y-m-d"),
         ];
 

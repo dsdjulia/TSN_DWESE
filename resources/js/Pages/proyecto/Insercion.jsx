@@ -289,7 +289,7 @@ export default function Insercion({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */
-        
+
         >
             <Head title="Insercion" />
             <div className="flex flex-col items-center justify-center min-h-screen bg-[#e5eaf0] pb-10">
@@ -514,7 +514,7 @@ export default function Insercion({ auth }) {
                                 multiple
                             />
                         </div>
-                        
+
                         <div className="mt-4 flex flex-wrap gap-4" id="containerImages">
 
                         <div className="mt-4 flex flex-wrap gap-4">
@@ -535,6 +535,7 @@ export default function Insercion({ auth }) {
                             ))}
                         </div>
 
+                    </div>
 
 
                         <div className="flex justify-start mt-4">
@@ -547,8 +548,8 @@ export default function Insercion({ auth }) {
                                 Guardar muestra
                             </Link>
                         </div>
-                    </div>
                 </div>
+            </div>
             </div>
         </AuthenticatedLayout>
     );

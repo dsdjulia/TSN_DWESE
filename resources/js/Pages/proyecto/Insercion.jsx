@@ -193,10 +193,17 @@ export default function Insercion({ auth }) {
     const [calidadSeleccionada, setCalidadSeleccionada] = useState('') // Aquí modifico la selección
     const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') // Aquí modifico la selección
 
+    const [arrayImagenes, setArrayImagenes] = useState([
+        '../public/muestra1.png',
+        '../public/muestra2.png',
+    ])
+
+
     const handleSelect = (seleccion) => {
         const clave = seleccion.target.value
+        console.log(clave);
 
-        if (clave === 'B'){
+        if (clave == 'B'|| clave == 'BV'){
             setBiopsiaHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
 
         } else {
@@ -210,11 +217,9 @@ export default function Insercion({ auth }) {
 
     const handleCalidad = (seleccion) => {
 
-        console.log(seleccion.target.value);
-        const claveCalidad = seleccion.target.value
-        claveCalidad.length
+        const textoCalidad = seleccion.target.options[seleccion.target.selectedIndex].text
 
-        if (claveCalidad === 6 || claveCalidad === 8 ||claveCalidad === 9){ // Compruebo que el penultimo sea un punto
+        if (textoCalidad[textoCalidad.length - 2] === '.'){ // Compruebo que el penultimo sea un punto
             setCalidadHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
 
         } else {
@@ -241,12 +246,36 @@ export default function Insercion({ auth }) {
         console.log(form);
     }
 
-const handleSubmit = () => {
-    console.log(form);
-    router.post('api/createMuestra', form)
-    showSuccessAlert()
+    const addPhoto = () => {
 
-}
+    }
+
+    const handlePhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
+        const urlImagen = photo.target.files[0]
+        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]) 
+
+        console.log(arrayImagenes);
+
+    }   
+
+    const handleDeletePhoto = (seleccion) => {
+        const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
+
+        seleccion.target.parentElement.remove();
+
+
+        // setArrayImagenes(prevImages => // La sacamos del array
+        //     prevImages.filter(photo => photo !== photoDeleted)
+        // );
+        // console.log(arrayImagenes);
+    }   
+
+    const handleSubmit = () => {
+        console.log(form);
+        router.post('api/createMuestra', form)
+        showSuccessAlert()
+
+    }
 
 
     return (
@@ -304,7 +333,7 @@ const handleSubmit = () => {
                             >
                                 Tipo de estudio
                             </label>
-                            <select onChange={(e) => { handleSelect(e); handleData(e); }} //! SEGUN LO QUE SELECCIONEMOS AQUI
+                            <select onChange={(e) => { handleSelect(e); handleData(e); }}
                                 id="tipoEstudio"
                                 name="tipoEstudio"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -317,6 +346,9 @@ const handleSubmit = () => {
                                 <option value="CB">Cavidad bucal</option>
                                 <option value="CV">Citología vaginal</option>
                                 <option value="EX">Extensión sanguínea</option>
+                                <option value="O">Orinas</option>
+                                <option value="E">Esputos</option>
+
                             </select>
                         </div>
                         <div className={biopsiaHidden} id="organos_biopsiados">
@@ -363,7 +395,7 @@ const handleSubmit = () => {
                             >
                                 Naturaleza de la muestra
                             </label>
-                            <select //! SEGUN LO QUE SELECCIONEMOS AQUI
+                            <select
                                 id="naturaleza"
                                 name="naturaleza"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -372,8 +404,7 @@ const handleSubmit = () => {
                                 <option value="">
                                     Seleccione la naturaleza de la muestra
                                 </option>
-                                <option value="O">Orinas</option>
-                                <option value="E">Esputos</option>
+
                                 <option value="ES">Semen</option>
                                 <option value="I">Improntas</option>
                                 <option value="F">Frotis</option>
@@ -411,7 +442,7 @@ const handleSubmit = () => {
                             >
                                 Calidad de la muestra
                             </label>
-                            <select onChange={(e) => { handleSelect(e); handleData(e); }}//! AQUI
+                            <select onChange={(e) => { handleCalidad(e); handleData(e); }}
                                 id="calidad"
                                 name="calidad"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -423,7 +454,7 @@ const handleSubmit = () => {
                                 {Object.entries(calidadSeleccionada).map(
                                     ([key, contenido]) => (
                                         <option value={key}>
-                                            <strong>{contenido}</strong>{" "}
+                                            {contenido}{" "}
                                             {/* si se selecciona alguna opcion de rellenar, debe aparecer un formulario de texto */}
                                         </option>
                                     )
@@ -448,7 +479,7 @@ const handleSubmit = () => {
                             >
                                 Interpretación
                             </label>
-                            <select //! AQUI
+                            <select
                                 id="interpretacion"
                                 name="interpretacion"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm mb-6"
@@ -465,7 +496,7 @@ const handleSubmit = () => {
                                         ] /* esto funciona en react como for(let key in Json) en javascript  */
                                     ) => (
                                         <option value={key}>
-                                            <strong>{contenido}</strong>
+                                            {contenido}
                                         </option>
                                     )
                                 )}
@@ -481,7 +512,7 @@ const handleSubmit = () => {
                             >
                                 Añadir imágenes
                             </label>
-                            <input //! AQUI FALTA CONTROLAR LAS IMAGENES
+                            <input onChange={handlePhotos}
                                 type="file"
                                 id="imagenes"
                                 name="imagenes"
@@ -489,39 +520,27 @@ const handleSubmit = () => {
                                 multiple
                             />
                         </div>
-
-                        <div className="mt-4 space-x-4 flex">
-                            <div className="relative w-auto h-32 inline-block">
-                                <img
-                                    src="../public/muestra1.png"
-                                    alt="Imagen 1"
-                                    className="w-auto h-32 object-cover rounded-lg"
-                                />
-                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
-                                    X
-                                </a>
-                            </div>
-                            <div className="relative w-auto h-32 inline-block">
-                                <img
-                                    src="../public/muestra2.png"
-                                    alt="Imagen 2"
-                                    className="w-auto h-32 object-cover rounded-lg"
-                                />
-                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
-                                    X
-                                </a>
-                            </div>
-                            <div className="relative w-auto h-32 inline-block">
-                                <img
-                                    src="../public/muestra3.png"
-                                    alt="Imagen 3"
-                                    className="w-auto h-32 object-cover rounded-lg"
-                                />
-                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
-                                    X
-                                </a>
-                            </div>
+                        
+                        <div className="mt-4 flex flex-wrap gap-4">
+                            {/* Aqui voy añadiendo las nuevas fotos, falta borrarlas del array*/}
+                            {arrayImagenes.map((photo) => ( 
+                                <div className="relative w-auto h-32 inline-block">
+                                    <img
+                                        src={photo}
+                                        className="w-auto h-32 object-cover rounded-lg"
+                                    />
+                                    <button
+                                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex items-center justify-center cursor-pointer"
+                                        onClick={handleDeletePhoto}
+                                    >
+                                        X
+                                    </button>
+                                </div>
+                            ))}
                         </div>
+
+
+
                         <div className="flex justify-start mt-4">
                             <Link
                                 method="post"

@@ -246,9 +246,6 @@ export default function Insercion({ auth }) {
         console.log(form);
     }
 
-    const addPhoto = () => {
-
-    }
 
     const handlePhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
         const urlImagen = photo.target.files[0]
@@ -263,11 +260,7 @@ export default function Insercion({ auth }) {
 
         seleccion.target.parentElement.remove();
 
-
-        // setArrayImagenes(prevImages => // La sacamos del array
-        //     prevImages.filter(photo => photo !== photoDeleted)
-        // );
-        // console.log(arrayImagenes);
+        //todo Falta sacarla la imagen eliminada del array
     }   
 
     const handleSubmit = () => {
@@ -339,7 +332,7 @@ export default function Insercion({ auth }) {
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                             >
                                 <option value="">
-                                    Seleccione un tipo de estudio
+                                    Seleccione un tipo de naturaleza
                                 </option>
                                 <option value="B">Biopsias</option>
                                 <option value="BV">Biopsias veterinarias</option>

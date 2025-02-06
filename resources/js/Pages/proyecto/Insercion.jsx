@@ -307,7 +307,7 @@ export default function Insercion({ auth }) {
                             >
                                 Tipo de estudio
                             </label>
-                            <select onChange={(e) => { handleSelect(e); handleData(e); }} //! SEGUN LO QUE SELECCIONEMOS AQUI
+                            <select onChange={(e) => { handleSelect(e); handleData(e); }}
                                 id="tipoEstudio"
                                 name="tipoEstudio"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -369,7 +369,7 @@ export default function Insercion({ auth }) {
                             >
                                 Naturaleza de la muestra
                             </label>
-                            <select //! SEGUN LO QUE SELECCIONEMOS AQUI
+                            <select
                                 id="naturaleza"
                                 name="naturaleza"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -416,7 +416,7 @@ export default function Insercion({ auth }) {
                             >
                                 Calidad de la muestra
                             </label>
-                            <select onChange={(e) => { handleCalidad(e); handleData(e); }}//! AQUI
+                            <select onChange={(e) => { handleCalidad(e); handleData(e); }}
                                 id="calidad"
                                 name="calidad"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -453,7 +453,7 @@ export default function Insercion({ auth }) {
                             >
                                 Interpretación
                             </label>
-                            <select //! AQUI
+                            <select
                                 id="interpretacion"
                                 name="interpretacion"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm mb-6"
@@ -486,7 +486,7 @@ export default function Insercion({ auth }) {
                             >
                                 Añadir imágenes
                             </label>
-                            <input //! AQUI FALTA CONTROLAR LAS IMAGENES
+                            <input
                                 type="file"
                                 id="imagenes"
                                 name="imagenes"

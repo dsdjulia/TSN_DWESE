@@ -89,6 +89,5 @@ class CalidadSeeder extends Seeder
             ]);
         }
 
-        /*Calidad::factory(10)->create();*/
     }
 }

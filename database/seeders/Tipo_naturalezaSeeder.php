@@ -13,7 +13,7 @@ class Tipo_naturalezaSeeder extends Seeder
      */
     public function run(): void
     {
-        /* $tiposNaturaleza = [
+        $tiposNaturaleza = [
             ['codigo' => 'B', 'nombre' => 'Biopsias'],
             ['codigo' => 'BV', 'nombre' => 'Biopsias veterinarias'],
             ['codigo' => 'CB', 'nombre' => 'Cavidad bucal'],
@@ -28,8 +28,7 @@ class Tipo_naturalezaSeeder extends Seeder
 
         foreach ($tiposNaturaleza as $tipo) {
             Tipo_naturaleza::create($tipo);
-        } */
+        }
 
-        Tipo_naturaleza::factory(10)->create();
     }
 }

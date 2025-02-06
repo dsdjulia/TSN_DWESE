@@ -20,7 +20,5 @@ class UserSeeder extends Seeder
             'password' => 'user',
             'idSede' => 1
         ]);
-        
-        User::factory(10)->create();
     }
 }

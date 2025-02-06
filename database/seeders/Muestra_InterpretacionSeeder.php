@@ -13,6 +13,6 @@ class Muestra_InterpretacionSeeder extends Seeder
      */
     public function run(): void
     {
-        Muestra_Interpretacion::factory(10)->create();
+        
     }
 }

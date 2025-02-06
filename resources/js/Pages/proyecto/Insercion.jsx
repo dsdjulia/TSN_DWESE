@@ -195,8 +195,9 @@ export default function Insercion({ auth }) {
 
     const handleSelect = (seleccion) => {
         const clave = seleccion.target.value
+        console.log(clave);
 
-        if (clave === 'B'){
+        if (clave == 'B'|| clave == 'BV'){
             setBiopsiaHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
 
         } else {
@@ -213,8 +214,9 @@ export default function Insercion({ auth }) {
         console.log(seleccion.target.value);
         const claveCalidad = seleccion.target.value
         claveCalidad.length
+        console.log(claveCalidad);
 
-        if (claveCalidad === 6 || claveCalidad === 8 ||claveCalidad === 9){ // Compruebo que el penultimo sea un punto
+        if (claveCalidad === 6){ // Compruebo que el penultimo sea un punto
             setCalidadHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
 
         } else {
@@ -317,6 +319,9 @@ const handleSubmit = () => {
                                 <option value="CB">Cavidad bucal</option>
                                 <option value="CV">Citología vaginal</option>
                                 <option value="EX">Extensión sanguínea</option>
+                                <option value="O">Orinas</option>
+                                <option value="E">Esputos</option>
+
                             </select>
                         </div>
                         <div className={biopsiaHidden} id="organos_biopsiados">
@@ -372,8 +377,7 @@ const handleSubmit = () => {
                                 <option value="">
                                     Seleccione la naturaleza de la muestra
                                 </option>
-                                <option value="O">Orinas</option>
-                                <option value="E">Esputos</option>
+
                                 <option value="ES">Semen</option>
                                 <option value="I">Improntas</option>
                                 <option value="F">Frotis</option>

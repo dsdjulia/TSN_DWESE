@@ -193,6 +193,8 @@ export default function Insercion({ auth }) {
     const [calidadSeleccionada, setCalidadSeleccionada] = useState('') // Aquí modifico la selección
     const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') // Aquí modifico la selección
 
+    const [arrayImagenes, setArrayImagenes] = useState('')
+
     const handleSelect = (seleccion) => {
         const clave = seleccion.target.value
         console.log(clave);
@@ -240,7 +242,15 @@ export default function Insercion({ auth }) {
         console.log(form);
     }
 
-    const handlePhoto = (seleccion) => {
+    const handlePhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
+        const urlImagen = photo.target.files[0]
+        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]) 
+
+        console.log(arrayImagenes);
+
+    }   
+
+    const handleDeletePhoto = (seleccion) => {
         seleccion.target.parentElement.remove();
     }   
 
@@ -486,7 +496,7 @@ export default function Insercion({ auth }) {
                             >
                                 Añadir imágenes
                             </label>
-                            <input
+                            <input onChange={handlePhotos}
                                 type="file"
                                 id="imagenes"
                                 name="imagenes"
@@ -495,14 +505,15 @@ export default function Insercion({ auth }) {
                             />
                         </div>
 
-                        <div className="mt-4 space-x-4 flex">
+                        <div className="mt-4 space-x-4 flex">{/* Aquí meto las imágenes que vayan añadiendo */}
+                            
                             <div className="relative w-auto h-32 inline-block">
                                 <img
                                     src="../public/muestra1.png"
                                     alt="Imagen 1"
                                     className="w-auto h-32 object-cover rounded-lg"
                                 />
-                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer" onClick={handlePhoto}>
+                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer" onClick={handleDeletePhoto}>
                                     X
                                 </a>
                             </div>
@@ -512,7 +523,7 @@ export default function Insercion({ auth }) {
                                     alt="Imagen 2"
                                     className="w-auto h-32 object-cover rounded-lg"
                                 />
-                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer" onClick={handlePhoto}>
+                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer" onClick={handleDeletePhoto}>
                                     X
                                 </a>
                             </div>
@@ -522,11 +533,13 @@ export default function Insercion({ auth }) {
                                     alt="Imagen 3"
                                     className="w-auto h-32 object-cover rounded-lg"
                                 />
-                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer" onClick={handlePhoto}>
+                                <a className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer" onClick={handleDeletePhoto}>
                                     X
                                 </a>
                             </div>
                         </div>
+
+
                         <div className="flex justify-start mt-4">
                             <Link
                                 method="post"

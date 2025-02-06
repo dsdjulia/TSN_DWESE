@@ -18,17 +18,13 @@ export default function Muestras({auth}) {
   return (
     <AuthenticatedLayout
                 user={auth.user} /* Comprobamos que este autenticado */
-                header={
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Muestras
-                    </h2> /* heredamos el header e introducimos este texto */
-                }
+            
             >
 
             <Head title="Muestras"/>
 
-    <div className="flex items-center justify-center min-h-screen bg-[#e5eaf0]">
-      <div className="p-8 bg-white rounded-md  text-center w-5/6 h-5/6">
+    <div className="flex flex-col items-center justify-start min-h-screen bg-[#e5eaf0]">
+      <div className="p-8 bg-white rounded-md  text-center w-5/6 h-5/6 mt-10">
         <h1 className="text-lg font-semibold text-gray-700 mb-4">Archivo de Muestras</h1>
         <table className="w-full border-collapse">
           <thead>

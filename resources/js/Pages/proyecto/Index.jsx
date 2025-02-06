@@ -8,11 +8,9 @@ export default function Index({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Inicio
-                </h2> /* heredamos el header e introducimos este texto */
-            }
+            header={<h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white ">
+                Inicio
+            </h1>}
         >
             <Head title="Inicio" />
             <div className="flex items-center justify-center min-h-screen bg-[url('/public/fondo-inicio.jpg')] bg-cover bg-slate-50">

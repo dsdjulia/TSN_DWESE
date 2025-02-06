@@ -37,10 +37,10 @@ export default function AuthenticatedLayout({ header, children }) {
                                     Muestras
                                 </NavLink>
                                 <NavLink
-                                    href={route('referencia')}
+                                    href={route('nuevaMuestra')}
                                     active={route().current('dashboard')}
                                 >
-                                    Referencia
+                                    Añadir muestra
                                 </NavLink>
                             </div>
                         </div>
@@ -172,7 +172,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
             {header && (
                 <header className="bg-white shadow">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex">
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex text-center align-middle justify-center text-slate-800 md:text-">
                         {header}
                     </div>
                 </header>

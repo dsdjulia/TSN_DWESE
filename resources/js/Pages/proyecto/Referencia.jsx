@@ -3,7 +3,7 @@ import React from "react";
 import { Head } from "@inertiajs/react";
 
 export default function Muestras({ auth }) {
-    
+
     const calidadesBucal = {
         B1: "Muestra válida para examen",
         B2: "Muestra válida para examen aunque limitada por cantidad insuficiente de células",
@@ -31,11 +31,7 @@ export default function Muestras({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Referencia
-                </h2> /* heredamos el header e introducimos este texto */
-            }
+           
         >
             <Head title="Referencia" />
 

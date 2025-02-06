@@ -285,11 +285,7 @@ export default function Insercion({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Nueva Muestra
-                </h2> /* heredamos el header e introducimos este texto */
-            }
+        
         >
             <Head title="Insercion" />
             <div className="flex flex-col items-center justify-center min-h-screen bg-[#e5eaf0] pb-10">

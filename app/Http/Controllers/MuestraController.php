@@ -32,7 +32,6 @@ class MuestraController extends Controller
         $data = [
             // Request
             'codigo' => $request->input('codigo'),
-            'idTipoEstudio' => $request->input('idTipoEstudio'),
             'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
             'idFormato' => $request->input('idFormato'),
             'idCalidad' => $request->input('idCalidad'),
@@ -71,7 +70,6 @@ class MuestraController extends Controller
         $data = [
             // Request
             'codigo' => $request->input('codigo'),
-            'idTipoEstudio' => $request->input('idTipoEstudio'),
             'idTipoNaturaleza' => $request->input('idTipoNaturaleza'),
             'idFormato' => $request->input('idFormato'),
             'idCalidad' => $request->input('idCalidad'),
@@ -111,7 +109,6 @@ class MuestraController extends Controller
     public function validatorMuestrasInsert($datos){
         $validator = Validator::make($datos, [
             'codigo' => 'required|string|min:1|max:8',
-            'idTipoEstudio' => 'required|string|', 
             'idTipoNaturaleza' => 'required|string',
             'idFormato' => 'required|string',
             'idCalidad' => 'required|string',
@@ -131,7 +128,6 @@ class MuestraController extends Controller
     public function validatorMuestrasUpdate($datos){
         $validator = Validator::make($datos, [
             'codigo' => 'required|string|min:1|max:8',
-            'idTipoEstudio' => 'required|string|', 
             'idTipoNaturaleza' => 'required|string',
             'idFormato' => 'required|string',
             'idCalidad' => 'required|string',

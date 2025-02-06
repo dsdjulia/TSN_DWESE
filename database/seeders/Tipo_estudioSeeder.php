@@ -25,6 +25,5 @@ class Tipo_estudioSeeder extends Seeder
             Tipo_estudio::create($tipo);
         }
 
-        /*Tipo_estudio::factory(10)->create();*/
     }
 }

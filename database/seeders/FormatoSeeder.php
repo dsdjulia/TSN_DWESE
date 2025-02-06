@@ -13,6 +13,17 @@ class FormatoSeeder extends Seeder
      */
     public function run(): void
     {
-        Formato::factory(10)->create();
+        $formatos= [
+            ['codigo' => 'Fr', 'nombre' => 'Fresco'],
+            ['codigo' => 'Fo', 'nombre' => 'Formol'],
+            ['codigo' => 'Et', 'nombre' => 'Etanol 70%']
+        ];
+
+        foreach($formatos as $formato){
+            Formato::create([
+                'codigo' => $formato['codigo'],
+                'nombre' => $formato['nombre']
+            ]);
+        }
     }
 }

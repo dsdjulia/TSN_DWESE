@@ -335,7 +335,7 @@ export default function Insercion({ auth }) {
                                 for="naturaleza_muestra"
                                 className="block text-sm font-semibold text-gray-700"
                             >
-                                Tipo de estudio
+                                Tipo de naturaleza0
                             </label>
                             <select onChange={(e) => { handleSelect(e); handleData(e); }}
                                 id="tipoEstudio"
@@ -352,6 +352,9 @@ export default function Insercion({ auth }) {
                                 <option value="EX">Extensión sanguínea</option>
                                 <option value="O">Orinas</option>
                                 <option value="E">Esputos</option>
+                                <option value="ES">Semen</option>
+                                <option value="I">Improntas</option>
+                                <option value="F">Frotis</option>
 
                             </select>
                         </div>
@@ -392,7 +395,7 @@ export default function Insercion({ auth }) {
                                 <option value="BP">Pulmón</option>
                             </select>
                         </div>
-                        <div>
+                        {/* <div>
                             <label
                                 for="naturaleza_muestra"
                                 className="block text-sm font-semibold text-gray-700"
@@ -413,7 +416,7 @@ export default function Insercion({ auth }) {
                                 <option value="I">Improntas</option>
                                 <option value="F">Frotis</option>
                             </select>
-                        </div>
+                        </div> */}
 
                         <div>
                             <label

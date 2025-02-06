@@ -35,6 +35,5 @@ class SedeSeeder extends Seeder
             Sede::create($sede);
         }
 
-        /*Sede::factory(10)->create();*/
     }
 }

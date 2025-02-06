@@ -428,7 +428,7 @@ export default function Insercion({ auth }) {
                                 {Object.entries(calidadSeleccionada).map(
                                     ([key, contenido]) => (
                                         <option value={key}>
-                                            <strong>{contenido}</strong>{" "}
+                                            {contenido}{" "}
                                             {/* si se selecciona alguna opcion de rellenar, debe aparecer un formulario de texto */}
                                         </option>
                                     )
@@ -470,7 +470,7 @@ export default function Insercion({ auth }) {
                                         ] /* esto funciona en react como for(let key in Json) en javascript  */
                                     ) => (
                                         <option value={key}>
-                                            <strong>{contenido}</strong>
+                                            {contenido}
                                         </option>
                                     )
                                 )}

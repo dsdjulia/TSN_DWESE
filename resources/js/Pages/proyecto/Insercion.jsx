@@ -259,7 +259,15 @@ export default function Insercion({ auth }) {
     }   
 
     const handleDeletePhoto = (seleccion) => {
+        const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
+
         seleccion.target.parentElement.remove();
+
+
+        // setArrayImagenes(prevImages => // La sacamos del array
+        //     prevImages.filter(photo => photo !== photoDeleted)
+        // );
+        // console.log(arrayImagenes);
     }   
 
     const handleSubmit = () => {
@@ -514,7 +522,7 @@ export default function Insercion({ auth }) {
                         </div>
                         
                         <div className="mt-4 flex flex-wrap gap-4">
-                            {/* Aqui voy añadiendo las nuevas fotos*/}
+                            {/* Aqui voy añadiendo las nuevas fotos, falta borrarlas del array*/}
                             {arrayImagenes.map((photo) => ( 
                                 <div className="relative w-auto h-32 inline-block">
                                     <img

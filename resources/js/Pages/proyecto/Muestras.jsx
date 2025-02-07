@@ -5,12 +5,8 @@ import { useState } from "react";
 import ModalModificar from "./ModalModificar";
 import ModalEliminar from "./ModalEliminar";
 
-export default function Muestras({auth}) {
-  const muestras = [
-    { id: 1, tipo: 'Sangre', fecha: '2024-01-31' },
-    { id: 2, tipo: 'Esputo', fecha: '2024-02-01' },
-    { id: 3, tipo: 'Sangre', fecha: '2024-02-02' }
-  ];
+export default function Muestras({auth,data}) {
+  const muestras = data;
   const [modificarAbierto, setModificarAbierto] = useState(false);
   const [eliminarAbierto, setEliminarAbierto] = useState(false);
 
@@ -28,8 +24,11 @@ export default function Muestras({auth}) {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-200">
+              <th className="p-2">Usuario</th>
               <th className="p-2">ID de Muestra</th>
+              <th className="p-2">Codigo Muestra</th>
               <th className="p-2">Tipo de Muestra</th>
+              <th className="p-2">Formato</th>
               <th className="p-2">Fecha</th>
               <th className="p-2"></th>
             </tr>
@@ -37,8 +36,11 @@ export default function Muestras({auth}) {
           <tbody>
             {muestras.map((muestra) => (
               <tr key={muestra.id} className="border-b">
+                <td className="p-2">{muestra.user.name}</td>
                 <td className="p-2">{muestra.id}</td>
-                <td className="p-2">{muestra.tipo}</td>
+                <td className="p-2">{muestra.codigo}</td>
+                <td className="p-2">{muestra.tipo_naturaleza.nombre}</td>
+                <td className="p-2">{muestra.formato.nombre}</td>
                 <td className="p-2">{muestra.fecha}</td>
                 <td className="p-2 flex space-x-2 justify-center">
                   <button className="text-blue-500 hover:text-blue-700" onClick={() => setModificarAbierto(true)} >

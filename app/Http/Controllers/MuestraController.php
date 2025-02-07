@@ -2,20 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Muestra;
-use Database\Seeders\MuestraSeeder;
 use Illuminate\Http\Request;
+use Database\Seeders\MuestraSeeder;
 use Illuminate\Support\Facades\Validator;
 
 class MuestraController extends Controller
 {
 
-    public function getAllJson(){
-        $muestras = Muestra::all();
-        if (!$muestras) {
+    public function getAllJson2(){
+        $muestras = Muestra::with([
+            'tipoNaturaleza:id,nombre',
+            'user:id,name',
+            'formato:id,nombre',
+            'sede:id,nombre'
+        ])->get();
+
+        if ($muestras->isEmpty()) {
             return response()->json(["error" => "No hay muestras registradas"]);
         }
+    
         return response()->json($muestras);
+    }
+    public function getAllJson(){
+        $muestras = Muestra::with([
+            'tipoNaturaleza:id,nombre',
+            'user:id,name',
+            'formato:id,nombre',
+            'sede:id,nombre'
+        ])->get();
+
+        if ($muestras->isEmpty()) {
+            return response()->json(["error" => "No hay muestras registradas"]);
+        }
+        
+        return Inertia::render('proyecto/Muestras', ["data" => $muestras]);
     }
 
     public function getMuestraJson($id){

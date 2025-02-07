@@ -9,7 +9,7 @@ use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\Api\AuthController;
 
 
-//GetJson all();
+//Test Inertia();
 
 // GetJsons por id
 Route::get('/sede/{id}', [SedeController::class, 'getSedeJson'])->name('sedeJson');
@@ -17,7 +17,7 @@ Route::get('/imagen/{id}', [ImagenController::class, 'getImagenJson'])->name('im
 
 
 // CRUD Muestras
-Route::get('/muestras', [MuestraController::class, 'getAllJson'])->name('MuestrasController.getAllJson');
+Route::get('/muestras', [MuestraController::class, 'getAllJson2'])->name('MuestrasController.getAllJson');
 Route::get('/muestra/{id}', [MuestraController::class, 'getMuestraJson'])->name('MuestrasController.getMuestraJson');
 Route::post('/muestra', [MuestraController::class, 'insertMuestra'])->name('MuestrasController.insertarMuestra');
 Route::delete('/muestra/{id}', [MuestraController::class, 'deleteMuestra'])->name('MuestrasController.deleteMuestra');

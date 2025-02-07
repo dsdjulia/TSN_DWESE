@@ -9,176 +9,176 @@ import Interpretacion from "@/Components/Interpretacion";
 export default function Insercion({ auth }) {
 
     const datos = {
-        C: {
+        1: {
             calidad: {
-                1: 'Toma válida para examen.',
-                2: 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
-                3: 'Toma válida para examen aunque limitada por hemorragia.',
-                4: 'Toma válida para examen aunque limitada por escasez de células.',
-                5: 'Toma válida para examen aunque limitada por intensa citolisis.',
-                6: 'Toma válida para examen aunque limitada por...',
-                7: 'Toma no valorable por desecación.',
-                8: 'Toma no valorable por ausencia de células...',
-                9: 'Toma no valorable por...'
+                'C. 1.': 'Toma válida para examen.',
+                'C. 2.': 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
+                'C. 3.': 'Toma válida para examen aunque limitada por hemorragia.',
+                'C. 4.': 'Toma válida para examen aunque limitada por escasez de células.',
+                'C. 5.': 'Toma válida para examen aunque limitada por intensa citolisis.',
+                'C. 6.': 'Toma válida para examen aunque limitada por...',
+                'C. 7.': 'Toma no valorable por desecación.',
+                'C. 8.': 'Toma no valorable por ausencia de células...',
+                'C. 9.': 'Toma no valorable por...'
             },
             interpretacion: {
-                1: 'Predominio de células epiteliales escamosas superficiales.',
-                2: 'Predominio de células epiteliales escamosas intermedias.',
-                3: 'Predominio de células epiteliales escamosas parabasales.',
-                4: 'Polinucleares neutrófilos.',
-                5: 'Hematíes.',
-                6: 'Células endocervicales en exocervix.',
-                7: 'Células metaplásicas en exocérvix.',
-                8: 'Células metaplásicas inmaduras.',
-                9: 'Células reactivas.',
-                10: 'Células endometriales en mujer ≥ de 40 años.',
-                11: 'Alteraciones celulares sugerentes con HPV.',
-                12: 'Alteraciones celulares sugerentes de Herpes.',
-                13: 'Células neoplásicas.',
-                14: 'Células superficiales e intermedias con cambios atípicos.',
-                15: 'Células intermedias y parabasales con algunos cambios atípicos.',
-                16: 'Células parabasales con algunos cambios atípicos.',
-                17: 'Células escamosas de significado incierto.',
-                18: 'Células epiteliales glandulares de significado incierto.',
-                19: 'Estructuras micóticas correspondientes a Candida albicans.',
-                20: 'Estructuras micóticas correspondientes a Candida glabrata.',
-                21: 'Estructuras bacterianas con disposición característica de actinomyces.',
-                22: 'Estructuras bacterianas correspondiente de Gardnerella vaginalis.',
-                23: 'Estructuras bacterianas de naturaleza cocácea.',
-                24: 'Estructuras bacterianas sugerentes de Leptothrix.',
-                25: 'Estructuras correspondientes a Trichomonas vaginalis.',
-                26: 'Células histiocitarias multinucleadas.',
-                27: 'Células epiteliales de tipo escamoso con intensos cambios atípicos.',
-                28: 'Presencia de epitelio endometrial sin cambios atípicos.',
-                29: 'Células epiteliales de apariencia glandular con núcleos amplios e irregulares.'
-            }
+                "1.1": 'Predominio de células epiteliales escamosas superficiales.',
+                "1.2": 'Predominio de células epiteliales escamosas intermedias.',
+                "1.3": 'Predominio de células epiteliales escamosas parabasales.',
+                "1.4": 'Polinucleares neutrófilos.',
+                "1.5": 'Hematíes.',
+                "1.6": 'Células endocervicales en exocervix.',
+                "1.7": 'Células metaplásicas en exocérvix.',
+                "1.8": 'Células metaplásicas inmaduras.',
+                "1.9": 'Células reactivas.',
+                "1.10": 'Células endometriales en mujer ≥ de 40 años.',
+                "1.11": 'Alteraciones celulares sugerentes con HPV.',
+                "1.12": 'Alteraciones celulares sugerentes de Herpes.',
+                "1.13": 'Células neoplásicas.',
+                "1.14": 'Células superficiales e intermedias con cambios atípicos.',
+                "1.15": 'Células intermedias y parabasales con algunos cambios atípicos.',
+                "1.16": 'Células parabasales con algunos cambios atípicos.',
+                "1.17": 'Células escamosas de significado incierto.',
+                "1.18": 'Células epiteliales glandulares de significado incierto.',
+                "1.19": 'Estructuras micóticas correspondientes a Candida albicans.',
+                "1.20": 'Estructuras micóticas correspondientes a Candida glabrata.',
+                "1.21": 'Estructuras bacterianas con disposición característica de actinomyces.',
+                "1.22": 'Estructuras bacterianas correspondiente de Gardnerella vaginalis.',
+                "1.23": 'Estructuras bacterianas de naturaleza cocácea.',
+                "1.24": 'Estructuras bacterianas sugerentes de Leptothrix.',
+                "1.25": 'Estructuras correspondientes a Trichomonas vaginalis.',
+                "1.26": 'Células histiocitarias multinucleadas.',
+                "1.27": 'Células epiteliales de tipo escamoso con intensos cambios atípicos.',
+                "1.28": 'Presencia de epitelio endometrial sin cambios atípicos.',
+                "1.29": 'Células epiteliales de apariencia glandular con núcleos amplios e irregulares.'
+            }            
         },
-        H: {
+        2: {
             calidad: {
-                1: 'Muestra válida para examen.',
-                2: 'Muestra válida para examen aunque limitada por lipemia.',
-                3: 'Muestra válida para examen aunque limitada por hemólisis.',
-                4: 'Muestra válida para examen aunque limitada por aglutinación.',
-                5: 'Muestra válida para examen aunque limitada por coagulación.',
-                6: 'Muestra válida para examen aunque limitada por...',
-                7: 'Muestra no valorable por desnaturalización de proteínas.',
-                8: 'Muestra no valorable por contaminación bacteriana.',
-                9: 'Muestra no valorable por...'
+                'H. 1.': 'Muestra válida para examen.',
+                'H. 2.': 'Muestra válida para examen aunque limitada por lipemia.',
+                'H. 3.': 'Muestra válida para examen aunque limitada por hemólisis.',
+                'H. 4.': 'Muestra válida para examen aunque limitada por aglutinación.',
+                'H. 5.': 'Muestra válida para examen aunque limitada por coagulación.',
+                'H. 6.': 'Muestra válida para examen aunque limitada por...',
+                'H. 7.': 'Muestra no valorable por desnaturalización de proteínas.',
+                'H. 8.': 'Muestra no valorable por contaminación bacteriana.',
+                'H. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
-                1: 'Predominio de eritrocitos normocíticos normocrómicos.',
-                2: 'Predominio de eritrocitos microcíticos hipocrómicos.',
-                3: 'Presencia de esferocitos.',
-                4: 'Presencia de dianocitos (células en forma de lágrima).',
-                5: 'Leucocitos con predominio de neutrófilos.',
-                6: 'Leucocitos con predominio de linfocitos.',
-                7: 'Presencia de células blásticas.',
-                8: 'Presencia de eosinófilos aumentados.',
-                9: 'Presencia de basófilos aumentados.',
-                10: 'Trombocitosis (aumento de plaquetas).',
-                11: 'Trombocitopenia (disminución de plaquetas).',
-                12: 'Anomalías en la morfología plaquetaria.',
-                13: 'Presencia de células atípicas sugestivas de neoplasia.',
-                14: 'Presencia de células inmaduras del linaje mieloide.',
-                15: 'Presencia de células inmaduras del linaje linfático.',
-                16: 'Anisocitosis (variabilidad en el tamaño de los eritrocitos).',
-                17: 'Poiquilocitosis (variabilidad en la forma de los eritrocitos).',
-                18: 'Presencia de cuerpos de Howell-Jolly.',
-                19: 'Células con inclusiones de hierro (cuerpos de Pappenheimer).',
-                20: 'Presencia de parásitos intraeritrocitarios.'
-            }
+                "2.1": 'Predominio de eritrocitos normocíticos normocrómicos.',
+                "2.2": 'Predominio de eritrocitos microcíticos hipocrómicos.',
+                "2.3": 'Presencia de esferocitos.',
+                "2.4": 'Presencia de dianocitos (células en forma de lágrima).',
+                "2.5": 'Leucocitos con predominio de neutrófilos.',
+                "2.6": 'Leucocitos con predominio de linfocitos.',
+                "2.7": 'Presencia de células blásticas.',
+                "2.8": 'Presencia de eosinófilos aumentados.',
+                "2.9": 'Presencia de basófilos aumentados.',
+                "2.10": 'Trombocitosis (aumento de plaquetas).',
+                "2.11": 'Trombocitopenia (disminución de plaquetas).',
+                "2.12": 'Anomalías en la morfología plaquetaria.',
+                "2.13": 'Presencia de células atípicas sugestivas de neoplasia.',
+                "2.14": 'Presencia de células inmaduras del linaje mieloide.',
+                "2.15": 'Presencia de células inmaduras del linaje linfático.',
+                "2.16": 'Anisocitosis (variabilidad en el tamaño de los eritrocitos).',
+                "2.17": 'Poiquilocitosis (variabilidad en la forma de los eritrocitos).',
+                "2.18": 'Presencia de cuerpos de Howell-Jolly.',
+                "2.19": 'Células con inclusiones de hierro (cuerpos de Pappenheimer).',
+                "2.20": 'Presencia de parásitos intraeritrocitarios.'
+            }            
         },
-        U: {
+        3: {
             calidad: {
-                1: 'Muestra válida para examen.',
-                2: 'Muestra válida para examen aunque limitada por turbidez.',
-                3: 'Muestra válida para examen aunque limitada por coloración anormal.',
-                4: 'Muestra válida para examen aunque limitada por contaminación fecal.',
-                5: 'Muestra válida para examen aunque limitada por preservación inadecuada.',
-                6: 'Muestra válida para examen aunque limitada por volumen insuficiente.',
-                7: 'Muestra no valorable por deterioro.',
-                8: 'Muestra no valorable por contaminación con agentes externos.',
-                9: 'Muestra no valorable por...'
+                'U. 1.': 'Muestra válida para examen.',
+                'U. 2.': 'Muestra válida para examen aunque limitada por turbidez.',
+                'U. 3.': 'Muestra válida para examen aunque limitada por coloración anormal.',
+                'U. 4.': 'Muestra válida para examen aunque limitada por contaminación fecal.',
+                'U. 5.': 'Muestra válida para examen aunque limitada por preservación inadecuada.',
+                'U. 6.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
+                'U. 7.': 'Muestra no valorable por deterioro.',
+                'U. 8.': 'Muestra no valorable por contaminación con agentes externos.',
+                'U. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
-                1: 'pH normal.',
-                2: 'pH elevado.',
-                3: 'pH reducido.',
-                4: 'Presencia de proteínas.',
-                5: 'Negativo para proteínas.',
-                6: 'Glucosa presente.',
-                7: 'Negativo para la glucosa.',
-                8: 'Cetonas detectadas.',
-                9: 'Negativo para cetonas.',
-                10: 'Hemoglobina presente.',
-                11: 'Negativo para hemoglobina.',
-                12: 'Bilirrubina detectada.',
-                13: 'Negativo para bilirrubina.',
-                14: 'Urobilinógeno normal.',
-                15: 'Urobilinógeno elevado.',
-                16: 'Presencia de nitritos.',
-                17: 'Negativo para nitritos.',
-                18: 'Presencia de leucocitos.',
-                19: 'Ausencia de leucocitos.',
-                20: 'Presencia de eritrocitos.',
-                21: 'Ausencia de eritrocitos.',
-                22: 'Células epiteliales.',
-                23: 'Cilindros hialinos.',
-                24: 'Cilindros granulosos.',
-                25: 'Cristales (oxalato de calcio, ácido úrico, etc.).',
-                26: 'Bacterias.',
-                27: 'Levaduras.',
-                28: 'Parásitos.'
-            }
+                "3.1": 'pH normal.',
+                "3.2": 'pH elevado.',
+                "3.3": 'pH reducido.',
+                "3.4": 'Presencia de proteínas.',
+                "3.5": 'Negativo para proteínas.',
+                "3.6": 'Glucosa presente.',
+                "3.7": 'Negativo para la glucosa.',
+                "3.8": 'Cetonas detectadas.',
+                "3.9": 'Negativo para cetonas.',
+                "3.10": 'Hemoglobina presente.',
+                "3.11": 'Negativo para hemoglobina.',
+                "3.12": 'Bilirrubina detectada.',
+                "3.13": 'Negativo para bilirrubina.',
+                "3.14": 'Urobilinógeno normal.',
+                "3.15": 'Urobilinógeno elevado.',
+                "3.16": 'Presencia de nitritos.',
+                "3.17": 'Negativo para nitritos.',
+                "3.18": 'Presencia de leucocitos.',
+                "3.19": 'Ausencia de leucocitos.',
+                "3.20": 'Presencia de eritrocitos.',
+                "3.21": 'Ausencia de eritrocitos.',
+                "3.22": 'Células epiteliales.',
+                "3.23": 'Cilindros hialinos.',
+                "3.24": 'Cilindros granulosos.',
+                "3.25": 'Cristales (oxalato de calcio, ácido úrico, etc.).',
+                "3.26": 'Bacterias.',
+                "3.27": 'Levaduras.',
+                "3.28": 'Parásitos.'
+            }            
         },
-        E: {
+        4: {
             calidad: {
-                1: 'Muestra válida para examen.',
-                2: 'Muestra válida para examen aunque limitada por volumen insuficiente.',
-                3: 'Muestra válida para examen aunque limitada por presencia de sangre.',
-                4: 'Muestra válida para examen aunque limitada por contaminación con saliva.',
-                5: 'Muestra válida para examen aunque limitada por contaminación con secreciones nasales.',
-                6: 'Muestra válida para examen aunque limitada por presencia de alimentos.',
-                7: 'Muestra no valorable por descomposición.',
-                8: 'Muestra no valorable por...',
-                9: 'Muestra no valorable por...'
+                'E. 1.': 'Muestra válida para examen.',
+                'E. 2.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
+                'E. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
+                'E. 4.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
+                'E. 5.': 'Muestra válida para examen aunque limitada por contaminación con secreciones nasales.',
+                'E. 6.': 'Muestra válida para examen aunque limitada por presencia de alimentos.',
+                'E. 7.': 'Muestra no valorable por descomposición.',
+                'E. 8.': 'Muestra no valorable por...',
+                'E. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
-                1: 'Presencia de células epiteliales escamosas.',
-                2: 'Presencia de células epiteliales columnares.',
-                3: 'Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).',
-                4: 'Presencia de células metaplásicas.',
-                5: 'Presencia de células malignas.',
-                6: 'Presencia de células atípicas sugestivas de neoplasia.',
-                7: 'Presencia de microorganismos (bacterias, hongos, micobacterias).',
-                8: 'Presencia de células sanguíneas (eritrocitos, plaquetas).',
-                9: 'Presencia de material mucoso o mucopurulento.',
-                10: 'Presencia de cristales (de colesterol, calcio, etc.).',
-                11: 'Ausencia de células significativas para el análisis.'
-            }
+                "4.1": 'Presencia de células epiteliales escamosas.',
+                "4.2": 'Presencia de células epiteliales columnares.',
+                "4.3": 'Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).',
+                "4.4": 'Presencia de células metaplásicas.',
+                "4.5": 'Presencia de células malignas.',
+                "4.6": 'Presencia de células atípicas sugestivas de neoplasia.',
+                "4.7": 'Presencia de microorganismos (bacterias, hongos, micobacterias).',
+                "4.8": 'Presencia de células sanguíneas (eritrocitos, plaquetas).',
+                "4.9": 'Presencia de material mucoso o mucopurulento.',
+                "4.10": 'Presencia de cristales (de colesterol, calcio, etc.).',
+                "4.11": 'Ausencia de células significativas para el análisis.'
+            }            
         },
-        B: {
+        5: {
             calidad: {
-                1: 'Muestra válida para examen.',
-                2: 'Muestra válida para examen aunque limitada por cantidad insuficiente de células.',
-                3: 'Muestra válida para examen aunque limitada por presencia de sangre.',
-                4: 'Muestra válida para examen aunque limitada por contaminación con alimentos.',
-                5: 'Muestra válida para examen aunque limitada por contaminación con saliva.',
-                6: 'Muestra válida para examen aunque limitada por...',
-                7: 'Muestra no valorable por deshidratación.',
-                8: 'Muestra no valorable por contaminación con microorganismos.',
-                9: 'Muestra no valorable por...'
+                'B. 1.': 'Muestra válida para examen.',
+                'B. 2.': 'Muestra válida para examen aunque limitada por cantidad insuficiente de células.',
+                'B. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
+                'B. 4.': 'Muestra válida para examen aunque limitada por contaminación con alimentos.',
+                'B. 5.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
+                'B. 6.': 'Muestra válida para examen aunque limitada por...',
+                'B. 7.': 'Muestra no valorable por deshidratación.',
+                'B. 8.': 'Muestra no valorable por contaminación con microorganismos.',
+                'B. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
-                1: 'Presencia de células epiteliales escamosas.',
-                2: 'Presencia de células epiteliales cilíndricas.',
-                3: 'Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).',
-                4: 'Presencia de células glandulares.',
-                5: 'Presencia de células metaplásicas.',
-                6: 'Presencia de células atípicas sugestivas de neoplasia.',
-                7: 'Presencia de microorganismos (bacterias, hongos, levaduras).',
-                8: 'Presencia de células anormales con cambios citológicos.',
-                9: 'Ausencia de células significativas para el análisis.'
+                '5.1': 'Presencia de células epiteliales escamosas.',
+                '5.2': 'Presencia de células epiteliales cilíndricas.',
+                '5.3': 'Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).',
+                '5.4': 'Presencia de células glandulares.',
+                '5.5': 'Presencia de células metaplásicas.',
+                '5.6': 'Presencia de células atípicas sugestivas de neoplasia.',
+                '5.7': 'Presencia de microorganismos (bacterias, hongos, levaduras).',
+                '5.8': 'Presencia de células anormales con cambios citológicos.',
+                '5.9': 'Ausencia de células significativas para el análisis.'
             }
         }
     };
@@ -241,7 +241,7 @@ export default function Insercion({ auth }) {
         formato: "",
         calidad: "",
         descripcionCalidad: "",
-        interpretacion: "",
+        interpretacion: "", //todo Tengo que mirar como almacenar mas interpretaciones
     });
 
     const handleData = (e) => {
@@ -334,7 +334,7 @@ export default function Insercion({ auth }) {
                             >
                                 Tipo de naturaleza
                             </label>
-                            <select onChange={(e) => { handleSelect(e); handleData(e); }}
+                            <select onChange={(e) => { handleData(e); }}
                                 id="tipoNaturaleza"
                                 name="tipoNaturaleza"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -342,16 +342,16 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un tipo de naturaleza
                                 </option>
-                                <option value="B">Biopsias</option>
-                                <option value="BV">Biopsias veterinarias</option>
-                                <option value="CB">Cavidad bucal</option>
-                                <option value="CV">Citología vaginal</option>
-                                <option value="EX">Extensión sanguínea</option>
-                                <option value="O">Orinas</option>
-                                <option value="E">Esputos</option>
-                                <option value="ES">Semen</option>
-                                <option value="I">Improntas</option>
-                                <option value="F">Frotis</option>
+                                <option value="1">Biopsias</option>
+                                <option value="2">Biopsias veterinarias</option>
+                                <option value="3">Cavidad bucal</option>
+                                <option value="4">Citología vaginal</option>
+                                <option value="5">Extensión sanguínea</option>
+                                <option value="6">Orinas</option>
+                                <option value="7">Esputos</option>
+                                <option value="8">Semen</option>
+                                <option value="9">Improntas</option>
+                                <option value="10">Frotis</option>
 
                             </select>
                         </div>
@@ -370,11 +370,11 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un tipo de estudio
                                 </option>
-                                <option value="C">Citológico cérvico - vaginal</option>
-                                <option value="H">Hematológico completo</option>
-                                <option value="U">Microscópico y químico de orina</option>
-                                <option value="E">Citológico de esputo</option>
-                                <option value="EX">Citológico bucal</option>
+                                <option value="1">Citológico cérvico - vaginal</option>
+                                <option value="2">Hematológico completo</option>
+                                <option value="3">Microscópico y químico de orina</option>
+                                <option value="4">Citológico de esputo</option>
+                                <option value="5">Citológico bucal</option>
 
                             </select>
                         </div>
@@ -433,9 +433,9 @@ export default function Insercion({ auth }) {
                                     Seleccione el formato de recepción de la
                                     muestra
                                 </option>
-                                <option value="biopsia">Fresco</option>
-                                <option value="esputo">Formol</option>
-                                <option value="bucal">Etanol 70%</option>
+                                <option value="1">Fresco</option>
+                                <option value="2">Formol</option>
+                                <option value="3">Etanol 70%</option>
                             </select>
                         </div>
 

@@ -2,20 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Muestra;
-use Database\Seeders\MuestraSeeder;
 use Illuminate\Http\Request;
+use Database\Seeders\MuestraSeeder;
 use Illuminate\Support\Facades\Validator;
 
 class MuestraController extends Controller
 {
 
-    public function getAllJson(){
-        $muestras = Muestra::all();
-        if (!$muestras) {
+    public function getAllJson2(){
+        $muestras = Muestra::with([
+            'tipoNaturaleza:id,nombre',
+            'user:id,name',
+            'formato:id,nombre',
+            'sede:id,nombre'
+        ])->get();
+
+        if ($muestras->isEmpty()) {
             return response()->json(["error" => "No hay muestras registradas"]);
         }
+    
         return response()->json($muestras);
+    }
+    public function getAllJson(){
+        $muestras = Muestra::with([
+            'tipoNaturaleza:id,nombre',
+            'user:id,name',
+            'formato:id,nombre',
+            'sede:id,nombre'
+        ])->get();
+
+        if ($muestras->isEmpty()) {
+            return response()->json(["error" => "No hay muestras registradas"]);
+        }
+        
+        return Inertia::render('proyecto/Muestras', ["data" => $muestras]);
     }
 
     public function getMuestraJson($id){
@@ -28,25 +50,33 @@ class MuestraController extends Controller
     }
 
     public function insertMuestra(Request $request){
+
         $data = [
-            'codigo' => $request->input(key: 'codigoMuestra'),
-            'fecha' => $request->input('fecha'),
-            'organo' => $request->input('organo'),
-            'tipoNaturaleza' => $request->input('naturaleza'),
-            'idFormato' => $request->input('formato'),
-            'idCalidad' => $request->input('calidad'),
+            // Request
+            'codigo' => $request->input('codigo'),
+            'idTipoNaturaleza' => intval($request->input('idTipoNaturaleza')),
+            'idFormato' => intval($request->input('idFormato')),
+            'idCalidad' => intval($request->input('idCalidad')),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
-            'interpretacion' => $request->input('interpretacion'),
+            'organo' => $request->input('organo'),
+            'fecha' => $request->input('fecha'),
+            
+            // Local Storage
+            'idUser' => intval($request->input('idUser')),
+            'idSede' => intval($request->input('idSede')),
+            'created_at' => date("Y-m-d"),
+            'updated_at' => date("Y-m-d"),
+
         ];
 
-        // $validacion = $this->validatorMuestras($data);
+        $validacion = $this->validatorMuestras($data);
 
-        // if($validacion->fails()){
-        //     return response()->json(["error" => $validacion -> errors()]);
-        // }else{
-        //     $muestra = Muestra::create($data);
-        //     return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
-        // }
+        if($validacion->fails()){
+            return response()->json(["error" => $validacion -> errors()]);
+        }else{
+            $muestra = Muestra::create($data);
+            return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
+        }
 
         $muestra = Muestra::create($data);
 
@@ -60,14 +90,19 @@ class MuestraController extends Controller
         }
 
         $data = [
+            // Request
             'codigo' => $request->input('codigo'),
+            'idTipoNaturaleza' => intval($request->input('idTipoNaturaleza')),
+            'idFormato' => intval($request->input('idFormato')),
+            'idCalidad' => intval($request->input('idCalidad')),
+            'descripcionCalidad' => $request->input('descripcionCalidad'),
             'organo' => $request->input('organo'),
             'fecha' => $request->input('fecha'),
-            'naturaleza' => $request->input('naturaleza'),
-            'formato' => $request->input('formato'),
-            'calidad' => $request->input('calidad'),
-            'interpretacion' => $request->input('interpretacion'),
-            'descripcion' => $request->input('descripcion'),
+            
+            // Local Storage
+            'idUser' => intval($request->input('idUser')),
+            'idSede' => intval($request->input('idSede')),
+            'updated_at' => date("Y-m-d"),
         ];
 
         $validator = $this->validatorMuestras($data);
@@ -96,43 +131,17 @@ class MuestraController extends Controller
     public function validatorMuestras($datos){
         $validator = Validator::make($datos, [
             'codigo' => 'required|string|min:1|max:8',
-            'organo' => 'string',
-            'descripcion' => 'required|string|min:1|max:50',
+            'idTipoNaturaleza' => 'required|integer|between:1,10',
+            'idFormato' => 'required|integer|between:1,3',
+            'idCalidad' => 'required|integer|between:1,45',
+            'descripcionCalidad' => 'required|string|max:50',
+            'organo' => 'nullable|string',
             'fecha' => 'required|date_format:Y-m-d',
-            'naturaleza' => 'required|string|min:1|max:2',
-            'formato' => 'required|string',
-            'calidad' => 'required|string',
-            'interpretacion' => 'required|string'
-        ],
-        [
-            'codigo.required' => 'El código es obligatorio',
-            'codigo.min' => 'El código debe tener al menos 1 carácter.',
-            'codigo.max' => 'El código no puede tener más de 8 caracteres.',
-            'codigo.string' => 'El código debe ser una cadena de texto',
-            
-            'organo.string' => 'El código debe ser una cadena de texto',
 
-            'fecha.required' => 'La fecha es obligatoria',
-            'fecha.date' => 'La fecha debe ser una fecha',
-            'fecha.date_format' => 'La fecha debe estar en formato dd-mm-yyyy',
-            
-            'naturaleza.required' => 'La naturaleza es obligatoria',
-            'naturaleza.between' => 'La naturaleza debe tener entre 1 y 2 carácteres',
-            'naturaleza.string' => 'La naturaleza debe ser una cadena de texto',
-            
-            'formato.required' => 'El formato es obligatorio',
-            'formato.string' => 'El formato debe ser una cadena de texto',
-            
-            'calidad.required' => 'La calidad es obligatoria',
-            'calidad.string' => 'La calidad debe ser una cadena de texto',
-            
-            'interpretacion.required' => 'La interpretación es obligatoria',
-            'interpretacion.string' => 'La interpretación debe ser una cadena de texto',
-
-            'descripcion.required' => 'La descripción es obligatoria',
-            'descripcion.between' => 'La descripción debe tener entre 1 y 50 carácteres',
-            'descripcion.string' => 'La descripción debe ser una cadena de texto',
-            
+            'idUser' => 'required|integer',
+            'idSede' => 'required|integer|between:1,15',
+            'created_at' =>' nullable|date_format:Y-m-d',
+            'updated_at' => 'nullable|date_format:Y-m-d',
         ]);
         
         return $validator;

@@ -29,8 +29,10 @@ class UserController extends Controller
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'idSede' => intval($request->input('idSede')),
             'password' => Hash::make($request->input('password')),
-            'idSede' => $request->input('idSede') ,
+            'created_at' => date("Y-m-d"),
+            'updated_at' => date("Y-m-d"),
         ];
 
         $validacion = $this->validatorUser($data);
@@ -54,7 +56,8 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'idSede' => $request->input('idSede') ,
+            'idSede' => intval($request->input('idSede')),
+            'updated_at' => date("Y-m-d"),
         ];
 
         $validator = $this->validatorUser($data);
@@ -86,23 +89,7 @@ class UserController extends Controller
             'name' => 'required|max:255|string',
             'email' => 'required|email|unique:'.User::class,
             'password' => 'required|min:4|string',
-            'idSede' => ['required', 'regex:/^(1[0-5]|[1-9])$/'],
-        ],
-        [
-            'name.required' => 'El nombre es obligatorio.',
-            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
-            'name.string' => 'El nombre debe ser un texto válido.',
-        
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe tener un formato válido.',
-            'email.unique' => 'Este correo electrónico ya está registrado.',
-        
-            'password.required' => 'La contraseña es obligatoria.',
-            'password.min' => 'La contraseña debe tener al menos 4 caracteres.',
-            'password.string' => 'La contraseña debe ser un texto válido.',
-        
-            'idSede.required' => 'El ID de la sede es obligatorio.',
-            'idSede.regex' => 'El código de sede debe ser un número entre 1 y 15.',
+            'idSede' => 'required|integer|between:1,15',
         ]);
 
         return $validator;

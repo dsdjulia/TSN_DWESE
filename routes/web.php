@@ -21,14 +21,9 @@ Route::get('/index', function () {
     return Inertia::render('proyecto/Index');
 })->middleware(['auth', 'verified'])->name('index');
 
-
 Route::get('/nuevaMuestra', function () {
     return Inertia::render('proyecto/Insercion');
 })->middleware(['auth', 'verified'])->name('nuevaMuestra');
-
-Route::get('/muestras', function () {
-    return Inertia::render('proyecto/Muestras');
-})->middleware(['auth', 'verified'])->name('muestras');
 
 Route::get('/referencia', function () {
     return Inertia::render('proyecto/Referencia');
@@ -50,6 +45,11 @@ Route::get('/test', function () {
 
 Route::get('/guardar',[MuestraController::class, 'guardar']) -> name('guardar');
 Route::get('/eliminar',[MuestraController::class, 'eliminar']) -> name('eliminar');
+
+
+// Vistas con datos 
+Route::get('/muestras', [MuestraController::class, 'getAllJson'])->middleware(['auth', 'verified'])->name('muestras');
+
 
 require __DIR__.'/auth.php';
 

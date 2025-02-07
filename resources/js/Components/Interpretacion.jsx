@@ -8,7 +8,7 @@ const Interpretacion = ({ id, onRemove, interpretaciones }) => {
                 <select
                     id={`${id}`}
                     name={`interpretacion-${id}`}
-                    className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                    className="p-3 w-full border border-gray-300 rounded-md shadow-sm"
                 >
                     <option value="">Seleccione interpretación</option>
                     {/* Opciones dinámicas aquí */}
@@ -27,9 +27,9 @@ const Interpretacion = ({ id, onRemove, interpretaciones }) => {
                 </select>
                 <button
                     onClick={() => onRemove(id)}
-                    className="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center ml-2 font-extrabold"
+                    className=" bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center ml-2 font-extrabold"
                 >
-                    X
+                    ✕
                 </button>
             </div>
         </div>

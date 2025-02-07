@@ -1,6 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
 import { Head } from "@inertiajs/react";
+import Footer from "@/Components/Footer";
 
 export default function Muestras({ auth }) {
 
@@ -135,6 +136,7 @@ export default function Muestras({ auth }) {
                     </table>
                 </div>
             </div>
+            <Footer/>
         </AuthenticatedLayout>
     );
 }

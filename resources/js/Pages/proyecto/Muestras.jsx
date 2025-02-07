@@ -4,11 +4,14 @@ import { Head, Link } from "@inertiajs/react";
 import { useState } from "react";
 import ModalModificar from "./ModalModificar";
 import ModalEliminar from "./ModalEliminar";
+import ModalVisualizar from "./ModalVisualizar";
+import Footer from "@/Components/Footer";
 
 export default function Muestras({auth,data}) {
   const muestras = data;
   const [modificarAbierto, setModificarAbierto] = useState(false);
   const [eliminarAbierto, setEliminarAbierto] = useState(false);
+  const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
 
   return (
     <AuthenticatedLayout
@@ -25,7 +28,6 @@ export default function Muestras({auth,data}) {
           <thead>
             <tr className="bg-gray-200">
               <th className="p-2">Usuario</th>
-              <th className="p-2">ID de Muestra</th>
               <th className="p-2">Codigo Muestra</th>
               <th className="p-2">Tipo de Muestra</th>
               <th className="p-2">Formato</th>
@@ -37,12 +39,14 @@ export default function Muestras({auth,data}) {
             {muestras.map((muestra) => (
               <tr key={muestra.id} className="border-b">
                 <td className="p-2">{muestra.user.name}</td>
-                <td className="p-2">{muestra.id}</td>
                 <td className="p-2">{muestra.codigo}</td>
                 <td className="p-2">{muestra.tipo_naturaleza.nombre}</td>
                 <td className="p-2">{muestra.formato.nombre}</td>
                 <td className="p-2">{muestra.fecha}</td>
                 <td className="p-2 flex space-x-2 justify-center">
+                  <button className="text-blue-500 hover:text-blue-700" onClick={() => setVisualizarAbierto(true)} >
+                    <img className="w-8" src="../public/info.png" alt="detallesMuestra" />
+                  </button>
                   <button className="text-blue-500 hover:text-blue-700" onClick={() => setModificarAbierto(true)} >
                     <img className="w-8" src="../public/icono-editar.png" alt="editar" />
                   </button>
@@ -83,5 +87,7 @@ export default function Muestras({auth,data}) {
     </div>
     {modificarAbierto && <ModalModificar onClose={() => setModificarAbierto(false)} />}
     {eliminarAbierto && <ModalEliminar onClose={() => setEliminarAbierto(false)} />}
+    {VisualizarAbierto && <ModalVisualizar onClose={() => setVisualizarAbierto(false)} />}
+    <Footer/>
     </AuthenticatedLayout>);
 }

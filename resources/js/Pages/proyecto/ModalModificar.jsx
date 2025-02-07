@@ -29,8 +29,12 @@ export default function ModalModificar({id, onClose}) {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-        <div class="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-2/3 shadow-gray-500">
+        <div class="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-2/3 shadow-gray-500 relative">
+        <button className="absolute w-10 h-10 top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 font-extrabold" onClick={onClose}>
+                    ✕
+                </button>
             <div class="space-y-4">
+
                 <h2>Modificar Muestra</h2>
                 <div>
                     <label
@@ -199,8 +203,8 @@ export default function ModalModificar({id, onClose}) {
                             alt="Imagen 1"
                             class="w-auto h-32 object-cover rounded-lg"
                         />
-                        <a class="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
-                            X
+                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
+                        ✕
                         </a>
                     </div>
                     <div class="relative w-auto h-32 inline-block">
@@ -209,8 +213,8 @@ export default function ModalModificar({id, onClose}) {
                             alt="Imagen 2"
                             class="w-auto h-32 object-cover rounded-lg"
                         />
-                        <a class="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
-                            X
+                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
+                        ✕
                         </a>
                     </div>
                     <div class="relative w-auto h-32 inline-block">
@@ -219,15 +223,15 @@ export default function ModalModificar({id, onClose}) {
                             alt="Imagen 3"
                             class="w-auto h-32 object-cover rounded-lg"
                         />
-                        <a class="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
-                            X
+                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
+                        ✕
                         </a>
                     </div>
                 </div>
                 <div className="flex justify-start gap-8 mt-4">
-                    {/* <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]" href={route('guardar')+"/"+id}>
+                    { <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]" href={route('guardar')+"/"+id}>
                         Guardar Muestra
-                    </Link> */}
+                    </Link> }
                     <button class="text-red-700 hover:underline focus:outline-none " onClick={onClose}>
                         Cancelar
                     </button>
@@ -235,5 +239,6 @@ export default function ModalModificar({id, onClose}) {
             </div>
         </div>
         </div>
+
     );
 }

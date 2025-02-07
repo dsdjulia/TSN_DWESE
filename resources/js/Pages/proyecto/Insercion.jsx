@@ -4,6 +4,7 @@ import { Head, Link, router } from "@inertiajs/react";
 import { buscarEstudio } from "@/Components/ListaIC";
 import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
 import Interpretacion from "@/Components/Interpretacion";
+import Footer from "@/Components/Footer";
 
 
 export default function Insercion({ auth }) {
@@ -51,7 +52,7 @@ export default function Insercion({ auth }) {
                 "1.27": 'Células epiteliales de tipo escamoso con intensos cambios atípicos.',
                 "1.28": 'Presencia de epitelio endometrial sin cambios atípicos.',
                 "1.29": 'Células epiteliales de apariencia glandular con núcleos amplios e irregulares.'
-            }            
+            }
         },
         2: {
             calidad: {
@@ -86,7 +87,7 @@ export default function Insercion({ auth }) {
                 "2.18": 'Presencia de cuerpos de Howell-Jolly.',
                 "2.19": 'Células con inclusiones de hierro (cuerpos de Pappenheimer).',
                 "2.20": 'Presencia de parásitos intraeritrocitarios.'
-            }            
+            }
         },
         3: {
             calidad: {
@@ -129,7 +130,7 @@ export default function Insercion({ auth }) {
                 "3.26": 'Bacterias.',
                 "3.27": 'Levaduras.',
                 "3.28": 'Parásitos.'
-            }            
+            }
         },
         4: {
             calidad: {
@@ -155,7 +156,7 @@ export default function Insercion({ auth }) {
                 "4.9": 'Presencia de material mucoso o mucopurulento.',
                 "4.10": 'Presencia de cristales (de colesterol, calcio, etc.).',
                 "4.11": 'Ausencia de células significativas para el análisis.'
-            }            
+            }
         },
         5: {
             calidad: {
@@ -547,10 +548,10 @@ export default function Insercion({ auth }) {
                                         className="w-auto h-32 object-cover rounded-lg"
                                     />
                                     <button
-                                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex items-center justify-center cursor-pointer"
+                                        className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex items-center justify-center cursor-pointer"
                                         onClick={handleDeletePhoto}
                                     >
-                                        X
+                                        ✕
                                     </button>
                                 </div>
                             ))}
@@ -572,6 +573,7 @@ export default function Insercion({ auth }) {
                 </div>
             </div>
             </div>
+            <Footer/>
         </AuthenticatedLayout>
     );
 }

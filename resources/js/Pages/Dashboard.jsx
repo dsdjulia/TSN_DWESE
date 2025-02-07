@@ -1,3 +1,4 @@
+import Footer from '@/Components/Footer';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
@@ -21,6 +22,7 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </AuthenticatedLayout>
     );
 }

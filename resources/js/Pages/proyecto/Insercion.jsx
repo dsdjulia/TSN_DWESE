@@ -239,11 +239,11 @@ export default function Insercion({ auth }) {
         formato: "",
         calidad: "",
         descripcionCalidad: "",
-        interpretacion: "|", //todo Tengo que mirar como almacenar mas interpretaciones
+        interpretacion: [], //todo Tengo que mirar como almacenar mas interpretaciones
     });
 
     const handleData = (e) => {
-        setForm({...form , [e.target.name]: e.target.value}) // uso ...form para no eliminar los demas datos al modificar
+        setForm({...form , [e.target.name]: [e.target.value]}) // uso ...form para no eliminar los demas datos al modificar
         console.log(form);
     }
 
@@ -263,8 +263,18 @@ export default function Insercion({ auth }) {
         console.log(arrayImagenes);
     }
 
+    const recogerInterpretaciones = () => {
+
+        const interpretaciones = document.querySelectorAll('#interpretacionAdicional')
+        interpretaciones.forEach(interpretacionAdicional => {
+            setForm({...form, interpretacion: [...form.interpretacion, interpretacionAdicional.value]})
+        });
+
+    }
+
     const handleSubmit = () => {
         console.log(form);
+        recogerInterpretaciones()
         router.post('api/createMuestra', form)
         showSuccessAlert()
 

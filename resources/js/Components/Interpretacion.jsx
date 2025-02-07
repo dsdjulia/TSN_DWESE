@@ -6,7 +6,7 @@ const Interpretacion = ({ id, onRemove, interpretaciones }) => {
 
             <div className="flex justify-center items-center h-">
                 <select
-                    id={`${id}`}
+                    id={`interpretacionAdicional`}
                     name={`interpretacion-${id}`}
                     className="p-3 w-full border border-gray-300 rounded-md shadow-sm"
                 >

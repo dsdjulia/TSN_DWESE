@@ -33,6 +33,7 @@ export default function Muestras({auth,data}) {
               <th className="p-2">Formato</th>
               <th className="p-2">Fecha</th>
               <th className="p-2"></th>
+              <th className="p-2"></th>
             </tr>
           </thead>
           <tbody>
@@ -48,11 +49,16 @@ export default function Muestras({auth,data}) {
                     <img className="w-8" src="../public/info.png" alt="detallesMuestra" />
                   </button>
                   <button className="text-blue-500 hover:text-blue-700" onClick={() => setModificarAbierto(true)} >
-                    <img className="w-8" src="../public/icono-editar.png" alt="editar" />
+                    <img className="w-8" src="../public/edit.png" alt="editar" />
                   </button>
-                  <button onClick={() => setEliminarAbierto(true)} className="text-red-500 hover:text-red-700" >
-                    <img className="w-8" src="../public/icono-borrar.webp" alt="borrar" />
+                  <button onClick={() => setEliminarAbierto(true)}  >
+                    <img className="w-8" src="../public/icono-borrar.png" alt="borrar" />
+                  </button>
 
+                </td>
+                <td className="p-2">
+                <button className="ml-2" >
+                    <img className="w-8" src="../public/print.png" alt="imprimir" />
                   </button>
                 </td>
               </tr>

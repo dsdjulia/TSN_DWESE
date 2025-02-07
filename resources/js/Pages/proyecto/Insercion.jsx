@@ -239,7 +239,7 @@ export default function Insercion({ auth }) {
         formato: "",
         calidad: "",
         descripcionCalidad: "",
-        interpretacion: "", //todo Tengo que mirar como almacenar mas interpretaciones
+        interpretacion: "|", //todo Tengo que mirar como almacenar mas interpretaciones
     });
 
     const handleData = (e) => {
@@ -537,7 +537,7 @@ export default function Insercion({ auth }) {
                         <div className="mt-4 flex flex-wrap gap-4" id="containerImages">
 
                         <div className="mt-4 flex flex-wrap gap-4">
-                            {/* Aqui voy añadiendo las nuevas fotos, falta borrarlas del array*/}
+                            {/* Aqui voy añadiendo las nuevas fotos.*/}
                             {arrayImagenes.map((photo) => (
                                 <div className="relative w-auto h-32 inline-block">
                                     <img

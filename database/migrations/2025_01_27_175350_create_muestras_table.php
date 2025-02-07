@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idCalidad');
 
             $table->string('descripcionCalidad')->nullable();
-            $table->string('organo');
+            $table->string('organo')->nullable();
             $table->date('fecha');
 
             $table->timestamps();

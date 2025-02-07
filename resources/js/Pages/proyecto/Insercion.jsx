@@ -9,17 +9,17 @@ import Interpretacion from "@/Components/Interpretacion";
 export default function Insercion({ auth }) {
 
     const datos = {
-        C: {
+        1: {
             calidad: {
-                'C.1': 'Toma válida para examen.',
-                'C.2': 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
-                'C.3': 'Toma válida para examen aunque limitada por hemorragia.',
-                'C.4': 'Toma válida para examen aunque limitada por escasez de células.',
-                'C.5': 'Toma válida para examen aunque limitada por intensa citolisis.',
-                'C.6': 'Toma válida para examen aunque limitada por...',
-                'C.7': 'Toma no valorable por desecación.',
-                'C.8': 'Toma no valorable por ausencia de células...',
-                'C.9': 'Toma no valorable por...'
+                'C. 1.': 'Toma válida para examen.',
+                'C. 2.': 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
+                'C. 3.': 'Toma válida para examen aunque limitada por hemorragia.',
+                'C. 4.': 'Toma válida para examen aunque limitada por escasez de células.',
+                'C. 5.': 'Toma válida para examen aunque limitada por intensa citolisis.',
+                'C. 6.': 'Toma válida para examen aunque limitada por...',
+                'C. 7.': 'Toma no valorable por desecación.',
+                'C. 8.': 'Toma no valorable por ausencia de células...',
+                'C. 9.': 'Toma no valorable por...'
             },
             interpretacion: {
                 "1.1": 'Predominio de células epiteliales escamosas superficiales.',
@@ -53,17 +53,17 @@ export default function Insercion({ auth }) {
                 "1.29": 'Células epiteliales de apariencia glandular con núcleos amplios e irregulares.'
             }            
         },
-        H: {
+        2: {
             calidad: {
-                'H.1': 'Muestra válida para examen.',
-                'H.2': 'Muestra válida para examen aunque limitada por lipemia.',
-                'H.3': 'Muestra válida para examen aunque limitada por hemólisis.',
-                'H.4': 'Muestra válida para examen aunque limitada por aglutinación.',
-                'H.5': 'Muestra válida para examen aunque limitada por coagulación.',
-                'H.6': 'Muestra válida para examen aunque limitada por...',
-                'H.7': 'Muestra no valorable por desnaturalización de proteínas.',
-                'H.8': 'Muestra no valorable por contaminación bacteriana.',
-                'H.9': 'Muestra no valorable por...'
+                'H. 1.': 'Muestra válida para examen.',
+                'H. 2.': 'Muestra válida para examen aunque limitada por lipemia.',
+                'H. 3.': 'Muestra válida para examen aunque limitada por hemólisis.',
+                'H. 4.': 'Muestra válida para examen aunque limitada por aglutinación.',
+                'H. 5.': 'Muestra válida para examen aunque limitada por coagulación.',
+                'H. 6.': 'Muestra válida para examen aunque limitada por...',
+                'H. 7.': 'Muestra no valorable por desnaturalización de proteínas.',
+                'H. 8.': 'Muestra no valorable por contaminación bacteriana.',
+                'H. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
                 "2.1": 'Predominio de eritrocitos normocíticos normocrómicos.',
@@ -88,17 +88,17 @@ export default function Insercion({ auth }) {
                 "2.20": 'Presencia de parásitos intraeritrocitarios.'
             }            
         },
-        U: {
+        3: {
             calidad: {
-                'U.1': 'Muestra válida para examen.',
-                'U.2': 'Muestra válida para examen aunque limitada por turbidez.',
-                'U.3': 'Muestra válida para examen aunque limitada por coloración anormal.',
-                'U.4': 'Muestra válida para examen aunque limitada por contaminación fecal.',
-                'U.5': 'Muestra válida para examen aunque limitada por preservación inadecuada.',
-                'U.6': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
-                'U.7': 'Muestra no valorable por deterioro.',
-                'U.8': 'Muestra no valorable por contaminación con agentes externos.',
-                'U.9': 'Muestra no valorable por...'
+                'U. 1.': 'Muestra válida para examen.',
+                'U. 2.': 'Muestra válida para examen aunque limitada por turbidez.',
+                'U. 3.': 'Muestra válida para examen aunque limitada por coloración anormal.',
+                'U. 4.': 'Muestra válida para examen aunque limitada por contaminación fecal.',
+                'U. 5.': 'Muestra válida para examen aunque limitada por preservación inadecuada.',
+                'U. 6.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
+                'U. 7.': 'Muestra no valorable por deterioro.',
+                'U. 8.': 'Muestra no valorable por contaminación con agentes externos.',
+                'U. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
                 "3.1": 'pH normal.',
@@ -131,17 +131,17 @@ export default function Insercion({ auth }) {
                 "3.28": 'Parásitos.'
             }            
         },
-        E: {
+        4: {
             calidad: {
-                'E.1': 'Muestra válida para examen.',
-                'E.2': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
-                'E.3': 'Muestra válida para examen aunque limitada por presencia de sangre.',
-                'E.4': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
-                'E.5': 'Muestra válida para examen aunque limitada por contaminación con secreciones nasales.',
-                'E.6': 'Muestra válida para examen aunque limitada por presencia de alimentos.',
-                'E.7': 'Muestra no valorable por descomposición.',
-                'E.8': 'Muestra no valorable por...',
-                'E.9': 'Muestra no valorable por...'
+                'E. 1.': 'Muestra válida para examen.',
+                'E. 2.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
+                'E. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
+                'E. 4.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
+                'E. 5.': 'Muestra válida para examen aunque limitada por contaminación con secreciones nasales.',
+                'E. 6.': 'Muestra válida para examen aunque limitada por presencia de alimentos.',
+                'E. 7.': 'Muestra no valorable por descomposición.',
+                'E. 8.': 'Muestra no valorable por...',
+                'E. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
                 "4.1": 'Presencia de células epiteliales escamosas.',
@@ -157,17 +157,17 @@ export default function Insercion({ auth }) {
                 "4.11": 'Ausencia de células significativas para el análisis.'
             }            
         },
-        B: {
+        5: {
             calidad: {
-                'B.1': 'Muestra válida para examen.',
-                'B.2': 'Muestra válida para examen aunque limitada por cantidad insuficiente de células.',
-                'B.3': 'Muestra válida para examen aunque limitada por presencia de sangre.',
-                'B.4': 'Muestra válida para examen aunque limitada por contaminación con alimentos.',
-                'B.5': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
-                'B.6': 'Muestra válida para examen aunque limitada por...',
-                'B.7': 'Muestra no valorable por deshidratación.',
-                'B.8': 'Muestra no valorable por contaminación con microorganismos.',
-                'B.9': 'Muestra no valorable por...'
+                'B. 1.': 'Muestra válida para examen.',
+                'B. 2.': 'Muestra válida para examen aunque limitada por cantidad insuficiente de células.',
+                'B. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
+                'B. 4.': 'Muestra válida para examen aunque limitada por contaminación con alimentos.',
+                'B. 5.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
+                'B. 6.': 'Muestra válida para examen aunque limitada por...',
+                'B. 7.': 'Muestra no valorable por deshidratación.',
+                'B. 8.': 'Muestra no valorable por contaminación con microorganismos.',
+                'B. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
                 '5.1': 'Presencia de células epiteliales escamosas.',
@@ -241,7 +241,7 @@ export default function Insercion({ auth }) {
         formato: "",
         calidad: "",
         descripcionCalidad: "",
-        interpretacion: "",
+        interpretacion: "", //todo Tengo que mirar como almacenar mas interpretaciones
     });
 
     const handleData = (e) => {
@@ -334,7 +334,7 @@ export default function Insercion({ auth }) {
                             >
                                 Tipo de naturaleza
                             </label>
-                            <select onChange={(e) => { handleSelect(e); handleData(e); }}
+                            <select onChange={(e) => { handleData(e); }}
                                 id="tipoNaturaleza"
                                 name="tipoNaturaleza"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -342,16 +342,16 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un tipo de naturaleza
                                 </option>
-                                <option value="B">Biopsias</option>
-                                <option value="BV">Biopsias veterinarias</option>
-                                <option value="CB">Cavidad bucal</option>
-                                <option value="CV">Citología vaginal</option>
-                                <option value="EX">Extensión sanguínea</option>
-                                <option value="O">Orinas</option>
-                                <option value="E">Esputos</option>
-                                <option value="ES">Semen</option>
-                                <option value="I">Improntas</option>
-                                <option value="F">Frotis</option>
+                                <option value="1">Biopsias</option>
+                                <option value="2">Biopsias veterinarias</option>
+                                <option value="3">Cavidad bucal</option>
+                                <option value="4">Citología vaginal</option>
+                                <option value="5">Extensión sanguínea</option>
+                                <option value="6">Orinas</option>
+                                <option value="7">Esputos</option>
+                                <option value="8">Semen</option>
+                                <option value="9">Improntas</option>
+                                <option value="10">Frotis</option>
 
                             </select>
                         </div>
@@ -370,11 +370,11 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un tipo de estudio
                                 </option>
-                                <option value="C">Citológico cérvico - vaginal</option>
-                                <option value="H">Hematológico completo</option>
-                                <option value="U">Microscópico y químico de orina</option>
-                                <option value="E">Citológico de esputo</option>
-                                <option value="EX">Citológico bucal</option>
+                                <option value="1">Citológico cérvico - vaginal</option>
+                                <option value="2">Hematológico completo</option>
+                                <option value="3">Microscópico y químico de orina</option>
+                                <option value="4">Citológico de esputo</option>
+                                <option value="5">Citológico bucal</option>
 
                             </select>
                         </div>
@@ -433,9 +433,9 @@ export default function Insercion({ auth }) {
                                     Seleccione el formato de recepción de la
                                     muestra
                                 </option>
-                                <option value="biopsia">Fresco</option>
-                                <option value="esputo">Formol</option>
-                                <option value="bucal">Etanol 70%</option>
+                                <option value="1">Fresco</option>
+                                <option value="2">Formol</option>
+                                <option value="3">Etanol 70%</option>
                             </select>
                         </div>
 

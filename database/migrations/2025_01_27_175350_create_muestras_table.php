@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idFormato');
             $table->unsignedBigInteger('idCalidad');
 
-            $table->string('descripcionCalidad');
-            $table->string('organo')->nullable();
+            $table->string('descripcionCalidad')->nullable();
+            $table->string('organo');
             $table->date('fecha');
 
             $table->timestamps();

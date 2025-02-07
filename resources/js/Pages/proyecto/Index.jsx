@@ -1,6 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
 import { Head, Link } from "@inertiajs/react";
+import Footer from "@/Components/Footer";
 
 export default function Index({ auth }) {
     /* Esto nos permite acceder al controlador proyectos y al usuario autenticado */
@@ -32,6 +33,7 @@ export default function Index({ auth }) {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </AuthenticatedLayout>
     );
 }

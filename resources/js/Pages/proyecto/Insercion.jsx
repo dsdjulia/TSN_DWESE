@@ -201,9 +201,8 @@ export default function Insercion({ auth }) {
 
 
     const handleSelect = (seleccion) => {
-        const clave = seleccion.target.value
-        console.log('holaa');
-        console.log(clave);
+
+        const clave = seleccion.target.value // Si la clave == 1 o 2 corresponde a biopsia
 
         if (clave == '1'|| clave == '2'){ // Evaluamos si es una biopsia
             setBiopsiaHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')

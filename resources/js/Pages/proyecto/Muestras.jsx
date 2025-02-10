@@ -7,93 +7,165 @@ import ModalEliminar from "./ModalEliminar";
 import ModalVisualizar from "./ModalVisualizar";
 import Footer from "@/Components/Footer";
 
-export default function Muestras({auth,data}) {
-  const muestras = data;
-  const [modificarAbierto, setModificarAbierto] = useState(false);
-  const [eliminarAbierto, setEliminarAbierto] = useState(false);
-  const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
+export default function Muestras({ auth, data }) {
+    const muestras = data;
+    const [modificarAbierto, setModificarAbierto] = useState(false);
+    const [eliminarAbierto, setEliminarAbierto] = useState(false);
+    const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
 
-  return (
-    <AuthenticatedLayout
-                user={auth.user} /* Comprobamos que este autenticado */
-                header={'muestras'}
-            >
+    const handleClose = (e) => {
+        e.preventDefault();
+        console.log(e.target)
+        console.log(e.currentTarget)
+        if(e.target === e.currentTarget) {
+            setEliminarAbierto(false)
+        }
 
-            <Head title="Muestras"/>
+    };
 
-    <div className="flex flex-col items-center justify-start min-h-screen bg-[#e5eaf0]">
-      <div className="p-8 bg-white rounded-md  text-center w-5/6 h-5/6 mt-10">
-        <h1 className="text-lg font-semibold text-gray-700 mb-4">Archivo de Muestras</h1>
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="p-2">Usuario</th>
-              <th className="p-2">Codigo Muestra</th>
-              <th className="p-2">Tipo de Muestra</th>
-              <th className="p-2">Formato</th>
-              <th className="p-2">Fecha</th>
-              <th className="p-2"></th>
-              <th className="p-2"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {muestras.map((muestra) => (
-              <tr key={muestra.id} className="border-b">
-                <td className="p-2">{muestra.user.name}</td>
-                <td className="p-2">{muestra.codigo}</td>
-                <td className="p-2">{muestra.tipo_naturaleza.nombre}</td>
-                <td className="p-2">{muestra.formato.nombre}</td>
-                <td className="p-2">{muestra.fecha}</td>
-                <td className="p-2 flex space-x-2 justify-center">
-                  <button className="text-blue-500 hover:text-blue-700" onClick={() => setVisualizarAbierto(true)} >
-                    <img className="w-8" src="../public/info.png" alt="detallesMuestra" />
-                  </button>
-                  <button className="text-blue-500 hover:text-blue-700" onClick={() => setModificarAbierto(true)} >
-                    <img className="w-8" src="../public/edit.png" alt="editar" />
-                  </button>
-                  <button onClick={() => setEliminarAbierto(true)}  >
-                    <img className="w-8" src="../public/icono-borrar.png" alt="borrar" />
-                  </button>
+    return (
+        <AuthenticatedLayout
+            user={auth.user} /* Comprobamos que este autenticado */
+            header={"muestras"}
+        >
+            <Head title="Muestras" />
 
-                </td>
-                <td className="p-2">
-                <button className="ml-2" >
-                    <img className="w-8" src="../public/print.png" alt="imprimir" />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="flex justify-start mt-4">
-          <Link href="../nuevaMuestra" className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]">
-            Nueva Muestra
-          </Link>
-        </div>
-      </div>
-      <div className="w-5/6 flex justify-end  mt-2 ">
-            <div className="flex items-center justify-between bg-white rounded-md w-1/5 h-10 p-1"> {/* seccion paginacion */}
-                <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
-                    <img className="" src="../public/primeraPag.png" alt="1" />
-                </button>
-                <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
-                    <img className="" src="../public/pagAtras.png" alt="1" />
-                </button>
-
-                <p className="text-gray-300"><span>1</span> ... <span>18</span></p>
-                <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
-                    <img className="" src="../public/pagAlante.png" alt="1" />
-                </button>
-                <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
-                    <img className="" src="../public/ultimaPag.png" alt="1" />
-                </button>
-
+            <div className="flex flex-col items-center justify-start min-h-screen bg-[#e5eaf0]">
+                <div className="p-8 bg-white rounded-md  text-center w-5/6 h-5/6 mt-10">
+                    <h1 className="text-lg font-semibold text-gray-700 mb-4">
+                        Archivo de Muestras
+                    </h1>
+                    <table className="w-full border-collapse">
+                        <thead>
+                            <tr className="bg-gray-200">
+                                <th className="p-2">Usuario</th>
+                                <th className="p-2">Codigo Muestra</th>
+                                <th className="p-2">Tipo de Muestra</th>
+                                <th className="p-2">Formato</th>
+                                <th className="p-2">Fecha</th>
+                                <th className="p-2"></th>
+                                <th className="p-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {muestras.map((muestra) => (
+                                <tr key={muestra.id} className="border-b">
+                                    <td className="p-2">{muestra.user.name}</td>
+                                    <td className="p-2">{muestra.codigo}</td>
+                                    <td className="p-2">
+                                        {muestra.tipo_naturaleza.nombre}
+                                    </td>
+                                    <td className="p-2">
+                                        {muestra.formato.nombre}
+                                    </td>
+                                    <td className="p-2">{muestra.fecha}</td>
+                                    <td className="p-2 flex space-x-2 justify-center">
+                                        <button
+                                            className="text-blue-500 hover:text-blue-700"
+                                            onClick={() =>
+                                                setVisualizarAbierto(true)
+                                            }
+                                        >
+                                            <img
+                                                className="w-8"
+                                                src="../public/info.png"
+                                                alt="detallesMuestra"
+                                            />
+                                        </button>
+                                        <button
+                                            className="text-blue-500 hover:text-blue-700"
+                                            onClick={() =>
+                                                setModificarAbierto(true)
+                                            }
+                                        >
+                                            <img
+                                                className="w-8"
+                                                src="../public/edit.png"
+                                                alt="editar"
+                                            />
+                                        </button>
+                                        <button
+                                            onClick={() =>
+                                                setEliminarAbierto(true)
+                                            }
+                                        >
+                                            <img
+                                                className="w-8"
+                                                src="../public/icono-borrar.png"
+                                                alt="borrar"
+                                            />
+                                        </button>
+                                    </td>
+                                    <td className="p-2">
+                                        <button className="ml-2">
+                                            <img
+                                                className="w-8"
+                                                src="../public/print.png"
+                                                alt="imprimir"
+                                            />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div className="flex justify-start mt-4">
+                        <Link
+                            href="../nuevaMuestra"
+                            className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]"
+                        >
+                            Nueva Muestra
+                        </Link>
+                    </div>
+                </div>
+                <div className="w-5/6 flex justify-end  mt-2 ">
+                    <div className="flex items-center justify-between bg-white rounded-md w-1/5 h-10 p-1">
+                        {" "}
+                        {/* seccion paginacion */}
+                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
+                            <img
+                                className=""
+                                src="../public/primeraPag.png"
+                                alt="1"
+                            />
+                        </button>
+                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
+                            <img
+                                className=""
+                                src="../public/pagAtras.png"
+                                alt="1"
+                            />
+                        </button>
+                        <p className="text-gray-300">
+                            <span>1</span> ... <span>18</span>
+                        </p>
+                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
+                            <img
+                                className=""
+                                src="../public/pagAlante.png"
+                                alt="1"
+                            />
+                        </button>
+                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
+                            <img
+                                className=""
+                                src="../public/ultimaPag.png"
+                                alt="1"
+                            />
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    {modificarAbierto && <ModalModificar onClose={() => setModificarAbierto(false)} />}
-    {eliminarAbierto && <ModalEliminar onClose={() => setEliminarAbierto(false)} />}
-    {VisualizarAbierto && <ModalVisualizar onClose={() => setVisualizarAbierto(false)} />}
-    <Footer/>
-    </AuthenticatedLayout>);
+            {modificarAbierto && (
+                <ModalModificar onClose={() => setModificarAbierto(false)} />
+            )}
+            {eliminarAbierto && (
+                <ModalEliminar onClose={(e) => handleClose(e)} />
+            )}
+            {VisualizarAbierto && (
+                <ModalVisualizar onClose={() => setVisualizarAbierto(false)} />
+            )}
+            <Footer />
+        </AuthenticatedLayout>
+    );
 }

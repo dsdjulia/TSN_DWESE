@@ -242,6 +242,7 @@ export default function Insercion({ auth }) {
         formato: "",
         calidad: "",
         descripcionCalidad: "",
+        tipoEstudio: "",
         interpretacion: [],
     });
 
@@ -332,24 +333,32 @@ export default function Insercion({ auth }) {
             showModificableAlert('Rellene todos los campos', 'El tipo de naturaleza se encuentra vacía', 'error')
             return false
 
-        } else if (form.calidad.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La calidad de la muestra se encuentra vacía', 'error')
+        } else if ((form.tipoNaturaleza == 1 || form.tipoNaturaleza == 2) && form.organo < 1 ){
+            showModificableAlert('Rellene todos los campos', 'El organo biopsiado se encuentra vacío', 'error')
             return false
 
+        } else if (form.tipoEstudio < 1){
+            showModificableAlert('Rellene todos los campos', 'Debe indicar el tipo de estudio', 'error')
+            return false
+
+        } else if (form.formato < 1){
+            showModificableAlert('Rellene todos los campos', 'Debe indicar el formato', 'error')
+            return false
+
+        } else if (form.calidad.length < 1){
+            showModificableAlert('Rellene todos los campos', 'Debe indicar la calidad de la muestra', 'error')
+            return false
+            
         } else if (calidadHidden !== 'hidden' && form.descripcionCalidad.length < 1){
             showModificableAlert('Rellene todos los campos', 'La descripción de la calidad se encuentra vacía', 'error')
             return false
-
-
-
-        } else if ((form.tipoNaturaleza === 1 || form.tipoNaturaleza === 2) && form.organo.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La  se encuentra vacía', 'error')
-            return false
-
+            
         } else if (form.interpretacion.length < 1){
             showModificableAlert('Rellene todos los campos', 'La interpretación se encuentra vacía', 'error')
             return false
+            
         }
+
 
         return true
     }
@@ -491,8 +500,9 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un tipo de estudio
                                 </option>
-                                <option value="1">Citológico cérvico - vaginal</option>
-                                <option value="2">Hematológico completo</option>
+                                {/* Me joden el organo biopsiado */}
+                                <option value="">Citológico cérvico - vaginal</option> 
+                                <option value="">Hematológico completo</option>
                                 <option value="3">Microscópico y químico de orina</option>
                                 <option value="4">Citológico de esputo</option>
                                 <option value="5">Citológico bucal</option>

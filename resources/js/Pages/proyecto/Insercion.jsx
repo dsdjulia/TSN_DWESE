@@ -202,9 +202,10 @@ export default function Insercion({ auth }) {
 
     const handleSelect = (seleccion) => {
         const clave = seleccion.target.value
+        console.log('holaa');
         console.log(clave);
 
-        if (clave == 'B'|| clave == 'BV'){ // Evaluamos si es una biopsia
+        if (clave == '1'|| clave == '2'){ // Evaluamos si es una biopsia
             setBiopsiaHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
 
         } else if(clave in datos){ // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
@@ -241,7 +242,7 @@ export default function Insercion({ auth }) {
         formato: "",
         calidad: "",
         descripcionCalidad: "",
-        interpretacion: [], //todo Tengo que mirar como almacenar mas interpretaciones
+        interpretacion: [],
     });
 
     const handleData = (e) => {
@@ -250,9 +251,9 @@ export default function Insercion({ auth }) {
     }
 
 
-    const handlePhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
+    const handlePhotos = (photo) => {
         const urlImagen = photo.target.files[0]
-        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)])
+        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]) // Esto crea la url en el dispositivo que se usa
 
         console.log(arrayImagenes);
     }
@@ -318,11 +319,51 @@ export default function Insercion({ auth }) {
         setInterpretaciones(interpretaciones.filter(item => item.id !== id));
     };
 
-    const handleSubmit = () => {
-        recogerInterpretaciones()
-        handleUpload()
-        router.post('api/createMuestra', form)
-        showSuccessAlert()
+    const validarFormulario = () => {
+        if (form.codigoMuestra.length < 1){
+            showModificableAlert('Rellene todos los campos', 'El código de muestra se encuentra vacío', 'error')
+            return false
+
+        } else if (form.fecha.length < 1){
+            showModificableAlert('Rellene todos los campos', 'La fecha se encuentra vacía', 'error')
+            return false
+
+        } else if (form.tipoNaturaleza.length < 1){
+            showModificableAlert('Rellene todos los campos', 'El tipo de naturaleza se encuentra vacía', 'error')
+            return false
+
+        } else if (form.calidad.length < 1){
+            showModificableAlert('Rellene todos los campos', 'La calidad de la muestra se encuentra vacía', 'error')
+            return false
+
+        } else if (calidadHidden !== 'hidden' && form.descripcionCalidad.length < 1){
+            showModificableAlert('Rellene todos los campos', 'La descripción de la calidad se encuentra vacía', 'error')
+            return false
+
+
+
+        } else if ((form.tipoNaturaleza === 1 || form.tipoNaturaleza === 2) && form.organo.length < 1){
+            showModificableAlert('Rellene todos los campos', 'La  se encuentra vacía', 'error')
+            return false
+
+        } else if (form.interpretacion.length < 1){
+            showModificableAlert('Rellene todos los campos', 'La interpretación se encuentra vacía', 'error')
+            return false
+        }
+
+        return true
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        if (validarFormulario()){
+            recogerInterpretaciones()
+            handleUpload()
+            router.post('api/createMuestra', form)
+            showSuccessAlert()
+
+        }
     }
 
     return (
@@ -376,7 +417,7 @@ export default function Insercion({ auth }) {
                             >
                                 Tipo de naturaleza
                             </label>
-                            <select onChange={(e) => { handleData(e); }}
+                            <select onChange={(e) => { handleData(e); handleSelect(e) }}
                                 id="tipoNaturaleza"
                                 name="tipoNaturaleza"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -394,32 +435,9 @@ export default function Insercion({ auth }) {
                                 <option value="8">Semen</option>
                                 <option value="9">Improntas</option>
                                 <option value="10">Frotis</option>
-
                             </select>
                         </div>
-                        <div>
-                            <label
-                                for="naturaleza_muestra"
-                                className="block text-sm font-semibold text-gray-700"
-                            >
-                                Tipo de estudio
-                            </label>
-                            <select onChange={(e) => { handleSelect(e); handleData(e); }}
-                                id="tipoEstudio"
-                                name="tipoEstudio"
-                                className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                            >
-                                <option value="">
-                                    Seleccione un tipo de estudio
-                                </option>
-                                <option value="1">Citológico cérvico - vaginal</option>
-                                <option value="2">Hematológico completo</option>
-                                <option value="3">Microscópico y químico de orina</option>
-                                <option value="4">Citológico de esputo</option>
-                                <option value="5">Citológico bucal</option>
 
-                            </select>
-                        </div>
                         <div className={biopsiaHidden} id="organos_biopsiados">
                             <label
                                 for="organo_biopsiado"
@@ -455,6 +473,30 @@ export default function Insercion({ auth }) {
                                 <option value="BT">Testículo</option>
                                 <option value="BPI">Piel</option>
                                 <option value="BP">Pulmón</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label
+                                for="naturaleza_muestra"
+                                className="block text-sm font-semibold text-gray-700"
+                            >
+                                Tipo de estudio
+                            </label>
+                            <select onChange={(e) => { handleSelect(e); handleData(e); }}
+                                id="tipoEstudio"
+                                name="tipoEstudio"
+                                className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                            >
+                                <option value="">
+                                    Seleccione un tipo de estudio
+                                </option>
+                                <option value="1">Citológico cérvico - vaginal</option>
+                                <option value="2">Hematológico completo</option>
+                                <option value="3">Microscópico y químico de orina</option>
+                                <option value="4">Citológico de esputo</option>
+                                <option value="5">Citológico bucal</option>
+
                             </select>
                         </div>
 

@@ -196,6 +196,8 @@ export default function Insercion({ auth }) {
     const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') // Aquí modifico la selección
 
     const [arrayImagenes, setArrayImagenes] = useState([])
+    const [arrayImagenesUpload, setArrayImagenesUpload] = useState([])
+    const [interpretaciones, setInterpretaciones] = useState([]);
 
 
     const handleSelect = (seleccion) => {
@@ -239,11 +241,11 @@ export default function Insercion({ auth }) {
         formato: "",
         calidad: "",
         descripcionCalidad: "",
-        interpretacion: "|", //todo Tengo que mirar como almacenar mas interpretaciones
+        interpretacion: [], //todo Tengo que mirar como almacenar mas interpretaciones
     });
 
     const handleData = (e) => {
-        setForm({...form , [e.target.name]: e.target.value}) // uso ...form para no eliminar los demas datos al modificar
+        setForm({...form , [e.target.name]: [e.target.value]}) // uso ...form para no eliminar los demas datos al modificar
         console.log(form);
     }
 
@@ -253,8 +255,15 @@ export default function Insercion({ auth }) {
         setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)])
 
         console.log(arrayImagenes);
-
     }
+
+    const handleUploadPhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
+        const arrayFotos = photo.target.files
+        arrayFotos.forEach(foto => {
+            setArrayImagenesUpload([...arrayImagenesUpload, foto])
+        });
+    }
+
 
     const handleDeletePhoto = (seleccion) => {
 
@@ -263,23 +272,58 @@ export default function Insercion({ auth }) {
         console.log(arrayImagenes);
     }
 
-    const handleSubmit = () => {
-        console.log(form);
-        router.post('api/createMuestra', form)
-        showSuccessAlert()
+    const recogerInterpretaciones = () => {
 
+        const interpretaciones = document.querySelectorAll('#interpretacionAdicional')
+        interpretaciones.forEach(interpretacionAdicional => {
+            setForm({...form, interpretacion: [...form.interpretacion, interpretacionAdicional.value]})
+        });
     }
 
-
-    const [interpretaciones, setInterpretaciones] = useState([]);
-
+    
+    const handleUpload = async () => {
+        
+        handleUploadPhotos()
+        
+        if (arrayImagenesUpload.length !== 0) {
+            
+            const formData = new FormData();
+            
+            arrayImagenesUpload.forEach((image, index) => {
+                formData.append(`images[]`, image); // Enviar cada imagen
+            });
+            
+            try {
+                const res = await fetch("/api/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+                
+                const data = await res.json();
+                console.log("Imágenes subidas con éxito:", data);
+                
+            } catch (error) {
+                alert("Error subiendo las imágenes");
+            }
+            
+        }
+    };
+    
+    
     const agregarInterpretacion = () => {
         setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
     };
-
+    
     const eliminarInterpretacion = (id) => {
         setInterpretaciones(interpretaciones.filter(item => item.id !== id));
     };
+
+    const handleSubmit = () => {
+        recogerInterpretaciones()
+        handleUpload()
+        router.post('api/createMuestra', form)
+        showSuccessAlert()
+    }
 
     return (
         <AuthenticatedLayout

@@ -13,15 +13,7 @@ export default function Muestras({ auth, data }) {
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
 
-    const handleClose = (e) => {
-        e.preventDefault();
-        console.log(e.target)
-        console.log(e.currentTarget)
-        if(e.target === e.currentTarget) {
-            setEliminarAbierto(false)
-        }
 
-    };
 
     return (
         <AuthenticatedLayout
@@ -160,7 +152,7 @@ export default function Muestras({ auth, data }) {
                 <ModalModificar onClose={() => setModificarAbierto(false)} />
             )}
             {eliminarAbierto && (
-                <ModalEliminar onClose={(e) => handleClose(e)} />
+                <ModalEliminar onClose={() => handleClose()} />
             )}
             {VisualizarAbierto && (
                 <ModalVisualizar onClose={() => setVisualizarAbierto(false)} />

@@ -5,7 +5,7 @@ export default function ModalEliminar({ id, onClose }) {
     return (
         <div
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-            onClick={onClose}
+         
         >
             <div class="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-1/6 shadow-gray-500">
                 <div class="space-y-4 text-center">

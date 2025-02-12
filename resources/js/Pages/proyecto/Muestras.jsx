@@ -152,7 +152,7 @@ export default function Muestras({ auth, data }) {
                 <ModalModificar onClose={() => setModificarAbierto(false)} />
             )}
             {eliminarAbierto && (
-                <ModalEliminar onClose={() => handleClose()} />
+                <ModalEliminar onClose={() => setEliminarAbierto(false)} />
             )}
             {VisualizarAbierto && (
                 <ModalVisualizar onClose={() => setVisualizarAbierto(false)} />

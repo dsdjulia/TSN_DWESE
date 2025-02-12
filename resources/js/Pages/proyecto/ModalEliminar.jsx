@@ -7,8 +7,8 @@ export default function ModalEliminar({ id, onClose }) {
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
 
         >
-            <div class="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-1/6 shadow-gray-500">
-                <div class="space-y-4 text-center">
+            <div className="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-1/6 shadow-gray-500">
+                <div className="space-y-4 text-center">
                     <h2 className="font-extrabold">¿Eliminar Muestra?</h2>
 
                     <div className="flex justify-around mt-4">
@@ -21,7 +21,7 @@ export default function ModalEliminar({ id, onClose }) {
 
                         </Link>
                         <button
-                            class="text-red-700 hover:underline focus:outline-none"
+                            className="text-red-700 hover:underline focus:outline-none"
                             onClick={onClose}
                         >
                             Cancelar

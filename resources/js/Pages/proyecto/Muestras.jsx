@@ -37,7 +37,7 @@ export default function Muestras({ auth, data }) {
     }
 
     const handleImprimir = (e) => {
-        
+        console.log('hola');
     }
 
 
@@ -118,7 +118,7 @@ export default function Muestras({ auth, data }) {
                                         </button>
                                     </td>
                                     <td className="p-2">
-                                        <button className="ml-2" onClick={handleImprimir()}>
+                                        <button className="ml-2" onClick={(e) => handleImprimir()}>
                                             <img
                                                 className="w-8"
                                                 src="../public/print.png"

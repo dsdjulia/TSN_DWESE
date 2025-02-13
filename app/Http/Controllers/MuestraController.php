@@ -25,6 +25,7 @@ class MuestraController extends Controller
 
         return response()->json($muestras);
     }
+    
     public function getAllJson(){
         $muestras = Muestra::with([
             'tipoNaturaleza:id,nombre',
@@ -74,6 +75,7 @@ class MuestraController extends Controller
         if($validacion->fails()){
             return response()->json(["error" => $validacion -> errors()]);
         }else{
+
             $muestra = Muestra::create($data);
 
             $muestras = Muestra::with([
@@ -83,8 +85,7 @@ class MuestraController extends Controller
                 'sede:id,nombre'
             ])->get();
 
-            return Inertia::render('proyecto/Muestras', ["data" => $muestras]);
-        }
+            return redirect()->route('muestras',$muestras);         }
     }
 
     public function updateMuestra(Request $request , $idMuestra){
@@ -125,8 +126,7 @@ class MuestraController extends Controller
             'sede:id,nombre'
         ])->get();
 
-        return Inertia::render('proyecto/Muestras', ["data" => $muestras]);
-
+        return redirect()->route('muestras',$muestras);  
     }
 
     public function deleteMuestra($idMuestra){

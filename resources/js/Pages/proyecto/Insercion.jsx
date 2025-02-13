@@ -388,7 +388,7 @@ export default function Insercion({ auth }) {
         if (validarFormulario()){
             recogerInterpretaciones()
             handleUpload()
-            router.post('api/muestra', form)
+            router.post('muestra', form)
             showSuccessAlert()
 
         }

@@ -49,6 +49,7 @@ Route::get('/eliminar',[MuestraController::class, 'eliminar']) -> name('eliminar
 
 // Vistas con datos 
 Route::get('/muestras', [MuestraController::class, 'getAllJson'])->middleware(['auth', 'verified'])->name('muestras');
+Route::post('/muestra', [MuestraController::class, 'insertMuestra'])->name('MuestrasController.insertarMuestra');
 
 
 // Cloudinary

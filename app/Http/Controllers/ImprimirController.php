@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 class ImprimirController extends Controller
 {
     public function nose(){
-        $pdf = PDF::loadHTML();
-        $pdf->loadView('pdf.pdf');
+        $pdf = PDF::loadHTML('<h1>Hola</h1>');
 
-        
+
+       // $pdf->loadView('pdf.pdf');
+
+        return $pdf->stream();
     }
 }

@@ -115,13 +115,13 @@ export default function Muestras({ auth, data }) {
                                         </button>
                                     </td>
                                     <td className="p-2">
-                                        <button className="ml-2" onClick={(e) => function(){router.visit('imprimi')}}>
+                                        <a className="ml-2" href={`/imprimir-muestra`} target="_blank" /* onClick={(e) => function(){router.visit('imprimir')}} */>
                                             <img
                                                 className="w-8"
                                                 src="../public/print.png"
                                                 alt="imprimir"
                                             />
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             ))}

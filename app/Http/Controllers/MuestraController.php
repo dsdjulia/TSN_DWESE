@@ -22,7 +22,7 @@ class MuestraController extends Controller
         if ($muestras->isEmpty()) {
             return response()->json(["error" => "No hay muestras registradas"]);
         }
-    
+
         return response()->json($muestras);
     }
     public function getAllJson(){
@@ -75,9 +75,15 @@ class MuestraController extends Controller
             return response()->json(["error" => $validacion -> errors()]);
         }else{
             $muestra = Muestra::create($data);
-            //! hay que devolver un tipo de respuesta inertia
 
-            return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
+            $muestras = Muestra::with([
+                'tipoNaturaleza:id,nombre',
+                'user:id,name',
+                'formato:id,nombre',
+                'sede:id,nombre'
+            ])->get();
+
+            return Inertia::render('proyecto/Muestras', ["data" => $muestras]);
         }
     }
 
@@ -87,16 +93,16 @@ class MuestraController extends Controller
         if (!$muestra) {
             return response()->json(["error" => "Muestra no encontrada"]);
         }
-//! hay que ajustar los campos
+
         $data = [
             // Request
-            'codigo' => $request->input(key: 'codigoMuestra'),
-            'idTipoNaturaleza' => intval($request->input('idTipoNaturaleza')),
-            'idFormato' => intval($request->input('idFormato')),
-            'idCalidad' => intval($request->input('idCalidad')),
+            'codigo' => $request->input('codigoMuestra')[0], // Le pasaba un array con 1 solo valor
+            'idTipoNaturaleza' => intval($request->input('tipoNaturaleza')),
+            'idFormato' => intval($request->input('formato')),
+            'idCalidad' => intval($request->input('calidad')),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
             'organo' => $request->input('organo'),
-            'fecha' => $request->input('fecha'),
+            'fecha' => $request->input('fecha')[0], // Le pasaba un array con 1 solo valor
             
             // Local Storage
             'idUser' => intval($request->input('idUser')),
@@ -112,7 +118,14 @@ class MuestraController extends Controller
 
         $muestra->update($data);
 
-        return response()->json(["message" => "Muestra actualizada con éxito", "muestra" => $muestra]);
+        $muestras = Muestra::with([
+            'tipoNaturaleza:id,nombre',
+            'user:id,name',
+            'formato:id,nombre',
+            'sede:id,nombre'
+        ])->get();
+
+        return Inertia::render('proyecto/Muestras', ["data" => $muestras]);
 
     }
 
@@ -124,7 +137,15 @@ class MuestraController extends Controller
         }
 
         $muestra->delete();
-        return response()->json(["message" => "Muestra eliminada con éxito"]);
+
+        $muestras = Muestra::with([
+            'tipoNaturaleza:id,nombre',
+            'user:id,name',
+            'formato:id,nombre',
+            'sede:id,nombre'
+        ])->get();
+
+        return Inertia::render('proyecto/Muestras', ["data" => $muestras]);
     }
 
     public function validatorMuestras($datos){

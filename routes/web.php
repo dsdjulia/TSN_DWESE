@@ -51,5 +51,9 @@ Route::get('/eliminar',[MuestraController::class, 'eliminar']) -> name('eliminar
 Route::get('/muestras', [MuestraController::class, 'getAllJson'])->middleware(['auth', 'verified'])->name('muestras');
 
 
+// Cloudinary
+Route::post('/subir-imagen', [ImagenController::class, 'subirImagen']);
+
+
 require __DIR__.'/auth.php';
 

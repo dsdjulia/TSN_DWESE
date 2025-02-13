@@ -17,10 +17,10 @@ export default function Muestras({ auth, data }) {
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
 
     const usuario = JSON.parse(localStorage.getItem('usuarioActivo'))
+    
+    const [pagActual, setpagActual] = useState(1)
+    const [cantPag, setcantPag] = useState(10)
 
-
-    let pagActual = 2
-    let cantPag = 12
 
     return (
         <AuthenticatedLayout

@@ -53,13 +53,13 @@ class MuestraController extends Controller
 
         $data = [
             // Request
-            'codigo' => $request->input('codigo'),
-            'idTipoNaturaleza' => intval($request->input('idTipoNaturaleza')),
-            'idFormato' => intval($request->input('idFormato')),
-            'idCalidad' => intval($request->input('idCalidad')),
+            'codigo' => $request->input('codigoMuestra')[0], // Le pasaba un array con 1 solo valor
+            'idTipoNaturaleza' => intval($request->input('tipoNaturaleza')),
+            'idFormato' => intval($request->input('formato')),
+            'idCalidad' => intval($request->input('calidad')),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
             'organo' => $request->input('organo'),
-            'fecha' => $request->input('fecha'),
+            'fecha' => $request->input('fecha')[0], // Le pasaba un array con 1 solo valor
             
             // Local Storage
             'idUser' => intval($request->input('idUser')),
@@ -78,7 +78,6 @@ class MuestraController extends Controller
             return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
         }
 
-        $muestra = Muestra::create($data);
 
     }
 
@@ -88,10 +87,10 @@ class MuestraController extends Controller
         if (!$muestra) {
             return response()->json(["error" => "Muestra no encontrada"]);
         }
-
+//! hay que ajustar los campos
         $data = [
             // Request
-            'codigo' => $request->input('codigo'),
+            'codigo' => $request->input(key: 'codigoMuestra'),
             'idTipoNaturaleza' => intval($request->input('idTipoNaturaleza')),
             'idFormato' => intval($request->input('idFormato')),
             'idCalidad' => intval($request->input('idCalidad')),
@@ -134,7 +133,7 @@ class MuestraController extends Controller
             'idTipoNaturaleza' => 'required|integer|between:1,10',
             'idFormato' => 'required|integer|between:1,3',
             'idCalidad' => 'required|integer|between:1,45',
-            'descripcionCalidad' => 'required|string|max:50',
+            'descripcionCalidad' => 'nullable|string|max:50',
             'organo' => 'nullable|string',
             'fecha' => 'required|date_format:Y-m-d',
 

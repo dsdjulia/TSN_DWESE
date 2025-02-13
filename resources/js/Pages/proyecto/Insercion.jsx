@@ -13,15 +13,15 @@ export default function Insercion({ auth }) {
     const datos = {
         1: {
             calidad: {
-                'C. 1.': 'Toma válida para examen.',
-                'C. 2.': 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
-                'C. 3.': 'Toma válida para examen aunque limitada por hemorragia.',
-                'C. 4.': 'Toma válida para examen aunque limitada por escasez de células.',
-                'C. 5.': 'Toma válida para examen aunque limitada por intensa citolisis.',
-                'C. 6.': 'Toma válida para examen aunque limitada por...',
-                'C. 7.': 'Toma no valorable por desecación.',
-                'C. 8.': 'Toma no valorable por ausencia de células...',
-                'C. 9.': 'Toma no valorable por...'
+                '1': 'Toma válida para examen.',
+                '2': 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
+                '3': 'Toma válida para examen aunque limitada por hemorragia.',
+                '4': 'Toma válida para examen aunque limitada por escasez de células.',
+                '5': 'Toma válida para examen aunque limitada por intensa citolisis.',
+                '6': 'Toma válida para examen aunque limitada por...',
+                '7': 'Toma no valorable por desecación.',
+                '8': 'Toma no valorable por ausencia de células...',
+                '9': 'Toma no valorable por...'
             },
             interpretacion: {
                 "1.1": 'Predominio de células epiteliales escamosas superficiales.',
@@ -57,15 +57,15 @@ export default function Insercion({ auth }) {
         },
         2: {
             calidad: {
-                'H. 1.': 'Muestra válida para examen.',
-                'H. 2.': 'Muestra válida para examen aunque limitada por lipemia.',
-                'H. 3.': 'Muestra válida para examen aunque limitada por hemólisis.',
-                'H. 4.': 'Muestra válida para examen aunque limitada por aglutinación.',
-                'H. 5.': 'Muestra válida para examen aunque limitada por coagulación.',
-                'H. 6.': 'Muestra válida para examen aunque limitada por...',
-                'H. 7.': 'Muestra no valorable por desnaturalización de proteínas.',
-                'H. 8.': 'Muestra no valorable por contaminación bacteriana.',
-                'H. 9.': 'Muestra no valorable por...'
+                '10': 'Muestra válida para examen.',
+                '11': 'Muestra válida para examen aunque limitada por lipemia.',
+                '12': 'Muestra válida para examen aunque limitada por hemólisis.',
+                '13': 'Muestra válida para examen aunque limitada por aglutinación.',
+                '14': 'Muestra válida para examen aunque limitada por coagulación.',
+                '15': 'Muestra válida para examen aunque limitada por...',
+                '16': 'Muestra no valorable por desnaturalización de proteínas.',
+                '17': 'Muestra no valorable por contaminación bacteriana.',
+                '18': 'Muestra no valorable por...'
             },
             interpretacion: {
                 "2.1": 'Predominio de eritrocitos normocíticos normocrómicos.',
@@ -92,15 +92,15 @@ export default function Insercion({ auth }) {
         },
         3: {
             calidad: {
-                'U. 1.': 'Muestra válida para examen.',
-                'U. 2.': 'Muestra válida para examen aunque limitada por turbidez.',
-                'U. 3.': 'Muestra válida para examen aunque limitada por coloración anormal.',
-                'U. 4.': 'Muestra válida para examen aunque limitada por contaminación fecal.',
-                'U. 5.': 'Muestra válida para examen aunque limitada por preservación inadecuada.',
-                'U. 6.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
-                'U. 7.': 'Muestra no valorable por deterioro.',
-                'U. 8.': 'Muestra no valorable por contaminación con agentes externos.',
-                'U. 9.': 'Muestra no valorable por...'
+                '19': 'Muestra válida para examen.',
+                '20': 'Muestra válida para examen aunque limitada por turbidez.',
+                '21': 'Muestra válida para examen aunque limitada por coloración anormal.',
+                '22': 'Muestra válida para examen aunque limitada por contaminación fecal.',
+                '23': 'Muestra válida para examen aunque limitada por preservación inadecuada.',
+                '24': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
+                '25': 'Muestra no valorable por deterioro.',
+                '26': 'Muestra no valorable por contaminación con agentes externos.',
+                '27': 'Muestra no valorable por...'
             },
             interpretacion: {
                 "3.1": 'pH normal.',
@@ -135,15 +135,15 @@ export default function Insercion({ auth }) {
         },
         4: {
             calidad: {
-                'E. 1.': 'Muestra válida para examen.',
-                'E. 2.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
-                'E. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
-                'E. 4.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
-                'E. 5.': 'Muestra válida para examen aunque limitada por contaminación con secreciones nasales.',
-                'E. 6.': 'Muestra válida para examen aunque limitada por presencia de alimentos.',
-                'E. 7.': 'Muestra no valorable por descomposición.',
-                'E. 8.': 'Muestra no valorable por...',
-                'E. 9.': 'Muestra no valorable por...'
+                '28': 'Muestra válida para examen.',
+                '29': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
+                '30': 'Muestra válida para examen aunque limitada por presencia de sangre.',
+                '31': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
+                '32': 'Muestra válida para examen aunque limitada por contaminación con secreciones nasales.',
+                '33': 'Muestra válida para examen aunque limitada por presencia de alimentos.',
+                '34': 'Muestra no valorable por descomposición.',
+                '35': 'Muestra no valorable por...',
+                '36': 'Muestra no valorable por...'
             },
             interpretacion: {
                 "4.1": 'Presencia de células epiteliales escamosas.',
@@ -161,15 +161,15 @@ export default function Insercion({ auth }) {
         },
         5: {
             calidad: {
-                'B. 1.': 'Muestra válida para examen.',
-                'B. 2.': 'Muestra válida para examen aunque limitada por cantidad insuficiente de células.',
-                'B. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
-                'B. 4.': 'Muestra válida para examen aunque limitada por contaminación con alimentos.',
-                'B. 5.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
-                'B. 6.': 'Muestra válida para examen aunque limitada por...',
-                'B. 7.': 'Muestra no valorable por deshidratación.',
-                'B. 8.': 'Muestra no valorable por contaminación con microorganismos.',
-                'B. 9.': 'Muestra no valorable por...'
+                '37': 'Muestra válida para examen.',
+                '38': 'Muestra válida para examen aunque limitada por cantidad insuficiente de células.',
+                '39': 'Muestra válida para examen aunque limitada por presencia de sangre.',
+                '40': 'Muestra válida para examen aunque limitada por contaminación con alimentos.',
+                '41': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
+                '42': 'Muestra válida para examen aunque limitada por...',
+                '43': 'Muestra no valorable por deshidratación.',
+                '44': 'Muestra no valorable por contaminación con microorganismos.',
+                '45': 'Muestra no valorable por...'
             },
             interpretacion: {
                 '5.1': 'Presencia de células epiteliales escamosas.',
@@ -388,7 +388,7 @@ export default function Insercion({ auth }) {
         if (validarFormulario()){
             recogerInterpretaciones()
             handleUpload()
-            router.post('muestra', form, {
+            router.post('api/muestra', form, {
                 onSuccess: showSuccessAlert(),
                 onError: (error) => showModificableAlert('Error al insertar la muestra', error, 'error')
             })

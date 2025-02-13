@@ -18,8 +18,6 @@ export default function Muestras({ auth, data }) {
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
     const [idMuestraSeleccionada, setidMuestraSeleccionada] = useState('')
-
-    const user = JSON.parse(localStorage.getItem('usuarioActivo'))
     
     const [pagActual, setpagActual] = useState(1)
     const [cantPag, setcantPag] = useState(10)

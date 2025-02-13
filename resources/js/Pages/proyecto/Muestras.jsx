@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
-import { Head, Link, usePage } from "@inertiajs/react";
+import { Head, Link, usePage, router } from "@inertiajs/react";
 import { useState } from "react";
 import ModalModificar from "./ModalModificar";
 import ModalEliminar from "./ModalEliminar";
@@ -36,10 +36,7 @@ export default function Muestras({ auth, data }) {
         setVisualizarAbierto(true)
     }
 
-    const handleImprimir = (e) => {
-        console.log('hola');
-    }
-
+    console.log(muestras[0]);
 
     return (
         <AuthenticatedLayout
@@ -118,7 +115,7 @@ export default function Muestras({ auth, data }) {
                                         </button>
                                     </td>
                                     <td className="p-2">
-                                        <button className="ml-2" onClick={(e) => handleImprimir()}>
+                                        <button className="ml-2" onClick={(e) => function(){router.visit('imprimi')}}>
                                             <img
                                                 className="w-8"
                                                 src="../public/print.png"

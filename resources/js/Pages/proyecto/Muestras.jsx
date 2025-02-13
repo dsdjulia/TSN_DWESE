@@ -28,6 +28,7 @@ export default function Muestras({ auth, data }) {
     }
     const handleModalModificar = (e) => {
         setidMuestraSeleccionada(e.target.closest('tr').id)
+        console.log('entra');
         setModificarAbierto(true)
     }
     const handleModalVisualizar = (e) => {
@@ -76,7 +77,7 @@ export default function Muestras({ auth, data }) {
                                         <button
                                             className="text-blue-500 hover:text-blue-700"
                                             onClick={(e) =>
-                                                handleModalVisualizar
+                                                handleModalVisualizar(e)
                                                 // setVisualizarAbierto(true)
                                             }
                                         >
@@ -89,7 +90,7 @@ export default function Muestras({ auth, data }) {
                                         <button
                                             className="text-blue-500 hover:text-blue-700"
                                             onClick={(e) =>
-                                                handleModalModificar
+                                                handleModalModificar(e)
                                                 // setModificarAbierto(true)
                                             }
                                         >

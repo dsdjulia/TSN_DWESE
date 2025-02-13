@@ -75,6 +75,8 @@ class MuestraController extends Controller
             return response()->json(["error" => $validacion -> errors()]);
         }else{
             $muestra = Muestra::create($data);
+            //! hay que devolver un tipo de respuesta inertia
+
             return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
         }
 

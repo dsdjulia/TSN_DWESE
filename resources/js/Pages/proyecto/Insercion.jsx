@@ -388,9 +388,10 @@ export default function Insercion({ auth }) {
         if (validarFormulario()){
             recogerInterpretaciones()
             handleUpload()
-            router.post('muestra', form)
-            showSuccessAlert()
-
+            router.post('muestra', form, {
+                onSuccess: showSuccessAlert(),
+                onError: (error) => showModificableAlert('Error al insertar la muestra', error, 'error')
+            })
         }
     }
 

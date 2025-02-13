@@ -9,10 +9,17 @@ import Footer from "@/Components/Footer";
 
 export default function Muestras({ auth, data }) {
     const muestras = data; // * Debo manipular esta data para la paginacion
+
+
+
     const [modificarAbierto, setModificarAbierto] = useState(false);
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
 
+    const usuario = JSON.parse(localStorage.getItem('usuarioActivo'))
+    
+    const [pagActual, setpagActual] = useState(1)
+    const [cantPag, setcantPag] = useState(10)
 
 
     return (
@@ -129,7 +136,7 @@ export default function Muestras({ auth, data }) {
                             />
                         </button>
                         <p className="text-gray-300">
-                            <span>1</span> ... <span>18</span>
+                            <span >{pagActual}</span> ... <span>{cantPag}</span>
                         </p>
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
                             <img
@@ -145,6 +152,7 @@ export default function Muestras({ auth, data }) {
                                 alt="1"
                             />
                         </button>
+                        
                     </div>
                 </div>
             </div>

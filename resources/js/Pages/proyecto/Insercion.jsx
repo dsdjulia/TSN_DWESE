@@ -199,23 +199,54 @@ export default function Insercion({ auth }) {
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([])
     const [interpretaciones, setInterpretaciones] = useState([]);
 
+    const idSede = localStorage.getItem('usuarioActivo')
+    const idSedeObjeto = JSON.parse(idSede)
+
+    const [form, setForm] = useState({
+        codigoMuestra: "",
+        fecha: "",
+        tipoNaturaleza: "",
+        organo: "",
+        formato: "",
+        calidad: "",
+        descripcionCalidad: "",
+        tipoEstudio: "",
+        idUser: 1, // Esto hay que sacarlo del login
+        idSede: idSedeObjeto['idSede'],
+        interpretacion: [],
+    });
+
+
+    const handleData = (e) => {
+        setForm({...form , [e.target.name]: [e.target.value]}) // uso ...form para no eliminar los demas datos al modificar
+        console.log(form);
+    }
 
     const handleSelect = (seleccion) => {
+
+        const clave = seleccion.target.value
+
+        if(clave in datos){ // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
+            setCalidadSeleccionada(datos[clave].calidad)
+            setInterpretacionSeleccionada(datos[clave].interpretacion)
+
+        } else { // Si no tiene propiedades lo dejamos vacio
+            setCalidadSeleccionada('')
+            setInterpretacionSeleccionada('')
+        }
+
+    }
+
+
+    const handleBiopsia = (seleccion) => {
 
         const clave = seleccion.target.value // Si la clave == 1 o 2 corresponde a biopsia
 
         if (clave == '1'|| clave == '2'){ // Evaluamos si es una biopsia
             setBiopsiaHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
 
-        } else if(clave in datos){ // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
-            setBiopsiaHidden('hidden')
-            setCalidadSeleccionada(datos[clave].calidad)
-            setInterpretacionSeleccionada(datos[clave].interpretacion)
-
         } else { // Si no tiene propiedades lo dejamos vacio
             setBiopsiaHidden('hidden')
-            setCalidadSeleccionada('')
-            setInterpretacionSeleccionada('')
         }
 
     }
@@ -233,22 +264,6 @@ export default function Insercion({ auth }) {
     }
 
 
-    const [form, setForm] = useState({
-        codigoMuestra: "",
-        fecha: "",
-        tipoNaturaleza: "",
-        organo: "",
-        formato: "",
-        calidad: "",
-        descripcionCalidad: "",
-        tipoEstudio: "",
-        interpretacion: [],
-    });
-
-    const handleData = (e) => {
-        setForm({...form , [e.target.name]: [e.target.value]}) // uso ...form para no eliminar los demas datos al modificar
-        console.log(form);
-    }
 
 
     const handlePhotos = (photo) => {
@@ -368,7 +383,7 @@ export default function Insercion({ auth }) {
         if (validarFormulario()){
             recogerInterpretaciones()
             handleUpload()
-            router.post('api/createMuestra', form)
+            router.post('api/muestra', form)
             showSuccessAlert()
 
         }
@@ -425,7 +440,7 @@ export default function Insercion({ auth }) {
                             >
                                 Tipo de naturaleza
                             </label>
-                            <select onChange={(e) => { handleData(e); handleSelect(e) }}
+                            <select onChange={(e) => { handleData(e); handleBiopsia(e) }}
                                 id="tipoNaturaleza"
                                 name="tipoNaturaleza"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -500,8 +515,8 @@ export default function Insercion({ auth }) {
                                     Seleccione un tipo de estudio
                                 </option>
                                 {/* Me joden el organo biopsiado */}
-                                <option value="">Citológico cérvico - vaginal</option> 
-                                <option value="">Hematológico completo</option>
+                                <option value="1">Citológico cérvico - vaginal</option> 
+                                <option value="2">Hematológico completo</option>
                                 <option value="3">Microscópico y químico de orina</option>
                                 <option value="4">Citológico de esputo</option>
                                 <option value="5">Citológico bucal</option>

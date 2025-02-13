@@ -11,16 +11,36 @@ export default function Register() {
         email: "",
         password: "",
         password_confirmation: "",
-        idSede: ""
+        idSede: "1",
     });
 
-  
+    const sedes = [
+        { nombre: "Albacete", codigo: "1" },
+        { nombre: "Alicante", codigo: "2" },
+        { nombre: "Alicante II", codigo: "3" },
+        { nombre: "Almería", codigo: "4" },
+        { nombre: "Córdoba", codigo: "5" },
+        { nombre: "Leganés", codigo: "6" },
+        { nombre: "Granada", codigo: "7" },
+        { nombre: "Huelva", codigo: "8" },
+        { nombre: "Jerez", codigo: "9" },
+        { nombre: "Madrid", codigo: "10" },
+        { nombre: "Málaga", codigo: "11" },
+        { nombre: "Murcia", codigo: "12" },
+        { nombre: "Sevilla", codigo: "13" },
+        { nombre: "Valencia", codigo: "14" },
+        { nombre: "Zaragoza", codigo: "15" },
+    ];
+
     const submit = (e) => {
         e.preventDefault();
         console.log(data); // Esto mostrará los datos antes de enviarlos
         post(route("register"), {
             onFinish: () => reset("password", "password_confirmation"),
         });
+        localStorage.setItem('usuarioActivo', JSON.stringify(data))
+        const usuario = JSON.parse(localStorage.getItem('usuarioActivo'))
+        console.log(usuario)
     };
 
     return (
@@ -109,18 +129,23 @@ export default function Register() {
                         value="Sede Medac"
                         className="mt-4"
                     />
-                    <TextInput
+                    <select
                         id="idSede"
-                        type="text"
+                        type="idSede"
                         name="idSede"
-                        value={data.idSede}
-                        className="mt-1 block w-full h-10 border-gray-300 border"
-                        autoComplete="medac arena"
-                        onChange={(e) =>
-                            setData("idSede", e.target.value)
-                        }
-                        required
-                    />
+                        autoComplete="1"
+                        onChange={(e) => setData("idSede", e.target.value)}
+                        className="w-full p-2 border rounded-md"
+                    >
+                        <option value="" disabled>
+                            Seleccione una opción
+                        </option>
+                        {sedes.map((sede) => (
+                            <option key={sede.codigo} value={sede.codigo}>
+                                {sede.nombre}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="mt-4 flex items-center justify-end">
                     <Link

@@ -145,7 +145,7 @@ class MuestraController extends Controller
             'sede:id,nombre'
         ])->get();
 
-        return Inertia::render('proyecto/Muestras', ["data" => $muestras]);
+        return redirect()->route('muestras',$muestras);
     }
 
     public function validatorMuestras($datos){

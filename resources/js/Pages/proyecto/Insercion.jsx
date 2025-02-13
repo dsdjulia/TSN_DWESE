@@ -14,19 +14,15 @@ export default function Insercion({ auth }) {
     const datos = {
         1: {
             calidad: {
-                "C. 1.": "Toma válida para examen.",
-                "C. 2.":
-                    "Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.",
-                "C. 3.":
-                    "Toma válida para examen aunque limitada por hemorragia.",
-                "C. 4.":
-                    "Toma válida para examen aunque limitada por escasez de células.",
-                "C. 5.":
-                    "Toma válida para examen aunque limitada por intensa citolisis.",
-                "C. 6.": "Toma válida para examen aunque limitada por...",
-                "C. 7.": "Toma no valorable por desecación.",
-                "C. 8.": "Toma no valorable por ausencia de células...",
-                "C. 9.": "Toma no valorable por...",
+                '1': 'Toma válida para examen.',
+                '2': 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
+                '3': 'Toma válida para examen aunque limitada por hemorragia.',
+                '4': 'Toma válida para examen aunque limitada por escasez de células.',
+                '5': 'Toma válida para examen aunque limitada por intensa citolisis.',
+                '6': 'Toma válida para examen aunque limitada por...',
+                '7': 'Toma no valorable por desecación.',
+                '8': 'Toma no valorable por ausencia de células...',
+                '9': 'Toma no valorable por...'
             },
             interpretacion: {
                 1: "Predominio de células epiteliales escamosas superficiales.",
@@ -62,20 +58,15 @@ export default function Insercion({ auth }) {
         },
         2: {
             calidad: {
-                "H. 1.": "Muestra válida para examen.",
-                "H. 2.":
-                    "Muestra válida para examen aunque limitada por lipemia.",
-                "H. 3.":
-                    "Muestra válida para examen aunque limitada por hemólisis.",
-                "H. 4.":
-                    "Muestra válida para examen aunque limitada por aglutinación.",
-                "H. 5.":
-                    "Muestra válida para examen aunque limitada por coagulación.",
-                "H. 6.": "Muestra válida para examen aunque limitada por...",
-                "H. 7.":
-                    "Muestra no valorable por desnaturalización de proteínas.",
-                "H. 8.": "Muestra no valorable por contaminación bacteriana.",
-                "H. 9.": "Muestra no valorable por...",
+                'H. 1.': 'Muestra válida para examen.',
+                'H. 2.': 'Muestra válida para examen aunque limitada por lipemia.',
+                'H. 3.': 'Muestra válida para examen aunque limitada por hemólisis.',
+                'H. 4.': 'Muestra válida para examen aunque limitada por aglutinación.',
+                'H. 5.': 'Muestra válida para examen aunque limitada por coagulación.',
+                'H. 6.': 'Muestra válida para examen aunque limitada por...',
+                'H. 7.': 'Muestra no valorable por desnaturalización de proteínas.',
+                'H. 8.': 'Muestra no valorable por contaminación bacteriana.',
+                'H. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
                 30: "Predominio de eritrocitos normocíticos normocrómicos.",
@@ -102,114 +93,97 @@ export default function Insercion({ auth }) {
         },
         3: {
             calidad: {
-                "U. 1.": "Muestra válida para examen.",
-                "U. 2.":
-                    "Muestra válida para examen aunque limitada por turbidez.",
-                "U. 3.":
-                    "Muestra válida para examen aunque limitada por coloración anormal.",
-                "U. 4.":
-                    "Muestra válida para examen aunque limitada por contaminación fecal.",
-                "U. 5.":
-                    "Muestra válida para examen aunque limitada por preservación inadecuada.",
-                "U. 6.":
-                    "Muestra válida para examen aunque limitada por volumen insuficiente.",
-                "U. 7.": "Muestra no valorable por deterioro.",
-                "U. 8.":
-                    "Muestra no valorable por contaminación con agentes externos.",
-                "U. 9.": "Muestra no valorable por...",
+                'U. 1.': 'Muestra válida para examen.',
+                'U. 2.': 'Muestra válida para examen aunque limitada por turbidez.',
+                'U. 3.': 'Muestra válida para examen aunque limitada por coloración anormal.',
+                'U. 4.': 'Muestra válida para examen aunque limitada por contaminación fecal.',
+                'U. 5.': 'Muestra válida para examen aunque limitada por preservación inadecuada.',
+                'U. 6.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
+                'U. 7.': 'Muestra no valorable por deterioro.',
+                'U. 8.': 'Muestra no valorable por contaminación con agentes externos.',
+                'U. 9.': 'Muestra no valorable por...'
             },
             interpretacion: {
-                50: "pH normal.",
-                51: "pH elevado.",
-                52: "pH reducido.",
-                53: "Presencia de proteínas.",
-                54: "Negativo para proteínas.",
-                55: "Glucosa presente.",
-                56: "Negativo para la glucosa.",
-                57: "Cetonas detectadas.",
-                58: "Negativo para cetonas.",
-                59: "Hemoglobina presente.",
-                60: "Negativo para hemoglobina.",
-                61: "Bilirrubina detectada.",
-                62: "Negativo para bilirrubina.",
-                63: "Urobilinógeno normal.",
-                64: "Urobilinógeno elevado.",
-                65: "Presencia de nitritos.",
-                66: "Negativo para nitritos.",
-                67: "Presencia de leucocitos.",
-                68: "Ausencia de leucocitos.",
-                69: "Presencia de eritrocitos.",
-                70: "Ausencia de eritrocitos.",
-                71: "Células epiteliales.",
-                72: "Cilindros hialinos.",
-                73: "Cilindros granulosos.",
-                74: "Cristales (oxalato de calcio, ácido úrico, etc.).",
-                75: "Bacterias.",
-                76: "Levaduras.",
-                77: "Parásitos.",
-            },
-            4: {
-                calidad: {
-                    "E. 1.": "Muestra válida para examen.",
-                    "E. 2.":
-                        "Muestra válida para examen aunque limitada por volumen insuficiente.",
-                    "E. 3.":
-                        "Muestra válida para examen aunque limitada por presencia de sangre.",
-                    "E. 4.":
-                        "Muestra válida para examen aunque limitada por contaminación con saliva.",
-                    "E. 5.":
-                        "Muestra válida para examen aunque limitada por contaminación con secreciones nasales.",
-                    "E. 6.":
-                        "Muestra válida para examen aunque limitada por presencia de alimentos.",
-                    "E. 7.": "Muestra no valorable por descomposición.",
-                    "E. 8.": "Muestra no valorable por...",
-                    "E. 9.": "Muestra no valorable por...",
-                },
-                interpretacion: {
-                    78: "Presencia de células epiteliales escamosas.",
-                    79: "Presencia de células epiteliales columnares.",
-                    80: "Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).",
-                    81: "Presencia de células metaplásicas.",
-                    82: "Presencia de células malignas.",
-                    83: "Presencia de células atípicas sugestivas de neoplasia.",
-                    84: "Presencia de microorganismos (bacterias, hongos, micobacterias).",
-                    85: "Presencia de células sanguíneas (eritrocitos, plaquetas).",
-                    86: "Presencia de material mucoso o mucopurulento.",
-                    87: "Presencia de cristales (de colesterol, calcio, etc.).",
-                    88: "Ausencia de células significativas para el análisis.",
-                },
-            },
-            5: {
-                calidad: {
-                    "B. 1.": "Muestra válida para examen.",
-                    "B. 2.":
-                        "Muestra válida para examen aunque limitada por cantidad insuficiente de células.",
-                    "B. 3.":
-                        "Muestra válida para examen aunque limitada por presencia de sangre.",
-                    "B. 4.":
-                        "Muestra válida para examen aunque limitada por contaminación con alimentos.",
-                    "B. 5.":
-                        "Muestra válida para examen aunque limitada por contaminación con saliva.",
-                    "B. 6.":
-                        "Muestra válida para examen aunque limitada por...",
-                    "B. 7.": "Muestra no valorable por deshidratación.",
-                    "B. 8.":
-                        "Muestra no valorable por contaminación con microorganismos.",
-                    "B. 9.": "Muestra no valorable por...",
-                },
-                interpretacion: {
-                    89: "Presencia de células epiteliales escamosas.",
-                    90: "Presencia de células epiteliales cilíndricas.",
-                    91: "Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).",
-                    92: "Presencia de células glandulares.",
-                    93: "Presencia de células metaplásicas.",
-                    94: "Presencia de células atípicas sugestivas de neoplasia.",
-                    95: "Presencia de microorganismos (bacterias, hongos, levaduras).",
-                    96: "Presencia de células anormales con cambios citológicos.",
-                    97: "Ausencia de células significativas para el análisis.",
-                },
-            },
+                "3.1": 'pH normal.',
+                "3.2": 'pH elevado.',
+                "3.3": 'pH reducido.',
+                "3.4": 'Presencia de proteínas.',
+                "3.5": 'Negativo para proteínas.',
+                "3.6": 'Glucosa presente.',
+                "3.7": 'Negativo para la glucosa.',
+                "3.8": 'Cetonas detectadas.',
+                "3.9": 'Negativo para cetonas.',
+                "3.10": 'Hemoglobina presente.',
+                "3.11": 'Negativo para hemoglobina.',
+                "3.12": 'Bilirrubina detectada.',
+                "3.13": 'Negativo para bilirrubina.',
+                "3.14": 'Urobilinógeno normal.',
+                "3.15": 'Urobilinógeno elevado.',
+                "3.16": 'Presencia de nitritos.',
+                "3.17": 'Negativo para nitritos.',
+                "3.18": 'Presencia de leucocitos.',
+                "3.19": 'Ausencia de leucocitos.',
+                "3.20": 'Presencia de eritrocitos.',
+                "3.21": 'Ausencia de eritrocitos.',
+                "3.22": 'Células epiteliales.',
+                "3.23": 'Cilindros hialinos.',
+                "3.24": 'Cilindros granulosos.',
+                "3.25": 'Cristales (oxalato de calcio, ácido úrico, etc.).',
+                "3.26": 'Bacterias.',
+                "3.27": 'Levaduras.',
+                "3.28": 'Parásitos.'
+            }
         },
+        4: {
+            calidad: {
+                'E. 1.': 'Muestra válida para examen.',
+                'E. 2.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
+                'E. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
+                'E. 4.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
+                'E. 5.': 'Muestra válida para examen aunque limitada por contaminación con secreciones nasales.',
+                'E. 6.': 'Muestra válida para examen aunque limitada por presencia de alimentos.',
+                'E. 7.': 'Muestra no valorable por descomposición.',
+                'E. 8.': 'Muestra no valorable por...',
+                'E. 9.': 'Muestra no valorable por...'
+            },
+            interpretacion: {
+                "4.1": 'Presencia de células epiteliales escamosas.',
+                "4.2": 'Presencia de células epiteliales columnares.',
+                "4.3": 'Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).',
+                "4.4": 'Presencia de células metaplásicas.',
+                "4.5": 'Presencia de células malignas.',
+                "4.6": 'Presencia de células atípicas sugestivas de neoplasia.',
+                "4.7": 'Presencia de microorganismos (bacterias, hongos, micobacterias).',
+                "4.8": 'Presencia de células sanguíneas (eritrocitos, plaquetas).',
+                "4.9": 'Presencia de material mucoso o mucopurulento.',
+                "4.10": 'Presencia de cristales (de colesterol, calcio, etc.).',
+                "4.11": 'Ausencia de células significativas para el análisis.'
+            }
+        },
+        5: {
+            calidad: {
+                'B. 1.': 'Muestra válida para examen.',
+                'B. 2.': 'Muestra válida para examen aunque limitada por cantidad insuficiente de células.',
+                'B. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
+                'B. 4.': 'Muestra válida para examen aunque limitada por contaminación con alimentos.',
+                'B. 5.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
+                'B. 6.': 'Muestra válida para examen aunque limitada por...',
+                'B. 7.': 'Muestra no valorable por deshidratación.',
+                'B. 8.': 'Muestra no valorable por contaminación con microorganismos.',
+                'B. 9.': 'Muestra no valorable por...'
+            },
+            interpretacion: {
+                '5.1': 'Presencia de células epiteliales escamosas.',
+                '5.2': 'Presencia de células epiteliales cilíndricas.',
+                '5.3': 'Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).',
+                '5.4': 'Presencia de células glandulares.',
+                '5.5': 'Presencia de células metaplásicas.',
+                '5.6': 'Presencia de células atípicas sugestivas de neoplasia.',
+                '5.7': 'Presencia de microorganismos (bacterias, hongos, levaduras).',
+                '5.8': 'Presencia de células anormales con cambios citológicos.',
+                '5.9': 'Ausencia de células significativas para el análisis.'
+            }
+        }
     };
 
     // Ahora debo sacar esto del metodo
@@ -444,14 +418,16 @@ export default function Insercion({ auth }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        if (validarFormulario()) {
-            recogerInterpretaciones();
-            handleUpload();
-            router.post("muestra", form);
-            showSuccessAlert();
+        
+        if (validarFormulario()){
+            recogerInterpretaciones()
+            handleUpload()
+            router.post('muestra', form, {
+                onSuccess: showSuccessAlert(),
+                onError: (error) => showModificableAlert('Error al insertar la muestra', error, 'error')
+            })
         }
-    };
+    }
 
     return (
         <AuthenticatedLayout

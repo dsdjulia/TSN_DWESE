@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
-import { Head, Link, usePage } from "@inertiajs/react";
+import { Head, Link, usePage, router } from "@inertiajs/react";
 import { useState } from "react";
 import ModalModificar from "./ModalModificar";
 import ModalEliminar from "./ModalEliminar";
@@ -28,6 +28,7 @@ export default function Muestras({ auth, data }) {
     }
     const handleModalModificar = (e) => {
         setidMuestraSeleccionada(e.target.closest('tr').id)
+        console.log('entra');
         setModificarAbierto(true)
     }
     const handleModalVisualizar = (e) => {
@@ -35,6 +36,7 @@ export default function Muestras({ auth, data }) {
         setVisualizarAbierto(true)
     }
 
+    console.log(muestras[0]);
 
     return (
         <AuthenticatedLayout
@@ -76,7 +78,7 @@ export default function Muestras({ auth, data }) {
                                         <button
                                             className="text-blue-500 hover:text-blue-700"
                                             onClick={(e) =>
-                                                handleModalVisualizar
+                                                handleModalVisualizar(e)
                                                 // setVisualizarAbierto(true)
                                             }
                                         >
@@ -89,7 +91,7 @@ export default function Muestras({ auth, data }) {
                                         <button
                                             className="text-blue-500 hover:text-blue-700"
                                             onClick={(e) =>
-                                                handleModalModificar
+                                                handleModalModificar(e)
                                                 // setModificarAbierto(true)
                                             }
                                         >
@@ -113,13 +115,13 @@ export default function Muestras({ auth, data }) {
                                         </button>
                                     </td>
                                     <td className="p-2">
-                                        <button className="ml-2">
+                                        <a className="ml-2" href={`/imprimir-muestra`} target="_blank" /* onClick={(e) => function(){router.visit('imprimir')}} */>
                                             <img
                                                 className="w-8"
                                                 src="../public/print.png"
                                                 alt="imprimir"
                                             />
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             ))}

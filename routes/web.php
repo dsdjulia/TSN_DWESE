@@ -43,11 +43,7 @@ Route::get('/test', function () {
     return Inertia::render('Test');
 })->middleware(['auth', 'verified'])->name('test');
 
-Route::get('/guardar',[MuestraController::class, 'guardar']) -> name('guardar');
-Route::get('/eliminar',[MuestraController::class, 'eliminar']) -> name('eliminar');
-
-
-// Vistas con datos 
+// CRUD redireccion Vistas
 Route::get('/muestras', [MuestraController::class, 'getAllJson'])->middleware(['auth', 'verified'])->name('muestras');
 Route::post('/muestra', [MuestraController::class, 'insertMuestra'])->name('MuestrasController.insertarMuestra');
 

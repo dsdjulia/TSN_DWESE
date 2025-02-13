@@ -36,6 +36,10 @@ export default function Muestras({ auth, data }) {
         setVisualizarAbierto(true)
     }
 
+    const handleImprimir = (e) => {
+        
+    }
+
 
     return (
         <AuthenticatedLayout
@@ -114,7 +118,7 @@ export default function Muestras({ auth, data }) {
                                         </button>
                                     </td>
                                     <td className="p-2">
-                                        <button className="ml-2">
+                                        <button className="ml-2" onClick={handleImprimir()}>
                                             <img
                                                 className="w-8"
                                                 src="../public/print.png"

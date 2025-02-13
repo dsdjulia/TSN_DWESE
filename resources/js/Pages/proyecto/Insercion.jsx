@@ -2,210 +2,235 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useState } from "react";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import { buscarEstudio } from "@/Components/ListaIC";
-import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
+import {
+    showErrorAlert,
+    showSuccessAlert,
+    showModificableAlert,
+} from "../../Components/SweetAlerts";
 import Interpretacion from "@/Components/Interpretacion";
 import Footer from "@/Components/Footer";
 
-
 export default function Insercion({ auth }) {
-
-
     const datos = {
         1: {
             calidad: {
-                'C. 1.': 'Toma válida para examen.',
-                'C. 2.': 'Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.',
-                'C. 3.': 'Toma válida para examen aunque limitada por hemorragia.',
-                'C. 4.': 'Toma válida para examen aunque limitada por escasez de células.',
-                'C. 5.': 'Toma válida para examen aunque limitada por intensa citolisis.',
-                'C. 6.': 'Toma válida para examen aunque limitada por...',
-                'C. 7.': 'Toma no valorable por desecación.',
-                'C. 8.': 'Toma no valorable por ausencia de células...',
-                'C. 9.': 'Toma no valorable por...'
+                "C. 1.": "Toma válida para examen.",
+                "C. 2.":
+                    "Toma válida para examen aunque limitada por ausencia de células endocervicales / zona de transición.",
+                "C. 3.":
+                    "Toma válida para examen aunque limitada por hemorragia.",
+                "C. 4.":
+                    "Toma válida para examen aunque limitada por escasez de células.",
+                "C. 5.":
+                    "Toma válida para examen aunque limitada por intensa citolisis.",
+                "C. 6.": "Toma válida para examen aunque limitada por...",
+                "C. 7.": "Toma no valorable por desecación.",
+                "C. 8.": "Toma no valorable por ausencia de células...",
+                "C. 9.": "Toma no valorable por...",
             },
             interpretacion: {
-                "1.1": 'Predominio de células epiteliales escamosas superficiales.',
-                "1.2": 'Predominio de células epiteliales escamosas intermedias.',
-                "1.3": 'Predominio de células epiteliales escamosas parabasales.',
-                "1.4": 'Polinucleares neutrófilos.',
-                "1.5": 'Hematíes.',
-                "1.6": 'Células endocervicales en exocervix.',
-                "1.7": 'Células metaplásicas en exocérvix.',
-                "1.8": 'Células metaplásicas inmaduras.',
-                "1.9": 'Células reactivas.',
-                "1.10": 'Células endometriales en mujer ≥ de 40 años.',
-                "1.11": 'Alteraciones celulares sugerentes con HPV.',
-                "1.12": 'Alteraciones celulares sugerentes de Herpes.',
-                "1.13": 'Células neoplásicas.',
-                "1.14": 'Células superficiales e intermedias con cambios atípicos.',
-                "1.15": 'Células intermedias y parabasales con algunos cambios atípicos.',
-                "1.16": 'Células parabasales con algunos cambios atípicos.',
-                "1.17": 'Células escamosas de significado incierto.',
-                "1.18": 'Células epiteliales glandulares de significado incierto.',
-                "1.19": 'Estructuras micóticas correspondientes a Candida albicans.',
-                "1.20": 'Estructuras micóticas correspondientes a Candida glabrata.',
-                "1.21": 'Estructuras bacterianas con disposición característica de actinomyces.',
-                "1.22": 'Estructuras bacterianas correspondiente de Gardnerella vaginalis.',
-                "1.23": 'Estructuras bacterianas de naturaleza cocácea.',
-                "1.24": 'Estructuras bacterianas sugerentes de Leptothrix.',
-                "1.25": 'Estructuras correspondientes a Trichomonas vaginalis.',
-                "1.26": 'Células histiocitarias multinucleadas.',
-                "1.27": 'Células epiteliales de tipo escamoso con intensos cambios atípicos.',
-                "1.28": 'Presencia de epitelio endometrial sin cambios atípicos.',
-                "1.29": 'Células epiteliales de apariencia glandular con núcleos amplios e irregulares.'
-            }
+                1: "Predominio de células epiteliales escamosas superficiales.",
+                2: "Predominio de células epiteliales escamosas intermedias.",
+                3: "Predominio de células epiteliales escamosas parabasales.",
+                4: "Polinucleares neutrófilos.",
+                5: "Hematíes.",
+                6: "Células endocervicales en exocervix.",
+                7: "Células metaplásicas en exocérvix.",
+                8: "Células metaplásicas inmaduras.",
+                9: "Células reactivas.",
+                10: "Células endometriales en mujer ≥ de 40 años.",
+                11: "Alteraciones celulares sugerentes con HPV.",
+                12: "Alteraciones celulares sugerentes de Herpes.",
+                13: "Células neoplásicas.",
+                14: "Células superficiales e intermedias con cambios atípicos.",
+                15: "Células intermedias y parabasales con algunos cambios atípicos.",
+                16: "Células parabasales con algunos cambios atípicos.",
+                17: "Células escamosas de significado incierto.",
+                18: "Células epiteliales glandulares de significado incierto.",
+                19: "Estructuras micóticas correspondientes a Candida albicans.",
+                20: "Estructuras micóticas correspondientes a Candida glabrata.",
+                21: "Estructuras bacterianas con disposición característica de actinomyces.",
+                22: "Estructuras bacterianas correspondiente de Gardnerella vaginalis.",
+                23: "Estructuras bacterianas de naturaleza cocácea.",
+                24: "Estructuras bacterianas sugerentes de Leptothrix.",
+                25: "Estructuras correspondientes a Trichomonas vaginalis.",
+                26: "Células histiocitarias multinucleadas.",
+                27: "Células epiteliales de tipo escamoso con intensos cambios atípicos.",
+                28: "Presencia de epitelio endometrial sin cambios atípicos.",
+                29: "Células epiteliales de apariencia glandular con núcleos amplios e irregulares.",
+            },
         },
         2: {
             calidad: {
-                'H. 1.': 'Muestra válida para examen.',
-                'H. 2.': 'Muestra válida para examen aunque limitada por lipemia.',
-                'H. 3.': 'Muestra válida para examen aunque limitada por hemólisis.',
-                'H. 4.': 'Muestra válida para examen aunque limitada por aglutinación.',
-                'H. 5.': 'Muestra válida para examen aunque limitada por coagulación.',
-                'H. 6.': 'Muestra válida para examen aunque limitada por...',
-                'H. 7.': 'Muestra no valorable por desnaturalización de proteínas.',
-                'H. 8.': 'Muestra no valorable por contaminación bacteriana.',
-                'H. 9.': 'Muestra no valorable por...'
+                "H. 1.": "Muestra válida para examen.",
+                "H. 2.":
+                    "Muestra válida para examen aunque limitada por lipemia.",
+                "H. 3.":
+                    "Muestra válida para examen aunque limitada por hemólisis.",
+                "H. 4.":
+                    "Muestra válida para examen aunque limitada por aglutinación.",
+                "H. 5.":
+                    "Muestra válida para examen aunque limitada por coagulación.",
+                "H. 6.": "Muestra válida para examen aunque limitada por...",
+                "H. 7.":
+                    "Muestra no valorable por desnaturalización de proteínas.",
+                "H. 8.": "Muestra no valorable por contaminación bacteriana.",
+                "H. 9.": "Muestra no valorable por...",
             },
             interpretacion: {
-                "2.1": 'Predominio de eritrocitos normocíticos normocrómicos.',
-                "2.2": 'Predominio de eritrocitos microcíticos hipocrómicos.',
-                "2.3": 'Presencia de esferocitos.',
-                "2.4": 'Presencia de dianocitos (células en forma de lágrima).',
-                "2.5": 'Leucocitos con predominio de neutrófilos.',
-                "2.6": 'Leucocitos con predominio de linfocitos.',
-                "2.7": 'Presencia de células blásticas.',
-                "2.8": 'Presencia de eosinófilos aumentados.',
-                "2.9": 'Presencia de basófilos aumentados.',
-                "2.10": 'Trombocitosis (aumento de plaquetas).',
-                "2.11": 'Trombocitopenia (disminución de plaquetas).',
-                "2.12": 'Anomalías en la morfología plaquetaria.',
-                "2.13": 'Presencia de células atípicas sugestivas de neoplasia.',
-                "2.14": 'Presencia de células inmaduras del linaje mieloide.',
-                "2.15": 'Presencia de células inmaduras del linaje linfático.',
-                "2.16": 'Anisocitosis (variabilidad en el tamaño de los eritrocitos).',
-                "2.17": 'Poiquilocitosis (variabilidad en la forma de los eritrocitos).',
-                "2.18": 'Presencia de cuerpos de Howell-Jolly.',
-                "2.19": 'Células con inclusiones de hierro (cuerpos de Pappenheimer).',
-                "2.20": 'Presencia de parásitos intraeritrocitarios.'
-            }
+                30: "Predominio de eritrocitos normocíticos normocrómicos.",
+                31: "Predominio de eritrocitos microcíticos hipocrómicos.",
+                32: "Presencia de esferocitos.",
+                33: "Presencia de dianocitos (células en forma de lágrima).",
+                34: "Leucocitos con predominio de neutrófilos.",
+                35: "Leucocitos con predominio de linfocitos.",
+                36: "Presencia de células blásticas.",
+                37: "Presencia de eosinófilos aumentados.",
+                38: "Presencia de basófilos aumentados.",
+                39: "Trombocitosis (aumento de plaquetas).",
+                40: "Trombocitopenia (disminución de plaquetas).",
+                41: "Anomalías en la morfología plaquetaria.",
+                42: "Presencia de células atípicas sugestivas de neoplasia.",
+                43: "Presencia de células inmaduras del linaje mieloide.",
+                44: "Presencia de células inmaduras del linaje linfático.",
+                45: "Anisocitosis (variabilidad en el tamaño de los eritrocitos).",
+                46: "Poiquilocitosis (variabilidad en la forma de los eritrocitos).",
+                47: "Presencia de cuerpos de Howell-Jolly.",
+                48: "Células con inclusiones de hierro (cuerpos de Pappenheimer).",
+                49: "Presencia de parásitos intraeritrocitarios.",
+            },
         },
         3: {
             calidad: {
-                'U. 1.': 'Muestra válida para examen.',
-                'U. 2.': 'Muestra válida para examen aunque limitada por turbidez.',
-                'U. 3.': 'Muestra válida para examen aunque limitada por coloración anormal.',
-                'U. 4.': 'Muestra válida para examen aunque limitada por contaminación fecal.',
-                'U. 5.': 'Muestra válida para examen aunque limitada por preservación inadecuada.',
-                'U. 6.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
-                'U. 7.': 'Muestra no valorable por deterioro.',
-                'U. 8.': 'Muestra no valorable por contaminación con agentes externos.',
-                'U. 9.': 'Muestra no valorable por...'
+                "U. 1.": "Muestra válida para examen.",
+                "U. 2.":
+                    "Muestra válida para examen aunque limitada por turbidez.",
+                "U. 3.":
+                    "Muestra válida para examen aunque limitada por coloración anormal.",
+                "U. 4.":
+                    "Muestra válida para examen aunque limitada por contaminación fecal.",
+                "U. 5.":
+                    "Muestra válida para examen aunque limitada por preservación inadecuada.",
+                "U. 6.":
+                    "Muestra válida para examen aunque limitada por volumen insuficiente.",
+                "U. 7.": "Muestra no valorable por deterioro.",
+                "U. 8.":
+                    "Muestra no valorable por contaminación con agentes externos.",
+                "U. 9.": "Muestra no valorable por...",
             },
             interpretacion: {
-                "3.1": 'pH normal.',
-                "3.2": 'pH elevado.',
-                "3.3": 'pH reducido.',
-                "3.4": 'Presencia de proteínas.',
-                "3.5": 'Negativo para proteínas.',
-                "3.6": 'Glucosa presente.',
-                "3.7": 'Negativo para la glucosa.',
-                "3.8": 'Cetonas detectadas.',
-                "3.9": 'Negativo para cetonas.',
-                "3.10": 'Hemoglobina presente.',
-                "3.11": 'Negativo para hemoglobina.',
-                "3.12": 'Bilirrubina detectada.',
-                "3.13": 'Negativo para bilirrubina.',
-                "3.14": 'Urobilinógeno normal.',
-                "3.15": 'Urobilinógeno elevado.',
-                "3.16": 'Presencia de nitritos.',
-                "3.17": 'Negativo para nitritos.',
-                "3.18": 'Presencia de leucocitos.',
-                "3.19": 'Ausencia de leucocitos.',
-                "3.20": 'Presencia de eritrocitos.',
-                "3.21": 'Ausencia de eritrocitos.',
-                "3.22": 'Células epiteliales.',
-                "3.23": 'Cilindros hialinos.',
-                "3.24": 'Cilindros granulosos.',
-                "3.25": 'Cristales (oxalato de calcio, ácido úrico, etc.).',
-                "3.26": 'Bacterias.',
-                "3.27": 'Levaduras.',
-                "3.28": 'Parásitos.'
-            }
+                50: "pH normal.",
+                51: "pH elevado.",
+                52: "pH reducido.",
+                53: "Presencia de proteínas.",
+                54: "Negativo para proteínas.",
+                55: "Glucosa presente.",
+                56: "Negativo para la glucosa.",
+                57: "Cetonas detectadas.",
+                58: "Negativo para cetonas.",
+                59: "Hemoglobina presente.",
+                60: "Negativo para hemoglobina.",
+                61: "Bilirrubina detectada.",
+                62: "Negativo para bilirrubina.",
+                63: "Urobilinógeno normal.",
+                64: "Urobilinógeno elevado.",
+                65: "Presencia de nitritos.",
+                66: "Negativo para nitritos.",
+                67: "Presencia de leucocitos.",
+                68: "Ausencia de leucocitos.",
+                69: "Presencia de eritrocitos.",
+                70: "Ausencia de eritrocitos.",
+                71: "Células epiteliales.",
+                72: "Cilindros hialinos.",
+                73: "Cilindros granulosos.",
+                74: "Cristales (oxalato de calcio, ácido úrico, etc.).",
+                75: "Bacterias.",
+                76: "Levaduras.",
+                77: "Parásitos.",
+            },
+            4: {
+                calidad: {
+                    "E. 1.": "Muestra válida para examen.",
+                    "E. 2.":
+                        "Muestra válida para examen aunque limitada por volumen insuficiente.",
+                    "E. 3.":
+                        "Muestra válida para examen aunque limitada por presencia de sangre.",
+                    "E. 4.":
+                        "Muestra válida para examen aunque limitada por contaminación con saliva.",
+                    "E. 5.":
+                        "Muestra válida para examen aunque limitada por contaminación con secreciones nasales.",
+                    "E. 6.":
+                        "Muestra válida para examen aunque limitada por presencia de alimentos.",
+                    "E. 7.": "Muestra no valorable por descomposición.",
+                    "E. 8.": "Muestra no valorable por...",
+                    "E. 9.": "Muestra no valorable por...",
+                },
+                interpretacion: {
+                    78: "Presencia de células epiteliales escamosas.",
+                    79: "Presencia de células epiteliales columnares.",
+                    80: "Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).",
+                    81: "Presencia de células metaplásicas.",
+                    82: "Presencia de células malignas.",
+                    83: "Presencia de células atípicas sugestivas de neoplasia.",
+                    84: "Presencia de microorganismos (bacterias, hongos, micobacterias).",
+                    85: "Presencia de células sanguíneas (eritrocitos, plaquetas).",
+                    86: "Presencia de material mucoso o mucopurulento.",
+                    87: "Presencia de cristales (de colesterol, calcio, etc.).",
+                    88: "Ausencia de células significativas para el análisis.",
+                },
+            },
+            5: {
+                calidad: {
+                    "B. 1.": "Muestra válida para examen.",
+                    "B. 2.":
+                        "Muestra válida para examen aunque limitada por cantidad insuficiente de células.",
+                    "B. 3.":
+                        "Muestra válida para examen aunque limitada por presencia de sangre.",
+                    "B. 4.":
+                        "Muestra válida para examen aunque limitada por contaminación con alimentos.",
+                    "B. 5.":
+                        "Muestra válida para examen aunque limitada por contaminación con saliva.",
+                    "B. 6.":
+                        "Muestra válida para examen aunque limitada por...",
+                    "B. 7.": "Muestra no valorable por deshidratación.",
+                    "B. 8.":
+                        "Muestra no valorable por contaminación con microorganismos.",
+                    "B. 9.": "Muestra no valorable por...",
+                },
+                interpretacion: {
+                    89: "Presencia de células epiteliales escamosas.",
+                    90: "Presencia de células epiteliales cilíndricas.",
+                    91: "Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).",
+                    92: "Presencia de células glandulares.",
+                    93: "Presencia de células metaplásicas.",
+                    94: "Presencia de células atípicas sugestivas de neoplasia.",
+                    95: "Presencia de microorganismos (bacterias, hongos, levaduras).",
+                    96: "Presencia de células anormales con cambios citológicos.",
+                    97: "Ausencia de células significativas para el análisis.",
+                },
+            },
         },
-        4: {
-            calidad: {
-                'E. 1.': 'Muestra válida para examen.',
-                'E. 2.': 'Muestra válida para examen aunque limitada por volumen insuficiente.',
-                'E. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
-                'E. 4.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
-                'E. 5.': 'Muestra válida para examen aunque limitada por contaminación con secreciones nasales.',
-                'E. 6.': 'Muestra válida para examen aunque limitada por presencia de alimentos.',
-                'E. 7.': 'Muestra no valorable por descomposición.',
-                'E. 8.': 'Muestra no valorable por...',
-                'E. 9.': 'Muestra no valorable por...'
-            },
-            interpretacion: {
-                "4.1": 'Presencia de células epiteliales escamosas.',
-                "4.2": 'Presencia de células epiteliales columnares.',
-                "4.3": 'Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).',
-                "4.4": 'Presencia de células metaplásicas.',
-                "4.5": 'Presencia de células malignas.',
-                "4.6": 'Presencia de células atípicas sugestivas de neoplasia.',
-                "4.7": 'Presencia de microorganismos (bacterias, hongos, micobacterias).',
-                "4.8": 'Presencia de células sanguíneas (eritrocitos, plaquetas).',
-                "4.9": 'Presencia de material mucoso o mucopurulento.',
-                "4.10": 'Presencia de cristales (de colesterol, calcio, etc.).',
-                "4.11": 'Ausencia de células significativas para el análisis.'
-            }
-        },
-        5: {
-            calidad: {
-                'B. 1.': 'Muestra válida para examen.',
-                'B. 2.': 'Muestra válida para examen aunque limitada por cantidad insuficiente de células.',
-                'B. 3.': 'Muestra válida para examen aunque limitada por presencia de sangre.',
-                'B. 4.': 'Muestra válida para examen aunque limitada por contaminación con alimentos.',
-                'B. 5.': 'Muestra válida para examen aunque limitada por contaminación con saliva.',
-                'B. 6.': 'Muestra válida para examen aunque limitada por...',
-                'B. 7.': 'Muestra no valorable por deshidratación.',
-                'B. 8.': 'Muestra no valorable por contaminación con microorganismos.',
-                'B. 9.': 'Muestra no valorable por...'
-            },
-            interpretacion: {
-                '5.1': 'Presencia de células epiteliales escamosas.',
-                '5.2': 'Presencia de células epiteliales cilíndricas.',
-                '5.3': 'Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).',
-                '5.4': 'Presencia de células glandulares.',
-                '5.5': 'Presencia de células metaplásicas.',
-                '5.6': 'Presencia de células atípicas sugestivas de neoplasia.',
-                '5.7': 'Presencia de microorganismos (bacterias, hongos, levaduras).',
-                '5.8': 'Presencia de células anormales con cambios citológicos.',
-                '5.9': 'Ausencia de células significativas para el análisis.'
-            }
-        }
     };
-
-
-
 
     // Ahora debo sacar esto del metodo
 
-    const [biopsiaHidden, setBiopsiaHidden] = useState('hidden') // Aquí modifico la selección
-    const [calidadHidden, setCalidadHidden] = useState('hidden') // Aquí modifico la selección
+    const [biopsiaHidden, setBiopsiaHidden] = useState("hidden"); // Aquí modifico la selección
+    const [calidadHidden, setCalidadHidden] = useState("hidden"); // Aquí modifico la selección
 
-    const [calidadSeleccionada, setCalidadSeleccionada] = useState('') // Aquí modifico la selección
-    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') // Aquí modifico la selección
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState(""); // Aquí modifico la selección
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] =
+        useState(""); // Aquí modifico la selección
 
-    const [arrayImagenes, setArrayImagenes] = useState([])
-    const [arrayImagenesUpload, setArrayImagenesUpload] = useState([])
+    const [arrayImagenes, setArrayImagenes] = useState([]);
+    const [arrayImagenesUpload, setArrayImagenesUpload] = useState([]);
     const [interpretaciones, setInterpretaciones] = useState([]);
 
     // const idSede = localStorage.getItem('usuarioActivo')
     // const idSedeObjeto = JSON.parse(idSede)
 
-    const user = JSON.parse(localStorage.getItem('usuarioActivo'))
-    const idUser = user['id']
-    const idSede = user['idSede']
+    const user = JSON.parse(localStorage.getItem("usuarioActivo"));
+    const idUser = user["id"];
+    const idSede = user["idSede"];
 
     const [form, setForm] = useState({
         codigoMuestra: "",
@@ -221,184 +246,217 @@ export default function Insercion({ auth }) {
         interpretacion: [],
     });
 
-
     const handleData = (e) => {
-        setForm({...form , [e.target.name]: [e.target.value]}) // uso ...form para no eliminar los demas datos al modificar
+        setForm({ ...form, [e.target.name]: [e.target.value] }); // uso ...form para no eliminar los demas datos al modificar
         console.log(form);
-    }
+    };
 
     const handleSelect = (seleccion) => {
+        const clave = seleccion.target.value;
 
-        const clave = seleccion.target.value
-
-        if(clave in datos){ // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
-            setCalidadSeleccionada(datos[clave].calidad)
-            setInterpretacionSeleccionada(datos[clave].interpretacion)
-
-        } else { // Si no tiene propiedades lo dejamos vacio
-            setCalidadSeleccionada('')
-            setInterpretacionSeleccionada('')
+        if (clave in datos) {
+            // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
+            setCalidadSeleccionada(datos[clave].calidad);
+            setInterpretacionSeleccionada(datos[clave].interpretacion);
+        } else {
+            // Si no tiene propiedades lo dejamos vacio
+            setCalidadSeleccionada("");
+            setInterpretacionSeleccionada("");
         }
-
-    }
-
+    };
 
     const handleBiopsia = (seleccion) => {
+        const clave = seleccion.target.value; // Si la clave == 1 o 2 corresponde a biopsia
 
-        const clave = seleccion.target.value // Si la clave == 1 o 2 corresponde a biopsia
-
-        if (clave == '1'|| clave == '2'){ // Evaluamos si es una biopsia
-            setBiopsiaHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
-
-        } else { // Si no tiene propiedades lo dejamos vacio
-            setBiopsiaHidden('hidden')
+        if (clave == "1" || clave == "2") {
+            // Evaluamos si es una biopsia
+            setBiopsiaHidden(
+                "mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+            );
+        } else {
+            // Si no tiene propiedades lo dejamos vacio
+            setBiopsiaHidden("hidden");
         }
-
-    }
+    };
 
     const handleCalidad = (seleccion) => {
+        const textoCalidad =
+            seleccion.target.options[seleccion.target.selectedIndex].text;
 
-        const textoCalidad = seleccion.target.options[seleccion.target.selectedIndex].text
-
-        if (textoCalidad[textoCalidad.length - 2] === '.'){ // Compruebo que el penultimo sea un punto
-            setCalidadHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
-
+        if (textoCalidad[textoCalidad.length - 2] === ".") {
+            // Compruebo que el penultimo sea un punto
+            setCalidadHidden(
+                "mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+            );
         } else {
-            setCalidadHidden('hidden')
+            setCalidadHidden("hidden");
         }
-    }
-
-
-
+    };
 
     const handlePhotos = (photo) => {
-        const urlImagen = photo.target.files[0]
-        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]) // Esto crea la url en el dispositivo que se usa
+        const urlImagen = photo.target.files[0];
+        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]); // Esto crea la url en el dispositivo que se usa
 
         console.log(arrayImagenes);
-    }
+    };
 
-    const handleUploadPhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
-        const arrayFotos = photo.target.files
-        arrayFotos.forEach(foto => {
-            setArrayImagenesUpload([...arrayImagenesUpload, foto])
+    const handleUploadPhotos = (photo) => {
+        // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
+        const arrayFotos = photo.target.files;
+        arrayFotos.forEach((foto) => {
+            setArrayImagenesUpload([...arrayImagenesUpload, foto]);
         });
-    }
-
+    };
 
     const handleDeletePhoto = (seleccion) => {
-
-        const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
-        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img !== photoDeleted)); // quito del array la imagen eliminada
+        const photoDeleted =
+            seleccion.target.parentElement.querySelector("img").src; // Guardamos la ruta de la imagen que hemos borrado
+        setArrayImagenes((arrayImagenes) =>
+            arrayImagenes.filter((img) => img !== photoDeleted)
+        ); // quito del array la imagen eliminada
         console.log(arrayImagenes);
-    }
+    };
 
     const recogerInterpretaciones = () => {
-
-        const interpretaciones = document.querySelectorAll('#interpretacionAdicional')
-        interpretaciones.forEach(interpretacionAdicional => {
-            setForm({...form, interpretacion: [...form.interpretacion, interpretacionAdicional.value]})
+        const interpretaciones = document.querySelectorAll(
+            "#interpretacionAdicional"
+        );
+        interpretaciones.forEach((interpretacionAdicional) => {
+            setForm({
+                ...form,
+                interpretacion: [
+                    ...form.interpretacion,
+                    interpretacionAdicional.value,
+                ],
+            });
         });
-    }
+    };
 
-    
     const handleUpload = async () => {
-        
-        handleUploadPhotos()
-        
+        handleUploadPhotos();
+
         if (arrayImagenesUpload.length !== 0) {
-            
             const formData = new FormData();
-            
+
             arrayImagenesUpload.forEach((image, index) => {
                 formData.append(`images[]`, image); // Enviar cada imagen
             });
-            
+
             try {
                 const res = await fetch("/api/upload", {
                     method: "POST",
                     body: formData,
                 });
-                
+
                 const data = await res.json();
                 console.log("Imágenes subidas con éxito:", data);
-                
             } catch (error) {
                 alert("Error subiendo las imágenes");
             }
-            
         }
     };
-    
-    
+
     const agregarInterpretacion = () => {
-        setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
+        setInterpretaciones([
+            ...interpretaciones,
+            { id: interpretaciones.length },
+        ]);
     };
-    
+
     const eliminarInterpretacion = (id) => {
-        setInterpretaciones(interpretaciones.filter(item => item.id !== id));
+        setInterpretaciones(interpretaciones.filter((item) => item.id !== id));
     };
 
     const validarFormulario = () => {
-        if (form.codigoMuestra.length < 1){
-            showModificableAlert('Rellene todos los campos', 'El código de muestra se encuentra vacío', 'error')
-            return false
-
-        } else if (form.fecha.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La fecha se encuentra vacía', 'error')
-            return false
-
-        } else if (form.tipoNaturaleza.length < 1){
-            showModificableAlert('Rellene todos los campos', 'El tipo de naturaleza se encuentra vacía', 'error')
-            return false
-
-        } else if ((form.tipoNaturaleza == 1 || form.tipoNaturaleza == 2) && form.organo < 1 ){
-            showModificableAlert('Rellene todos los campos', 'El organo biopsiado se encuentra vacío', 'error')
-            return false
-
-        } else if (form.tipoEstudio < 1){
-            showModificableAlert('Rellene todos los campos', 'Debe indicar el tipo de estudio', 'error')
-            return false
-
-        } else if (form.formato < 1){
-            showModificableAlert('Rellene todos los campos', 'Debe indicar el formato', 'error')
-            return false
-
-        } else if (form.calidad.length < 1){
-            showModificableAlert('Rellene todos los campos', 'Debe indicar la calidad de la muestra', 'error')
-            return false
-            
-        } else if (calidadHidden !== 'hidden' && form.descripcionCalidad.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La descripción de la calidad se encuentra vacía', 'error')
-            return false
-            
-        } else if (form.interpretacion.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La interpretación se encuentra vacía', 'error')
-            return false
-            
+        if (form.codigoMuestra.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "El código de muestra se encuentra vacío",
+                "error"
+            );
+            return false;
+        } else if (form.fecha.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "La fecha se encuentra vacía",
+                "error"
+            );
+            return false;
+        } else if (form.tipoNaturaleza.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "El tipo de naturaleza se encuentra vacía",
+                "error"
+            );
+            return false;
+        } else if (
+            (form.tipoNaturaleza == 1 || form.tipoNaturaleza == 2) &&
+            form.organo < 1
+        ) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "El organo biopsiado se encuentra vacío",
+                "error"
+            );
+            return false;
+        } else if (form.tipoEstudio < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "Debe indicar el tipo de estudio",
+                "error"
+            );
+            return false;
+        } else if (form.formato < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "Debe indicar el formato",
+                "error"
+            );
+            return false;
+        } else if (form.calidad.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "Debe indicar la calidad de la muestra",
+                "error"
+            );
+            return false;
+        } else if (
+            calidadHidden !== "hidden" &&
+            form.descripcionCalidad.length < 1
+        ) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "La descripción de la calidad se encuentra vacía",
+                "error"
+            );
+            return false;
+        } else if (form.interpretacion.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "La interpretación se encuentra vacía",
+                "error"
+            );
+            return false;
         }
 
-
-        return true
-    }
+        return true;
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        if (validarFormulario()){
-            recogerInterpretaciones()
-            handleUpload()
-            router.post('muestra', form, {
-                onSuccess: showSuccessAlert(),
-                onError: (error) => showModificableAlert('Error al insertar la muestra', error, 'error')
-            })
+
+        if (validarFormulario()) {
+            recogerInterpretaciones();
+            handleUpload();
+            router.post("muestra", form);
+            showSuccessAlert();
         }
-    }
+    };
 
     return (
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */
-            header={'insercion'}
+            header={"insercion"}
         >
             <Head title="Insercion" />
             <div className="flex flex-col items-center justify-center min-h-screen bg-[#e5eaf0] pb-10">
@@ -446,7 +504,11 @@ export default function Insercion({ auth }) {
                             >
                                 Tipo de naturaleza
                             </label>
-                            <select onChange={(e) => { handleData(e); handleBiopsia(e) }}
+                            <select
+                                onChange={(e) => {
+                                    handleData(e);
+                                    handleBiopsia(e);
+                                }}
                                 id="tipoNaturaleza"
                                 name="tipoNaturaleza"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -494,9 +556,7 @@ export default function Insercion({ auth }) {
                                 <option value="BU">Útero</option>
                                 <option value="BO">Ovario</option>
                                 <option value="BI">Intestino</option>
-                                <option value="BTF">
-                                    Trompa de Falopio
-                                </option>
+                                <option value="BTF">Trompa de Falopio</option>
                                 <option value="BEF">Esófago</option>
                                 <option value="BPA">Páncreas</option>
                                 <option value="BT">Testículo</option>
@@ -512,7 +572,11 @@ export default function Insercion({ auth }) {
                             >
                                 Tipo de estudio
                             </label>
-                            <select onChange={(e) => { handleSelect(e); handleData(e); }}
+                            <select
+                                onChange={(e) => {
+                                    handleSelect(e);
+                                    handleData(e);
+                                }}
                                 id="tipoEstudio"
                                 name="tipoEstudio"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -521,12 +585,15 @@ export default function Insercion({ auth }) {
                                     Seleccione un tipo de estudio
                                 </option>
                                 {/* Me joden el organo biopsiado */}
-                                <option value="1">Citológico cérvico - vaginal</option> 
+                                <option value="1">
+                                    Citológico cérvico - vaginal
+                                </option>
                                 <option value="2">Hematológico completo</option>
-                                <option value="3">Microscópico y químico de orina</option>
+                                <option value="3">
+                                    Microscópico y químico de orina
+                                </option>
                                 <option value="4">Citológico de esputo</option>
                                 <option value="5">Citológico bucal</option>
-
                             </select>
                         </div>
 
@@ -553,7 +620,6 @@ export default function Insercion({ auth }) {
                             </select>
                         </div>
 
-
                         <div>
                             <label
                                 for="calidad_muestra"
@@ -561,7 +627,11 @@ export default function Insercion({ auth }) {
                             >
                                 Calidad de la muestra
                             </label>
-                            <select onChange={(e) => { handleCalidad(e); handleData(e); }}
+                            <select
+                                onChange={(e) => {
+                                    handleCalidad(e);
+                                    handleData(e);
+                                }}
                                 id="calidad"
                                 name="calidad"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
@@ -583,12 +653,17 @@ export default function Insercion({ auth }) {
 
                         <div className={calidadHidden}>
                             <label
-                                    for="detalles_calidad_muestra"
-                                    className="block text-sm font-semibold text-gray-700"
-                                    >
-                                    Calidad de la muestra
-                                </label>
-                            <input type="text" className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm" name="descripcionCalidad" onChange={handleData}></input>
+                                for="detalles_calidad_muestra"
+                                className="block text-sm font-semibold text-gray-700"
+                            >
+                                Calidad de la muestra
+                            </label>
+                            <input
+                                type="text"
+                                className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                                name="descripcionCalidad"
+                                onChange={handleData}
+                            ></input>
                         </div>
 
                         <div>
@@ -614,14 +689,12 @@ export default function Insercion({ auth }) {
                                             contenido,
                                         ] /* esto funciona en react como for(let key in Json) en javascript  */
                                     ) => (
-                                        <option value={key}>
-                                            {contenido}
-                                        </option>
+                                        <option value={key}>{contenido}</option>
                                     )
                                 )}
                             </select>
                         </div>
-                        {interpretaciones.map(item => (
+                        {interpretaciones.map((item) => (
                             <Interpretacion
                                 key={item.id}
                                 id={item.id}
@@ -630,7 +703,12 @@ export default function Insercion({ auth }) {
                             />
                         ))}
 
-                        <button className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 mb-6 font-bold text-gray-700" onClick={agregarInterpretacion}>Añadir interpretación</button>
+                        <button
+                            className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 mb-6 font-bold text-gray-700"
+                            onClick={agregarInterpretacion}
+                        >
+                            Añadir interpretación
+                        </button>
 
                         <hr className="my-4 border-gray-300" />
 
@@ -641,7 +719,8 @@ export default function Insercion({ auth }) {
                             >
                                 Añadir imágenes
                             </label>
-                            <input onChange={handlePhotos}
+                            <input
+                                onChange={handlePhotos}
                                 type="file"
                                 id="imagenes"
                                 name="imagenes"
@@ -650,43 +729,45 @@ export default function Insercion({ auth }) {
                             />
                         </div>
 
-                        <div className="mt-4 flex flex-wrap gap-4" id="containerImages">
-
-                        <div className="mt-4 flex flex-wrap gap-4">
-                            {/* Aqui voy añadiendo las nuevas fotos.*/}
-                            {arrayImagenes.map((photo) => (
-                                <div className="relative w-auto h-32 inline-block">
-                                    <img
-                                        src={photo}
-                                        className="w-auto h-32 object-cover rounded-lg"
-                                    />
-                                    <button
-                                        className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex items-center justify-center cursor-pointer"
-                                        onClick={handleDeletePhoto}
-                                    >
-                                        ✕
-                                    </button>
-                                </div>
-                            ))}
+                        <div
+                            className="mt-4 flex flex-wrap gap-4"
+                            id="containerImages"
+                        >
+                            <div className="mt-4 flex flex-wrap gap-4">
+                                {/* Aqui voy añadiendo las nuevas fotos.*/}
+                                {arrayImagenes.map((photo) => (
+                                    <div className="relative w-auto h-32 inline-block">
+                                        <img
+                                            src={photo}
+                                            className="w-auto h-32 object-cover rounded-lg"
+                                        />
+                                        <button
+                                            className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex items-center justify-center cursor-pointer"
+                                            onClick={handleDeletePhoto}
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-
-                    </div>
-
 
                         <div className="flex justify-start mt-4">
                             <Link
                                 method="post"
-                                href={route("MuestrasController.insertarMuestra")}
+                                href={route(
+                                    "MuestrasController.insertarMuestra"
+                                )}
                                 className="px-4 py-2 bg-[#0057B8] text-white rounded-md shadow-md hover:bg-[#004494]"
                                 onClick={handleSubmit}
                             >
                                 Guardar muestra
                             </Link>
                         </div>
+                    </div>
                 </div>
             </div>
-            </div>
-            <Footer/>
+            <Footer />
         </AuthenticatedLayout>
     );
 }

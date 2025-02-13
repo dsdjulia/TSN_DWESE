@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\ImprimirController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -51,6 +52,9 @@ Route::delete('/muestra/{id}', [MuestraController::class, 'deleteMuestra'])->nam
 
 // Cloudinary
 Route::post('/subir-imagen', [ImagenController::class, 'subirImagen']);
+
+//Imprimir
+Route::get('/imprimir-muestra', [ImprimirController::class, 'todavianolose'])->name('imprimir');
 
 
 require __DIR__.'/auth.php';

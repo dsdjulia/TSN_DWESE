@@ -6,6 +6,9 @@ import Footer from "@/Components/Footer";
 export default function Index({ auth }) {
     /* Esto nos permite acceder al controlador proyectos y al usuario autenticado */
 
+    localStorage.setItem('usuarioActivo', JSON.stringify(auth.user))
+    console.log(localStorage.getItem('usuarioActivo'));
+    
     return (
         <AuthenticatedLayout
             user={auth.user} /* Comprobamos que este autenticado */

@@ -1,11 +1,13 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import { useState } from "react";
 import ModalModificar from "./ModalModificar";
 import ModalEliminar from "./ModalEliminar";
 import ModalVisualizar from "./ModalVisualizar";
 import Footer from "@/Components/Footer";
+
+
 
 export default function Muestras({ auth, data }) {
     const muestras = data; // * Debo manipular esta data para la paginacion
@@ -16,7 +18,7 @@ export default function Muestras({ auth, data }) {
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
 
-    const usuario = JSON.parse(localStorage.getItem('usuarioActivo'))
+    const user = JSON.parse(localStorage.getItem('usuarioActivo'))
     
     const [pagActual, setpagActual] = useState(1)
     const [cantPag, setcantPag] = useState(10)

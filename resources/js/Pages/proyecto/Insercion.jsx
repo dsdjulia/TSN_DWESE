@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useState } from "react";
-import { Head, Link, router } from "@inertiajs/react";
+import { Head, Link, router, usePage } from "@inertiajs/react";
 import { buscarEstudio } from "@/Components/ListaIC";
 import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
 import Interpretacion from "@/Components/Interpretacion";
@@ -8,6 +8,7 @@ import Footer from "@/Components/Footer";
 
 
 export default function Insercion({ auth }) {
+
 
     const datos = {
         1: {
@@ -199,8 +200,12 @@ export default function Insercion({ auth }) {
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([])
     const [interpretaciones, setInterpretaciones] = useState([]);
 
-    const idSede = localStorage.getItem('usuarioActivo')
-    const idSedeObjeto = JSON.parse(idSede)
+    // const idSede = localStorage.getItem('usuarioActivo')
+    // const idSedeObjeto = JSON.parse(idSede)
+
+    const user = JSON.parse(localStorage.getItem('usuarioActivo'))
+    const idUser = user['id']
+    const idSede = user['idSede']
 
     const [form, setForm] = useState({
         codigoMuestra: "",
@@ -211,8 +216,8 @@ export default function Insercion({ auth }) {
         calidad: "",
         descripcionCalidad: "",
         tipoEstudio: "",
-        idUser: 1, // Esto hay que sacarlo del login
-        idSede: idSedeObjeto['idSede'],
+        idUser: idUser, // Esto hay que sacarlo del login
+        idSede: idSede,
         interpretacion: [],
     });
 

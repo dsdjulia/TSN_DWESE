@@ -85,7 +85,8 @@ class MuestraController extends Controller
                 'sede:id,nombre'
             ])->get();
 
-            return redirect()->route('muestras',$muestras);         }
+            return redirect()->route('muestras',$muestras);         
+        }
     }
 
     public function updateMuestra(Request $request , $idMuestra){
@@ -145,7 +146,7 @@ class MuestraController extends Controller
             'sede:id,nombre'
         ])->get();
 
-        return Inertia::render('proyecto/Muestras',$muestras);  
+        return response()->json("data",$muestras);
     }
 
     public function validatorMuestras($datos){

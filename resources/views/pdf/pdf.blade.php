@@ -8,5 +8,6 @@
 </head>
 <body>
     holaaaa
+    id: {{$id}}
 </body>
 </html>

@@ -141,7 +141,7 @@ export default function ModalModificar({id, onClose}) {
                         {Object.entries(calidadesBucal).map(
                             ([key, contenido]) => (
                                 <option value={key}>
-                                    <strong>{contenido}</strong>{" "}
+                                    {contenido}{" "}
                                     {/* si se selecciona alguna opcion de rellenar, debe aparecer un formulario de texto */}
                                 </option>
                             )
@@ -170,7 +170,7 @@ export default function ModalModificar({id, onClose}) {
                                 ] /* esto funciona en react como for(let key in Json) en javascript  */
                             ) => (
                                 <option value={key}>
-                                    <strong>{contenido}</strong>
+                                    {contenido}
                                 </option>
                             )
                         )}
@@ -229,7 +229,7 @@ export default function ModalModificar({id, onClose}) {
                     </div>
                 </div>
                 <div className="flex justify-start gap-8 mt-4">
-                    { <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]" href={route('guardar')+"/"+id}  onClick={onClose}>
+                    { <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]" onClick={onClose}>
                         Guardar Muestra
                     </Link> }
                     <button class="text-red-700 hover:underline focus:outline-none " onClick={onClose}>

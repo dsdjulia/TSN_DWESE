@@ -82,7 +82,7 @@ export default function Login({ status, canResetPassword }) {
                     </label>
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
+                <div className="mt-4 flex items-center justify-end mb-6">
                     {canResetPassword && (
                         <Link
                             href={route("password.request")}
@@ -95,6 +95,14 @@ export default function Login({ status, canResetPassword }) {
                     <PrimaryButton className="ms-4" disabled={processing}>
                         Log in
                     </PrimaryButton>
+                </div>
+                <div className="mt-4 flex items-center justify-end">
+                <Link
+                            href={route("register")}
+                            className="rounded-md text-xs text-blue-600 underline hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        >
+                            ¿Aún no estás registrado? Regístrate aquí
+                        </Link>
                 </div>
             </form>
         </GuestLayout>

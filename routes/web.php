@@ -54,7 +54,7 @@ Route::delete('/muestra/{id}', [MuestraController::class, 'deleteMuestra'])->mid
 Route::post('/subir-imagen', [ImagenController::class, 'subirImagen']);
 
 //Imprimir
-Route::get('/imprimir-muestra', [ImprimirController::class, 'nose']);
+Route::get('/imprimir/{id}/pdf', [ImprimirController::class, 'generarPDF'])->name('imprimir');
 
 
 require __DIR__.'/auth.php';

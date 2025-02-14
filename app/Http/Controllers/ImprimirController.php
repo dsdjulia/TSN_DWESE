@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 
 class ImprimirController extends Controller
 {
-    public function nose(){
-        $pdf = PDF::loadHTML('<h1>Hola</h1>');
+    public function generarPDF($id){
 
 
-       // $pdf->loadView('pdf.pdf');
+        $pdf = PDF::loadView('pdf.pdf');
 
         return $pdf->stream();
     }
 }
+
+/* return $pdf->with($id[])->stream(); */

@@ -12,8 +12,6 @@ import Footer from "@/Components/Footer";
 export default function Muestras({ auth, data }) {
     const muestras = data; // * Debo manipular esta data para la paginacion
 
-
-
     const [modificarAbierto, setModificarAbierto] = useState(false);
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
@@ -115,7 +113,7 @@ export default function Muestras({ auth, data }) {
                                         </button>
                                     </td>
                                     <td className="p-2">
-                                        <a className="ml-2" href={`/imprimir-muestra`} target="_blank" /* onClick={(e) => function(){router.visit('imprimir')}} */>
+                                        <a className="ml-2" href={`imprimir/${muestra.id}/pdf`} target="_blank" >
                                             <img
                                                 className="w-8"
                                                 src="../public/print.png"

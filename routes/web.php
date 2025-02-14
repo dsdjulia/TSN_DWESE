@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\ImprimirController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -43,12 +44,17 @@ Route::get('/test', function () {
     return Inertia::render('Test');
 })->middleware(['auth', 'verified'])->name('test');
 
-Route::get('/guardar',[MuestraController::class, 'guardar']) -> name('guardar');
-Route::get('/eliminar',[MuestraController::class, 'eliminar']) -> name('eliminar');
-
-
-// Vistas con datos 
+// CRUD redireccion Vistas
 Route::get('/muestras', [MuestraController::class, 'getAllJson'])->middleware(['auth', 'verified'])->name('muestras');
+Route::post('/muestra', [MuestraController::class, 'insertMuestra'])->middleware(['auth', 'verified'])->name('MuestrasController.insertarMuestra');
+Route::delete('/muestra/{id}', [MuestraController::class, 'deleteMuestra'])->middleware(['auth', 'verified'])->name('MuestrasController.deleteMuestra');
+
+
+// Cloudinary
+Route::post('/subir-imagen', [ImagenController::class, 'subirImagen']);
+
+//Imprimir
+Route::get('/imprimir-muestra', [ImprimirController::class, 'nose']);
 
 
 require __DIR__.'/auth.php';

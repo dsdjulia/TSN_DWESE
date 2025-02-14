@@ -22,9 +22,10 @@ class MuestraController extends Controller
         if ($muestras->isEmpty()) {
             return response()->json(["error" => "No hay muestras registradas"]);
         }
-    
+
         return response()->json($muestras);
     }
+    
     public function getAllJson(){
         $muestras = Muestra::with([
             'tipoNaturaleza:id,nombre',
@@ -53,13 +54,13 @@ class MuestraController extends Controller
 
         $data = [
             // Request
-            'codigo' => $request->input('codigo'),
-            'idTipoNaturaleza' => intval($request->input('idTipoNaturaleza')),
-            'idFormato' => intval($request->input('idFormato')),
-            'idCalidad' => intval($request->input('idCalidad')),
+            'codigo' => $request->input('codigoMuestra')[0], // Le pasaba un array con 1 solo valor
+            'idTipoNaturaleza' => intval($request->input('tipoNaturaleza')[0]),
+            'idFormato' => intval($request->input('formato')[0]),
+            'idCalidad' => intval($request->input('calidad')[0]),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
             'organo' => $request->input('organo'),
-            'fecha' => $request->input('fecha'),
+            'fecha' => $request->input('fecha')[0], // Le pasaba un array con 1 solo valor
             
             // Local Storage
             'idUser' => intval($request->input('idUser')),
@@ -74,12 +75,18 @@ class MuestraController extends Controller
         if($validacion->fails()){
             return response()->json(["error" => $validacion -> errors()]);
         }else{
+
             $muestra = Muestra::create($data);
-            return response()->json(["message" => "Muestra creada con éxito", "muestra" => $muestra]);
+
+            $muestras = Muestra::with([
+                'tipoNaturaleza:id,nombre',
+                'user:id,name',
+                'formato:id,nombre',
+                'sede:id,nombre'
+            ])->get();
+
+            return redirect()->route('muestras',$muestras);         
         }
-
-        $muestra = Muestra::create($data);
-
     }
 
     public function updateMuestra(Request $request , $idMuestra){
@@ -91,13 +98,13 @@ class MuestraController extends Controller
 
         $data = [
             // Request
-            'codigo' => $request->input('codigo'),
-            'idTipoNaturaleza' => intval($request->input('idTipoNaturaleza')),
-            'idFormato' => intval($request->input('idFormato')),
-            'idCalidad' => intval($request->input('idCalidad')),
+            'codigo' => $request->input('codigoMuestra')[0], // Le pasaba un array con 1 solo valor
+            'idTipoNaturaleza' => intval($request->input('tipoNaturaleza')),
+            'idFormato' => intval($request->input('formato')),
+            'idCalidad' => intval($request->input('calidad')),
             'descripcionCalidad' => $request->input('descripcionCalidad'),
             'organo' => $request->input('organo'),
-            'fecha' => $request->input('fecha'),
+            'fecha' => $request->input('fecha')[0], // Le pasaba un array con 1 solo valor
             
             // Local Storage
             'idUser' => intval($request->input('idUser')),
@@ -113,8 +120,14 @@ class MuestraController extends Controller
 
         $muestra->update($data);
 
-        return response()->json(["message" => "Muestra actualizada con éxito", "muestra" => $muestra]);
+        $muestras = Muestra::with([
+            'tipoNaturaleza:id,nombre',
+            'user:id,name',
+            'formato:id,nombre',
+            'sede:id,nombre'
+        ])->get();
 
+        return redirect()->route('muestras',$muestras);  
     }
 
     public function deleteMuestra($idMuestra){
@@ -125,7 +138,15 @@ class MuestraController extends Controller
         }
 
         $muestra->delete();
-        return response()->json(["message" => "Muestra eliminada con éxito"]);
+
+        $muestras = Muestra::with([
+            'tipoNaturaleza:id,nombre',
+            'user:id,name',
+            'formato:id,nombre',
+            'sede:id,nombre'
+        ])->get();
+
+        return response()->json("data",$muestras);
     }
 
     public function validatorMuestras($datos){
@@ -134,7 +155,7 @@ class MuestraController extends Controller
             'idTipoNaturaleza' => 'required|integer|between:1,10',
             'idFormato' => 'required|integer|between:1,3',
             'idCalidad' => 'required|integer|between:1,45',
-            'descripcionCalidad' => 'required|string|max:50',
+            'descripcionCalidad' => 'nullable|string|max:50',
             'organo' => 'nullable|string',
             'fecha' => 'required|date_format:Y-m-d',
 

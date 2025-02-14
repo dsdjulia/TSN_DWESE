@@ -1,7 +1,18 @@
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import React from "react";
+import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
+
 
 export default function ModalEliminar({ id, onClose }) {
+
+    console.log(id);
+    const deleteMuestra = () => {
+        router.delete(`muestra/${id}`, {
+            onSuccess: showModificableAlert('Muestra eliminada', 'Muestra eliminada con éxito', 'success'),
+            onError: (error) => showModificableAlert('Error al eliminar la muesta', `Error: ${error}`, 'error')
+        })
+    }
+    
     return (
         <div
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
@@ -13,9 +24,8 @@ export default function ModalEliminar({ id, onClose }) {
 
                     <div className="flex justify-around mt-4">
                         <Link
-                            href={route("eliminar")}
                             className="px-4 py-2 bg-red-400 text-white rounded-lg shadow-md hover:bg-red-500"
-                            onClick={onClose}
+                            onClick={() => {deleteMuestra(); onClose();}}
                         >
                             Eliminar
 

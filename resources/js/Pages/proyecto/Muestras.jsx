@@ -1,11 +1,13 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage, router } from "@inertiajs/react";
 import { useState } from "react";
 import ModalModificar from "./ModalModificar";
 import ModalEliminar from "./ModalEliminar";
 import ModalVisualizar from "./ModalVisualizar";
 import Footer from "@/Components/Footer";
+
+
 
 export default function Muestras({ auth, data }) {
     const muestras = data; // * Debo manipular esta data para la paginacion
@@ -15,12 +17,26 @@ export default function Muestras({ auth, data }) {
     const [modificarAbierto, setModificarAbierto] = useState(false);
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
+    const [idMuestraSeleccionada, setidMuestraSeleccionada] = useState('')
+    
+    const [pagActual, setpagActual] = useState(1)
+    const [cantPag, setcantPag] = useState(10)
 
-    const usuario = JSON.parse(localStorage.getItem('usuarioActivo'))
+    const handleModalEliminar = (e) => {
+        setidMuestraSeleccionada(e.target.closest('tr').id)
+        setEliminarAbierto(true)
+    }
+    const handleModalModificar = (e) => {
+        setidMuestraSeleccionada(e.target.closest('tr').id)
+        console.log('entra');
+        setModificarAbierto(true)
+    }
+    const handleModalVisualizar = (e) => {
+        setidMuestraSeleccionada(e.target.closest('tr').id)
+        setVisualizarAbierto(true)
+    }
 
-
-    let pagActual = 2
-    let cantPag = 12
+    console.log(muestras[0]);
 
     return (
         <AuthenticatedLayout
@@ -48,7 +64,7 @@ export default function Muestras({ auth, data }) {
                         </thead>
                         <tbody>
                             {muestras.map((muestra) => (
-                                <tr key={muestra.id} className="border-b">
+                                <tr key={muestra.id} className="border-b" id={muestra.id}>
                                     <td className="p-2">{muestra.user.name}</td>
                                     <td className="p-2">{muestra.codigo}</td>
                                     <td className="p-2">
@@ -61,8 +77,9 @@ export default function Muestras({ auth, data }) {
                                     <td className="p-2 flex space-x-2 justify-center">
                                         <button
                                             className="text-blue-500 hover:text-blue-700"
-                                            onClick={() =>
-                                                setVisualizarAbierto(true)
+                                            onClick={(e) =>
+                                                handleModalVisualizar(e)
+                                                // setVisualizarAbierto(true)
                                             }
                                         >
                                             <img
@@ -73,8 +90,9 @@ export default function Muestras({ auth, data }) {
                                         </button>
                                         <button
                                             className="text-blue-500 hover:text-blue-700"
-                                            onClick={() =>
-                                                setModificarAbierto(true)
+                                            onClick={(e) =>
+                                                handleModalModificar(e)
+                                                // setModificarAbierto(true)
                                             }
                                         >
                                             <img
@@ -84,8 +102,9 @@ export default function Muestras({ auth, data }) {
                                             />
                                         </button>
                                         <button
-                                            onClick={() =>
-                                                setEliminarAbierto(true)
+                                            onClick={(e) =>
+                                                handleModalEliminar(e)
+                                                // setEliminarAbierto(true)
                                             }
                                         >
                                             <img
@@ -96,13 +115,13 @@ export default function Muestras({ auth, data }) {
                                         </button>
                                     </td>
                                     <td className="p-2">
-                                        <button className="ml-2">
+                                        <a className="ml-2" href={`/imprimir-muestra`} target="_blank" /* onClick={(e) => function(){router.visit('imprimir')}} */>
                                             <img
                                                 className="w-8"
                                                 src="../public/print.png"
                                                 alt="imprimir"
                                             />
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             ))}
@@ -157,13 +176,19 @@ export default function Muestras({ auth, data }) {
                 </div>
             </div>
             {modificarAbierto && (
-                <ModalModificar onClose={() => setModificarAbierto(false)} />
+                <ModalModificar 
+                    id={idMuestraSeleccionada}
+                    onClose={() => setModificarAbierto(false)} />
             )}
             {eliminarAbierto && (
-                <ModalEliminar onClose={() => setEliminarAbierto(false)} />
+                <ModalEliminar 
+                    id={idMuestraSeleccionada}
+                    onClose={() => setEliminarAbierto(false)} />
             )}
             {VisualizarAbierto && (
-                <ModalVisualizar onClose={() => setVisualizarAbierto(false)} />
+                <ModalVisualizar 
+                    id={idMuestraSeleccionada}
+                    onClose={() => setVisualizarAbierto(false)} />
             )}
             <Footer />
         </AuthenticatedLayout>

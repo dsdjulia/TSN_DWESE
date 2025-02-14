@@ -28,8 +28,9 @@ export default function ModalModificar({id, onClose}) {
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" >
-        <div class="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-2/3 shadow-gray-500 relative">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 flex-col" >
+        <div class="p-6 mx-auto space-y-6 bg-white  rounded-lg shadow-lg w-2/3 shadow-gray-500 relative max-xl:h-5/6 max-xl:w-5/6 overflow-scroll border-white border-8 ">
+
         <button className="absolute w-10 h-10 top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 font-extrabold" onClick={onClose}>
                     ✕
                 </button>
@@ -39,14 +40,14 @@ export default function ModalModificar({id, onClose}) {
                 <div>
                     <label
                         for="naturaleza_muestra"
-                        class="block text-sm font-semibold text-gray-700"
+                        class="block text-sm font-semibold text-gray-700 "
                     >
                         Naturaleza de la muestra
                     </label>
                     <select
                         id="naturaleza_muestra"
                         name="naturaleza_muestra"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm "
                     >
                         <option value="">Seleccione un tipo de muestra</option>
                         <option value="biopsias">Biopsias</option>
@@ -228,8 +229,8 @@ export default function ModalModificar({id, onClose}) {
                         </a>
                     </div>
                 </div>
-                <div className="flex justify-start gap-8 mt-4">
-                    { <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]" onClick={onClose}>
+                <div className="flex justify-start gap-8 mt-4 max-xl:flex-col">
+                    { <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494] max-xl:w-full text-center" onClick={onClose}>
                         Guardar Muestra
                     </Link> }
                     <button class="text-red-700 hover:underline focus:outline-none " onClick={onClose}>
@@ -237,8 +238,11 @@ export default function ModalModificar({id, onClose}) {
                     </button>
                 </div>
             </div>
+
+            </div>
+
         </div>
-        </div>
+
 
     );
 }

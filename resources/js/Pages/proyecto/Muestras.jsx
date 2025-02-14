@@ -41,13 +41,13 @@ export default function Muestras({ auth, data }) {
         >
             <Head title="Muestras" />
 
-            <div className="flex flex-col items-center justify-start min-h-screen bg-[#e5eaf0]">
+            <div className="flex flex-col items-center justify-start min-h-screen bg-[#e5eaf0] pb-10">
                 <div className="p-8 bg-white rounded-md  text-center w-5/6 h-5/6 mt-10">
                     <h1 className="text-lg font-semibold text-gray-700 mb-4">
                         Archivo de Muestras
                     </h1>
-
-                    <table className="w-full border-collapse">
+                    <div className="w-full overflow-scroll">
+                    <table className="w-full border-collapse ">
                         <thead>
                             <tr className="bg-gray-200">
                                 <th className="p-2">Usuario</th>
@@ -62,9 +62,9 @@ export default function Muestras({ auth, data }) {
                         <tbody>
                             {muestras.map((muestra) => (
                                 <tr
-                                    key={muestra.id}
-                                    className="border-b"
-                                    id={muestra.id}
+                                key={muestra.id}
+                                className="border-b"
+                                id={muestra.id}
                                 >
                                     <td className="p-2">{muestra.user.name}</td>
                                     <td className="p-2">{muestra.codigo}</td>
@@ -86,6 +86,7 @@ export default function Muestras({ auth, data }) {
                                             <img
                                                 className="w-8"
                                                 src="../public/info.png"
+
                                                 alt="detallesMuestra"
                                             />
                                         </button>
@@ -129,21 +130,23 @@ export default function Muestras({ auth, data }) {
                                             />
                                         </a>
                                     </td>
+
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    </div>
                     <div className="flex justify-start mt-4">
                         <Link
                             href="../nuevaMuestra"
-                            className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]"
+                            className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494] max-lg:w-full"
                         >
                             Nueva Muestra
                         </Link>
                     </div>
                 </div>
                 <div className="w-5/6 flex justify-end  mt-2 ">
-                    <div className="flex items-center justify-between bg-white rounded-md w-1/5 h-10 p-1">
+                    <div className="flex items-center justify-between bg-white rounded-md w-1/5 h-10 p-1 max-lg:w-full max-lg:h-20">
                         {" "}
                         {/* seccion paginacion */}
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">

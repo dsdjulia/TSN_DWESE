@@ -9,30 +9,31 @@ import Footer from "@/Components/Footer";
 
 export default function Muestras({ auth, data }) {
     const muestras = data; // * Debo manipular esta data para la paginacion
+    // console.log(muestras[0]);
 
     const [modificarAbierto, setModificarAbierto] = useState(false);
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
-    const [idMuestraSeleccionada, setidMuestraSeleccionada] = useState("");
-
-    const [pagActual, setpagActual] = useState(1);
-    const [cantPag, setcantPag] = useState(10);
+    const [idMuestraSeleccionada, setidMuestraSeleccionada] = useState('')
+    const [muestraSeleccionada, setmuestraSeleccionada] = useState('')
+    
+    const [pagActual, setpagActual] = useState(1)
+    const [cantPag, setcantPag] = useState(10)
 
     const handleModalEliminar = (e) => {
         setidMuestraSeleccionada(e.target.closest("tr").id);
         setEliminarAbierto(true);
     };
     const handleModalModificar = (e) => {
-        setidMuestraSeleccionada(e.target.closest("tr").id);
-        console.log("entra");
-        setModificarAbierto(true);
-    };
+        setidMuestraSeleccionada(e.target.closest('tr').id)
+        setmuestraSeleccionada(muestras.find(muestra => muestra.id == e.target.closest('tr').id))
+        setModificarAbierto(true)
+    }
     const handleModalVisualizar = (e) => {
         setidMuestraSeleccionada(e.target.closest("tr").id);
         setVisualizarAbierto(true);
     };
 
-    console.log(muestras[0]);
 
     return (
         <AuthenticatedLayout
@@ -186,8 +187,8 @@ export default function Muestras({ auth, data }) {
             {modificarAbierto && (
                 <ModalModificar
                     id={idMuestraSeleccionada}
-                    onClose={() => setModificarAbierto(false)}
-                />
+                    muestra={muestraSeleccionada}
+                    onClose={() => setModificarAbierto(false)} />
             )}
             {eliminarAbierto && (
                 <ModalEliminar
@@ -198,8 +199,8 @@ export default function Muestras({ auth, data }) {
             {VisualizarAbierto && (
                 <ModalVisualizar
                     id={idMuestraSeleccionada}
-                    onClose={() => setVisualizarAbierto(false)}
-                />
+                    muestra={muestraSeleccionada}
+                    onClose={() => setVisualizarAbierto(false)} />
             )}
             <Footer />
         </AuthenticatedLayout>

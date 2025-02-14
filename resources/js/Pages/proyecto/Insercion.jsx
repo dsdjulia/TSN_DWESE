@@ -518,7 +518,6 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un tipo de estudio
                                 </option>
-                                {/* Me joden el organo biopsiado */}
                                 <option value="1">Citológico cérvico - vaginal</option> 
                                 <option value="2">Hematológico completo</option>
                                 <option value="3">Microscópico y químico de orina</option>

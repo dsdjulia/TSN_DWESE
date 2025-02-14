@@ -197,39 +197,39 @@ export default function ModalModificar({id, onClose}) {
                 </div>
 
                 <div className="mt-4 space-x-4 flex">
-                    <div class="relative w-auto h-32 inline-block">
+                    <div class="relative w-auto h-24 max-lg:h-12  inline-block">
                         <img
                             src="../public/muestra1.png"
                             alt="Imagen 1"
-                            class="w-auto h-32 object-cover rounded-lg"
+                            class="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
                         />
-                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
+                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
                         ✕
                         </a>
                     </div>
-                    <div class="relative w-auto h-32 inline-block">
+                    <div class="relative w-auto h-24 max-lg:h-12 inline-block">
                         <img
                             src="../public/muestra2.png"
                             alt="Imagen 2"
-                            class="w-auto h-32 object-cover rounded-lg"
+                            class="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
                         />
-                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
+                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
                         ✕
                         </a>
                     </div>
-                    <div class="relative w-auto h-32 inline-block">
+                    <div class="relative w-auto h-24 max-lg:h-12 inline-block">
                         <img
                             src="../public/muestra3.png"
                             alt="Imagen 3"
-                            class="w-auto h-32 object-cover rounded-lg"
+                            class="w-auto h-24 max-lg:h-12 object-cover rounded-lg "
                         />
-                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer">
+                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-auto h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
                         ✕
                         </a>
                     </div>
                 </div>
                 <div className="flex justify-start gap-8 mt-4">
-                    { <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]" href={route('guardar')+"/"+id}  onClick={onClose}>
+                    { <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494]"  onClick={onClose}>
                         Guardar Muestra
                     </Link> }
                     <button class="text-red-700 hover:underline focus:outline-none " onClick={onClose}>

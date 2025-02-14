@@ -7,32 +7,30 @@ import ModalEliminar from "./ModalEliminar";
 import ModalVisualizar from "./ModalVisualizar";
 import Footer from "@/Components/Footer";
 
-
-
 export default function Muestras({ auth, data }) {
     const muestras = data; // * Debo manipular esta data para la paginacion
 
     const [modificarAbierto, setModificarAbierto] = useState(false);
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
-    const [idMuestraSeleccionada, setidMuestraSeleccionada] = useState('')
-    
-    const [pagActual, setpagActual] = useState(1)
-    const [cantPag, setcantPag] = useState(10)
+    const [idMuestraSeleccionada, setidMuestraSeleccionada] = useState("");
+
+    const [pagActual, setpagActual] = useState(1);
+    const [cantPag, setcantPag] = useState(10);
 
     const handleModalEliminar = (e) => {
-        setidMuestraSeleccionada(e.target.closest('tr').id)
-        setEliminarAbierto(true)
-    }
+        setidMuestraSeleccionada(e.target.closest("tr").id);
+        setEliminarAbierto(true);
+    };
     const handleModalModificar = (e) => {
-        setidMuestraSeleccionada(e.target.closest('tr').id)
-        console.log('entra');
-        setModificarAbierto(true)
-    }
+        setidMuestraSeleccionada(e.target.closest("tr").id);
+        console.log("entra");
+        setModificarAbierto(true);
+    };
     const handleModalVisualizar = (e) => {
-        setidMuestraSeleccionada(e.target.closest('tr').id)
-        setVisualizarAbierto(true)
-    }
+        setidMuestraSeleccionada(e.target.closest("tr").id);
+        setVisualizarAbierto(true);
+    };
 
     console.log(muestras[0]);
 
@@ -48,6 +46,7 @@ export default function Muestras({ auth, data }) {
                     <h1 className="text-lg font-semibold text-gray-700 mb-4">
                         Archivo de Muestras
                     </h1>
+
                     <table className="w-full border-collapse">
                         <thead>
                             <tr className="bg-gray-200">
@@ -62,7 +61,11 @@ export default function Muestras({ auth, data }) {
                         </thead>
                         <tbody>
                             {muestras.map((muestra) => (
-                                <tr key={muestra.id} className="border-b" id={muestra.id}>
+                                <tr
+                                    key={muestra.id}
+                                    className="border-b"
+                                    id={muestra.id}
+                                >
                                     <td className="p-2">{muestra.user.name}</td>
                                     <td className="p-2">{muestra.codigo}</td>
                                     <td className="p-2">
@@ -74,9 +77,9 @@ export default function Muestras({ auth, data }) {
                                     <td className="p-2">{muestra.fecha}</td>
                                     <td className="p-2 flex space-x-2 justify-center">
                                         <button
-                                            className="text-blue-500 hover:text-blue-700"
-                                            onClick={(e) =>
-                                                handleModalVisualizar(e)
+                                            className="max-lg:hidden "
+                                            onClick={
+                                                (e) => handleModalVisualizar(e)
                                                 // setVisualizarAbierto(true)
                                             }
                                         >
@@ -87,9 +90,9 @@ export default function Muestras({ auth, data }) {
                                             />
                                         </button>
                                         <button
-                                            className="text-blue-500 hover:text-blue-700"
-                                            onClick={(e) =>
-                                                handleModalModificar(e)
+                                            className="max-lg:hidden "
+                                            onClick={
+                                                (e) => handleModalModificar(e)
                                                 // setModificarAbierto(true)
                                             }
                                         >
@@ -100,20 +103,25 @@ export default function Muestras({ auth, data }) {
                                             />
                                         </button>
                                         <button
-                                            onClick={(e) =>
-                                                handleModalEliminar(e)
+                                            className="max-lg:hidden "
+                                            onClick={
+                                                (e) => handleModalEliminar(e)
                                                 // setEliminarAbierto(true)
                                             }
                                         >
                                             <img
-                                                className="w-8"
+                                                className="w-8 "
                                                 src="../public/icono-borrar.png"
                                                 alt="borrar"
                                             />
                                         </button>
                                     </td>
-                                    <td className="p-2">
-                                        <a className="ml-2" href={`imprimir/${muestra.id}/pdf`} target="_blank" >
+                                    <td className="">
+                                        <a
+                                            className="max-lg:hidden"
+                                            href={`imprimir/${muestra.id}/pdf`}
+                                            target="_blank"
+                                        >
                                             <img
                                                 className="w-8"
                                                 src="../public/print.png"
@@ -153,7 +161,7 @@ export default function Muestras({ auth, data }) {
                             />
                         </button>
                         <p className="text-gray-300">
-                            <span >{pagActual}</span> ... <span>{cantPag}</span>
+                            <span>{pagActual}</span> ... <span>{cantPag}</span>
                         </p>
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
                             <img
@@ -169,24 +177,26 @@ export default function Muestras({ auth, data }) {
                                 alt="1"
                             />
                         </button>
-                        
                     </div>
                 </div>
             </div>
             {modificarAbierto && (
-                <ModalModificar 
+                <ModalModificar
                     id={idMuestraSeleccionada}
-                    onClose={() => setModificarAbierto(false)} />
+                    onClose={() => setModificarAbierto(false)}
+                />
             )}
             {eliminarAbierto && (
-                <ModalEliminar 
+                <ModalEliminar
                     id={idMuestraSeleccionada}
-                    onClose={() => setEliminarAbierto(false)} />
+                    onClose={() => setEliminarAbierto(false)}
+                />
             )}
             {VisualizarAbierto && (
-                <ModalVisualizar 
+                <ModalVisualizar
                     id={idMuestraSeleccionada}
-                    onClose={() => setVisualizarAbierto(false)} />
+                    onClose={() => setVisualizarAbierto(false)}
+                />
             )}
             <Footer />
         </AuthenticatedLayout>

@@ -10,9 +10,9 @@ const CloudinaryImage = ({ publicId, width = 500, height = 500 }) => {
 
     const img = cld
     .image(publicId)
-    .format('auto') // Optimización automática
+    .format('auto')
     .quality('auto')
-    .resize(auto().gravity(autoGravity()).width(width).height(height)); // Ajusta el tamaño
+    .resize(auto().gravity(autoGravity()).width(width).height(height));
 
     return <AdvancedImage cldImg={img} />;
 };

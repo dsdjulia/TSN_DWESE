@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import { buscarEstudio } from "@/Components/ListaIC";
 import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
@@ -216,15 +216,19 @@ export default function Insercion({ auth }) {
         calidad: "",
         descripcionCalidad: "",
         tipoEstudio: "",
-        idUser: idUser, // Esto hay que sacarlo del login
+        idUser: idUser,
         idSede: idSede,
         interpretacion: [],
     });
 
+    useEffect(() => {
+        console.log(form);
+    }, [form]);
+
 
     const handleData = (e) => {
         setForm({...form , [e.target.name]: [e.target.value]}) // uso ...form para no eliminar los demas datos al modificar
-        console.log(form);
+        // console.log(form);
     }
 
     const handleSelect = (seleccion) => {
@@ -285,23 +289,6 @@ export default function Insercion({ auth }) {
         });
     }
 
-
-    const handleDeletePhoto = (seleccion) => {
-
-        const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
-        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img !== photoDeleted)); // quito del array la imagen eliminada
-        console.log(arrayImagenes);
-    }
-
-    const recogerInterpretaciones = () => {
-
-        const interpretaciones = document.querySelectorAll('#interpretacionAdicional')
-        interpretaciones.forEach(interpretacionAdicional => {
-            setForm({...form, interpretacion: [...form.interpretacion, interpretacionAdicional.value]})
-        });
-    }
-
-    
     const handleUpload = async () => {
         
         handleUploadPhotos()
@@ -329,6 +316,35 @@ export default function Insercion({ auth }) {
             
         }
     };
+
+    const handleDeletePhoto = (seleccion) => {
+
+        const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
+        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img !== photoDeleted)); // quito del array la imagen eliminada
+        console.log(arrayImagenes);
+    }
+
+    const recogerInterpretaciones = () => {
+
+        const interpretaciones = document.querySelectorAll('#interpretacionAdicional');
+    
+        interpretaciones.forEach(interpretacionAdicional => {
+            
+            const nuevaInterpretacion = {
+                id: interpretacionAdicional.value,
+                descripcion: interpretacionAdicional.options[interpretacionAdicional.selectedIndex].text
+            };
+    
+            // Usamos setForm con la función de actualización para asegurar que se agregue correctamente a las interpretaciones
+            setForm(prevForm => ({
+                ...prevForm,
+                interpretacion: [...prevForm.interpretacion, nuevaInterpretacion],
+            }));
+        });
+    };
+    
+
+    
     
     
     const agregarInterpretacion = () => {
@@ -372,11 +388,12 @@ export default function Insercion({ auth }) {
             showModificableAlert('Rellene todos los campos', 'La descripción de la calidad se encuentra vacía', 'error')
             return false
             
-        } else if (form.interpretacion.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La interpretación se encuentra vacía', 'error')
-            return false
+        } 
+        // else if (form.interpretacion.length < 1){
+        //     showModificableAlert('Rellene todos los campos', 'La interpretación se encuentra vacía', 'error')
+        //     return false
             
-        }
+        // }
 
 
         return true
@@ -388,6 +405,7 @@ export default function Insercion({ auth }) {
         if (validarFormulario()) {
             recogerInterpretaciones();
             handleUpload();
+            console.log(form);
             router.post("muestra", form);
             showSuccessAlert();
         }
@@ -583,7 +601,7 @@ export default function Insercion({ auth }) {
                                     for="detalles_calidad_muestra"
                                     className="block text-sm font-semibold text-gray-700"
                                     >
-                                    Calidad de la muestra
+                                    Descripción de la calidad de la muestra
                                 </label>
                             <input type="text" className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm" name="descripcionCalidad" onChange={handleData}></input>
                         </div>
@@ -596,10 +614,9 @@ export default function Insercion({ auth }) {
                                 Interpretación
                             </label>
                             <select
-                                id="interpretacion"
-                                name="interpretacion"
+                                id="interpretacionAdicional"
+                                name="interpretacionAdicional"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm "
-                                onChange={handleData}
                             >
                                 <option value="">
                                     Seleccione interpretación

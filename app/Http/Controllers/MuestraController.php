@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Muestra;
+use App\Models\Muestra_Interpretacion;
 use Illuminate\Http\Request;
+use App\Models\Interpretacion;
 use Database\Seeders\MuestraSeeder;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,7 +33,9 @@ class MuestraController extends Controller
             'tipoNaturaleza:id,nombre',
             'user:id,name',
             'formato:id,nombre',
-            'sede:id,nombre'
+            'sede:id,nombre',
+            'calidad',
+            'formato'
         ])->get();
 
         if ($muestras->isEmpty()) {
@@ -84,6 +88,21 @@ class MuestraController extends Controller
                 'formato:id,nombre',
                 'sede:id,nombre'
             ])->get();
+        
+            $intepretaciones = $request->input('interpretacion');
+
+            foreach ($intepretaciones as $interpretacion) {
+                $dataInterpretacion = [
+                    'descripcion' => $interpretacion['descripcion'],
+                    'idMuestra' => $muestra->id, // Le doy el id de la muestra creada
+                    'idInterpretacion' => $interpretacion['id'],
+        
+                ];
+
+                $muestraInterpretacion = Muestra_Interpretacion::create($dataInterpretacion);
+            }
+
+
 
             return redirect()->route('muestras',$muestras);         
         }

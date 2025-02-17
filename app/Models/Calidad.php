@@ -22,6 +22,6 @@ class Calidad extends Model
     }
 
     public function tipoEstudios(){
-        return $this->HasMany(Calidad::class, 'idCalidad', 'id');
+        return $this->hasMany(Calidad::class, 'idCalidad', 'id');
     }
 }

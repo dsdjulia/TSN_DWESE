@@ -25,7 +25,7 @@ export default function ModalVisualizar({ id, onClose, muestra }) {
 
 
 
-
+    console.log(muestra);
 
 
 
@@ -40,23 +40,23 @@ export default function ModalVisualizar({ id, onClose, muestra }) {
                 <div>
                 <div className="mb-2">
                     <p className="text-sm font-semibold text-gray-700">Naturaleza de la muestra:</p>
-                    <p className="text-gray-600">{/* {muestra.naturaleza} */}Biopsias</p>
+                    <p className="text-gray-600">{muestra.tipo_naturaleza.nombre}</p>
                 </div>
                 <div className="mb-2">
                     <p className="text-sm font-semibold text-gray-700">Recibido en:</p>
-                    <p className="text-gray-600">{/* muestra.formato */}Fresco</p>
+                    <p className="text-gray-600">{muestra.formato.nombre}</p>
                 </div>
                 </div>
                 <div>
                 <div className="mb-2">
                     <p className="text-sm font-semibold text-gray-700">Órgano biopsiado:</p>
-                    <p className="text-gray-600">{/* muestra.organo */}Corazon</p>
+                    <p className="text-gray-600">{muestra.organo ?? ' - '}</p> {/* Comprobamos si tenemos valor de organo biopsiado */}
                 </div>
 
 
                 <div className="mb-2">
                     <p className="text-sm font-semibold text-gray-700">Calidad de la muestra:</p>
-                    <p className="text-gray-600">{/* muestra.calidad */}Muestra válida para examen</p>
+                    <p className="text-gray-600">{muestra.idCalidad}</p>
                 </div>
                 <div className="mb-2">
                     <p className="text-sm font-semibold text-gray-700">Interpretación:</p>

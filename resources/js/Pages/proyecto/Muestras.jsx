@@ -21,16 +21,15 @@ export default function Muestras({ auth, data }) {
     const [cantPag, setcantPag] = useState(10)
 
     const handleModalEliminar = (e) => {
-        setidMuestraSeleccionada(e.target.closest("tr").id);
+        setmuestraSeleccionada(muestras.find(muestra => muestra.id == e.target.closest('tr').id))
         setEliminarAbierto(true);
     };
     const handleModalModificar = (e) => {
-        setidMuestraSeleccionada(e.target.closest('tr').id)
         setmuestraSeleccionada(muestras.find(muestra => muestra.id == e.target.closest('tr').id))
         setModificarAbierto(true)
     }
     const handleModalVisualizar = (e) => {
-        setidMuestraSeleccionada(e.target.closest("tr").id);
+        setmuestraSeleccionada(muestras.find(muestra => muestra.id == e.target.closest('tr').id))
         setVisualizarAbierto(true);
     };
 
@@ -192,13 +191,12 @@ export default function Muestras({ auth, data }) {
             )}
             {eliminarAbierto && (
                 <ModalEliminar
-                    id={idMuestraSeleccionada}
+                    muestra={muestraSeleccionada}
                     onClose={() => setEliminarAbierto(false)}
                 />
             )}
             {VisualizarAbierto && (
                 <ModalVisualizar
-                    id={idMuestraSeleccionada}
                     muestra={muestraSeleccionada}
                     onClose={() => setVisualizarAbierto(false)} />
             )}

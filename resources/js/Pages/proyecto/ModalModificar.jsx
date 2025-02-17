@@ -2,12 +2,15 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useState } from "react";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import { buscarEstudio } from "@/Components/ListaIC";
-import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
+import {
+    showErrorAlert,
+    showSuccessAlert,
+    showModificableAlert,
+} from "../../Components/SweetAlerts";
 import Interpretacion from "@/Components/Interpretacion";
 import Footer from "@/Components/Footer";
 
-export default function ModalModificar({id, onClose, muestra}) {
-
+export default function ModalModificar({ id, onClose, muestra }) {
     const datos = {
         1: {
             calidad: {
@@ -22,36 +25,36 @@ export default function ModalModificar({id, onClose, muestra}) {
                 9: "Toma no valorable por...",
             },
             interpretacion: {
-                1: 'Predominio de células epiteliales escamosas superficiales.',
-                2: 'Predominio de células epiteliales escamosas intermedias.',
-                3: 'Predominio de células epiteliales escamosas parabasales.',
-                4: 'Polinucleares neutrófilos.',
-                5: 'Hematíes.',
-                6: 'Células endocervicales en exocervix.',
-                7: 'Células metaplásicas en exocérvix.',
-                8: 'Células metaplásicas inmaduras.',
-                9: 'Células reactivas.',
-                10: 'Células endometriales en mujer ≥ de 40 años.',
-                11: 'Alteraciones celulares sugerentes con HPV.',
-                12: 'Alteraciones celulares sugerentes de Herpes.',
-                13: 'Células neoplásicas.',
-                14: 'Células superficiales e intermedias con cambios atípicos.',
-                15: 'Células intermedias y parabasales con algunos cambios atípicos.',
-                16: 'Células parabasales con algunos cambios atípicos.',
-                17: 'Células escamosas de significado incierto.',
-                18: 'Células epiteliales glandulares de significado incierto.',
-                19: 'Estructuras micóticas correspondientes a Candida albicans.',
-                20: 'Estructuras micóticas correspondientes a Candida glabrata.',
-                21: 'Estructuras bacterianas con disposición característica de actinomyces.',
-                22: 'Estructuras bacterianas correspondiente de Gardnerella vaginalis.',
-                23: 'Estructuras bacterianas de naturaleza cocácea.',
-                24: 'Estructuras bacterianas sugerentes de Leptothrix.',
-                25: 'Estructuras correspondientes a Trichomonas vaginalis.',
-                26: 'Células histiocitarias multinucleadas.',
-                27: 'Células epiteliales de tipo escamoso con intensos cambios atípicos.',
-                28: 'Presencia de epitelio endometrial sin cambios atípicos.',
-                29: 'Células epiteliales de apariencia glandular con núcleos amplios e irregulares.'
-            }
+                1: "Predominio de células epiteliales escamosas superficiales.",
+                2: "Predominio de células epiteliales escamosas intermedias.",
+                3: "Predominio de células epiteliales escamosas parabasales.",
+                4: "Polinucleares neutrófilos.",
+                5: "Hematíes.",
+                6: "Células endocervicales en exocervix.",
+                7: "Células metaplásicas en exocérvix.",
+                8: "Células metaplásicas inmaduras.",
+                9: "Células reactivas.",
+                10: "Células endometriales en mujer ≥ de 40 años.",
+                11: "Alteraciones celulares sugerentes con HPV.",
+                12: "Alteraciones celulares sugerentes de Herpes.",
+                13: "Células neoplásicas.",
+                14: "Células superficiales e intermedias con cambios atípicos.",
+                15: "Células intermedias y parabasales con algunos cambios atípicos.",
+                16: "Células parabasales con algunos cambios atípicos.",
+                17: "Células escamosas de significado incierto.",
+                18: "Células epiteliales glandulares de significado incierto.",
+                19: "Estructuras micóticas correspondientes a Candida albicans.",
+                20: "Estructuras micóticas correspondientes a Candida glabrata.",
+                21: "Estructuras bacterianas con disposición característica de actinomyces.",
+                22: "Estructuras bacterianas correspondiente de Gardnerella vaginalis.",
+                23: "Estructuras bacterianas de naturaleza cocácea.",
+                24: "Estructuras bacterianas sugerentes de Leptothrix.",
+                25: "Estructuras correspondientes a Trichomonas vaginalis.",
+                26: "Células histiocitarias multinucleadas.",
+                27: "Células epiteliales de tipo escamoso con intensos cambios atípicos.",
+                28: "Presencia de epitelio endometrial sin cambios atípicos.",
+                29: "Células epiteliales de apariencia glandular con núcleos amplios e irregulares.",
+            },
         },
         2: {
             calidad: {
@@ -66,27 +69,27 @@ export default function ModalModificar({id, onClose, muestra}) {
                 18: "Muestra no valorable por...",
             },
             interpretacion: {
-                30: 'Predominio de eritrocitos normocíticos normocrómicos.',
-                31: 'Predominio de eritrocitos microcíticos hipocrómicos.',
-                32: 'Presencia de esferocitos.',
-                33: 'Presencia de dianocitos (células en forma de lágrima).',
-                34: 'Leucocitos con predominio de neutrófilos.',
-                35: 'Leucocitos con predominio de linfocitos.',
-                36: 'Presencia de células blásticas.',
-                37: 'Presencia de eosinófilos aumentados.',
-                38: 'Presencia de basófilos aumentados.',
-                39: 'Trombocitosis (aumento de plaquetas).',
-                40: 'Trombocitopenia (disminución de plaquetas).',
-                41: 'Anomalías en la morfología plaquetaria.',
-                42: 'Presencia de células atípicas sugestivas de neoplasia.',
-                43: 'Presencia de células inmaduras del linaje mieloide.',
-                44: 'Presencia de células inmaduras del linaje linfático.',
-                45: 'Anisocitosis (variabilidad en el tamaño de los eritrocitos).',
-                46: 'Poiquilocitosis (variabilidad en la forma de los eritrocitos).',
-                47: 'Presencia de cuerpos de Howell-Jolly.',
-                48: 'Células con inclusiones de hierro (cuerpos de Pappenheimer).',
-                49: 'Presencia de parásitos intraeritrocitarios.'
-            }
+                30: "Predominio de eritrocitos normocíticos normocrómicos.",
+                31: "Predominio de eritrocitos microcíticos hipocrómicos.",
+                32: "Presencia de esferocitos.",
+                33: "Presencia de dianocitos (células en forma de lágrima).",
+                34: "Leucocitos con predominio de neutrófilos.",
+                35: "Leucocitos con predominio de linfocitos.",
+                36: "Presencia de células blásticas.",
+                37: "Presencia de eosinófilos aumentados.",
+                38: "Presencia de basófilos aumentados.",
+                39: "Trombocitosis (aumento de plaquetas).",
+                40: "Trombocitopenia (disminución de plaquetas).",
+                41: "Anomalías en la morfología plaquetaria.",
+                42: "Presencia de células atípicas sugestivas de neoplasia.",
+                43: "Presencia de células inmaduras del linaje mieloide.",
+                44: "Presencia de células inmaduras del linaje linfático.",
+                45: "Anisocitosis (variabilidad en el tamaño de los eritrocitos).",
+                46: "Poiquilocitosis (variabilidad en la forma de los eritrocitos).",
+                47: "Presencia de cuerpos de Howell-Jolly.",
+                48: "Células con inclusiones de hierro (cuerpos de Pappenheimer).",
+                49: "Presencia de parásitos intraeritrocitarios.",
+            },
         },
         3: {
             calidad: {
@@ -182,23 +185,26 @@ export default function ModalModificar({id, onClose, muestra}) {
             },
         },
     };
-
+    console.log(muestra);
 
     // Ahora debo sacar esto del metodo
 
-    const [biopsiaHidden, setBiopsiaHidden] = useState('hidden') // Aquí modifico la selección
-    const [calidadHidden, setCalidadHidden] = useState('hidden') // Aquí modifico la selección
+    const [biopsiaHidden, setBiopsiaHidden] = useState("hidden"); // Aquí modifico la selección
+    const [calidadHidden, setCalidadHidden] = useState("hidden"); // Aquí modifico la selección
 
-    const [calidadSeleccionada, setCalidadSeleccionada] = useState(muestra.idCalidad) // Aquí modifico la selección
-    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') // Aquí modifico la selección
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState(
+        muestra.idCalidad
+    ); // Aquí modifico la selección
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] =
+        useState(""); // Aquí modifico la selección
 
-    const [arrayImagenes, setArrayImagenes] = useState([])
-    const [arrayImagenesUpload, setArrayImagenesUpload] = useState([])
+    const [arrayImagenes, setArrayImagenes] = useState([]);
+    const [arrayImagenesUpload, setArrayImagenesUpload] = useState([]);
     const [interpretaciones, setInterpretaciones] = useState([]);
 
-    const user = JSON.parse(localStorage.getItem('usuarioActivo'))
-    const idUser = user['id']
-    const idSede = user['idSede']
+    const user = JSON.parse(localStorage.getItem("usuarioActivo"));
+    const idUser = user["id"];
+    const idSede = user["idSede"];
 
     const [form, setForm] = useState({
         codigoMuestra: muestra.codigo,
@@ -214,166 +220,201 @@ export default function ModalModificar({id, onClose, muestra}) {
         interpretacion: [],
     });
 
-
     const handleData = (e) => {
-        setForm({...form , [e.target.name]: [e.target.value]}) // uso ...form para no eliminar los demas datos al modificar
+        setForm({ ...form, [e.target.name]: [e.target.value] }); // uso ...form para no eliminar los demas datos al modificar
         console.log(form);
-    }
+    };
 
     const handleSelect = (seleccion) => {
+        const clave = seleccion.target.value;
 
-        const clave = seleccion.target.value
-
-        if(clave in datos){ // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
-            setCalidadSeleccionada(datos[clave].calidad)
-            setInterpretacionSeleccionada(datos[clave].interpretacion)
-
-        } else { // Si no tiene propiedades lo dejamos vacio
-            setCalidadSeleccionada('')
-            setInterpretacionSeleccionada('')
+        if (clave in datos) {
+            // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
+            setCalidadSeleccionada(datos[clave].calidad);
+            setInterpretacionSeleccionada(datos[clave].interpretacion);
+        } else {
+            // Si no tiene propiedades lo dejamos vacio
+            setCalidadSeleccionada("");
+            setInterpretacionSeleccionada("");
         }
-
-    }
-
+    };
 
     const handleBiopsia = (seleccion) => {
+        const clave = seleccion.target.value; // Si la clave == 1 o 2 corresponde a biopsia
 
-        const clave = seleccion.target.value // Si la clave == 1 o 2 corresponde a biopsia
-
-        if (clave == '1'|| clave == '2'){ // Evaluamos si es una biopsia
-            setBiopsiaHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
-
-        } else { // Si no tiene propiedades lo dejamos vacio
-            setBiopsiaHidden('hidden')
+        if (clave == "1" || clave == "2") {
+            // Evaluamos si es una biopsia
+            setBiopsiaHidden(
+                "mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+            );
+        } else {
+            // Si no tiene propiedades lo dejamos vacio
+            setBiopsiaHidden("hidden");
         }
-
-    }
+    };
 
     const handleCalidad = (seleccion) => {
+        const textoCalidad =
+            seleccion.target.options[seleccion.target.selectedIndex].text;
 
-        const textoCalidad = seleccion.target.options[seleccion.target.selectedIndex].text
-
-        if (textoCalidad[textoCalidad.length - 2] === '.'){ // Compruebo que el penultimo sea un punto
-            setCalidadHidden('mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm')
-
+        if (textoCalidad[textoCalidad.length - 2] === ".") {
+            // Compruebo que el penultimo sea un punto
+            setCalidadHidden(
+                "mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+            );
         } else {
-            setCalidadHidden('hidden')
+            setCalidadHidden("hidden");
         }
-    }
-
-
-
+    };
 
     const handlePhotos = (photo) => {
-        const urlImagen = photo.target.files[0]
-        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]) // Esto crea la url en el dispositivo que se usa
+        const urlImagen = photo.target.files[0];
+        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]); // Esto crea la url en el dispositivo que se usa
 
         console.log(arrayImagenes);
-    }
+    };
 
-    const handleUploadPhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
-        const arrayFotos = photo.target.files
-        arrayFotos.forEach(foto => {
-            setArrayImagenesUpload([...arrayImagenesUpload, foto])
+    const handleUploadPhotos = (photo) => {
+        // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
+        const arrayFotos = photo.target.files;
+        arrayFotos.forEach((foto) => {
+            setArrayImagenesUpload([...arrayImagenesUpload, foto]);
         });
-    }
-
+    };
 
     const handleDeletePhoto = (seleccion) => {
-
-        const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
-        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img !== photoDeleted)); // quito del array la imagen eliminada
+        const photoDeleted =
+            seleccion.target.parentElement.querySelector("img").src; // Guardamos la ruta de la imagen que hemos borrado
+        setArrayImagenes((arrayImagenes) =>
+            arrayImagenes.filter((img) => img !== photoDeleted)
+        ); // quito del array la imagen eliminada
         console.log(arrayImagenes);
-    }
+    };
 
     const recogerInterpretaciones = () => {
-
-        const interpretaciones = document.querySelectorAll('#interpretacionAdicional')
-        interpretaciones.forEach(interpretacionAdicional => {
-            setForm({...form, interpretacion: [...form.interpretacion, interpretacionAdicional.value]})
+        const interpretaciones = document.querySelectorAll(
+            "#interpretacionAdicional"
+        );
+        interpretaciones.forEach((interpretacionAdicional) => {
+            setForm({
+                ...form,
+                interpretacion: [
+                    ...form.interpretacion,
+                    interpretacionAdicional.value,
+                ],
+            });
         });
-    }
+    };
 
-    
     const handleUpload = async () => {
-        
-        handleUploadPhotos()
-        
+        handleUploadPhotos();
+
         if (arrayImagenesUpload.length !== 0) {
-            
             const formData = new FormData();
-            
+
             arrayImagenesUpload.forEach((image, index) => {
                 formData.append(`images[]`, image); // Enviar cada imagen
             });
-            
+
             try {
                 const res = await fetch("/api/upload", {
                     method: "POST",
                     body: formData,
                 });
-                
+
                 const data = await res.json();
                 console.log("Imágenes subidas con éxito:", data);
-                
             } catch (error) {
                 alert("Error subiendo las imágenes");
             }
-            
         }
     };
-    
-    
+
     const agregarInterpretacion = () => {
-        setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
+        setInterpretaciones([
+            ...interpretaciones,
+            { id: interpretaciones.length },
+        ]);
     };
-    
+
     const eliminarInterpretacion = (id) => {
-        setInterpretaciones(interpretaciones.filter(item => item.id !== id));
+        setInterpretaciones(interpretaciones.filter((item) => item.id !== id));
     };
 
     const validarFormulario = () => {
-        if (form.codigoMuestra.length < 1){
-            showModificableAlert('Rellene todos los campos', 'El código de muestra se encuentra vacío', 'error')
-            return false
-
-        } else if (form.fecha.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La fecha se encuentra vacía', 'error')
-            return false
-
-        } else if (form.tipoNaturaleza.length < 1){
-            showModificableAlert('Rellene todos los campos', 'El tipo de naturaleza se encuentra vacía', 'error')
-            return false
-
-        } else if ((form.tipoNaturaleza == 1 || form.tipoNaturaleza == 2) && form.organo < 1 ){
-            showModificableAlert('Rellene todos los campos', 'El organo biopsiado se encuentra vacío', 'error')
-            return false
-
-        } else if (form.tipoEstudio < 1){
-            showModificableAlert('Rellene todos los campos', 'Debe indicar el tipo de estudio', 'error')
-            return false
-
-        } else if (form.formato < 1){
-            showModificableAlert('Rellene todos los campos', 'Debe indicar el formato', 'error')
-            return false
-
-        } else if (form.calidad.length < 1){
-            showModificableAlert('Rellene todos los campos', 'Debe indicar la calidad de la muestra', 'error')
-            return false
-            
-        } else if (calidadHidden !== 'hidden' && form.descripcionCalidad.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La descripción de la calidad se encuentra vacía', 'error')
-            return false
-            
-        } else if (form.interpretacion.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La interpretación se encuentra vacía', 'error')
-            return false
-            
+        if (form.codigoMuestra.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "El código de muestra se encuentra vacío",
+                "error"
+            );
+            return false;
+        } else if (form.fecha.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "La fecha se encuentra vacía",
+                "error"
+            );
+            return false;
+        } else if (form.tipoNaturaleza.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "El tipo de naturaleza se encuentra vacía",
+                "error"
+            );
+            return false;
+        } else if (
+            (form.tipoNaturaleza == 1 || form.tipoNaturaleza == 2) &&
+            form.organo < 1
+        ) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "El organo biopsiado se encuentra vacío",
+                "error"
+            );
+            return false;
+        } else if (form.tipoEstudio < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "Debe indicar el tipo de estudio",
+                "error"
+            );
+            return false;
+        } else if (form.formato < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "Debe indicar el formato",
+                "error"
+            );
+            return false;
+        } else if (form.calidad.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "Debe indicar la calidad de la muestra",
+                "error"
+            );
+            return false;
+        } else if (
+            calidadHidden !== "hidden" &&
+            form.descripcionCalidad.length < 1
+        ) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "La descripción de la calidad se encuentra vacía",
+                "error"
+            );
+            return false;
+        } else if (form.interpretacion.length < 1) {
+            showModificableAlert(
+                "Rellene todos los campos",
+                "La interpretación se encuentra vacía",
+                "error"
+            );
+            return false;
         }
 
-
-        return true
-    }
+        return true;
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -389,220 +430,292 @@ export default function ModalModificar({id, onClose, muestra}) {
     // console.log(form.tipoNaturaleza);
 
     const onPageLoad = () => {
-
-        console.log('hola');
-
-
-    }
+        console.log("hola");
+    };
 
     onPageLoad();
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 flex-col" >
-        <div class="p-6 mx-auto space-y-6 bg-white  rounded-lg shadow-lg w-2/3 shadow-gray-500 relative max-xl:h-5/6 max-xl:w-5/6 overflow-scroll border-white border-8 ">
-
-        <button className="absolute w-10 h-10 top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 font-extrabold" onClick={onClose}>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 flex-col">
+            <div class="p-6 mx-auto space-y-6 bg-white  rounded-lg shadow-lg w-2/3 shadow-gray-500 relative max-xl:h-5/6 max-xl:w-5/6 overflow-scroll border-white border-8 ">
+                <button
+                    className="absolute w-10 h-10 top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 font-extrabold"
+                    onClick={onClose}
+                >
                     ✕
                 </button>
-            <div class="space-y-4">
-
-                <h2 className="font-extrabold">Modificar Muestra</h2>
-                <div>
-                    <label
-                        for="naturaleza_muestra"
-                        class="block text-sm font-semibold text-gray-700 "
-                    >
-                        Naturaleza de la muestra
-                    </label>
-                    <select
-                        id="naturaleza_muestra"
-                        name="naturaleza_muestra"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm "
-                    >
-                        <option value={muestra.tipo_naturaleza.id}>{muestra.tipo_naturaleza.nombre}</option>
-                        <option value="biopsias">Biopsias</option>
-                        <option value="biopsias_veterinarias">Biopsias veterinarias</option>
-                        <option value="cavidad_bucal">Cavidad bucal</option>
-                        <option value="citologia_vaginal">Citología vaginal</option>
-                        <option value="extension_sanguinea">Extensión sanguínea</option>
-                        <option value="orinas">Orinas</option>
-                        <option value="esputos">Esputos</option>
-                        <option value="semen">Semen</option>
-                        <option value="improntas">Improntas</option>
-                        <option value="frotis">Frotis</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label
-                        for="formato"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Recibido en
-                    </label>
-                    <select
-                        id="formato"
-                        name="formato"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                    >
-                        <option value={muestra.formato.id}> {muestra.formato.nombre} </option>
-                        <option value="biopsia">Fresco</option>
-                        <option value="esputo">Formol</option>
-                        <option value="bucal">Etanol 70%</option>
-                    </select>
-                </div>
-
-                <div class="hidden" id="organos_biopsiados">
-                    <label
-                        for="organo_biopsiado"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Órgano biopsiado
-                    </label>
-                    <select
-                        id="organo_biopsiado"
-                        name="organo_biopsiado"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                    >
-                        <option value={muestra.organo}>{muestra.organo}</option>
-                        <option value="corazon">Corazón</option>
-                        <option value="bazo">Bazo</option>
-                        <option value="higado">Hígado</option>
-                        <option value="feto">Feto</option>
-                        <option value="estomago">Estómago</option>
-                        <option value="cerebro">Cerebro</option>
-                        <option value="rinon">Riñón</option>
-                        <option value="lengua">Lengua</option>
-                        <option value="utero">Útero</option>
-                        <option value="ovario">Ovario</option>
-                        <option value="intestino">Intestino</option>
-                        <option value="trompa_falopio">Trompa de Falopio</option>
-                        <option value="esofago">Esófago</option>
-                        <option value="pancreas">Páncreas</option>
-                        <option value="testiculo">Testículo</option>
-                        <option value="piel">Piel</option>
-                        <option value="pulmon">Pulmón</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label
-                        for="calidad_muestra"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Calidad de la muestra
-                    </label>
-                    <select
-                        id="calidad_muestra"
-                        name="calidad_muestra"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                    >
-                        <option value={muestra.idCalidad}>{muestra.idCalidad}</option>
-
-                        {Object.entries(calidadSeleccionada).map(
-                            ([key, contenido]) => (
-                                <option value={key}>
-                                    {contenido}{" "}
-                                    {/* si se selecciona alguna opcion de rellenar, debe aparecer un formulario de texto */}
-                                </option>
-                            )
-                        )}
-                    </select>
-                </div>
-
-                <div>
-                    <label
-                        for="interpretacion"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Interpretación
-                    </label>
-                    <select
-                        id="interpretacion"
-                        name="interpretacion"
-                        className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                    >
-                        <option value="">Seleccione interpretación</option>
-                        {Object.entries(interpretacionSeleccionada).map(
-                            (
-                                [
-                                    key,
-                                    contenido,
-                                ] /* esto funciona en react como for(let key in Json) en javascript  */
-                            ) => (
-                                <option value={key}>
-                                    {contenido}
-                                </option>
-                            )
-                        )}
-                    </select>
-                </div>
-
-
-                <hr className="my-4 border-gray-300 mb-10 mt-10" />
-
-                <div>
-                    <label
-                        for="imagenes"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Añadir imágenes
-                    </label>
-                    <input
-                        type="file"
-                        id="imagenes"
-                        name="imagenes"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                        multiple
-                    />
-                </div>
-
-                <div className="mt-4 space-x-4 flex">
-                    <div class="relative w-auto h-24 max-lg:h-12  inline-block">
-                        <img
-                            src="../public/muestra1.png"
-                            alt="Imagen 1"
-                            class="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
-                        />
-                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
-                        ✕
-                        </a>
+                <div class="space-y-4">
+                    <h2 className="font-extrabold">Modificar Muestra</h2>
+                    <div>
+                        <label
+                            for="naturaleza_muestra"
+                            className="block text-sm font-semibold text-gray-700"
+                        >
+                            Tipo de naturaleza
+                        </label>
+                        <select
+                            onChange={(e) => {
+                                handleData(e);
+                                handleBiopsia(e);
+                            }}
+                            id="tipoNaturaleza"
+                            name="tipoNaturaleza"
+                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                        >
+                            <option value={muestra.tipo_naturaleza.id}>
+                                {muestra.tipo_naturaleza.nombre}
+                            </option>
+                            <option value="1">Biopsias</option>
+                            <option value="2">Biopsias veterinarias</option>
+                            <option value="3">Cavidad bucal</option>
+                            <option value="4">Citología vaginal</option>
+                            <option value="5">Extensión sanguínea</option>
+                            <option value="6">Orinas</option>
+                            <option value="7">Esputos</option>
+                            <option value="8">Semen</option>
+                            <option value="9">Improntas</option>
+                            <option value="10">Frotis</option>
+                        </select>
                     </div>
-                    <div class="relative w-auto h-24 max-lg:h-12 inline-block">
-                        <img
-                            src="../public/muestra2.png"
-                            alt="Imagen 2"
-                            class="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
-                        />
-                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
-                        ✕
-                        </a>
+
+                    <div className={biopsiaHidden} id="organos_biopsiados">
+                        <label
+                            for="organo_biopsiado"
+                            className="block text-sm font-semibold text-gray-700"
+                        >
+                            Órgano biopsiado
+                        </label>
+                        <select
+                            id="organo"
+                            name="organo"
+                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                            onChange={handleData}
+                        >
+                            <option value={muestra.organo}>
+                                {muestra.organo}
+                            </option>
+                            <option value="BC">Corazón</option>
+                            <option value="BB">Bazo</option>
+                            <option value="BH">Hígado</option>
+                            <option value="BF">Feto</option>
+                            <option value="BES">Estómago</option>
+                            <option value="BCB">Cerebro</option>
+                            <option value="BR">Riñón</option>
+                            <option value="BL">Lengua</option>
+                            <option value="BU">Útero</option>
+                            <option value="BO">Ovario</option>
+                            <option value="BI">Intestino</option>
+                            <option value="BTF">Trompa de Falopio</option>
+                            <option value="BEF">Esófago</option>
+                            <option value="BPA">Páncreas</option>
+                            <option value="BT">Testículo</option>
+                            <option value="BPI">Piel</option>
+                            <option value="BP">Pulmón</option>
+                        </select>
                     </div>
-                    <div class="relative w-auto h-24 max-lg:h-12 inline-block">
-                        <img
-                            src="../public/muestra3.png"
-                            alt="Imagen 3"
-                            class="w-auto h-24 max-lg:h-12 object-cover rounded-lg "
-                        />
-                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-auto h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
-                        ✕
-                        </a>
+
+                    <div>
+                        <label
+                            for="naturaleza_muestra"
+                            className="block text-sm font-semibold text-gray-700"
+                        >
+                            Tipo de estudio
+                        </label>
+                        <select
+                            onChange={(e) => {
+                                handleSelect(e);
+                                handleData(e);
+                            }}
+                            id="tipoEstudio"
+                            name="tipoEstudio"
+                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                        >
+                            <option value="">
+                                Seleccione un tipo de estudio
+                            </option>
+                            <option value="1">
+                                Citológico cérvico - vaginal
+                            </option>
+                            <option value="2">Hematológico completo</option>
+                            <option value="3">
+                                Microscópico y químico de orina
+                            </option>
+                            <option value="4">Citológico de esputo</option>
+                            <option value="5">Citológico bucal</option>
+                        </select>
                     </div>
-                </div>
-                <div className="flex justify-start gap-8 mt-4 max-xl:flex-col">
-                    { <Link className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494] max-xl:w-full text-center" onClick={onClose}>
-                        Guardar Muestra
-                    </Link> }
-                    <button class="text-red-700 hover:underline focus:outline-none " onClick={onClose}>
-                        Cancelar
-                    </button>
+
+                    <div>
+                        <label
+                            for="formato"
+                            className="block text-sm font-semibold text-gray-700"
+                        >
+                            Recibido en
+                        </label>
+                        <select
+                            id="formato"
+                            name="formato"
+                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                            onChange={handleData}
+                        >
+                            <option value={muestra.formato.id}>
+                                {muestra.formato.nombre}
+                            </option>
+                            <option value="1">Fresco</option>
+                            <option value="2">Formol</option>
+                            <option value="3">Etanol 70%</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label
+                            for="calidad_muestra"
+                            className="block text-sm font-semibold text-gray-700"
+                        >
+                            Calidad de la muestra
+                        </label>
+                        <select
+                            onChange={(e) => {
+                                handleCalidad(e);
+                                handleData(e);
+                            }}
+                            id="calidad"
+                            name="calidad"
+                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                        >
+                            <option value={muestra.idCalidad}>
+                                {muestra.idCalidad}
+                            </option>
+
+                            {Object.entries(calidadSeleccionada).map(
+                                ([key, contenido]) => (
+                                    <option value={key}>
+                                        {contenido}{" "}
+                                        {/* si se selecciona alguna opcion de rellenar, debe aparecer un formulario de texto */}
+                                    </option>
+                                )
+                            )}
+                        </select>
+                    </div>
+
+                    <div className={calidadHidden}>
+                        <label
+                            for="detalles_calidad_muestra"
+                            className="block text-sm font-semibold text-gray-700"
+                        >
+                            Calidad de la muestra
+                        </label>
+                        <input
+                            type="text"
+                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                            name="descripcionCalidad"
+                            onChange={handleData}
+                        ></input>
+                    </div>
+
+                    <div>
+                        <label
+                            for="interpretacion"
+                            className="block text-sm font-semibold text-gray-700"
+                        >
+                            Interpretación
+                        </label>
+                        <select
+                            id="interpretacion"
+                            name="interpretacion"
+                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm "
+                            onChange={handleData}
+                        >
+                            <option value="">Seleccione interpretación</option>
+                            {Object.entries(interpretacionSeleccionada).map(
+                                (
+                                    [
+                                        key,
+                                        contenido,
+                                    ] /* esto funciona en react como for(let key in Json) en javascript  */
+                                ) => (
+                                    <option value={key}>{contenido}</option>
+                                )
+                            )}
+                        </select>
+                    </div>
+                    {interpretaciones.map((item) => (
+                        <Interpretacion
+                            key={item.id}
+                            id={item.id}
+                            onRemove={eliminarInterpretacion}
+                            interpretaciones={interpretacionSeleccionada}
+                        />
+                    ))}
+
+                    <hr className="my-4 border-gray-300 mb-10 mt-10" />
+
+                    <div>
+                        <label
+                            for="imagenes"
+                            class="block text-sm font-semibold text-gray-700"
+                        >
+                            Añadir imágenes
+                        </label>
+                        <input
+                            type="file"
+                            id="imagenes"
+                            name="imagenes"
+                            class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                            multiple
+                        />
+                    </div>
+
+                    <div className="mt-4 space-x-4 flex">
+                        <div class="relative w-auto h-24 max-lg:h-12  inline-block">
+                            <img
+                                src="../public/muestra1.png"
+                                alt="Imagen 1"
+                                class="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
+                            />
+                            <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
+                                ✕
+                            </a>
+                        </div>
+                        <div class="relative w-auto h-24 max-lg:h-12 inline-block">
+                            <img
+                                src="../public/muestra2.png"
+                                alt="Imagen 2"
+                                class="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
+                            />
+                            <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
+                                ✕
+                            </a>
+                        </div>
+                        <div class="relative w-auto h-24 max-lg:h-12 inline-block">
+                            <img
+                                src="../public/muestra3.png"
+                                alt="Imagen 3"
+                                class="w-auto h-24 max-lg:h-12 object-cover rounded-lg "
+                            />
+                            <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-auto h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
+                                ✕
+                            </a>
+                        </div>
+                    </div>
+                    <div className="flex justify-start gap-8 mt-4 max-xl:flex-col">
+                        {
+                            <Link
+                                className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494] max-xl:w-full text-center"
+                                onClick={onClose}
+                            >
+                                Guardar Muestra
+                            </Link>
+                        }
+                        <button
+                            class="text-red-700 hover:underline focus:outline-none "
+                            onClick={onClose}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
                 </div>
             </div>
-
-            </div>
-
         </div>
-
-
     );
 }

@@ -15,7 +15,7 @@ export default function Muestras({ auth, data }) {
     const [modificarAbierto, setModificarAbierto] = useState(false);
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
-    const [idMuestraSeleccionada, setidMuestraSeleccionada] = useState('')
+    const [idMuestraSeleccionada, setidMuestraSeleccionada] = useState('') //* Este creo que puedo quitarlo
     const [muestraSeleccionada, setmuestraSeleccionada] = useState('')
     
     const [pagActual, setpagActual] = useState(1)

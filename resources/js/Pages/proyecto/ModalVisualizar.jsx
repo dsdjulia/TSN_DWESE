@@ -1,5 +1,6 @@
 import { Link } from "@inertiajs/react";
 import React from "react";
+import CloudinaryImage from "@/Components/CloudinaryImage";
 
 export default function ModalVisualizar({ id, onClose, muestra }) {
 
@@ -76,6 +77,7 @@ export default function ModalVisualizar({ id, onClose, muestra }) {
                     <img src="../public/muestra1.png" alt="imagen de ejemplo" className="w-auto h-24  max-lg:h-12 object-cover rounded-lg" />
                     <img src="../public/muestra2.png" alt="imagen de ejemplo" className="w-auto h-24  max-lg:h-12 object-cover rounded-lg" />
                     <img src="../public/muestra3.png" alt="imagen de ejemplo" className="w-auto h-24 max-lg:h-12  object-cover rounded-lg" />
+                    <CloudinaryImage publicId={'uztn1x4hdv8wy08qhkh2'} height={100} width={100}></CloudinaryImage>
                     </div>
                 </div>
             </div>

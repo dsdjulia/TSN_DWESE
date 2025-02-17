@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React from "react";
 import { Head, Link, usePage, router } from "@inertiajs/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalModificar from "./ModalModificar";
 import ModalEliminar from "./ModalEliminar";
 import ModalVisualizar from "./ModalVisualizar";
@@ -9,7 +9,8 @@ import Footer from "@/Components/Footer";
 
 export default function Muestras({ auth, data }) {
     const muestras = data; // * Debo manipular esta data para la paginacion
-    // console.log(muestras[0]);
+
+    console.log(muestras);
 
     const [modificarAbierto, setModificarAbierto] = useState(false);
     const [eliminarAbierto, setEliminarAbierto] = useState(false);
@@ -18,7 +19,30 @@ export default function Muestras({ auth, data }) {
     const [muestraSeleccionada, setmuestraSeleccionada] = useState('')
     
     const [pagActual, setpagActual] = useState(1)
-    const [cantPag, setcantPag] = useState(10)
+    const [cantPag, setcantPag] = useState((muestras.length / 10).toFixed(0))
+    const [arrayMuestras, setarrayMuestras] = useState(muestras.slice(0, 9))
+
+    // Cada vez que se actualice la página actual se modificará el array a mostrar
+    useEffect(() => {
+        setarrayMuestras(muestras.slice((pagActual - 1) * 10, (pagActual - 1) * 10 + 10));
+    }, [pagActual]);
+
+    const firstPage = () => {
+        setpagActual(1)
+    }
+    const lastPage = () => {
+        setpagActual(cantPag)
+    }
+    const pageUp = () => {
+        if (pagActual < cantPag){
+            setpagActual(pagActual + 1)
+        }
+    }
+    const pageDown = () => {
+        if (pagActual > 1){
+            setpagActual(pagActual - 1)
+        }
+    }
 
     const handleModalEliminar = (e) => {
         setmuestraSeleccionada(muestras.find(muestra => muestra.id == e.target.closest('tr').id))
@@ -60,7 +84,7 @@ export default function Muestras({ auth, data }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {muestras.map((muestra) => (
+                            {arrayMuestras.map((muestra) => (
                                 <tr
                                 key={muestra.id}
                                 className="border-b"
@@ -149,14 +173,16 @@ export default function Muestras({ auth, data }) {
                     <div className="flex items-center justify-between bg-white rounded-md w-1/5 h-10 p-1 max-lg:w-full max-lg:h-20">
                         {" "}
                         {/* seccion paginacion */}
-                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
+                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
+                        onClick={firstPage}>
                             <img
                                 className=""
                                 src="../public/primeraPag.png"
                                 alt="1"
                             />
                         </button>
-                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
+                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
+                        onClick={pageDown}>
                             <img
                                 className=""
                                 src="../public/pagAtras.png"
@@ -166,14 +192,16 @@ export default function Muestras({ auth, data }) {
                         <p className="text-gray-300">
                             <span>{pagActual}</span> ... <span>{cantPag}</span>
                         </p>
-                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
+                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
+                        onClick={pageUp}>
                             <img
                                 className=""
                                 src="../public/pagAlante.png"
                                 alt="1"
                             />
                         </button>
-                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center">
+                        <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
+                        onClick={lastPage}>
                             <img
                                 className=""
                                 src="../public/ultimaPag.png"

@@ -132,58 +132,59 @@ export default function Insercion({ auth }) {
                 76: "Levaduras.",
                 77: "Parásitos.",
             },
-            4: {
-                calidad: {
-                    28: "Muestra válida para examen.",
-                    29: "Muestra válida para examen aunque limitada por volumen insuficiente.",
-                    30: "Muestra válida para examen aunque limitada por presencia de sangre.",
-                    31: "Muestra válida para examen aunque limitada por contaminación con saliva.",
-                    32: "Muestra válida para examen aunque limitada por contaminación con secreciones nasales.",
-                    33: "Muestra válida para examen aunque limitada por presencia de alimentos.",
-                    34: "Muestra no valorable por descomposición.",
-                    35: "Muestra no valorable por...",
-                    36: "Muestra no valorable por...",
-                },
-                interpretacion: {
-                    78: "Presencia de células epiteliales escamosas.",
-                    79: "Presencia de células epiteliales columnares.",
-                    80: "Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).",
-                    81: "Presencia de células metaplásicas.",
-                    82: "Presencia de células malignas.",
-                    83: "Presencia de células atípicas sugestivas de neoplasia.",
-                    84: "Presencia de microorganismos (bacterias, hongos, micobacterias).",
-                    85: "Presencia de células sanguíneas (eritrocitos, plaquetas).",
-                    86: "Presencia de material mucoso o mucopurulento.",
-                    87: "Presencia de cristales (de colesterol, calcio, etc.).",
-                    88: "Ausencia de células significativas para el análisis.",
-                },
+        },
+        4: {
+            calidad: {
+                28: "Muestra válida para examen.",
+                29: "Muestra válida para examen aunque limitada por volumen insuficiente.",
+                30: "Muestra válida para examen aunque limitada por presencia de sangre.",
+                31: "Muestra válida para examen aunque limitada por contaminación con saliva.",
+                32: "Muestra válida para examen aunque limitada por contaminación con secreciones nasales.",
+                33: "Muestra válida para examen aunque limitada por presencia de alimentos.",
+                34: "Muestra no valorable por descomposición.",
+                35: "Muestra no valorable por...",
+                36: "Muestra no valorable por...",
             },
-            5: {
-                calidad: {
-                    37: "Muestra válida para examen.",
-                    38: "Muestra válida para examen aunque limitada por cantidad insuficiente de células.",
-                    39: "Muestra válida para examen aunque limitada por presencia de sangre.",
-                    40: "Muestra válida para examen aunque limitada por contaminación con alimentos.",
-                    41: "Muestra válida para examen aunque limitada por contaminación con saliva.",
-                    42: "Muestra válida para examen aunque limitada por...",
-                    43: "Muestra no valorable por deshidratación.",
-                    44: "Muestra no valorable por contaminación con microorganismos.",
-                    45: "Muestra no valorable por...",
-                },
-                interpretacion: {
-                    89: "Presencia de células epiteliales escamosas.",
-                    90: "Presencia de células epiteliales cilíndricas.",
-                    91: "Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).",
-                    92: "Presencia de células glandulares.",
-                    93: "Presencia de células metaplásicas.",
-                    94: "Presencia de células atípicas sugestivas de neoplasia.",
-                    95: "Presencia de microorganismos (bacterias, hongos, levaduras).",
-                    96: "Presencia de células anormales con cambios citológicos.",
-                    97: "Ausencia de células significativas para el análisis.",
-                },
+            interpretacion: {
+                78: "Presencia de células epiteliales escamosas.",
+                79: "Presencia de células epiteliales columnares.",
+                80: "Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).",
+                81: "Presencia de células metaplásicas.",
+                82: "Presencia de células malignas.",
+                83: "Presencia de células atípicas sugestivas de neoplasia.",
+                84: "Presencia de microorganismos (bacterias, hongos, micobacterias).",
+                85: "Presencia de células sanguíneas (eritrocitos, plaquetas).",
+                86: "Presencia de material mucoso o mucopurulento.",
+                87: "Presencia de cristales (de colesterol, calcio, etc.).",
+                88: "Ausencia de células significativas para el análisis.",
             },
         },
-    };
+        5: {
+            calidad: {
+                37: "Muestra válida para examen.",
+                38: "Muestra válida para examen aunque limitada por cantidad insuficiente de células.",
+                39: "Muestra válida para examen aunque limitada por presencia de sangre.",
+                40: "Muestra válida para examen aunque limitada por contaminación con alimentos.",
+                41: "Muestra válida para examen aunque limitada por contaminación con saliva.",
+                42: "Muestra válida para examen aunque limitada por...",
+                43: "Muestra no valorable por deshidratación.",
+                44: "Muestra no valorable por contaminación con microorganismos.",
+                45: "Muestra no valorable por...",
+            },
+            interpretacion: {
+                89: "Presencia de células epiteliales escamosas.",
+                90: "Presencia de células epiteliales cilíndricas.",
+                91: "Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).",
+                92: "Presencia de células glandulares.",
+                93: "Presencia de células metaplásicas.",
+                94: "Presencia de células atípicas sugestivas de neoplasia.",
+                95: "Presencia de microorganismos (bacterias, hongos, levaduras).",
+                96: "Presencia de células anormales con cambios citológicos.",
+                97: "Ausencia de células significativas para el análisis.",
+            },
+        },
+    }
+
 
 
 
@@ -712,5 +713,5 @@ export default function Insercion({ auth }) {
             </div>
             <Footer/>
         </AuthenticatedLayout>
-    );
+);
 }

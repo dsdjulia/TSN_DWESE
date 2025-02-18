@@ -57,6 +57,7 @@ class MuestraController extends Controller
 
     public function insertMuestra(Request $request){
 
+        // dd($request);
         $data = [
             // Request
             'codigo' => $request->input('codigoMuestra')[0], // Le pasaba un array con 1 solo valor
@@ -91,6 +92,7 @@ class MuestraController extends Controller
             ])->get();
         
             $intepretaciones = $request->input('interpretacion');
+            // dd($intepretaciones);
 
             foreach ($intepretaciones as $interpretacion) {
                 $dataInterpretacion = [

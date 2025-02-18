@@ -19,7 +19,7 @@ export default function Muestras({ auth, data }) {
     const [muestraSeleccionada, setmuestraSeleccionada] = useState('')
     
     const [pagActual, setpagActual] = useState(1)
-    const [cantPag, setcantPag] = useState((muestras.length / 10).toFixed(0))
+    const [cantPag, setcantPag] = useState(Math.ceil(muestras.length / 10));
     const [arrayMuestras, setarrayMuestras] = useState(muestras.slice(0, 9))
 
     // Cada vez que se actualice la página actual se modificará el array a mostrar

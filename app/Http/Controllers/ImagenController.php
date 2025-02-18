@@ -36,17 +36,16 @@ class ImagenController extends Controller
         // ]);
         $uploadedFileUrls = [];
 
-        foreach ($request->file('images') as $image) {
-            $upload = Cloudinary::upload($image->getRealPath());
+        // foreach ($request->file('images') as $image) {
+        //     $upload = Cloudinary::upload($image->getRealPath());
 
-            Imagen::create([
-                'public_id' => $upload->getPublicId(),
-                'titulo' => $request->title,
-                'imagen' => $upload->getSecurePath(),
-            ]);
-        }
+        //     Imagen::create([
+        //         'public_id' => $upload->getPublicId(),
+        //         'titulo' => $request->title,
+        //         'imagen' => $upload->getSecurePath(),
+        //     ]);
+        // }
 
-        
         // Devolver vista de muestras
     }
 

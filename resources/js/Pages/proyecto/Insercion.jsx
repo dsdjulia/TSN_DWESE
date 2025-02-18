@@ -289,27 +289,53 @@ export default function Insercion({ auth }) {
     }
     
 
-    const handleUpload = () => {
-                
-        if (arrayImagenesUpload.length !== 0) {
+    const handleUpload = async () => {
+
+        if (arrayImagenesUpload.length !== 0) { // Comprobamos que haya alguna imagen para subir
+            const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dcdvxqsxn/image/upload`;
+            const uploadPreset = "default";
             
             const formData = new FormData();
-            
-            arrayImagenesUpload.forEach((image, index) => {
-                formData.append(`images[]`, image); // Enviar cada imagen
-            });
-
-            formData.forEach((value, key) => {
-                console.log(key, value); // Esto te muestra cada clave y valor
-            });
-
-            setForm(prevForm => ({
+    
+            const uploadToCloudinary = async (image) => {
+                formData.append("file", image); // La imagen
+                formData.append("upload_preset", uploadPreset); // Preset de subida
+    
+                try {
+                    const response = await fetch(cloudinaryUrl, {
+                        method: "POST",
+                        body: formData,
+                    });
+                    const data = await response.json();
+                    if (response.ok) {
+                        console.log("Subida exitosa:", data);
+                        return data.public_id; // Devolvemos solo el ID público de la imagen
+                    } else {
+                        console.error("Error al subir imagen:", data.error.message);
+                    }
+                } catch (error) {
+                    console.error("Error al conectar con Cloudinary:", error);
+                }
+                return null; // Si algo falla, retornamos null
+            };
+    
+            // Subimos las imágenes usando Promise.all
+            const uploadPromises = arrayImagenesUpload.map((image) => uploadToCloudinary(image));
+            const publicIds = await Promise.all(uploadPromises);
+    
+            // Filtramos los IDs públicos válidos y actualizamos el estado del formulario
+            const validPublicIds = publicIds.filter((id) => id !== null);
+            console.log("Public IDs subidos a Cloudinary:", validPublicIds);
+    
+            // Actualizamos el estado del formulario para enviar los IDs públicos al backend
+            setForm((prevForm) => ({
                 ...prevForm,
-                imagenes: formData,
+                imagenes: validPublicIds, // Almacenamos solo los IDs públicos
             }));
-        };
-            
         }
+    };
+    
+
 
     const handleDeletePhoto = (seleccion) => {
 
@@ -344,9 +370,6 @@ export default function Insercion({ auth }) {
     };
     
 
-    
-    
-    
     const agregarInterpretacion = () => {
         setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
     };
@@ -405,19 +428,17 @@ export default function Insercion({ auth }) {
         if (validarFormulario()) {
             handleUpload();
             recogerInterpretaciones();
-            setIsReady(true);
+            // setIsReady(true);
             showSuccessAlert();
         }
     };
     
     // Enviar los datos solo cuando form haya actualizado los datos
     useEffect(() => {
-        if (isReady) {
             console.log(form);
             router.post("muestra", form);
-            setIsReady(false);
-        }
-    }, [form, isReady])
+            // setIsReady(false);
+    }, [form.imagenes])
 
     
 

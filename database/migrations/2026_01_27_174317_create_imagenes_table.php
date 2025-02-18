@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('idMuestra');
             $table->unsignedBigInteger('idPublica');
-            $table->json_encode('ruta');
+            $table->string('ruta');
             $table->string('zoom');
             $table->timestamps();
 

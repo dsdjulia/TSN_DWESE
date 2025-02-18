@@ -12,10 +12,10 @@ class Imagen extends Model
     protected $table = "imagenes"; 
 
     protected $fillable = [
+        'idMuestra',
         'idPublica',
         'ruta',
         'zoom',
-        'idMuestra',
     ];
 
     public function muestra(){

@@ -97,18 +97,11 @@ class MuestraController extends Controller
                     'descripcion' => $interpretacion['descripcion'],
                     'idMuestra' => $muestra->id, // Le doy el id de la muestra creada
                     'idInterpretacion' => $interpretacion['id'],
-        
                 ];
 
-                try {
-                    $muestraInterpretacion = Muestra_Interpretacion::create($dataInterpretacion);
-                    // dd($muestraInterpretacion);
-                } catch (\Exception $e) {
-                    dd($e->getMessage()); // Muestra el error si ocurre
-                }
+                $muestraInterpretacion = Muestra_Interpretacion::create($dataInterpretacion);
+                // dd($muestraInterpretacion);
             }
-
-
 
             return redirect()->route('muestras',$muestras);         
         }

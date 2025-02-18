@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ secure_asset('build/assets/app.css') }}">
+    <script src="{{ secure_asset('build/assets/app.js') }}"></script>
     <style>
         @page {
             margin: 0cm 0cm;
@@ -24,6 +26,22 @@
         #fotoHeader{
             height: 50px;
             margin-top: 40px;
+            margin-left: 2.5px;
+            margin-right: 2.5px;
+        }
+        footer {
+            position: fixed;
+            bottom: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 2cm;
+            display:flex;
+            justify-content: center;
+            margin-left: 175px;
+        }
+        #fotoFooter{
+            height: 35px;
+            margin-bottom: 40px;
             margin-left: 2.5px;
             margin-right: 2.5px;
         }
@@ -127,19 +145,15 @@
             <td>
                 {{ $descripcion->implode(', ') }}</td>
         </tr>
-        <tr>
-            <td>Fila 2</td>
-        </tr>
-        <tr>
-            <td>Fila 3</td>
-        </tr>
-        <tr>
-            <td>Fila 4</td>
-        </tr>
     </table>
 
    {{$interpretaciones}}
 
     
 </body>
+
+<footer>
+    <img src="{{public_path('/img/medac.jpg')}}" id=fotoFooter alt="">
+    <img src="{{public_path('/img/fundacion.jpg')}}" id=fotoFooter alt="">
+</footer>
 </html>

@@ -199,6 +199,8 @@ export default function Insercion({ auth }) {
     const [arrayImagenes, setArrayImagenes] = useState([])
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([])
     const [interpretaciones, setInterpretaciones] = useState([]);
+    const [isReady, setIsReady] = useState(false);
+
 
     // const idSede = localStorage.getItem('usuarioActivo')
     // const idSedeObjeto = JSON.parse(idSede)
@@ -401,15 +403,24 @@ export default function Insercion({ auth }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+    
         if (validarFormulario()) {
             recogerInterpretaciones();
             handleUpload();
-            console.log(form);
-            router.post("muestra", form);
+            setIsReady(true);
             showSuccessAlert();
         }
     };
+    
+    // Enviar los datos solo cuando form haya actualizado los datos
+    useEffect(() => {
+        if (isReady) {
+            router.post("muestra", form);
+            setIsReady(false);
+        }
+    }, [form, isReady])
+
+    
 
     return (
         <AuthenticatedLayout

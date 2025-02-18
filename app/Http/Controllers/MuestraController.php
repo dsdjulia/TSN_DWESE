@@ -188,6 +188,18 @@ class MuestraController extends Controller
             return response()->json(["error" => "Muestra no encontrada"]);
         }
 
+        // Borrado de imagenes
+        $imagenes = Imagen::where('muestra_id', $muestra->id)->get();
+        foreach ($imagenes as $imagen) {
+            // Eliminar imagen de Cloudinary
+            Cloudinary::destroy($imagen->public_id);
+            // Eliminar registro de imagen en la base de datos
+            $imagen->delete();
+        }
+
+        // Borrar las interpretaciones asociadas a la muestra
+        Muestra_Interpretacion::where('idMuestra', $muestra->id)->delete();
+
         $muestra->delete();
 
         $muestras = Muestra::with([
@@ -197,7 +209,7 @@ class MuestraController extends Controller
             'sede:id,nombre'
         ])->get();
 
-        return response()->json("data",$muestras);
+        return response()->json("Muestra eliminada correctamente",$muestras);
     }
 
     public function validatorMuestras($datos){
@@ -217,6 +229,7 @@ class MuestraController extends Controller
 
             'imagenes' => 'required|array',
             'imagenes.*' => 'image|max:2048',
+            //mimes:jpeg,png
         ]);
         
         return $validator;

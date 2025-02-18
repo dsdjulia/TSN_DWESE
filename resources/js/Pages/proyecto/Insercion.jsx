@@ -221,6 +221,7 @@ export default function Insercion({ auth }) {
         idUser: idUser,
         idSede: idSede,
         interpretacion: [],
+        imagenes: [],
     });
 
     useEffect(() => {
@@ -275,26 +276,20 @@ export default function Insercion({ auth }) {
     }
 
 
-
-
-    const handlePhotos = (photo) => {
+    const handlePhotos = (photo) => { // Esto muestra las fotos subidas en la pagina
         const urlImagen = photo.target.files[0]
-        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]) // Esto crea la url en el dispositivo que se usa
+        setArrayImagenes([...arrayImagenes, {url: URL.createObjectURL(urlImagen), nombre: urlImagen.name}])
 
-        console.log(arrayImagenes);
     }
 
-    const handleUploadPhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
-        const arrayFotos = photo.target.files
-        arrayFotos.forEach(foto => {
-            setArrayImagenesUpload([...arrayImagenesUpload, foto])
-        });
+    const handleUploadPhotos = (photo) => { // Con esto guardo cada foto que se suba
+        const fotoSeleccionada = photo.target.files[0]
+        setArrayImagenesUpload([...arrayImagenesUpload, fotoSeleccionada])
     }
+    
 
-    const handleUpload = async () => {
-        
-        handleUploadPhotos()
-        
+    const handleUpload = () => {
+                
         if (arrayImagenesUpload.length !== 0) {
             
             const formData = new FormData();
@@ -302,28 +297,30 @@ export default function Insercion({ auth }) {
             arrayImagenesUpload.forEach((image, index) => {
                 formData.append(`images[]`, image); // Enviar cada imagen
             });
-            
-            try {
-                const res = await fetch("/api/upload", {
-                    method: "POST",
-                    body: formData,
-                });
-                
-                const data = await res.json();
-                console.log("Imágenes subidas con éxito:", data);
-                
-            } catch (error) {
-                alert("Error subiendo las imágenes");
-            }
+
+            formData.forEach((value, key) => {
+                console.log(key, value); // Esto te muestra cada clave y valor
+            });
+
+            setForm(prevForm => ({
+                ...prevForm,
+                imagenes: formData,
+            }));
+        };
             
         }
-    };
 
     const handleDeletePhoto = (seleccion) => {
 
-        const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
-        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img !== photoDeleted)); // quito del array la imagen eliminada
-        console.log(arrayImagenes);
+        const nombreImagen = seleccion.target.parentElement.querySelector('img').name;
+        const photoDeleted = seleccion.target.parentElement.querySelector('img').src 
+        
+        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img.url !== photoDeleted)); // quito del array la imagen eliminada
+        setArrayImagenesUpload((arrayImagenesUpload) => arrayImagenesUpload.filter((img) => img.name !== nombreImagen)); // filtro la imagen por el nombre
+        
+        console.log(nombreImagen);
+        console.log(arrayImagenesUpload);
+
     }
 
     const recogerInterpretaciones = () => {
@@ -405,8 +402,8 @@ export default function Insercion({ auth }) {
         e.preventDefault();
     
         if (validarFormulario()) {
-            recogerInterpretaciones();
             handleUpload();
+            recogerInterpretaciones();
             setIsReady(true);
             showSuccessAlert();
         }
@@ -415,6 +412,7 @@ export default function Insercion({ auth }) {
     // Enviar los datos solo cuando form haya actualizado los datos
     useEffect(() => {
         if (isReady) {
+            console.log(form);
             router.post("muestra", form);
             setIsReady(false);
         }
@@ -666,7 +664,7 @@ export default function Insercion({ auth }) {
                             >
                                 Añadir imágenes
                             </label>
-                            <input onChange={handlePhotos}
+                            <input onChange={(e) => {handlePhotos(e), handleUploadPhotos(e)}}
                                 type="file"
                                 id="imagenes"
                                 name="imagenes"
@@ -682,7 +680,8 @@ export default function Insercion({ auth }) {
                             {arrayImagenes.map((photo) => (
                                 <div className="relative w-auto h-32 inline-block">
                                     <img
-                                        src={photo}
+                                        src={photo.url}
+                                        name={photo.nombre}
                                         className="w-auto h-32 object-cover rounded-lg"
                                     />
                                     <button

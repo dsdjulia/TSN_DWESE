@@ -192,9 +192,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
     const [biopsiaHidden, setBiopsiaHidden] = useState("hidden"); // Aquí modifico la selección
     const [calidadHidden, setCalidadHidden] = useState("hidden"); // Aquí modifico la selección
 
-    const [calidadSeleccionada, setCalidadSeleccionada] = useState(
-        muestra.idCalidad
-    ); // Aquí modifico la selección
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState(muestra.idCalidad); // Aquí modifico la selección
     const [interpretacionSeleccionada, setInterpretacionSeleccionada] =
         useState(""); // Aquí modifico la selección
 
@@ -217,7 +215,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
         tipoEstudio: "",
         idUser: idUser, // Esto hay que sacarlo del login
         idSede: idSede,
-        interpretacion: [],
+        interpretacion: muestra.muestras_interpretaciones,
     });
 
     const handleData = (e) => {
@@ -430,21 +428,21 @@ export default function ModalModificar({ id, onClose, muestra }) {
     // console.log(form.tipoNaturaleza);
 
     const onPageLoad = () => {
-        console.log("hola");
+        
     };
 
     onPageLoad();
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 flex-col">
-            <div class="p-6 mx-auto space-y-6 bg-white  rounded-lg shadow-lg w-2/3 shadow-gray-500 relative max-xl:h-5/6 max-xl:w-5/6 overflow-scroll border-white border-8 ">
+            <div className="p-6 mx-auto space-y-6 bg-white  rounded-lg shadow-lg w-2/3 shadow-gray-500 relative max-xl:h-5/6 max-xl:w-5/6 overflow-scroll border-white border-8 ">
                 <button
                     className="absolute w-10 h-10 top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 font-extrabold"
                     onClick={onClose}
                 >
                     ✕
                 </button>
-                <div class="space-y-4">
+                <div className="space-y-4">
                     <h2 className="font-extrabold">Modificar Muestra</h2>
                     <div>
                         <label
@@ -626,7 +624,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm "
                             onChange={handleData}
                         >
-                            <option value="">Seleccione interpretación</option>
+                            <option value={muestra.muestras_interpretaciones[0].id}>{muestra.muestras_interpretaciones[0].descripcion}</option>
                             {Object.entries(interpretacionSeleccionada).map(
                                 (
                                     [

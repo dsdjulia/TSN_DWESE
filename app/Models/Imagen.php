@@ -12,6 +12,8 @@ class Imagen extends Model
     protected $table = "imagenes"; 
 
     protected $fillable = [
+        'titulo',
+        'idPublica',
         'ruta',
         'zoom',
         'idMuestra',

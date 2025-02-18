@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Imagen;
 use App\Models\Muestra;
-use App\Models\Muestra_Interpretacion;
 use Illuminate\Http\Request;
 use App\Models\Interpretacion;
 use Database\Seeders\MuestraSeeder;
+use App\Models\Muestra_Interpretacion;
 use Illuminate\Support\Facades\Validator;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class MuestraController extends Controller
 {
@@ -72,7 +74,6 @@ class MuestraController extends Controller
             'idSede' => intval($request->input('idSede')),
             'created_at' => date("Y-m-d"),
             'updated_at' => date("Y-m-d"),
-
         ];
 
         $validacion = $this->validatorMuestras($data);
@@ -82,6 +83,16 @@ class MuestraController extends Controller
         }else{
 
             $muestra = Muestra::create($data);
+
+            foreach ($request->file('imagenes') as $imagen) {
+                $upload = Cloudinary::upload($imagen->getRealPath(),['folder'=>'imgMuestras']);
+        
+                Imagen::create([
+                    'muestra_id' => $muestra->id,  // Relacionamos la imagen con la muestra
+                    'url' => $upload->getSecurePath(),
+                    'public_id' => $upload->getPublicId(),
+                ]);
+            }
 
             $muestras = Muestra::with([
                 'tipoNaturaleza:id,nombre',
@@ -103,7 +114,7 @@ class MuestraController extends Controller
                 // dd($muestraInterpretacion);
             }
 
-            return redirect()->route('muestras',$muestras);         
+            return redirect()->route('muestras',$muestras);
         }
     }
 
@@ -137,6 +148,26 @@ class MuestraController extends Controller
         }
 
         $muestra->update($data);
+
+        if ($request->hasFile('imagenes')) {
+
+            // Borrado de las fotos antiguas
+            $imagenesAntiguas = Imagen::where('muestra_id', $muestra->id)->get();
+            foreach ($imagenesAntiguas as $imagen) {
+                Cloudinary::destroy($imagen->public_id);
+                $imagen->delete(); 
+            }
+            // Actualizando fotos nuevas
+            foreach ($request->file('imagenes') as $imagen) {
+                $upload = Cloudinary::upload($imagen->getRealPath());
+                
+                Imagen::create([
+                    'muestra_id' => $muestra->id,
+                    'url' => $upload->getSecurePath(),
+                    'public_id' => $upload->getPublicId(),
+                ]);
+            }
+        }
 
         $muestras = Muestra::with([
             'tipoNaturaleza:id,nombre',
@@ -181,6 +212,9 @@ class MuestraController extends Controller
             'idSede' => 'required|integer|between:1,15',
             'created_at' =>' nullable|date_format:Y-m-d',
             'updated_at' => 'nullable|date_format:Y-m-d',
+
+            'imagenes' => 'required|array',
+            'imagenes.*' => 'image|max:2048',
         ]);
         
         return $validator;

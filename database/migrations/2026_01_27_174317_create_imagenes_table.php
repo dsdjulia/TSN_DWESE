@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('imagenes', function (Blueprint $table) {
             $table->id();
-            $table->string('ruta');
+            $table->unsignedBigInteger('idMuestra');
+            $table->unsignedBigInteger('idPublica');
+            $table->string('titulo');
+            $table->json_encode('ruta');
             $table->string('zoom');
             $table->timestamps();
-
-            $table->unsignedBigInteger('idMuestra');
 
             $table->foreign('idMuestra')->references('id')->on('muestras')->onUpdate('cascade')->onDelete('cascade');
         });

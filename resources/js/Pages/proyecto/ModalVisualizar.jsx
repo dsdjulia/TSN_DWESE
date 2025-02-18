@@ -88,10 +88,12 @@ export default function ModalVisualizar({ id, onClose, muestra }) {
                             <p className="text-sm font-semibold text-gray-700">
                                 Interpretación:
                             </p>
-                            <p className="text-gray-600">
-                                {/* muestra.interpretacion */}Presencia de
-                                células epiteliales escamosas
+                            {muestra.muestras_interpretaciones.map((interpretacion, index) => (
+                            <p key={index} className="text-gray-600">
+                            {interpretacion.descripcion}
                             </p>
+                        ))}
+
                         </div>
                     </div>
                 </div>

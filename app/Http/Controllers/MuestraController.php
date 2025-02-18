@@ -35,7 +35,8 @@ class MuestraController extends Controller
             'formato:id,nombre',
             'sede:id,nombre',
             'calidad',
-            'formato'
+            'formato',
+            'muestras_interpretaciones',
         ])->get();
 
         if ($muestras->isEmpty()) {
@@ -99,7 +100,12 @@ class MuestraController extends Controller
         
                 ];
 
-                $muestraInterpretacion = Muestra_Interpretacion::create($dataInterpretacion);
+                try {
+                    $muestraInterpretacion = Muestra_Interpretacion::create($dataInterpretacion);
+                    // dd($muestraInterpretacion);
+                } catch (\Exception $e) {
+                    dd($e->getMessage()); // Muestra el error si ocurre
+                }
             }
 
 

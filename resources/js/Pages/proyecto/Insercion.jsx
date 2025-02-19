@@ -287,13 +287,13 @@ export default function Insercion({ auth }) {
     const handleUpload = async () => {
 
         if (arrayImagenesUpload.length !== 0) { // Comprobamos que haya alguna imagen para subir
-            const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dcdvxqsxn/image/upload`;
+            const cloudinaryUrl = `https://api.cloudinary.com/v1_1/TUDIRECCION/image/upload`;
             const uploadPreset = "default";
 
 
             const formData = new FormData();
             const uploadToCloudinary = async (image) => {
-                formData.append("file", image); // La imagen
+                formData.append("file", image);
                 formData.append("upload_preset", uploadPreset); // Preset de subida
 
                 try {
@@ -301,31 +301,33 @@ export default function Insercion({ auth }) {
                         method: "POST",
                         body: formData,
                     });
+
                     const data = await response.json();
+
                     if (response.ok) {
-                        console.log("Subida exitosa:", [data,data.url,data.public_id,data.original_filename]);
-                        return data; // Devolvemos solo el ID público de la imagen
+                        console.log("Imagenes subidas con exito:", [data,data.url,data.public_id,data.original_filename]);
+                        return data; // Devolvemos los datos de la subida
+
                     } else {
                         console.error("Error al subir imagen:", data.error.message);
                     }
                 } catch (error) {
                     console.error("Error al conectar con Cloudinary:", error);
                 }
-                return null; // Si algo falla, retornamos null
+                return null;
             };
 
-            // Subimos las imágenes usando Promise.all
+            // Subimos las imagenes
             const uploadPromises = arrayImagenesUpload.map((image) => uploadToCloudinary(image));
             const publicIds = await Promise.all(uploadPromises);
 
             // Filtramos los IDs públicos válidos y actualizamos el estado del formulario
             const validPublicIds = publicIds.filter((id) => id !== null);
-            // console.log("Public IDs subidos a Cloudinary:", validPublicIds);
 
             // Actualizamos el estado del formulario para enviar los IDs públicos al backend
             setForm((prevForm) => ({
                 ...prevForm,
-                imagenes: validPublicIds, // Almacenamos solo los IDs públicos
+                imagenes: validPublicIds,
             }));
         }
         setIsReady(true) // Una vez se hayan subido las fotos enviamos el form con los datos
@@ -522,25 +524,24 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un órgano biopsiado
                                 </option>
-                                <option value="BC">Corazón</option>
-                                <option value="BB">Bazo</option>
-                                <option value="BH">Hígado</option>
-                                <option value="BF">Feto</option>
-                                <option value="BES">Estómago</option>
-                                <option value="BCB">Cerebro</option>
-                                <option value="BR">Riñón</option>
-                                <option value="BL">Lengua</option>
-                                <option value="BU">Útero</option>
-                                <option value="BO">Ovario</option>
-                                <option value="BI">Intestino</option>
-                                <option value="BTF">
-                                    Trompa de Falopio
-                                </option>
-                                <option value="BEF">Esófago</option>
-                                <option value="BPA">Páncreas</option>
-                                <option value="BT">Testículo</option>
-                                <option value="BPI">Piel</option>
-                                <option value="BP">Pulmón</option>
+                                <option value="Corazón">Corazón</option>
+                                <option value="Bazo">Bazo</option>
+                                <option value="Hígado">Hígado</option>
+                                <option value="Feto">Feto</option>
+                                <option value="Estómago">Estómago</option>
+                                <option value="Cerebro">Cerebro</option>
+                                <option value="Riñón">Riñón</option>
+                                <option value="Lengua">Lengua</option>
+                                <option value="Útero">Útero</option>
+                                <option value="Ovario">Ovario</option>
+                                <option value="Intestino">Intestino</option>
+                                <option value="Trompa de Falopio">Trompa de Falopio</option>
+                                <option value="Esófago">Esófago</option>
+                                <option value="Páncreas">Páncreas</option>
+                                <option value="Testículo">Testículo</option>
+                                <option value="Piel">Piel</option>
+                                <option value="Pulmón">Pulmón</option>
+
                             </select>
                         </div>
 

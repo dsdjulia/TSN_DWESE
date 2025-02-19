@@ -194,8 +194,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
     const [calidadHidden, setCalidadHidden] = useState("hidden"); // Aquí modifico la selección
 
     const [calidadSeleccionada, setCalidadSeleccionada] = useState(muestra.idCalidad); // Aquí modifico la selección
-    const [interpretacionSeleccionada, setInterpretacionSeleccionada] =
-        useState(""); // Aquí modifico la selección
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState(""); // Aquí modifico la selección
 
     const [arrayImagenes, setArrayImagenes] = useState([]);
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([]);
@@ -213,7 +212,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
         formato: muestra.idFormato,
         calidad: muestra.idCalidad,
         descripcionCalidad: muestra.descripcionCalidad,
-        tipoEstudio: "", //* Esto lo podria sacar buscando la calidad de la muestra
+        tipoEstudio: muestra.calidad.idTipoEstudio, //* Esto lo podria sacar buscando la calidad de la muestra
         idUser: idUser,
         idSede: idSede,
         interpretacion: muestra.muestras_interpretaciones,
@@ -429,10 +428,38 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     // console.log(form.tipoNaturaleza);
 
+    const [tipoEstudio, settipoEstudio] = useState('')
+
     useEffect(() => {
-        if (muestra?.idTipoNaturaleza === "1" || muestra?.idTipoNaturaleza === "2") {
+        if (muestra?.idTipoNaturaleza == "1" || muestra?.idTipoNaturaleza == "2") {
             setBiopsiaHidden("mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm");
         }
+
+        const claveTipoEstudio = muestra.calidad.idTipoEstudio
+        if (muestra.calidad.idTipoEstudio in datos) {
+            // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
+            setCalidadSeleccionada(datos[claveTipoEstudio].calidad);
+            setInterpretacionSeleccionada(datos[claveTipoEstudio].interpretacion);
+        }
+
+        const tipoEstudios = {
+            1: {nombre: 'Citológico cérvico - vaginal'},
+            2: {nombre: 'Hematológico completo'},
+            3: {nombre: 'Microscópico y químico de orina'},
+            4: {nombre: ' Citológico de esputo'},
+            5: {nombre: 'Citológico bucal'},
+        }
+
+        settipoEstudio(tipoEstudios[claveTipoEstudio].nombre)
+
+        if (muestra.calidad.nombre[muestra.calidad.nombre.length - 2] === ".") {
+            setCalidadHidden(
+                "mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+            );
+        }
+
+
+
     }, [muestra]); // Se ejecuta cuando cambia `muestra`
 
     return (
@@ -494,23 +521,24 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             <option value={muestra.organo}>
                                 {muestra.organo}
                             </option>
-                            <option value="BC">Corazón</option>
-                            <option value="BB">Bazo</option>
-                            <option value="BH">Hígado</option>
-                            <option value="BF">Feto</option>
-                            <option value="BES">Estómago</option>
-                            <option value="BCB">Cerebro</option>
-                            <option value="BR">Riñón</option>
-                            <option value="BL">Lengua</option>
-                            <option value="BU">Útero</option>
-                            <option value="BO">Ovario</option>
-                            <option value="BI">Intestino</option>
-                            <option value="BTF">Trompa de Falopio</option>
-                            <option value="BEF">Esófago</option>
-                            <option value="BPA">Páncreas</option>
-                            <option value="BT">Testículo</option>
-                            <option value="BPI">Piel</option>
-                            <option value="BP">Pulmón</option>
+                            <option value="Corazón">Corazón</option>
+                            <option value="Bazo">Bazo</option>
+                            <option value="Hígado">Hígado</option>
+                            <option value="Feto">Feto</option>
+                            <option value="Estómago">Estómago</option>
+                            <option value="Cerebro">Cerebro</option>
+                            <option value="Riñón">Riñón</option>
+                            <option value="Lengua">Lengua</option>
+                            <option value="Útero">Útero</option>
+                            <option value="Ovario">Ovario</option>
+                            <option value="Intestino">Intestino</option>
+                            <option value="Trompa de Falopio">Trompa de Falopio</option>
+                            <option value="Esófago">Esófago</option>
+                            <option value="Páncreas">Páncreas</option>
+                            <option value="Testículo">Testículo</option>
+                            <option value="Piel">Piel</option>
+                            <option value="Pulmón">Pulmón</option>
+
                         </select>
                     </div>
 
@@ -530,18 +558,12 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             name="tipoEstudio"
                             className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                         >
-                            <option value="">
-                                Seleccione un tipo de estudio
-                            </option>
-                            <option value="1">
-                                Citológico cérvico - vaginal
-                            </option>
-                            <option value="2">Hematológico completo</option>
-                            <option value="3">
-                                Microscópico y químico de orina
-                            </option>
-                            <option value="4">Citológico de esputo</option>
-                            <option value="5">Citológico bucal</option>
+                            <option value={muestra.calidad.idTipoEstudio}> {tipoEstudio} </option>
+                            <option value="1"> Citológico cérvico - vaginal </option>
+                            <option value="2"> Hematológico completo</option>
+                            <option value="3"> Microscópico y químico de orina</option>
+                            <option value="4"> Citológico de esputo</option>
+                            <option value="5"> Citológico bucal</option>
                         </select>
                     </div>
 
@@ -603,13 +625,20 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             for="detalles_calidad_muestra"
                             className="block text-sm font-semibold text-gray-700"
                         >
-                            Calidad de la muestra
+                            Descripción de la calidad
                         </label>
                         <input
                             type="text"
                             className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                             name="descripcionCalidad"
+                            value={muestra.descripcionCalidad}
+                        ></input>
+                        <input
+                            type="text"
+                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                            name="descripcionCalidad"
                             onChange={handleData}
+                            
                         ></input>
                     </div>
 

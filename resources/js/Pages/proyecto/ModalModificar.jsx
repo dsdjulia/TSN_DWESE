@@ -186,16 +186,13 @@ export default function ModalModificar({ id, onClose, muestra }) {
     };
     console.log(muestra);
 
-    // Ahora debo sacar esto del metodo
+    
 
     const [biopsiaHidden, setBiopsiaHidden] = useState("hidden"); // Aquí modifico la selección
     const [calidadHidden, setCalidadHidden] = useState("hidden"); // Aquí modifico la selección
 
-    const [calidadSeleccionada, setCalidadSeleccionada] = useState(
-        muestra.idCalidad
-    ); // Aquí modifico la selección
-    const [interpretacionSeleccionada, setInterpretacionSeleccionada] =
-        useState(""); // Aquí modifico la selección
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState(muestra.idCalidad); // Aquí modifico la selección
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState(""); // Aquí modifico la selección
 
     const [arrayImagenes, setArrayImagenes] = useState([]);
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([]);
@@ -331,11 +328,10 @@ export default function ModalModificar({ id, onClose, muestra }) {
     };
 
     const agregarInterpretacion = () => {
-        setInterpretaciones([
-            ...interpretaciones,
-            { id: interpretaciones.length},
-        ]);
+         console.log(interpretacionSeleccionada);
+        setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
     };
+
 
     const eliminarInterpretacion = (id) => {
         setInterpretaciones(interpretaciones.filter((item) => item.id !== id));
@@ -432,8 +428,13 @@ export default function ModalModificar({ id, onClose, muestra }) {
     const [tipoEstudio, settipoEstudio] = useState("");
 
     useEffect(() => {
-        if (muestra?.idTipoNaturaleza == "1" || muestra?.idTipoNaturaleza == "2") {
-            setBiopsiaHidden("mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm");
+        if (
+            muestra?.idTipoNaturaleza == "1" ||
+            muestra?.idTipoNaturaleza == "2"
+        ) {
+            setBiopsiaHidden(
+                "mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+            );
         }
 
         const claveTipoEstudio = muestra.calidad.idTipoEstudio;
@@ -665,7 +666,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
                         >
                             Interpretación
                         </label>
-{/* Imprimimos las interpretaciones de la muestra */}
+                        {/* Imprimimos las interpretaciones de la muestra */}
                         {muestra.muestras_interpretaciones.map(
                             (interpretacion) => (
                                 <Interpretacion
@@ -673,33 +674,26 @@ export default function ModalModificar({ id, onClose, muestra }) {
                                     id={interpretacion.id}
                                     onRemove={eliminarInterpretacion}
                                     interpretaciones={interpretaciones} // Pasamos todas las interpretaciones para el select
-                                    idInterpretacionSeleccionada={
-                                        interpretacion.id
-                                    }
-                                    descripcionInterpretacionSeleccionada={
-                                        interpretacion.descripcion
-                                    }
+                                    idInterpretacionSeleccionada={interpretacion.id}
+                                    descripcionInterpretacionSeleccionada={interpretacion.descripcion}
                                 />
                             )
                         )}
                     </div>
 
-{/* Imprimimos las nuevas interpretaciones */}
-                        {interpretaciones.map(item => (
-                            <Interpretacion
-                                key={item.id}
-                                id={item.id}
-                                onRemove={eliminarInterpretacion}
-                                interpretaciones={interpretacionSeleccionada}
-                            />
-                        ))}
+                    {/* Imprimimos las nuevas interpretaciones */}
+                    {interpretaciones.map((item) => (
+                        <Interpretacion
+                            key={item.id}
+                            id={item.id}
+                            onRemove={eliminarInterpretacion}
+                            interpretaciones={interpretacionSeleccionada}
+                            idInterpretacionSeleccionada={''}
+                            descripcionInterpretacionSeleccionada={'Seleccione una descripción'}
+                        />
+                    ))}
 
-                    <button
-                        className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 mb-6 font-bold text-gray-700"
-                        onClick={agregarInterpretacion}
-                    >
-                        Añadir interpretación
-                    </button>
+                    <button className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 mb-6 font-bold text-gray-700" onClick={agregarInterpretacion}>Añadir interpretación</button>
 
                     <hr className="my-4 border-gray-300 mb-10 mt-10" />
 

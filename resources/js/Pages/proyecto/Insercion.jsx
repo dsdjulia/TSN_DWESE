@@ -287,7 +287,7 @@ export default function Insercion({ auth }) {
     const handleUpload = async () => {
 
         if (arrayImagenesUpload.length !== 0) { // Comprobamos que haya alguna imagen para subir
-            const cloudinaryUrl = `https://api.cloudinary.com/v1_1/TUDIRECCION/image/upload`;
+            const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dcdvxqsxn/image/upload`;
             const uploadPreset = "default";
 
 

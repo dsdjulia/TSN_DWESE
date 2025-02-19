@@ -39,6 +39,7 @@ class MuestraController extends Controller
             'calidad',
             'formato',
             'muestras_interpretaciones',
+            'imagenes',
         ])->get();
 
         if ($muestras->isEmpty()) {
@@ -67,7 +68,7 @@ class MuestraController extends Controller
             'idFormato' => intval($request->input('formato')[0]),
             'idCalidad' => intval($request->input('calidad')[0]),
             'descripcionCalidad' => $request->input('descripcionCalidad')[0] ?? null,
-            'organo' => $request->input('organo'),
+            'organo' => $request->input('organo')[0] ?? null,
             'fecha' => $request->input('fecha')[0], // Le pasaba un array con 1 solo valor
             
             // Local Storage

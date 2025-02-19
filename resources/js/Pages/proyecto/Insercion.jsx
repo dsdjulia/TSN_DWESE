@@ -328,7 +328,7 @@ export default function Insercion({ auth }) {
                 imagenes: validPublicIds, // Almacenamos solo los IDs públicos
             }));
         }
-        setIsReady(True) // Una vez se hayan subido las fotos enviamos el form con los datos
+        setIsReady(true) // Una vez se hayan subido las fotos enviamos el form con los datos
     };
     
 
@@ -345,23 +345,20 @@ export default function Insercion({ auth }) {
     }
 
     const recogerInterpretaciones = () => {
-
-        const interpretaciones = document.querySelectorAll('#interpretacionAdicional');
+        const interpretaciones = document.querySelectorAll("#interpretacionAdicional");
     
-        interpretaciones.forEach(interpretacionAdicional => {
-            
-            const nuevaInterpretacion = {
-                id: interpretacionAdicional.value,
-                descripcion: interpretacionAdicional.options[interpretacionAdicional.selectedIndex].text
-            };
+        const nuevasInterpretaciones = Array.from(interpretaciones).map((interpretacionAdicional) => ({
+            id: interpretacionAdicional.value,
+            descripcion: interpretacionAdicional.options[interpretacionAdicional.selectedIndex].text,
+        }));
     
-            // Usamos setForm con la función de actualización para asegurar que se agregue correctamente a las interpretaciones
-            setForm(prevForm => ({
-                ...prevForm,
-                interpretacion: [...prevForm.interpretacion, nuevaInterpretacion],
-            }));
-        });
+        setForm((prevForm) => ({
+            ...prevForm,
+            interpretacion: [...new Map([...prevForm.interpretacion, ...nuevasInterpretaciones].map(item => [item.id, item])).values()], // Filtra por si se añaden interpretaciones duplicadas
+        }));
     };
+    
+    
     
 
     const agregarInterpretacion = () => {

@@ -103,25 +103,18 @@ export default function ModalVisualizar({ id, onClose, muestra }) {
                         Imágenes adjuntas:
                     </p>
                     <div className="flex gap-4 mt-5">
-                        {/*  {muestra.imagenes.map((imagen, index) => (
-                            <div key={index} className="relative w-auto h-32 inline-block">
-                                <img src={imagen} alt={`Imagen ${index + 1}`} className="w-auto h-32 object-cover rounded-lg" />
-                            </div>
-                        ))} */}
-                        {/* <img src="../public/muestra1.png" alt="imagen de ejemplo" className="w-auto h-24  max-lg:h-12 object-cover rounded-lg" />
-                    <img src="../public/muestra2.png" alt="imagen de ejemplo" className="w-auto h-24  max-lg:h-12 object-cover rounded-lg" />
-                    <img src="../public/muestra3.png" alt="imagen de ejemplo" className="w-auto h-24 max-lg:h-12  object-cover rounded-lg" /> */}
-                        {/* el publicId tiene que llegar como parámetro de cada foto */}
-                        <CloudinaryImage
-                            publicId={"uztn1x4hdv8wy08qhkh2"}
-                            height={100}
-                            width={100}
-                        ></CloudinaryImage>
-                        <CloudinaryImage
-                            publicId={"zaolz7gxbjugrjktkchk"}
-                            height={100}
-                            width={100}
-                        ></CloudinaryImage>
+
+                        {muestra.imagenes.map((imagen) => {
+                            return (
+                                <CloudinaryImage
+                                    key={imagen.idPublica} // Agrega una `key` única
+                                    publicId={imagen.idPublica} // Usa el `publicId` dinámico
+                                    height={100}
+                                    width={100}
+                                />
+                            );
+                        })}
+
                     </div>
                 </div>
             </div>

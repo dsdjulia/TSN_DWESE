@@ -186,16 +186,11 @@ export default function Insercion({ auth }) {
     }
 
 
-
-
-
-    // Ahora debo sacar esto del metodo
-
     const [biopsiaHidden, setBiopsiaHidden] = useState('hidden') // Aquí modifico la selección
     const [calidadHidden, setCalidadHidden] = useState('hidden') // Aquí modifico la selección
 
-    const [calidadSeleccionada, setCalidadSeleccionada] = useState('') // Aquí modifico la selección
-    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') // Aquí modifico la selección
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState('') 
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') 
 
     const [arrayImagenes, setArrayImagenes] = useState([])
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([])
@@ -333,6 +328,7 @@ export default function Insercion({ auth }) {
                 imagenes: validPublicIds, // Almacenamos solo los IDs públicos
             }));
         }
+        setIsReady(True) // Una vez se hayan subido las fotos enviamos el form con los datos
     };
     
 
@@ -345,8 +341,6 @@ export default function Insercion({ auth }) {
         setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img.url !== photoDeleted)); // quito del array la imagen eliminada
         setArrayImagenesUpload((arrayImagenesUpload) => arrayImagenesUpload.filter((img) => img.name !== nombreImagen)); // filtro la imagen por el nombre
         
-        // console.log(nombreImagen);
-        // console.log(arrayImagenesUpload);
 
     }
 
@@ -428,7 +422,6 @@ export default function Insercion({ auth }) {
         if (validarFormulario()) {
             handleUpload();
             recogerInterpretaciones();
-            // setIsReady(true);
             showSuccessAlert();
         }
     };
@@ -436,9 +429,11 @@ export default function Insercion({ auth }) {
     // Enviar los datos solo cuando form haya actualizado los datos
     useEffect(() => {
             // console.log(form);
-            router.post("muestra", form);
-            // setIsReady(false);
-    }, [form.imagenes])
+            if(isReady){ // Que solo se ejecute si es true
+                router.post("muestra", form);
+                setIsReady(false)
+            }
+    }, [isReady])
 
     
 

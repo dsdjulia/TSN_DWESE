@@ -464,7 +464,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 flex-col">
-            <div className="p-6 mx-auto space-y-6 bg-white  rounded-lg shadow-lg w-2/3 shadow-gray-500 relative max-xl:h-5/6 max-xl:w-5/6 overflow-scroll border-white border-8 ">
+            <div className="p-6 mx-auto space-y-6 bg-white  rounded-lg shadow-lg w-2/3 shadow-gray-500 relative overflow-scroll border-white border-8 max-lg:w-full max-lg:h-full">
                 <button
                     className="absolute w-10 h-10 top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 font-extrabold"
                     onClick={onClose}

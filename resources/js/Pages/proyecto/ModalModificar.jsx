@@ -188,11 +188,14 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     
 
-    const [biopsiaHidden, setBiopsiaHidden] = useState("hidden"); // Aquí modifico la selección
-    const [calidadHidden, setCalidadHidden] = useState("hidden"); // Aquí modifico la selección
+    const [biopsiaHidden, setBiopsiaHidden] = useState("hidden"); // Aquí modifico el estado del campo complementario de la biopsia
+    const [calidadHidden, setCalidadHidden] = useState("hidden"); // Aquí modifico el estado del campo complementario de la calidad
 
     const [calidadSeleccionada, setCalidadSeleccionada] = useState(muestra.idCalidad); // Aquí modifico la selección
     const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState(""); // Aquí modifico la selección
+    const [tipoEstudio, settipoEstudio] = useState("");
+
+    const [interpretacionAntigua, setInterpretacionAntigua] = useState(muestra.muestras_interpretaciones);
 
     const [arrayImagenes, setArrayImagenes] = useState([]);
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([]);
@@ -337,6 +340,13 @@ export default function ModalModificar({ id, onClose, muestra }) {
         setInterpretaciones(interpretaciones.filter((item) => item.id !== id));
     };
 
+
+    const eliminarInterpretacionAntigua = (id) => {
+        console.log(id);
+        console.log(interpretacionAntigua);
+        setInterpretacionAntigua(interpretacionAntigua.filter((item) => item.id !== id));
+    };
+
     const validarFormulario = () => {
         if (form.codigoMuestra.length < 1) {
             showModificableAlert(
@@ -425,7 +435,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     // console.log(form.tipoNaturaleza);
 
-    const [tipoEstudio, settipoEstudio] = useState("");
+
 
     useEffect(() => {
         if (
@@ -667,12 +677,12 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             Interpretación
                         </label>
                         {/* Imprimimos las interpretaciones de la muestra */}
-                        {muestra.muestras_interpretaciones.map(
+                        {interpretacionAntigua.map(
                             (interpretacion) => (
                                 <Interpretacion
                                     key={interpretacion.id}
                                     id={interpretacion.id}
-                                    onRemove={eliminarInterpretacion}
+                                    onRemove={eliminarInterpretacionAntigua}
                                     interpretaciones={interpretaciones} // Pasamos todas las interpretaciones para el select
                                     idInterpretacionSeleccionada={interpretacion.id}
                                     descripcionInterpretacionSeleccionada={interpretacion.descripcion}

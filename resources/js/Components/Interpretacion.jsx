@@ -11,19 +11,18 @@ const Interpretacion = ({ id, onRemove, interpretaciones, idInterpretacionSelecc
                     className="p-3 w-full border border-gray-300 rounded-md shadow-sm"
                 >
                     <option value={idInterpretacionSeleccionada ?? ''}>{descripcionInterpretacionSeleccionada ?? 'Seleccione una descripción'}</option>
-
-                    {Array.isArray(interpretaciones) // Verifica si `interpretaciones` es un array
-                        ? // Si es un array:
-                            interpretaciones.map((item) => ( // Mapea cada elemento del array `interpretaciones`
+{/* A veces las interpretaciones llegan como array y otras como objeto */}  
+                    {Array.isArray(interpretaciones) 
+                        ? // Si interpretaciones es un array
+                            interpretaciones.map((item) => ( 
                                 <option key={item.id} value={item.id}> 
-                                    {item.descripcion} {/* Muestra el valor de `descripcion` como el contenido visible de la opción */}
+                                    {item.descripcion}
                                 </option>
                             ))
-                        : // Si no es un array, se asume que es un objeto:
+                        : // Si es un objeto
                             Object.entries(interpretaciones).map(([key, contenido]) => ( 
-                                // Convierte el objeto `interpretaciones` en un array de pares clave-valor y lo recorre
                                 <option key={key} value={key}>
-                                    {contenido} {/* Muestra el contenido asociado a la clave como el texto visible de la opción */}
+                                    {contenido} 
                                 </option>
                         ))}
 

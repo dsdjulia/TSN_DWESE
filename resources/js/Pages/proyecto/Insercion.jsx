@@ -328,7 +328,7 @@ export default function Insercion({ auth }) {
                 imagenes: validPublicIds, // Almacenamos solo los IDs públicos
             }));
         }
-        setIsReady(True) // Una vez se hayan subido las fotos enviamos el form con los datos
+        setIsReady(true) // Una vez se hayan subido las fotos enviamos el form con los datos
     };
     
 

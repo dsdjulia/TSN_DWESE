@@ -189,8 +189,8 @@ export default function Insercion({ auth }) {
     const [biopsiaHidden, setBiopsiaHidden] = useState('hidden') // Aquí modifico la selección
     const [calidadHidden, setCalidadHidden] = useState('hidden') // Aquí modifico la selección
 
-    const [calidadSeleccionada, setCalidadSeleccionada] = useState('') 
-    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') 
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState('')
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('')
 
     const [arrayImagenes, setArrayImagenes] = useState([])
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([])
@@ -282,20 +282,20 @@ export default function Insercion({ auth }) {
         const fotoSeleccionada = photo.target.files[0]
         setArrayImagenesUpload([...arrayImagenesUpload, fotoSeleccionada])
     }
-    
+
 
     const handleUpload = async () => {
 
-        if (arrayImagenesUpload.length !== 0) { // Comprobamos que haya alguna imagen para subir 
+        if (arrayImagenesUpload.length !== 0) { // Comprobamos que haya alguna imagen para subir
             const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dcdvxqsxn/image/upload`;
             const uploadPreset = "default";
-            
-            
+
+
             const formData = new FormData();
             const uploadToCloudinary = async (image) => {
                 formData.append("file", image); // La imagen
                 formData.append("upload_preset", uploadPreset); // Preset de subida
-    
+
                 try {
                     const response = await fetch(cloudinaryUrl, {
                         method: "POST",
@@ -313,15 +313,15 @@ export default function Insercion({ auth }) {
                 }
                 return null; // Si algo falla, retornamos null
             };
-    
+
             // Subimos las imágenes usando Promise.all
             const uploadPromises = arrayImagenesUpload.map((image) => uploadToCloudinary(image));
             const publicIds = await Promise.all(uploadPromises);
-    
+
             // Filtramos los IDs públicos válidos y actualizamos el estado del formulario
             const validPublicIds = publicIds.filter((id) => id !== null);
             // console.log("Public IDs subidos a Cloudinary:", validPublicIds);
-    
+
             // Actualizamos el estado del formulario para enviar los IDs públicos al backend
             setForm((prevForm) => ({
                 ...prevForm,
@@ -330,41 +330,41 @@ export default function Insercion({ auth }) {
         }
         setIsReady(true) // Una vez se hayan subido las fotos enviamos el form con los datos
     };
-    
+
 
 
     const handleDeletePhoto = (seleccion) => {
 
         const nombreImagen = seleccion.target.parentElement.querySelector('img').name;
-        const photoDeleted = seleccion.target.parentElement.querySelector('img').src 
-        
+        const photoDeleted = seleccion.target.parentElement.querySelector('img').src
+
         setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img.url !== photoDeleted)); // quito del array la imagen eliminada
         setArrayImagenesUpload((arrayImagenesUpload) => arrayImagenesUpload.filter((img) => img.name !== nombreImagen)); // filtro la imagen por el nombre
-        
+
 
     }
 
     const recogerInterpretaciones = () => {
         const interpretaciones = document.querySelectorAll("#interpretacionAdicional");
-    
+
         const nuevasInterpretaciones = Array.from(interpretaciones).map((interpretacionAdicional) => ({
             id: interpretacionAdicional.value,
             descripcion: interpretacionAdicional.options[interpretacionAdicional.selectedIndex].text,
         }));
-    
+
         setForm((prevForm) => ({
             ...prevForm,
             interpretacion: [...new Map([...prevForm.interpretacion, ...nuevasInterpretaciones].map(item => [item.id, item])).values()], // Filtra por si se añaden interpretaciones duplicadas
         }));
     };
-    
-    
-    
+
+
+
 
     const agregarInterpretacion = () => {
         setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
     };
-    
+
     const eliminarInterpretacion = (id) => {
         setInterpretaciones(interpretaciones.filter(item => item.id !== id));
     };
@@ -397,16 +397,16 @@ export default function Insercion({ auth }) {
         } else if (form.calidad.length < 1){
             showModificableAlert('Rellene todos los campos', 'Debe indicar la calidad de la muestra', 'error')
             return false
-            
+
         } else if (calidadHidden !== 'hidden' && form.descripcionCalidad.length < 1){
             showModificableAlert('Rellene todos los campos', 'La descripción de la calidad se encuentra vacía', 'error')
             return false
-            
-        } 
+
+        }
         // else if (form.interpretacion.length < 1){
         //     showModificableAlert('Rellene todos los campos', 'La interpretación se encuentra vacía', 'error')
         //     return false
-            
+
         // }
 
 
@@ -415,14 +415,14 @@ export default function Insercion({ auth }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         if (validarFormulario()) {
             handleUpload();
             recogerInterpretaciones();
             showSuccessAlert();
         }
     };
-    
+
     // Enviar los datos solo cuando form haya actualizado los datos
     useEffect(() => {
             // console.log(form);
@@ -432,7 +432,7 @@ export default function Insercion({ auth }) {
             }
     }, [isReady])
 
-    
+
 
     return (
         <AuthenticatedLayout
@@ -440,8 +440,8 @@ export default function Insercion({ auth }) {
             header={'insercion'}
         >
             <Head title="Insercion" />
-            <div className="flex flex-col items-center justify-center min-h-screen bg-[#e5eaf0] pb-10">
-                <div className="p-6  mx-auto space-y-6 bg-white border rounded-md shadow-lg w-2/3 m-10 mb-2">
+            <div className="flex flex-col items-center justify-center min-h-screen bg-[#e5eaf0] pb-10 px-2">
+                <div className="p-6  mx-auto space-y-6 bg-white border rounded-md shadow-lg w-2/3 m-10 mb-2 max-sm:w-full">
                     <div className="space-y-4">
                         <div>
                             <label
@@ -476,7 +476,7 @@ export default function Insercion({ auth }) {
                         </div>
                     </div>
                 </div>
-                <div className="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-2/3">
+                <div className="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-2/3 max-sm:w-full ">
                     <div className="space-y-4">
                         <div>
                             <label
@@ -559,7 +559,7 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un tipo de estudio
                                 </option>
-                                <option value="1">Citológico cérvico - vaginal</option> 
+                                <option value="1">Citológico cérvico - vaginal</option>
                                 <option value="2">Hematológico completo</option>
                                 <option value="3">Microscópico y químico de orina</option>
                                 <option value="4">Citológico de esputo</option>

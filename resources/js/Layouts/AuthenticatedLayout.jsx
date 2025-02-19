@@ -50,17 +50,17 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
                             <div className="relative ms-3 flex items-center gap-1">
                                 <button type="button" className="inline-flex flex-col items-start rounded-md border border-transparent bg-white px-3 py-2 text-sm font-bold leading-4 text-gray-900 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none justify-start" >
-                                    <img className='w-10 mr-2' src="../public/notificaciones.webp" alt="notificaciones" />
+                                    <img className='w-10 mr-2' src="https://cdn-icons-png.flaticon.com/512/60/60753.png" alt="notificaciones" />
                                 </button>
                                 <div className='block-relative' >
-                                    <img className='object-cover w-12 h-12 rounded-full custom-position' src="../public/user.png" alt="foto usuario" />
+                                    <img className='object-cover w-12 h-12 rounded-full custom-position' src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" alt="foto usuario" />
                                 </div>
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex flex-col items-start rounded-md border border-transparent bg-white px-3 py-2 text-sm font-bold leading-4 text-gray-900 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none justify-start"
+                                                className="inline-flex flex-col items-start rounded-md border border-transparent bg-white px-3 py-2 text-sm font-bold leading-4 text-gray-900 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none justify-start text-start"
                                             >
                                                 {user.name}
                                                 <span className='font-medium text-gray-600'>Investigador Medac</span>

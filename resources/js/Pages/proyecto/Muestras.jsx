@@ -17,7 +17,7 @@ export default function Muestras({ auth, data }) {
     const [VisualizarAbierto, setVisualizarAbierto] = useState(false);
     const [idMuestraSeleccionada, setidMuestraSeleccionada] = useState('') //* Este creo que puedo quitarlo
     const [muestraSeleccionada, setmuestraSeleccionada] = useState('')
-    
+
     const [pagActual, setpagActual] = useState(1)
     const [cantPag, setcantPag] = useState(Math.ceil(muestras.length / 10));
     const [arrayMuestras, setarrayMuestras] = useState(muestras.slice(0, 9))
@@ -57,6 +57,10 @@ export default function Muestras({ auth, data }) {
         setVisualizarAbierto(true);
     };
 
+    const handleRowClick = (e) => {
+        console.log(e)
+    }
+
 
     return (
         <AuthenticatedLayout
@@ -66,7 +70,7 @@ export default function Muestras({ auth, data }) {
             <Head title="Muestras" />
 
             <div className="flex flex-col items-center justify-start min-h-screen bg-[#e5eaf0] pb-10">
-                <div className="p-8 bg-white rounded-md  text-center w-5/6 h-5/6 mt-10">
+                <div className="p-8 bg-white rounded-md  text-center w-5/6 h-5/6 mt-10 max-lg:w-full max-lg:p-2 max-lg:mt-2">
                     <h1 className="text-lg font-semibold text-gray-700 mb-4">
                         Archivo de Muestras
                     </h1>
@@ -89,6 +93,7 @@ export default function Muestras({ auth, data }) {
                                 key={muestra.id}
                                 className="border-b"
                                 id={muestra.id}
+                                onClick={() => handleRowClick(muestra)}
                                 >
                                     <td className="p-2">{muestra.user.name}</td>
                                     <td className="p-2">{muestra.codigo}</td>

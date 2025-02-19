@@ -3,14 +3,16 @@ import React from "react";
 import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
 
 
-export default function ModalEliminar({ id, onClose }) {
+export default function ModalEliminar({ muestra, onClose }) {
 
-    console.log(id);
+    console.log(muestra.id);
+
     const deleteMuestra = () => {
-        router.delete(`muestra/${id}`, {
+        router.delete(`muestra/${muestra.id}`, {
             onSuccess: showModificableAlert('Muestra eliminada', 'Muestra eliminada con éxito', 'success'),
             onError: (error) => showModificableAlert('Error al eliminar la muesta', `Error: ${error}`, 'error')
         })
+        
     }
 
     return (

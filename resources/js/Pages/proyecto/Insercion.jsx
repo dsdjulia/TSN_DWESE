@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import { buscarEstudio } from "@/Components/ListaIC";
 import { showErrorAlert, showSuccessAlert, showModificableAlert } from "../../Components/SweetAlerts";
@@ -132,73 +132,71 @@ export default function Insercion({ auth }) {
                 76: "Levaduras.",
                 77: "Parásitos.",
             },
-            4: {
-                calidad: {
-                    28: "Muestra válida para examen.",
-                    29: "Muestra válida para examen aunque limitada por volumen insuficiente.",
-                    30: "Muestra válida para examen aunque limitada por presencia de sangre.",
-                    31: "Muestra válida para examen aunque limitada por contaminación con saliva.",
-                    32: "Muestra válida para examen aunque limitada por contaminación con secreciones nasales.",
-                    33: "Muestra válida para examen aunque limitada por presencia de alimentos.",
-                    34: "Muestra no valorable por descomposición.",
-                    35: "Muestra no valorable por...",
-                    36: "Muestra no valorable por...",
-                },
-                interpretacion: {
-                    78: "Presencia de células epiteliales escamosas.",
-                    79: "Presencia de células epiteliales columnares.",
-                    80: "Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).",
-                    81: "Presencia de células metaplásicas.",
-                    82: "Presencia de células malignas.",
-                    83: "Presencia de células atípicas sugestivas de neoplasia.",
-                    84: "Presencia de microorganismos (bacterias, hongos, micobacterias).",
-                    85: "Presencia de células sanguíneas (eritrocitos, plaquetas).",
-                    86: "Presencia de material mucoso o mucopurulento.",
-                    87: "Presencia de cristales (de colesterol, calcio, etc.).",
-                    88: "Ausencia de células significativas para el análisis.",
-                },
+        },
+        4: {
+            calidad: {
+                28: "Muestra válida para examen.",
+                29: "Muestra válida para examen aunque limitada por volumen insuficiente.",
+                30: "Muestra válida para examen aunque limitada por presencia de sangre.",
+                31: "Muestra válida para examen aunque limitada por contaminación con saliva.",
+                32: "Muestra válida para examen aunque limitada por contaminación con secreciones nasales.",
+                33: "Muestra válida para examen aunque limitada por presencia de alimentos.",
+                34: "Muestra no valorable por descomposición.",
+                35: "Muestra no valorable por...",
+                36: "Muestra no valorable por...",
             },
-            5: {
-                calidad: {
-                    37: "Muestra válida para examen.",
-                    38: "Muestra válida para examen aunque limitada por cantidad insuficiente de células.",
-                    39: "Muestra válida para examen aunque limitada por presencia de sangre.",
-                    40: "Muestra válida para examen aunque limitada por contaminación con alimentos.",
-                    41: "Muestra válida para examen aunque limitada por contaminación con saliva.",
-                    42: "Muestra válida para examen aunque limitada por...",
-                    43: "Muestra no valorable por deshidratación.",
-                    44: "Muestra no valorable por contaminación con microorganismos.",
-                    45: "Muestra no valorable por...",
-                },
-                interpretacion: {
-                    89: "Presencia de células epiteliales escamosas.",
-                    90: "Presencia de células epiteliales cilíndricas.",
-                    91: "Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).",
-                    92: "Presencia de células glandulares.",
-                    93: "Presencia de células metaplásicas.",
-                    94: "Presencia de células atípicas sugestivas de neoplasia.",
-                    95: "Presencia de microorganismos (bacterias, hongos, levaduras).",
-                    96: "Presencia de células anormales con cambios citológicos.",
-                    97: "Ausencia de células significativas para el análisis.",
-                },
+            interpretacion: {
+                78: "Presencia de células epiteliales escamosas.",
+                79: "Presencia de células epiteliales columnares.",
+                80: "Presencia de células inflamatorias (neutrófilos, linfocitos, eosinófilos, macrófagos).",
+                81: "Presencia de células metaplásicas.",
+                82: "Presencia de células malignas.",
+                83: "Presencia de células atípicas sugestivas de neoplasia.",
+                84: "Presencia de microorganismos (bacterias, hongos, micobacterias).",
+                85: "Presencia de células sanguíneas (eritrocitos, plaquetas).",
+                86: "Presencia de material mucoso o mucopurulento.",
+                87: "Presencia de cristales (de colesterol, calcio, etc.).",
+                88: "Ausencia de células significativas para el análisis.",
             },
         },
-    };
+        5: {
+            calidad: {
+                37: "Muestra válida para examen.",
+                38: "Muestra válida para examen aunque limitada por cantidad insuficiente de células.",
+                39: "Muestra válida para examen aunque limitada por presencia de sangre.",
+                40: "Muestra válida para examen aunque limitada por contaminación con alimentos.",
+                41: "Muestra válida para examen aunque limitada por contaminación con saliva.",
+                42: "Muestra válida para examen aunque limitada por...",
+                43: "Muestra no valorable por deshidratación.",
+                44: "Muestra no valorable por contaminación con microorganismos.",
+                45: "Muestra no valorable por...",
+            },
+            interpretacion: {
+                89: "Presencia de células epiteliales escamosas.",
+                90: "Presencia de células epiteliales cilíndricas.",
+                91: "Presencia de células inflamatorias (neutrófilos, linfocitos, macrófagos).",
+                92: "Presencia de células glandulares.",
+                93: "Presencia de células metaplásicas.",
+                94: "Presencia de células atípicas sugestivas de neoplasia.",
+                95: "Presencia de microorganismos (bacterias, hongos, levaduras).",
+                96: "Presencia de células anormales con cambios citológicos.",
+                97: "Ausencia de células significativas para el análisis.",
+            },
+        },
+    }
 
-
-
-
-    // Ahora debo sacar esto del metodo
 
     const [biopsiaHidden, setBiopsiaHidden] = useState('hidden') // Aquí modifico la selección
     const [calidadHidden, setCalidadHidden] = useState('hidden') // Aquí modifico la selección
 
-    const [calidadSeleccionada, setCalidadSeleccionada] = useState('') // Aquí modifico la selección
-    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') // Aquí modifico la selección
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState('') 
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState('') 
 
     const [arrayImagenes, setArrayImagenes] = useState([])
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([])
     const [interpretaciones, setInterpretaciones] = useState([]);
+    const [isReady, setIsReady] = useState(false);
+
 
     // const idSede = localStorage.getItem('usuarioActivo')
     // const idSedeObjeto = JSON.parse(idSede)
@@ -216,15 +214,20 @@ export default function Insercion({ auth }) {
         calidad: "",
         descripcionCalidad: "",
         tipoEstudio: "",
-        idUser: idUser, // Esto hay que sacarlo del login
+        idUser: idUser,
         idSede: idSede,
         interpretacion: [],
+        imagenes: [],
     });
+
+    useEffect(() => {
+        console.log(form);
+    }, [form]);
 
 
     const handleData = (e) => {
         setForm({...form , [e.target.name]: [e.target.value]}) // uso ...form para no eliminar los demas datos al modificar
-        console.log(form);
+        // console.log(form);
     }
 
     const handleSelect = (seleccion) => {
@@ -269,68 +272,98 @@ export default function Insercion({ auth }) {
     }
 
 
-
-
-    const handlePhotos = (photo) => {
+    const handlePhotos = (photo) => { // Esto muestra las fotos subidas en la pagina
         const urlImagen = photo.target.files[0]
-        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]) // Esto crea la url en el dispositivo que se usa
+        setArrayImagenes([...arrayImagenes, {url: URL.createObjectURL(urlImagen), nombre: urlImagen.name}])
 
-        console.log(arrayImagenes);
     }
 
-    const handleUploadPhotos = (photo) => { // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
-        const arrayFotos = photo.target.files
-        arrayFotos.forEach(foto => {
-            setArrayImagenesUpload([...arrayImagenesUpload, foto])
-        });
+    const handleUploadPhotos = (photo) => { // Con esto guardo cada foto que se suba
+        const fotoSeleccionada = photo.target.files[0]
+        setArrayImagenesUpload([...arrayImagenesUpload, fotoSeleccionada])
     }
+    
+
+    const handleUpload = async () => {
+
+        if (arrayImagenesUpload.length !== 0) { // Comprobamos que haya alguna imagen para subir 
+            const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dcdvxqsxn/image/upload`;
+            const uploadPreset = "default";
+            
+            
+            const formData = new FormData();
+            const uploadToCloudinary = async (image) => {
+                formData.append("file", image); // La imagen
+                formData.append("upload_preset", uploadPreset); // Preset de subida
+    
+                try {
+                    const response = await fetch(cloudinaryUrl, {
+                        method: "POST",
+                        body: formData,
+                    });
+                    const data = await response.json();
+                    if (response.ok) {
+                        console.log("Subida exitosa:", [data,data.url,data.public_id,data.original_filename]);
+                        return data; // Devolvemos solo el ID público de la imagen
+                    } else {
+                        console.error("Error al subir imagen:", data.error.message);
+                    }
+                } catch (error) {
+                    console.error("Error al conectar con Cloudinary:", error);
+                }
+                return null; // Si algo falla, retornamos null
+            };
+    
+            // Subimos las imágenes usando Promise.all
+            const uploadPromises = arrayImagenesUpload.map((image) => uploadToCloudinary(image));
+            const publicIds = await Promise.all(uploadPromises);
+    
+            // Filtramos los IDs públicos válidos y actualizamos el estado del formulario
+            const validPublicIds = publicIds.filter((id) => id !== null);
+            // console.log("Public IDs subidos a Cloudinary:", validPublicIds);
+    
+            // Actualizamos el estado del formulario para enviar los IDs públicos al backend
+            setForm((prevForm) => ({
+                ...prevForm,
+                imagenes: validPublicIds, // Almacenamos solo los IDs públicos
+            }));
+        }
+        setIsReady(True) // Una vez se hayan subido las fotos enviamos el form con los datos
+    };
+    
 
 
     const handleDeletePhoto = (seleccion) => {
 
-        const photoDeleted = seleccion.target.parentElement.querySelector('img').src // Guardamos la ruta de la imagen que hemos borrado
-        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img !== photoDeleted)); // quito del array la imagen eliminada
-        console.log(arrayImagenes);
+        const nombreImagen = seleccion.target.parentElement.querySelector('img').name;
+        const photoDeleted = seleccion.target.parentElement.querySelector('img').src 
+        
+        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img.url !== photoDeleted)); // quito del array la imagen eliminada
+        setArrayImagenesUpload((arrayImagenesUpload) => arrayImagenesUpload.filter((img) => img.name !== nombreImagen)); // filtro la imagen por el nombre
+        
+
     }
 
     const recogerInterpretaciones = () => {
 
-        const interpretaciones = document.querySelectorAll('#interpretacionAdicional')
-        interpretaciones.forEach(interpretacionAdicional => {
-            setForm({...form, interpretacion: [...form.interpretacion, interpretacionAdicional.value]})
-        });
-    }
-
+        const interpretaciones = document.querySelectorAll('#interpretacionAdicional');
     
-    const handleUpload = async () => {
-        
-        handleUploadPhotos()
-        
-        if (arrayImagenesUpload.length !== 0) {
+        interpretaciones.forEach(interpretacionAdicional => {
             
-            const formData = new FormData();
-            
-            arrayImagenesUpload.forEach((image, index) => {
-                formData.append(`images[]`, image); // Enviar cada imagen
-            });
-            
-            try {
-                const res = await fetch("/api/upload", {
-                    method: "POST",
-                    body: formData,
-                });
-                
-                const data = await res.json();
-                console.log("Imágenes subidas con éxito:", data);
-                
-            } catch (error) {
-                alert("Error subiendo las imágenes");
-            }
-            
-        }
+            const nuevaInterpretacion = {
+                id: interpretacionAdicional.value,
+                descripcion: interpretacionAdicional.options[interpretacionAdicional.selectedIndex].text
+            };
+    
+            // Usamos setForm con la función de actualización para asegurar que se agregue correctamente a las interpretaciones
+            setForm(prevForm => ({
+                ...prevForm,
+                interpretacion: [...prevForm.interpretacion, nuevaInterpretacion],
+            }));
+        });
     };
     
-    
+
     const agregarInterpretacion = () => {
         setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
     };
@@ -372,11 +405,12 @@ export default function Insercion({ auth }) {
             showModificableAlert('Rellene todos los campos', 'La descripción de la calidad se encuentra vacía', 'error')
             return false
             
-        } else if (form.interpretacion.length < 1){
-            showModificableAlert('Rellene todos los campos', 'La interpretación se encuentra vacía', 'error')
-            return false
+        } 
+        // else if (form.interpretacion.length < 1){
+        //     showModificableAlert('Rellene todos los campos', 'La interpretación se encuentra vacía', 'error')
+        //     return false
             
-        }
+        // }
 
 
         return true
@@ -384,14 +418,24 @@ export default function Insercion({ auth }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+    
         if (validarFormulario()) {
-            recogerInterpretaciones();
             handleUpload();
-            router.post("muestra", form);
+            recogerInterpretaciones();
             showSuccessAlert();
         }
     };
+    
+    // Enviar los datos solo cuando form haya actualizado los datos
+    useEffect(() => {
+            // console.log(form);
+            if(isReady){ // Que solo se ejecute si es true
+                router.post("muestra", form);
+                setIsReady(false)
+            }
+    }, [isReady])
+
+    
 
     return (
         <AuthenticatedLayout
@@ -518,7 +562,6 @@ export default function Insercion({ auth }) {
                                 <option value="">
                                     Seleccione un tipo de estudio
                                 </option>
-                                {/* Me joden el organo biopsiado */}
                                 <option value="1">Citológico cérvico - vaginal</option> 
                                 <option value="2">Hematológico completo</option>
                                 <option value="3">Microscópico y químico de orina</option>
@@ -584,7 +627,7 @@ export default function Insercion({ auth }) {
                                     for="detalles_calidad_muestra"
                                     className="block text-sm font-semibold text-gray-700"
                                     >
-                                    Calidad de la muestra
+                                    Descripción de la calidad de la muestra
                                 </label>
                             <input type="text" className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm" name="descripcionCalidad" onChange={handleData}></input>
                         </div>
@@ -597,10 +640,9 @@ export default function Insercion({ auth }) {
                                 Interpretación
                             </label>
                             <select
-                                id="interpretacion"
-                                name="interpretacion"
+                                id="interpretacionAdicional"
+                                name="interpretacionAdicional"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm "
-                                onChange={handleData}
                             >
                                 <option value="">
                                     Seleccione interpretación
@@ -639,7 +681,7 @@ export default function Insercion({ auth }) {
                             >
                                 Añadir imágenes
                             </label>
-                            <input onChange={handlePhotos}
+                            <input onChange={(e) => {handlePhotos(e), handleUploadPhotos(e)}}
                                 type="file"
                                 id="imagenes"
                                 name="imagenes"
@@ -655,7 +697,8 @@ export default function Insercion({ auth }) {
                             {arrayImagenes.map((photo) => (
                                 <div className="relative w-auto h-32 inline-block">
                                     <img
-                                        src={photo}
+                                        src={photo.url}
+                                        name={photo.nombre}
                                         className="w-auto h-32 object-cover rounded-lg"
                                     />
                                     <button
@@ -686,5 +729,5 @@ export default function Insercion({ auth }) {
             </div>
             <Footer/>
         </AuthenticatedLayout>
-    );
+);
 }

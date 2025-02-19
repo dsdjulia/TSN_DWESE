@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Imagen;
 use App\Models\Muestra;
 use Illuminate\Http\Request;
+use App\Models\Interpretacion;
 use Database\Seeders\MuestraSeeder;
+use App\Models\Muestra_Interpretacion;
 use Illuminate\Support\Facades\Validator;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class MuestraController extends Controller
 {
@@ -31,7 +35,10 @@ class MuestraController extends Controller
             'tipoNaturaleza:id,nombre',
             'user:id,name',
             'formato:id,nombre',
-            'sede:id,nombre'
+            'sede:id,nombre',
+            'calidad',
+            'formato',
+            'muestras_interpretaciones',
         ])->get();
 
         if ($muestras->isEmpty()) {
@@ -52,13 +59,14 @@ class MuestraController extends Controller
 
     public function insertMuestra(Request $request){
 
+        //dd($request->all());
         $data = [
             // Request
             'codigo' => $request->input('codigoMuestra')[0], // Le pasaba un array con 1 solo valor
             'idTipoNaturaleza' => intval($request->input('tipoNaturaleza')[0]),
             'idFormato' => intval($request->input('formato')[0]),
             'idCalidad' => intval($request->input('calidad')[0]),
-            'descripcionCalidad' => $request->input('descripcionCalidad'),
+            'descripcionCalidad' => $request->input('descripcionCalidad')[0] ?? null,
             'organo' => $request->input('organo'),
             'fecha' => $request->input('fecha')[0], // Le pasaba un array con 1 solo valor
             
@@ -67,7 +75,6 @@ class MuestraController extends Controller
             'idSede' => intval($request->input('idSede')),
             'created_at' => date("Y-m-d"),
             'updated_at' => date("Y-m-d"),
-
         ];
 
         $validacion = $this->validatorMuestras($data);
@@ -77,6 +84,20 @@ class MuestraController extends Controller
         }else{
 
             $muestra = Muestra::create($data);
+            $imgs = $request->input('imagenes');
+
+            if (!empty($imgs)) {
+                foreach ($imgs as $imagen) {
+                    Imagen::create([
+                        'idMuestra' => $muestra->id, 
+                        'idPublica' => $imagen['public_id'],  
+                        'ruta' => $imagen['secure_url'],  
+                        'zoom' => "GG",
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
 
             $muestras = Muestra::with([
                 'tipoNaturaleza:id,nombre',
@@ -84,8 +105,22 @@ class MuestraController extends Controller
                 'formato:id,nombre',
                 'sede:id,nombre'
             ])->get();
+        
+            $intepretaciones = $request->input('interpretacion');
+            // dd($intepretaciones);
 
-            return redirect()->route('muestras',$muestras);         
+            foreach ($intepretaciones as $interpretacion) {
+                $dataInterpretacion = [
+                    'descripcion' => $interpretacion['descripcion'],
+                    'idMuestra' => $muestra->id, // Le doy el id de la muestra creada
+                    'idInterpretacion' => $interpretacion['id'],
+                ];
+
+                $muestraInterpretacion = Muestra_Interpretacion::create($dataInterpretacion);
+                // dd($muestraInterpretacion);
+            }
+
+            return redirect()->route('muestras',$muestras);
         }
     }
 
@@ -102,7 +137,7 @@ class MuestraController extends Controller
             'idTipoNaturaleza' => intval($request->input('tipoNaturaleza')),
             'idFormato' => intval($request->input('formato')),
             'idCalidad' => intval($request->input('calidad')),
-            'descripcionCalidad' => $request->input('descripcionCalidad'),
+            'descripcionCalidad' => $request->input('descripcionCalidad') ?? [],
             'organo' => $request->input('organo'),
             'fecha' => $request->input('fecha')[0], // Le pasaba un array con 1 solo valor
             
@@ -120,6 +155,25 @@ class MuestraController extends Controller
 
         $muestra->update($data);
 
+        $imgs = $request->input('imagenes');
+        if ($imgs) {
+            $imagenesAntiguas = Imagen::where('idMuestra', $muestra->id)->get();
+            foreach ($imagenesAntiguas as $imagen) {
+                Cloudinary::destroy($imagen->public_id);
+                $imagen->delete();
+            }
+                foreach ($imgs as $imagen) {
+                Imagen::create([
+                    'idMuestra' => $muestra->id, 
+                    'idPublica' => $imagen['public_id'],  
+                    'ruta' => $imagen['secure_url'],  
+                    'zoom' => "GG",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
+
         $muestras = Muestra::with([
             'tipoNaturaleza:id,nombre',
             'user:id,name',
@@ -132,10 +186,22 @@ class MuestraController extends Controller
 
     public function deleteMuestra($idMuestra){
         $muestra = Muestra::find($idMuestra);
-
         if(!$muestra){
             return response()->json(["error" => "Muestra no encontrada"]);
         }
+
+        // Borrado de imagenes
+        $imagenes = Imagen::where('idMuestra', $muestra->id)->get();
+
+        if ($imagenes->isNotEmpty()) {
+            foreach ($imagenes as $imagen) {
+                Cloudinary::destroy($imagen->idPublica);
+                $imagen->delete();
+            }
+        }
+
+        // Borrar las interpretaciones asociadas a la muestra
+        Muestra_Interpretacion::where('idMuestra', $muestra->id)->delete();
 
         $muestra->delete();
 
@@ -146,7 +212,10 @@ class MuestraController extends Controller
             'sede:id,nombre'
         ])->get();
 
-        return response()->json("data",$muestras);
+        return response()->json([
+            'message' => 'Muestra eliminada correctamente',
+            'muestras' => $muestras
+        ]);
     }
 
     public function validatorMuestras($datos){
@@ -163,6 +232,8 @@ class MuestraController extends Controller
             'idSede' => 'required|integer|between:1,15',
             'created_at' =>' nullable|date_format:Y-m-d',
             'updated_at' => 'nullable|date_format:Y-m-d',
+
+            'imagenes' => '',
         ]);
         
         return $validator;

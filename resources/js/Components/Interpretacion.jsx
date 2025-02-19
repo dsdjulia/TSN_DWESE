@@ -7,7 +7,7 @@ const Interpretacion = ({ id, onRemove, interpretaciones }) => {
             <div className="flex justify-center items-center h-">
                 <select
                     id={`interpretacionAdicional`}
-                    name={`interpretacion-${id}`}
+                    name={id}
                     className="p-3 w-full border border-gray-300 rounded-md shadow-sm"
                 >
                     <option value="">Seleccione interpretación</option>

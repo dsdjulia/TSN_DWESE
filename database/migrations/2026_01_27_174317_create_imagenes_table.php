@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('imagenes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('idMuestra')->constrained('muestras')->onDelete('cascade');
+            $table->string('idPublica');
             $table->string('ruta');
-            $table->string('zoom');
+            $table->string('zoom')->nullable();
             $table->timestamps();
-
-            $table->unsignedBigInteger('idMuestra');
-
-            $table->foreign('idMuestra')->references('id')->on('muestras')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

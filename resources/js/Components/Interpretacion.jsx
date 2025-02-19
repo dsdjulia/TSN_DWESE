@@ -10,7 +10,7 @@ const Interpretacion = ({ id, onRemove, interpretaciones, idInterpretacionSelecc
                     name={id}
                     className="p-3 w-full border border-gray-300 rounded-md shadow-sm"
                 >
-                    <option value={idInterpretacionSeleccionada}>{descripcionInterpretacionSeleccionada}</option>
+                    <option value={idInterpretacionSeleccionada ?? ''}>{descripcionInterpretacionSeleccionada ?? 'Seleccione una descripción'}</option>
                     {/* Opciones dinámicas aquí */}
                     {Object.entries(interpretaciones).map(
                                     (

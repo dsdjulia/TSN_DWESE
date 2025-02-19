@@ -1,7 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useState, useEffect } from "react";
 import { Head, Link, router, usePage } from "@inertiajs/react";
-import { buscarEstudio } from "@/Components/ListaIC";
 import {
     showErrorAlert,
     showSuccessAlert,
@@ -11,7 +10,6 @@ import Interpretacion from "@/Components/Interpretacion";
 import Footer from "@/Components/Footer";
 
 export default function ModalModificar({ id, onClose, muestra }) {
-
     const datos = {
         1: {
             calidad: {
@@ -26,36 +24,36 @@ export default function ModalModificar({ id, onClose, muestra }) {
                 9: "Toma no valorable por...",
             },
             interpretacion: {
-                1: 'Predominio de células epiteliales escamosas superficiales.',
-                2: 'Predominio de células epiteliales escamosas intermedias.',
-                3: 'Predominio de células epiteliales escamosas parabasales.',
-                4: 'Polinucleares neutrófilos.',
-                5: 'Hematíes.',
-                6: 'Células endocervicales en exocervix.',
-                7: 'Células metaplásicas en exocérvix.',
-                8: 'Células metaplásicas inmaduras.',
-                9: 'Células reactivas.',
-                10: 'Células endometriales en mujer ≥ de 40 años.',
-                11: 'Alteraciones celulares sugerentes con HPV.',
-                12: 'Alteraciones celulares sugerentes de Herpes.',
-                13: 'Células neoplásicas.',
-                14: 'Células superficiales e intermedias con cambios atípicos.',
-                15: 'Células intermedias y parabasales con algunos cambios atípicos.',
-                16: 'Células parabasales con algunos cambios atípicos.',
-                17: 'Células escamosas de significado incierto.',
-                18: 'Células epiteliales glandulares de significado incierto.',
-                19: 'Estructuras micóticas correspondientes a Candida albicans.',
-                20: 'Estructuras micóticas correspondientes a Candida glabrata.',
-                21: 'Estructuras bacterianas con disposición característica de actinomyces.',
-                22: 'Estructuras bacterianas correspondiente de Gardnerella vaginalis.',
-                23: 'Estructuras bacterianas de naturaleza cocácea.',
-                24: 'Estructuras bacterianas sugerentes de Leptothrix.',
-                25: 'Estructuras correspondientes a Trichomonas vaginalis.',
-                26: 'Células histiocitarias multinucleadas.',
-                27: 'Células epiteliales de tipo escamoso con intensos cambios atípicos.',
-                28: 'Presencia de epitelio endometrial sin cambios atípicos.',
-                29: 'Células epiteliales de apariencia glandular con núcleos amplios e irregulares.'
-            }
+                1: "Predominio de células epiteliales escamosas superficiales.",
+                2: "Predominio de células epiteliales escamosas intermedias.",
+                3: "Predominio de células epiteliales escamosas parabasales.",
+                4: "Polinucleares neutrófilos.",
+                5: "Hematíes.",
+                6: "Células endocervicales en exocervix.",
+                7: "Células metaplásicas en exocérvix.",
+                8: "Células metaplásicas inmaduras.",
+                9: "Células reactivas.",
+                10: "Células endometriales en mujer ≥ de 40 años.",
+                11: "Alteraciones celulares sugerentes con HPV.",
+                12: "Alteraciones celulares sugerentes de Herpes.",
+                13: "Células neoplásicas.",
+                14: "Células superficiales e intermedias con cambios atípicos.",
+                15: "Células intermedias y parabasales con algunos cambios atípicos.",
+                16: "Células parabasales con algunos cambios atípicos.",
+                17: "Células escamosas de significado incierto.",
+                18: "Células epiteliales glandulares de significado incierto.",
+                19: "Estructuras micóticas correspondientes a Candida albicans.",
+                20: "Estructuras micóticas correspondientes a Candida glabrata.",
+                21: "Estructuras bacterianas con disposición característica de actinomyces.",
+                22: "Estructuras bacterianas correspondiente de Gardnerella vaginalis.",
+                23: "Estructuras bacterianas de naturaleza cocácea.",
+                24: "Estructuras bacterianas sugerentes de Leptothrix.",
+                25: "Estructuras correspondientes a Trichomonas vaginalis.",
+                26: "Células histiocitarias multinucleadas.",
+                27: "Células epiteliales de tipo escamoso con intensos cambios atípicos.",
+                28: "Presencia de epitelio endometrial sin cambios atípicos.",
+                29: "Células epiteliales de apariencia glandular con núcleos amplios e irregulares.",
+            },
         },
         2: {
             calidad: {
@@ -70,27 +68,27 @@ export default function ModalModificar({ id, onClose, muestra }) {
                 18: "Muestra no valorable por...",
             },
             interpretacion: {
-                30: 'Predominio de eritrocitos normocíticos normocrómicos.',
-                31: 'Predominio de eritrocitos microcíticos hipocrómicos.',
-                32: 'Presencia de esferocitos.',
-                33: 'Presencia de dianocitos (células en forma de lágrima).',
-                34: 'Leucocitos con predominio de neutrófilos.',
-                35: 'Leucocitos con predominio de linfocitos.',
-                36: 'Presencia de células blásticas.',
-                37: 'Presencia de eosinófilos aumentados.',
-                38: 'Presencia de basófilos aumentados.',
-                39: 'Trombocitosis (aumento de plaquetas).',
-                40: 'Trombocitopenia (disminución de plaquetas).',
-                41: 'Anomalías en la morfología plaquetaria.',
-                42: 'Presencia de células atípicas sugestivas de neoplasia.',
-                43: 'Presencia de células inmaduras del linaje mieloide.',
-                44: 'Presencia de células inmaduras del linaje linfático.',
-                45: 'Anisocitosis (variabilidad en el tamaño de los eritrocitos).',
-                46: 'Poiquilocitosis (variabilidad en la forma de los eritrocitos).',
-                47: 'Presencia de cuerpos de Howell-Jolly.',
-                48: 'Células con inclusiones de hierro (cuerpos de Pappenheimer).',
-                49: 'Presencia de parásitos intraeritrocitarios.'
-            }
+                30: "Predominio de eritrocitos normocíticos normocrómicos.",
+                31: "Predominio de eritrocitos microcíticos hipocrómicos.",
+                32: "Presencia de esferocitos.",
+                33: "Presencia de dianocitos (células en forma de lágrima).",
+                34: "Leucocitos con predominio de neutrófilos.",
+                35: "Leucocitos con predominio de linfocitos.",
+                36: "Presencia de células blásticas.",
+                37: "Presencia de eosinófilos aumentados.",
+                38: "Presencia de basófilos aumentados.",
+                39: "Trombocitosis (aumento de plaquetas).",
+                40: "Trombocitopenia (disminución de plaquetas).",
+                41: "Anomalías en la morfología plaquetaria.",
+                42: "Presencia de células atípicas sugestivas de neoplasia.",
+                43: "Presencia de células inmaduras del linaje mieloide.",
+                44: "Presencia de células inmaduras del linaje linfático.",
+                45: "Anisocitosis (variabilidad en el tamaño de los eritrocitos).",
+                46: "Poiquilocitosis (variabilidad en la forma de los eritrocitos).",
+                47: "Presencia de cuerpos de Howell-Jolly.",
+                48: "Células con inclusiones de hierro (cuerpos de Pappenheimer).",
+                49: "Presencia de parásitos intraeritrocitarios.",
+            },
         },
         3: {
             calidad: {
@@ -185,7 +183,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
                 97: "Ausencia de células significativas para el análisis.",
             },
         },
-    }
+    };
     console.log(muestra);
 
     // Ahora debo sacar esto del metodo
@@ -193,8 +191,11 @@ export default function ModalModificar({ id, onClose, muestra }) {
     const [biopsiaHidden, setBiopsiaHidden] = useState("hidden"); // Aquí modifico la selección
     const [calidadHidden, setCalidadHidden] = useState("hidden"); // Aquí modifico la selección
 
-    const [calidadSeleccionada, setCalidadSeleccionada] = useState(muestra.idCalidad); // Aquí modifico la selección
-    const [interpretacionSeleccionada, setInterpretacionSeleccionada] = useState(""); // Aquí modifico la selección
+    const [calidadSeleccionada, setCalidadSeleccionada] = useState(
+        muestra.idCalidad
+    ); // Aquí modifico la selección
+    const [interpretacionSeleccionada, setInterpretacionSeleccionada] =
+        useState(""); // Aquí modifico la selección
 
     const [arrayImagenes, setArrayImagenes] = useState([]);
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([]);
@@ -216,7 +217,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
         idUser: idUser,
         idSede: idSede,
         interpretacion: muestra.muestras_interpretaciones,
-        imagenes: []
+        imagenes: [],
     });
 
     const handleData = (e) => {
@@ -332,7 +333,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
     const agregarInterpretacion = () => {
         setInterpretaciones([
             ...interpretaciones,
-            { id: interpretaciones.length },
+            { id: interpretaciones.length},
         ]);
     };
 
@@ -428,14 +429,14 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     // console.log(form.tipoNaturaleza);
 
-    const [tipoEstudio, settipoEstudio] = useState('')
+    const [tipoEstudio, settipoEstudio] = useState("");
 
     useEffect(() => {
         if (muestra?.idTipoNaturaleza == "1" || muestra?.idTipoNaturaleza == "2") {
             setBiopsiaHidden("mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm");
         }
 
-        const claveTipoEstudio = muestra.calidad.idTipoEstudio
+        const claveTipoEstudio = muestra.calidad.idTipoEstudio;
         if (muestra.calidad.idTipoEstudio in datos) {
             // evaluamos si el valor seleccionado tiene calidad e interpretacion propias
             setCalidadSeleccionada(datos[claveTipoEstudio].calidad);
@@ -443,14 +444,14 @@ export default function ModalModificar({ id, onClose, muestra }) {
         }
 
         const tipoEstudios = {
-            1: {nombre: 'Citológico cérvico - vaginal'},
-            2: {nombre: 'Hematológico completo'},
-            3: {nombre: 'Microscópico y químico de orina'},
-            4: {nombre: ' Citológico de esputo'},
-            5: {nombre: 'Citológico bucal'},
-        }
+            1: { nombre: "Citológico cérvico - vaginal" },
+            2: { nombre: "Hematológico completo" },
+            3: { nombre: "Microscópico y químico de orina" },
+            4: { nombre: " Citológico de esputo" },
+            5: { nombre: "Citológico bucal" },
+        };
 
-        settipoEstudio(tipoEstudios[claveTipoEstudio].nombre)
+        settipoEstudio(tipoEstudios[claveTipoEstudio].nombre);
 
         if (muestra.calidad.nombre[muestra.calidad.nombre.length - 2] === ".") {
             setCalidadHidden(
@@ -465,10 +466,6 @@ export default function ModalModificar({ id, onClose, muestra }) {
         //         id: interpretacion.id,
         //     })),
         // ]);
-        
-
-
-
     }, [muestra]); // Se ejecuta cuando cambia `muestra`
 
     return (
@@ -541,13 +538,14 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             <option value="Útero">Útero</option>
                             <option value="Ovario">Ovario</option>
                             <option value="Intestino">Intestino</option>
-                            <option value="Trompa de Falopio">Trompa de Falopio</option>
+                            <option value="Trompa de Falopio">
+                                Trompa de Falopio
+                            </option>
                             <option value="Esófago">Esófago</option>
                             <option value="Páncreas">Páncreas</option>
                             <option value="Testículo">Testículo</option>
                             <option value="Piel">Piel</option>
                             <option value="Pulmón">Pulmón</option>
-
                         </select>
                     </div>
 
@@ -567,10 +565,19 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             name="tipoEstudio"
                             className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                         >
-                            <option value={muestra.calidad.idTipoEstudio}> {tipoEstudio} </option>
-                            <option value="1"> Citológico cérvico - vaginal </option>
+                            <option value={muestra.calidad.idTipoEstudio}>
+                                {" "}
+                                {tipoEstudio}{" "}
+                            </option>
+                            <option value="1">
+                                {" "}
+                                Citológico cérvico - vaginal{" "}
+                            </option>
                             <option value="2"> Hematológico completo</option>
-                            <option value="3"> Microscópico y químico de orina</option>
+                            <option value="3">
+                                {" "}
+                                Microscópico y químico de orina
+                            </option>
                             <option value="4"> Citológico de esputo</option>
                             <option value="5"> Citológico bucal</option>
                         </select>
@@ -641,7 +648,6 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                             disabled
                             value={muestra.descripcionCalidad}
-                            
                         ></input>
                         <input
                             type="text"
@@ -649,7 +655,6 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             name="descripcionCalidad"
                             placeholder="Nueva descripción"
                             onChange={handleData}
-                            
                         ></input>
                     </div>
 
@@ -660,23 +665,41 @@ export default function ModalModificar({ id, onClose, muestra }) {
                         >
                             Interpretación
                         </label>
-
-                        {muestra.muestras_interpretaciones.map((interpretacion) => (
-                            <Interpretacion
-                                key={interpretacion.id}
-                                id={interpretacion.id}
-                                onRemove={eliminarInterpretacion}
-                                interpretaciones={interpretaciones} // Pasamos todas las interpretaciones para el select
-                                idInterpretacionSeleccionada={interpretacion.id}
-                                descripcionInterpretacionSeleccionada={interpretacion.descripcion}
-                            />
-                        ))}
+{/* Imprimimos las interpretaciones de la muestra */}
+                        {muestra.muestras_interpretaciones.map(
+                            (interpretacion) => (
+                                <Interpretacion
+                                    key={interpretacion.id}
+                                    id={interpretacion.id}
+                                    onRemove={eliminarInterpretacion}
+                                    interpretaciones={interpretaciones} // Pasamos todas las interpretaciones para el select
+                                    idInterpretacionSeleccionada={
+                                        interpretacion.id
+                                    }
+                                    descripcionInterpretacionSeleccionada={
+                                        interpretacion.descripcion
+                                    }
+                                />
+                            )
+                        )}
                     </div>
 
+{/* Imprimimos las nuevas interpretaciones */}
+                        {interpretaciones.map(item => (
+                            <Interpretacion
+                                key={item.id}
+                                id={item.id}
+                                onRemove={eliminarInterpretacion}
+                                interpretaciones={interpretacionSeleccionada}
+                            />
+                        ))}
 
-
-                    <button className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 mb-6 font-bold text-gray-700" onClick={agregarInterpretacion}>Añadir interpretación</button>
-
+                    <button
+                        className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 mb-6 font-bold text-gray-700"
+                        onClick={agregarInterpretacion}
+                    >
+                        Añadir interpretación
+                    </button>
 
                     <hr className="my-4 border-gray-300 mb-10 mt-10" />
 

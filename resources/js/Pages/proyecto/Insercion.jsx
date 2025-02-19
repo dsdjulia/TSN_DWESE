@@ -295,8 +295,8 @@ export default function Insercion({ auth }) {
             const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dcdvxqsxn/image/upload`;
             const uploadPreset = "default";
             
+            
             const formData = new FormData();
-    
             const uploadToCloudinary = async (image) => {
                 formData.append("file", image); // La imagen
                 formData.append("upload_preset", uploadPreset); // Preset de subida
@@ -308,8 +308,8 @@ export default function Insercion({ auth }) {
                     });
                     const data = await response.json();
                     if (response.ok) {
-                        console.log("Subida exitosa:", data);
-                        return data.public_id; // Devolvemos solo el ID público de la imagen
+                        console.log("Subida exitosa:", [data,data.url,data.public_id,data.original_filename]);
+                        return data; // Devolvemos solo el ID público de la imagen
                     } else {
                         console.error("Error al subir imagen:", data.error.message);
                     }
@@ -325,7 +325,7 @@ export default function Insercion({ auth }) {
     
             // Filtramos los IDs públicos válidos y actualizamos el estado del formulario
             const validPublicIds = publicIds.filter((id) => id !== null);
-            console.log("Public IDs subidos a Cloudinary:", validPublicIds);
+            // console.log("Public IDs subidos a Cloudinary:", validPublicIds);
     
             // Actualizamos el estado del formulario para enviar los IDs públicos al backend
             setForm((prevForm) => ({
@@ -345,8 +345,8 @@ export default function Insercion({ auth }) {
         setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img.url !== photoDeleted)); // quito del array la imagen eliminada
         setArrayImagenesUpload((arrayImagenesUpload) => arrayImagenesUpload.filter((img) => img.name !== nombreImagen)); // filtro la imagen por el nombre
         
-        console.log(nombreImagen);
-        console.log(arrayImagenesUpload);
+        // console.log(nombreImagen);
+        // console.log(arrayImagenesUpload);
 
     }
 
@@ -435,7 +435,7 @@ export default function Insercion({ auth }) {
     
     // Enviar los datos solo cuando form haya actualizado los datos
     useEffect(() => {
-            console.log(form);
+            // console.log(form);
             router.post("muestra", form);
             // setIsReady(false);
     }, [form.imagenes])

@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import { buscarEstudio } from "@/Components/ListaIC";
 import {
@@ -429,11 +429,11 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     // console.log(form.tipoNaturaleza);
 
-    const onPageLoad = () => {
-        
-    };
-
-    onPageLoad();
+    useEffect(() => {
+        if (muestra?.idTipoNaturaleza === "1" || muestra?.idTipoNaturaleza === "2") {
+            setBiopsiaHidden("mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm");
+        }
+    }, [muestra]); // Se ejecuta cuando cambia `muestra`
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 flex-col">
@@ -583,8 +583,8 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             name="calidad"
                             className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                         >
-                            <option value={muestra.idCalidad}>
-                                {muestra.idCalidad}
+                            <option value={muestra.calidad.id}>
+                                {muestra.calidad.nombre}
                             </option>
 
                             {Object.entries(calidadSeleccionada).map(

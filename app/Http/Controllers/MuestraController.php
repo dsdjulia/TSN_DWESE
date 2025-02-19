@@ -59,7 +59,7 @@ class MuestraController extends Controller
 
     public function insertMuestra(Request $request){
 
-        // dd($request);
+        //dd($request->all());
         $data = [
             // Request
             'codigo' => $request->input('codigoMuestra')[0], // Le pasaba un array con 1 solo valor
@@ -84,15 +84,19 @@ class MuestraController extends Controller
         }else{
 
             $muestra = Muestra::create($data);
+            $imgs = $request->input('imagenes');
 
-            foreach ($request->file('imagenes') as $imagen) {
-                $upload = Cloudinary::upload($imagen->getRealPath(),['folder'=>'imgMuestras']);
-        
-                Imagen::create([
-                    'muestra_id' => $muestra->id,  // Relacionamos la imagen con la muestra
-                    'url' => $upload->getSecurePath(),
-                    'public_id' => $upload->getPublicId(),
-                ]);
+            if (!empty($imgs)) {
+                foreach ($imgs as $imagen) {
+                    Imagen::create([
+                        'idMuestra' => $muestra->id, 
+                        'idPublica' => $imagen['public_id'],  
+                        'ruta' => $imagen['secure_url'],  
+                        'zoom' => "GG",
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
             }
 
             $muestras = Muestra::with([
@@ -151,22 +155,21 @@ class MuestraController extends Controller
 
         $muestra->update($data);
 
-        if ($request->hasFile('imagenes')) {
-
-            // Borrado de las fotos antiguas
-            $imagenesAntiguas = Imagen::where('muestra_id', $muestra->id)->get();
+        $imgs = $request->input('imagenes');
+        if ($imgs) {
+            $imagenesAntiguas = Imagen::where('idMuestra', $muestra->id)->get();
             foreach ($imagenesAntiguas as $imagen) {
                 Cloudinary::destroy($imagen->public_id);
-                $imagen->delete(); 
+                $imagen->delete();
             }
-            // Actualizando fotos nuevas
-            foreach ($request->file('imagenes') as $imagen) {
-                $upload = Cloudinary::upload($imagen->getRealPath());
-                
+                foreach ($imgs as $imagen) {
                 Imagen::create([
-                    'muestra_id' => $muestra->id,
-                    'url' => $upload->getSecurePath(),
-                    'public_id' => $upload->getPublicId(),
+                    'idMuestra' => $muestra->id, 
+                    'idPublica' => $imagen['public_id'],  
+                    'ruta' => $imagen['secure_url'],  
+                    'zoom' => "GG",
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
             }
         }
@@ -183,18 +186,18 @@ class MuestraController extends Controller
 
     public function deleteMuestra($idMuestra){
         $muestra = Muestra::find($idMuestra);
-
         if(!$muestra){
             return response()->json(["error" => "Muestra no encontrada"]);
         }
 
         // Borrado de imagenes
-        $imagenes = Imagen::where('muestra_id', $muestra->id)->get();
-        foreach ($imagenes as $imagen) {
-            // Eliminar imagen de Cloudinary
-            Cloudinary::destroy($imagen->public_id);
-            // Eliminar registro de imagen en la base de datos
-            $imagen->delete();
+        $imagenes = Imagen::where('idMuestra', $muestra->id)->get();
+
+        if ($imagenes->isNotEmpty()) {
+            foreach ($imagenes as $imagen) {
+                Cloudinary::destroy($imagen->idPublica);
+                $imagen->delete();
+            }
         }
 
         // Borrar las interpretaciones asociadas a la muestra
@@ -209,7 +212,10 @@ class MuestraController extends Controller
             'sede:id,nombre'
         ])->get();
 
-        return response()->json("Muestra eliminada correctamente",$muestras);
+        return response()->json([
+            'message' => 'Muestra eliminada correctamente',
+            'muestras' => $muestras
+        ]);
     }
 
     public function validatorMuestras($datos){
@@ -227,9 +233,7 @@ class MuestraController extends Controller
             'created_at' =>' nullable|date_format:Y-m-d',
             'updated_at' => 'nullable|date_format:Y-m-d',
 
-            'imagenes' => 'required|array',
-            'imagenes.*' => 'image|max:2048',
-            //mimes:jpeg,png
+            'imagenes' => '',
         ]);
         
         return $validator;

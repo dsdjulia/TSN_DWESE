@@ -342,8 +342,6 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
 
     const eliminarInterpretacionAntigua = (id) => {
-        console.log(id);
-        console.log(interpretacionAntigua);
         setInterpretacionAntigua(interpretacionAntigua.filter((item) => item.id !== id));
     };
 

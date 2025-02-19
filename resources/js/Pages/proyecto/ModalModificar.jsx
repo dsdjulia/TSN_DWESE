@@ -198,7 +198,7 @@ export default function ModalModificar({id, onClose}) {
                 </div>
 
                 <div className="mt-4 space-x-4 flex">
-                    <div class="relative w-auto h-24 max-lg:h-12  inline-block">
+                    <div class="relative w-auto h-24 max-lg:h-12 inline-block">
                         <img
                             src="../public/muestra1.png"
                             alt="Imagen 1"

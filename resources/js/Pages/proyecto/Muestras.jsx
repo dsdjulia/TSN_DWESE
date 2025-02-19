@@ -113,7 +113,7 @@ export default function Muestras({ auth, data }) {
                                             }
                                         >
                                             <img
-                                                className="w-8"
+                                                className="opacity-35 w-8"
                                                 src="https://cdn-icons-png.flaticon.com/512/60/60809.png"
 
                                                 alt="detallesMuestra"
@@ -127,7 +127,7 @@ export default function Muestras({ auth, data }) {
                                             }
                                         >
                                             <img
-                                                className="w-8"
+                                                className="opacity-35 w-8"
                                                 src="https://cdn-icons-png.freepik.com/512/565/565317.png"
                                                 alt="editar"
                                             />
@@ -140,7 +140,7 @@ export default function Muestras({ auth, data }) {
                                             }
                                         >
                                             <img
-                                                className="w-8 "
+                                                className="opacity-35 w-8"
                                                 src="https://cdn-icons-png.freepik.com/512/60/60761.png"
                                                 alt="borrar"
                                             />
@@ -151,7 +151,7 @@ export default function Muestras({ auth, data }) {
                                             target="_blank"
                                         >
                                             <img
-                                                className="w-8"
+                                                className="opacity-35 w-8"
                                                 src="https://cdn-icons-png.freepik.com/512/565/565389.png"
                                                 alt="imprimir"
                                             />
@@ -181,7 +181,7 @@ export default function Muestras({ auth, data }) {
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
                         onClick={firstPage}>
                             <img
-                                className=""
+                               className="opacity-35"
                                 src="https://cdn.iconscout.com/icon/free/png-256/free-first-page-icon-download-in-svg-png-gif-file-formats--material-design-icons-google-navigation-pack-user-interface-1514164.png?f=webp&w=256"
                                 alt="1"
                             />
@@ -189,7 +189,7 @@ export default function Muestras({ auth, data }) {
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
                         onClick={pageDown}>
                             <img
-                                className=""
+                                className="opacity-35"
                                 src="https://cdn.iconscout.com/icon/free/png-256/free-left-icon-download-in-svg-png-gif-file-formats--keyboard-arrow-key-direction-google-material-vol-2-pack-user-interface-icons-30505.png"
                                 alt="1"
                             />
@@ -200,7 +200,7 @@ export default function Muestras({ auth, data }) {
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
                         onClick={pageUp}>
                             <img
-                                className=""
+                               className="opacity-35"
                                 src="https://cdn.iconscout.com/icon/free/png-256/free-keyboard-arrow-right-icon-download-in-svg-png-gif-file-formats--key-material-design-icons-google-hardware-pack-appliances-1517437.png"
                                 alt="1"
                             />
@@ -208,7 +208,7 @@ export default function Muestras({ auth, data }) {
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
                         onClick={lastPage}>
                             <img
-                                className=""
+                                className="opacity-35"
                                 src="https://cdn.iconscout.com/icon/free/png-256/free-last-page-icon-download-in-svg-png-gif-file-formats--till-material-design-icons-google-navigation-pack-maps-and-1518575.png"
                                 alt="1"
                             />

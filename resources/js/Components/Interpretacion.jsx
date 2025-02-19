@@ -1,6 +1,6 @@
 import React from "react";
 
-const Interpretacion = ({ id, onRemove, interpretaciones }) => {
+const Interpretacion = ({ id, onRemove, interpretaciones, idInterpretacionSeleccionada, descripcionInterpretacionSeleccionada }) => {
     return (
         <div className="mb-4">
 
@@ -10,7 +10,7 @@ const Interpretacion = ({ id, onRemove, interpretaciones }) => {
                     name={id}
                     className="p-3 w-full border border-gray-300 rounded-md shadow-sm"
                 >
-                    <option value="">Seleccione interpretación</option>
+                    <option value={idInterpretacionSeleccionada}>{descripcionInterpretacionSeleccionada}</option>
                     {/* Opciones dinámicas aquí */}
                     {Object.entries(interpretaciones).map(
                                     (

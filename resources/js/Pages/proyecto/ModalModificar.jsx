@@ -458,6 +458,15 @@ export default function ModalModificar({ id, onClose, muestra }) {
             );
         }
 
+        // Agrego las interpretaciones al array para poder eliminarlas
+        // setInterpretaciones((prevInterpretaciones) => [
+        //     ...prevInterpretaciones,
+        //     ...muestra.muestras_interpretaciones.map((interpretacion) => ({
+        //         id: interpretacion.id,
+        //     })),
+        // ]);
+        
+
 
 
     }, [muestra]); // Se ejecuta cuando cambia `muestra`
@@ -630,13 +639,15 @@ export default function ModalModificar({ id, onClose, muestra }) {
                         <input
                             type="text"
                             className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                            name="descripcionCalidad"
+                            disabled
                             value={muestra.descripcionCalidad}
+                            
                         ></input>
                         <input
                             type="text"
                             className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                             name="descripcionCalidad"
+                            placeholder="Nueva descripción"
                             onChange={handleData}
                             
                         ></input>
@@ -649,33 +660,23 @@ export default function ModalModificar({ id, onClose, muestra }) {
                         >
                             Interpretación
                         </label>
-                        <select
-                            id="interpretacion"
-                            name="interpretacion"
-                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm "
-                            onChange={handleData}
-                        >
-                            <option value={muestra.muestras_interpretaciones[0].id}>{muestra.muestras_interpretaciones[0].descripcion}</option>
-                            {Object.entries(interpretacionSeleccionada).map(
-                                (
-                                    [
-                                        key,
-                                        contenido,
-                                    ] /* esto funciona en react como for(let key in Json) en javascript  */
-                                ) => (
-                                    <option value={key}>{contenido}</option>
-                                )
-                            )}
-                        </select>
+
+                        {muestra.muestras_interpretaciones.map((interpretacion) => (
+                            <Interpretacion
+                                key={interpretacion.id}
+                                id={interpretacion.id}
+                                onRemove={eliminarInterpretacion}
+                                interpretaciones={interpretaciones} // Pasamos todas las interpretaciones para el select
+                                idInterpretacionSeleccionada={interpretacion.id}
+                                descripcionInterpretacionSeleccionada={interpretacion.descripcion}
+                            />
+                        ))}
                     </div>
-                    {interpretaciones.map((item) => (
-                        <Interpretacion
-                            key={item.id}
-                            id={item.id}
-                            onRemove={eliminarInterpretacion}
-                            interpretaciones={interpretacionSeleccionada}
-                        />
-                    ))}
+
+
+
+                    <button className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 mb-6 font-bold text-gray-700" onClick={agregarInterpretacion}>Añadir interpretación</button>
+
 
                     <hr className="my-4 border-gray-300 mb-10 mt-10" />
 

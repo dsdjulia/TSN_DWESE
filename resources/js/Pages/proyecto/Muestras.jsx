@@ -57,9 +57,9 @@ export default function Muestras({ auth, data }) {
         setVisualizarAbierto(true);
     };
 
-    const handleRowClick = (e) => {
+    /* const handleRowClick = (e) => {
         console.log(e)
-    }
+    } */
 
 
     return (
@@ -93,7 +93,7 @@ export default function Muestras({ auth, data }) {
                                 key={muestra.id}
                                 className="border-b"
                                 id={muestra.id}
-                                onClick={() => handleRowClick(muestra)}
+                                /* onClick={() => handleRowClick(muestra)} */
                                 >
                                     <td className="p-2">{muestra.user.name}</td>
                                     <td className="p-2">{muestra.codigo}</td>
@@ -104,60 +104,60 @@ export default function Muestras({ auth, data }) {
                                         {muestra.formato.nombre}
                                     </td>
                                     <td className="p-2">{muestra.fecha}</td>
-                                    <td className="p-2 flex space-x-2 justify-center">
+                                    <td className="pt-1 flex space-x-2 justify-center gap-1 pl-4 align-middle text-center max-xl:pt-2">
                                         <button
-                                            className="max-lg:hidden "
+                                            className="max-lg:w-14 "
                                             onClick={
                                                 (e) => handleModalVisualizar(e)
                                                 // setVisualizarAbierto(true)
                                             }
                                         >
                                             <img
-                                                className="w-8"
-                                                src="../public/info.png"
+                                                className="opacity-35 w-8"
+                                                src="https://cdn-icons-png.flaticon.com/512/60/60809.png"
 
                                                 alt="detallesMuestra"
                                             />
                                         </button>
                                         <button
-                                            className="max-lg:hidden "
+                                            className="max-lg:w-14 "
                                             onClick={
                                                 (e) => handleModalModificar(e)
                                                 // setModificarAbierto(true)
                                             }
                                         >
                                             <img
-                                                className="w-8"
-                                                src="../public/edit.png"
+                                                className="opacity-35 w-8"
+                                                src="https://cdn-icons-png.freepik.com/512/565/565317.png"
                                                 alt="editar"
                                             />
                                         </button>
                                         <button
-                                            className="max-lg:hidden "
+                                            className="max-lg:w-14 "
                                             onClick={
                                                 (e) => handleModalEliminar(e)
                                                 // setEliminarAbierto(true)
                                             }
                                         >
                                             <img
-                                                className="w-8 "
-                                                src="../public/icono-borrar.png"
+                                                className="opacity-35 w-8"
+                                                src="https://cdn-icons-png.freepik.com/512/60/60761.png"
                                                 alt="borrar"
                                             />
                                         </button>
-                                    </td>
-                                    <td className="">
                                         <a
-                                            className="max-lg:hidden"
+                                            className="max-lg:w-14"
                                             href={`imprimir/${muestra.id}/pdf`}
                                             target="_blank"
                                         >
                                             <img
-                                                className="w-8"
-                                                src="../public/print.png"
+                                                className="opacity-35 w-8"
+                                                src="https://cdn-icons-png.freepik.com/512/565/565389.png"
                                                 alt="imprimir"
                                             />
                                         </a>
+                                    </td>
+                                    <td className="">
                                     </td>
 
                                 </tr>
@@ -181,16 +181,16 @@ export default function Muestras({ auth, data }) {
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
                         onClick={firstPage}>
                             <img
-                                className=""
-                                src="../public/primeraPag.png"
+                               className="opacity-35"
+                                src="https://cdn.iconscout.com/icon/free/png-256/free-first-page-icon-download-in-svg-png-gif-file-formats--material-design-icons-google-navigation-pack-user-interface-1514164.png?f=webp&w=256"
                                 alt="1"
                             />
                         </button>
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
                         onClick={pageDown}>
                             <img
-                                className=""
-                                src="../public/pagAtras.png"
+                                className="opacity-35"
+                                src="https://cdn.iconscout.com/icon/free/png-256/free-left-icon-download-in-svg-png-gif-file-formats--keyboard-arrow-key-direction-google-material-vol-2-pack-user-interface-icons-30505.png"
                                 alt="1"
                             />
                         </button>
@@ -200,16 +200,16 @@ export default function Muestras({ auth, data }) {
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
                         onClick={pageUp}>
                             <img
-                                className=""
-                                src="../public/pagAlante.png"
+                               className="opacity-35"
+                                src="https://cdn.iconscout.com/icon/free/png-256/free-keyboard-arrow-right-icon-download-in-svg-png-gif-file-formats--key-material-design-icons-google-hardware-pack-appliances-1517437.png"
                                 alt="1"
                             />
                         </button>
                         <button className="bg-gray-100 rounded-md hover:bg-gray-200 font-bold text-gray-700 w-1/6 h-full flex align-middle justify-center items-center"
                         onClick={lastPage}>
                             <img
-                                className=""
-                                src="../public/ultimaPag.png"
+                                className="opacity-35"
+                                src="https://cdn.iconscout.com/icon/free/png-256/free-last-page-icon-download-in-svg-png-gif-file-formats--till-material-design-icons-google-navigation-pack-maps-and-1518575.png"
                                 alt="1"
                             />
                         </button>

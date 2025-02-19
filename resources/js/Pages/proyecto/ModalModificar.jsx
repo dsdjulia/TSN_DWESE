@@ -11,6 +11,7 @@ import Interpretacion from "@/Components/Interpretacion";
 import Footer from "@/Components/Footer";
 
 export default function ModalModificar({ id, onClose, muestra }) {
+
     const datos = {
         1: {
             calidad: {
@@ -443,181 +444,6 @@ export default function ModalModificar({ id, onClose, muestra }) {
                 >
                     ✕
                 </button>
-<<<<<<< HEAD
-            <div class="space-y-4">
-
-                <h2 className="font-extrabold">Modificar Muestra</h2>
-                <div>
-                    <label
-                        for="naturaleza_muestra"
-                        class="block text-sm font-semibold text-gray-700 "
-                    >
-                        Naturaleza de la muestra
-                    </label>
-                    <select
-                        id="naturaleza_muestra"
-                        name="naturaleza_muestra"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm "
-                    >
-                        <option value="">Seleccione un tipo de muestra</option>
-                        <option value="biopsias">Biopsias</option>
-                        <option value="biopsias_veterinarias">
-                            Biopsias veterinarias
-                        </option>
-                        <option value="cavidad_bucal">Cavidad bucal</option>
-                        <option value="citologia_vaginal">
-                            Citología vaginal
-                        </option>
-                        <option value="extension_sanguinea">
-                            Extensión sanguínea
-                        </option>
-                        <option value="orinas">Orinas</option>
-                        <option value="esputos">Esputos</option>
-                        <option value="semen">Semen</option>
-                        <option value="improntas">Improntas</option>
-                        <option value="frotis">Frotis</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label
-                        for="formato"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Recibido en
-                    </label>
-                    <select
-                        id="formato"
-                        name="formato"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                    >
-                        <option value="">
-                            Seleccione el formato de recepción de la muestra
-                        </option>
-                        <option value="biopsia">Fresco</option>
-                        <option value="esputo">Formol</option>
-                        <option value="bucal">Etanol 70%</option>
-                    </select>
-                </div>
-
-                <div class="hidden" id="organos_biopsiados">
-                    <label
-                        for="organo_biopsiado"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Órgano biopsiado
-                    </label>
-                    <select
-                        id="organo_biopsiado"
-                        name="organo_biopsiado"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                    >
-                        <option value="">Seleccione un órgano biopsiado</option>
-                        <option value="corazon">Corazón</option>
-                        <option value="bazo">Bazo</option>
-                        <option value="higado">Hígado</option>
-                        <option value="feto">Feto</option>
-                        <option value="estomago">Estómago</option>
-                        <option value="cerebro">Cerebro</option>
-                        <option value="rinon">Riñón</option>
-                        <option value="lengua">Lengua</option>
-                        <option value="utero">Útero</option>
-                        <option value="ovario">Ovario</option>
-                        <option value="intestino">Intestino</option>
-                        <option value="trompa_falopio">
-                            Trompa de Falopio
-                        </option>
-                        <option value="esofago">Esófago</option>
-                        <option value="pancreas">Páncreas</option>
-                        <option value="testiculo">Testículo</option>
-                        <option value="piel">Piel</option>
-                        <option value="pulmon">Pulmón</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label
-                        for="calidad_muestra"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Calidad de la muestra
-                    </label>
-                    <select
-                        id="calidad_muestra"
-                        name="calidad_muestra"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                    >
-                        <option value="">Seleccione calidad de muestra</option>
-
-                        {Object.entries(calidadesBucal).map(
-                            ([key, contenido]) => (
-                                <option value={key}>
-                                    {contenido}{" "}
-                                    {/* si se selecciona alguna opcion de rellenar, debe aparecer un formulario de texto */}
-                                </option>
-                            )
-                        )}
-                    </select>
-                </div>
-
-                <div>
-                    <label
-                        for="interpretacion"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Interpretación
-                    </label>
-                    <select
-                        id="interpretacion"
-                        name="interpretacion"
-                        className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                    >
-                        <option value="">Seleccione interpretación</option>
-                        {Object.entries(interpretacionesBucal).map(
-                            (
-                                [
-                                    key,
-                                    contenido,
-                                ] /* esto funciona en react como for(let key in Json) en javascript  */
-                            ) => (
-                                <option value={key}>
-                                    {contenido}
-                                </option>
-                            )
-                        )}
-                    </select>
-                </div>
-
-
-                <hr className="my-4 border-gray-300 mb-10 mt-10" />
-
-                <div>
-                    <label
-                        for="imagenes"
-                        class="block text-sm font-semibold text-gray-700"
-                    >
-                        Añadir imágenes
-                    </label>
-                    <input
-                        type="file"
-                        id="imagenes"
-                        name="imagenes"
-                        class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                        multiple
-                    />
-                </div>
-
-                <div className="mt-4 space-x-4 flex">
-                    <div class="relative w-auto h-24 max-lg:h-12 inline-block">
-                        <img
-                            src="../public/muestra1.png"
-                            alt="Imagen 1"
-                            class="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
-                        />
-                        <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
-                        ✕
-                        </a>
-=======
                 <div className="space-y-4">
                     <h2 className="font-extrabold">Modificar Muestra</h2>
                     <div>
@@ -650,7 +476,6 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             <option value="9">Improntas</option>
                             <option value="10">Frotis</option>
                         </select>
->>>>>>> fb2e236edf206bc03cd3470dcc3fa5ff1876867d
                     </div>
 
                     <div className={biopsiaHidden} id="organos_biopsiados">

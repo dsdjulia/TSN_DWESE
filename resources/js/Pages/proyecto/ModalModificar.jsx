@@ -653,7 +653,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
                     <div>
                         <label
                             for="imagenes"
-                            class="block text-sm font-semibold text-gray-700"
+                            className="block text-sm font-semibold text-gray-700"
                         >
                             Añadir imágenes
                         </label>
@@ -661,39 +661,39 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             type="file"
                             id="imagenes"
                             name="imagenes"
-                            class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                             multiple
                         />
                     </div>
 
                     <div className="mt-4 space-x-4 flex">
-                        <div class="relative w-auto h-24 max-lg:h-12  inline-block">
+                        <div className="relative w-auto h-24 max-lg:h-12  inline-block">
                             <img
                                 src="../public/muestra1.png"
                                 alt="Imagen 1"
-                                class="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
+                                className="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
                             />
-                            <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
+                            <a className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
                                 ✕
                             </a>
                         </div>
-                        <div class="relative w-auto h-24 max-lg:h-12 inline-block">
+                        <div className="relative w-auto h-24 max-lg:h-12 inline-block">
                             <img
                                 src="../public/muestra2.png"
                                 alt="Imagen 2"
-                                class="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
+                                className="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
                             />
-                            <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
+                            <a className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
                                 ✕
                             </a>
                         </div>
-                        <div class="relative w-auto h-24 max-lg:h-12 inline-block">
+                        <div className="relative w-auto h-24 max-lg:h-12 inline-block">
                             <img
                                 src="../public/muestra3.png"
                                 alt="Imagen 3"
-                                class="w-auto h-24 max-lg:h-12 object-cover rounded-lg "
+                                className="w-auto h-24 max-lg:h-12 object-cover rounded-lg "
                             />
-                            <a class="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-auto h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
+                            <a className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-auto h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
                                 ✕
                             </a>
                         </div>
@@ -708,7 +708,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
                             </Link>
                         }
                         <button
-                            class="text-red-700 hover:underline focus:outline-none "
+                            className="text-red-700 hover:underline focus:outline-none "
                             onClick={onClose}
                         >
                             Cancelar

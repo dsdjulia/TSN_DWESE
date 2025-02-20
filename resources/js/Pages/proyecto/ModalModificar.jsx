@@ -220,7 +220,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
         tipoEstudio: muestra.calidad.idTipoEstudio, //* Esto lo podria sacar buscando la calidad de la muestra
         idUser: idUser,
         idSede: idSede,
-        interpretacion: muestra.muestras_interpretaciones,
+        interpretacion: [],
         imagenes: [],
     });
 
@@ -273,18 +273,17 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     
     const recogerInterpretaciones = () => {
-        const interpretaciones = document.querySelectorAll(
-            "#interpretacionAdicional"
-        );
-        interpretaciones.forEach((interpretacionAdicional) => {
-            setForm({
-                ...form,
-                interpretacion: [
-                    ...form.interpretacion,
-                    interpretacionAdicional.value,
-                ],
-            });
-        });
+        const interpretaciones = document.querySelectorAll("#interpretacionAdicional");
+
+        const nuevasInterpretaciones = Array.from(interpretaciones).map((interpretacionAdicional) => ({
+            id: interpretacionAdicional.value,
+            descripcion: interpretacionAdicional.options[interpretacionAdicional.selectedIndex].text,
+        }));
+
+        setForm((prevForm) => ({
+            ...prevForm,
+            interpretacion: [...new Map([...prevForm.interpretacion, ...nuevasInterpretaciones].map(item => [item.id, item])).values()], // Filtra por si se añaden interpretaciones duplicadas
+        }));
     };
 
     const handlePhotos = (photo) => { // Esto muestra las fotos subidas en la pagina
@@ -510,8 +509,8 @@ export default function ModalModificar({ id, onClose, muestra }) {
         // }
 
 
-        await handleUpload();
         recogerInterpretaciones();
+        await handleUpload();
         showSuccessAlert();
 
     };

@@ -193,26 +193,31 @@ class MuestraController extends Controller
 
         $muestra->update($data);
 
+        
         $imgs = $request->input('imagenes');
-        if ($imgs) {
-            $imagenesAntiguas = Imagen::where('idMuestra', $muestra->id)->get();
-            foreach ($imagenesAntiguas as $imagen) {
-                // dd(vars: $imagen['idPublica']);
-                Cloudinary::destroy(publicId: $imagen['idPublica']);
-                $imagen->delete();
-            }
-                foreach ($imgs as $imagen) {
-                    // dd($imagen);
-                    Imagen::create([
-                        'idMuestra' => $muestra->id, 
-                        'idPublica' => $imagen['public_id'],  
-                        'ruta' => $imagen['secure_url'],  
-                        'zoom' => "GG",
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
+        
+        $imagenesAntiguas = Imagen::where('idMuestra', $muestra->id)->get();
+
+        foreach ($imagenesAntiguas as $imagen) {
+            // dd(vars: $imagen['idPublica']);
+            // Cloudinary::destroy(publicId: $imagen['idPublica']);
+            $imagen->delete();
+        }
+
+        if ($imgs){ // Si hay imágenes, las añadimos
+            foreach ($imgs as $imagen) {
+                // dd($imagen);
+                Imagen::create([
+                    'idMuestra' => $muestra->id, 
+                    'idPublica' => $imagen['public_id'],  
+                    'ruta' => $imagen['secure_url'],  
+                    'zoom' => "GG",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             }
         }
+        
 
         $muestras = Muestra::with([
             'tipoNaturaleza:id,nombre',

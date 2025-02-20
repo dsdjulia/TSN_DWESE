@@ -378,7 +378,20 @@ export default function ModalModificar({ id, onClose, muestra }) {
                 ],
             }));
             
+        } else { // Si no ha subido ninguna imagen nueva, añadimos las que quedan
+            console.log('Se ejecuta');
+            console.log(arrayImagenesCloudinary);
+            setForm((prevForm) => ({
+                ...prevForm,
+                imagenes: [
+                    ...arrayImagenesCloudinary.map((obj) => ({
+                        public_id: obj.idPublica,
+                        secure_url: obj.ruta,
+                    })),
+                ],
+            }));
         }
+
         setIsReady(true) // Una vez se hayan subido las fotos enviamos el form con los datos
     };
 

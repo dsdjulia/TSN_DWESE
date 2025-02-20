@@ -458,7 +458,7 @@ export default function Insercion({ auth }) {
                                 name="codigoMuestra"
                                 className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
                                 placeholder="Introduce el código de muestra"
-                                onChange={handleData}
+                                onBlur={handleData} // Esto hace que se ejecute cuando salga del campo
                             ></input>
                         </div>
                         <div>

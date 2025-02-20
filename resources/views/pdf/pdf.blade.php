@@ -151,7 +151,7 @@
 
     @if($ruta)
     <img src="{{ $ruta }}" alt="Imagen de la muestra" style="width: 300px; height: auto;">
-@endif
+    @endif
 
     
 </body>

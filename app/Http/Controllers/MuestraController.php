@@ -11,6 +11,8 @@ use Database\Seeders\MuestraSeeder;
 use App\Models\Muestra_Interpretacion;
 use Illuminate\Support\Facades\Validator;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\DB;
+
 
 class MuestraController extends Controller
 {
@@ -191,6 +193,22 @@ class MuestraController extends Controller
             return response()->json(["error" => $validator->errors()]);
         }
 
+        $interpretacionesAntiguas = Muestra_Interpretacion::where('idMuestra', $muestra->id)->delete();
+
+        $intepretaciones = $request->input('interpretacion');
+        // dd($intepretaciones);
+
+        foreach ($intepretaciones as $interpretacion) {
+            $dataInterpretacion = [
+                'descripcion' => $interpretacion['descripcion'],
+                'idMuestra' => $muestra->id, // Le doy el id de la muestra creada
+                'idInterpretacion' => $interpretacion['id'],
+            ];
+
+            $muestraInterpretacion = Muestra_Interpretacion::create($dataInterpretacion);
+            // dd($muestraInterpretacion);
+        }
+
         $muestra->update($data);
 
         
@@ -226,42 +244,47 @@ class MuestraController extends Controller
             'sede:id,nombre'
         ])->get();
 
-        return redirect()->route('muestras',$muestras);  
+        return redirect()->route('muestras');  
     }
 
-    public function deleteMuestra($idMuestra){
+    
+    public function deleteMuestra($idMuestra)
+    {
         $muestra = Muestra::find($idMuestra);
-        if(!$muestra){
-            return response()->json(["error" => "Muestra no encontrada"]);
+    
+        if (!$muestra) {
+            return response()->json(["error" => "Muestra no encontrada"], 404);
         }
-
-        // Borrado de imagenes
-        $imagenes = Imagen::where('idMuestra', $muestra->id)->get();
-
-        if ($imagenes->isNotEmpty()) {
-            foreach ($imagenes as $imagen) {
-                Cloudinary::destroy($imagen->idPublica);
-                $imagen->delete();
+    
+        DB::transaction(function () use ($muestra) {
+            // Borrado de imágenes en Cloudinary y en la base de datos
+            $imagenes = Imagen::where('idMuestra', $muestra->id)->get();
+    
+            if ($imagenes->isNotEmpty()) {
+                foreach ($imagenes as $imagen) {
+                    Cloudinary::destroy($imagen->idPublica); // Elimina la imagen en Cloudinary
+                    $imagen->delete(); // Elimina el registro de la imagen en la BD
+                }
             }
-        }
-
-        // Borrar las interpretaciones asociadas a la muestra
-        Muestra_Interpretacion::where('idMuestra', $muestra->id)->delete();
-
-        $muestra->delete();
-
+    
+            // Borrar las interpretaciones asociadas a la muestra
+            Muestra_Interpretacion::where('idMuestra', $muestra->id)->delete();
+    
+            // Borrar la muestra
+            $muestra->delete();
+        });
+    
+        // Obtener la lista de muestras actualizada
         $muestras = Muestra::with([
             'tipoNaturaleza:id,nombre',
             'user:id,name',
             'formato:id,nombre',
             'sede:id,nombre'
         ])->get();
-
-        return response()->json([
-            'message' => 'Muestra eliminada correctamente',
-            'muestras' => $muestras
-        ]);
+    
+        return redirect()->route('muestras');
     }
+    
 
     public function validatorMuestras($datos){
         $validator = Validator::make($datos, [

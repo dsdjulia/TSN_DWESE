@@ -368,12 +368,12 @@ export default function ModalModificar({ id, onClose, muestra }) {
                 ...prevForm,
                 imagenes: [
                     ...validPublicIds.map((obj) => ({
-                        idPublica: obj.public_id,
-                        ruta: obj.secure_url,
+                        public_id: obj.public_id,
+                        secure_url: obj.secure_url,
                     })),
                     ...arrayImagenesCloudinary.map((obj) => ({
-                        idPublica: obj.idPublica,
-                        ruta: obj.ruta,
+                        public_id: obj.idPublica,
+                        secure_url: obj.ruta,
                     })),
                 ],
             }));

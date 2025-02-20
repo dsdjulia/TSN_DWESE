@@ -197,18 +197,20 @@ class MuestraController extends Controller
         if ($imgs) {
             $imagenesAntiguas = Imagen::where('idMuestra', $muestra->id)->get();
             foreach ($imagenesAntiguas as $imagen) {
-                Cloudinary::destroy(publicId: $imagen->public_id);
+                // dd(vars: $imagen['idPublica']);
+                Cloudinary::destroy(publicId: $imagen['idPublica']);
                 $imagen->delete();
             }
                 foreach ($imgs as $imagen) {
-                Imagen::create([
-                    'idMuestra' => $muestra->id, 
-                    'idPublica' => $imagen['public_id'],  
-                    'ruta' => $imagen['secure_url'],  
-                    'zoom' => "GG",
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+                    // dd($imagen);
+                    Imagen::create([
+                        'idMuestra' => $muestra->id, 
+                        'idPublica' => $imagen['public_id'],  
+                        'ruta' => $imagen['secure_url'],  
+                        'zoom' => "GG",
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
             }
         }
 

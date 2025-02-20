@@ -355,11 +355,11 @@ export default function ModalModificar({ id, onClose, muestra }) {
             // Filtramos los IDs públicos válidos y actualizamos el estado del formulario
             const validPublicIds = publicIds.filter((id) => id !== null);
 
-            console.log(validPublicIds);
+            console.log(validPublicIds[0].public_id);
             console.log(arrayImagenesCloudinary);
 
 // Envío la unica informacion que guardamos en la BBDD, juntando la información de las imágenes ya subidas, con las nuevas
-            if(arrayImagenesCloudinary.length > 0) { // Si hay imágenes previas subidas
+            if(arrayImagenesCloudinary.length > 0) { // Si hay imágenes previas subidas, mandamos el array con antiguas y nuevas
                 setForm((prevForm) => ({
                     ...prevForm,
                     imagenes: [
@@ -376,7 +376,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
                 
             } else { // Si solo hay imágenes nuevas
                 //! NO SE AÑADEN
-                console.log('Aqui deberia entrar');
+                console.log('Entra');
                 console.log(validPublicIds[0].public_id);
                 console.log(validPublicIds[0].secure_url);
 
@@ -392,9 +392,8 @@ export default function ModalModificar({ id, onClose, muestra }) {
             }
             
             
-        } else { // Si no ha subido ninguna imagen nueva, añadimos las que quedan
-            console.log('Se ejecuta');
-            console.log(...arrayImagenesCloudinary);
+        } else { // Si no ha subido ninguna imagen nueva, añadimos las que hayan quedado
+
             setForm((prevForm) => ({
                 ...prevForm,
                 imagenes: [
@@ -407,9 +406,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
             
         }
 
-
         setIsReady(true);
-
 
     };
     

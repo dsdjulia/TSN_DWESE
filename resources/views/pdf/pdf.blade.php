@@ -13,6 +13,9 @@
             font-family: Arial, Helvetica, sans-serif;
             color: #012C55;
         }
+        .page-break {
+            page-break-after: always;
+        }
         header {
             position: fixed;
             top: 0cm;
@@ -96,7 +99,9 @@
             border-bottom: 2px solid black;
         }
 
-
+        #imgpdf{
+            margin:5px;
+        }
     </style>
 </head>
 <header>
@@ -138,19 +143,29 @@
 
     <br>
 
-    <h3>Descripción citológica o tisular de la muestra:</h3>
+    <h3>Interpretaciones:</h3>
 
     <table id="descripcion">
-        <tr>
-            <td>
-                {{ $descripcion->implode(', ') }}</td>
-        </tr>
+        @foreach($interpretaciones as $interpretacion)
+            <tr>
+                <td>{{ $interpretacion->descripcion }}</td>
+            </tr>
+        @endforeach
     </table>
 
-<br><br><br>
+    <h3>Descripción citológica o tisular de la muestra:</h3>
 
-    @if($ruta)
-    <img src="{{ $ruta }}" alt="Imagen de la muestra" style="width: 300px; height: auto;">
+
+    <div class="page-break"></div>
+
+    <h3>Imágenes de la muestra</h3>
+
+    @if(!empty($rutas))
+        @foreach($rutas as $ruta)
+            <div>
+                <img id="imgpdf" src="{{ $ruta }}" alt="Imagen de la muestra" style="width: 400px; height: auto;">
+            </div>
+        @endforeach
     @endif
 
     

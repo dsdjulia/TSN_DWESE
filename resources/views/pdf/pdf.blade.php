@@ -147,7 +147,7 @@
         </tr>
     </table>
 
-   {{$interpretaciones}}
+   {{$imagen}}
 
     
 </body>

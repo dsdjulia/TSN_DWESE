@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Formato;
+use App\Models\Imagen;
 use App\Models\Interpretacion;
 use App\Models\Muestra;
 use App\Models\Muestra_Interpretacion;
@@ -23,8 +24,10 @@ class ImprimirController extends Controller
         $interpretaciones = Muestra_Interpretacion::where("idMuestra", "=", $id)->get();
         $descripcion = $interpretaciones->pluck('descripcion');
 
+        $imagen = Imagen::where("idMuestra", "=", $id)->get();
 
-        $pdf = PDF::loadView('pdf.pdf', compact('muestra', 'formato', 'naturaleza', 'interpretaciones', 'descripcion'));
+
+        $pdf = PDF::loadView('pdf.pdf', compact('muestra', 'formato', 'naturaleza', 'interpretaciones', 'imagen', 'descripcion'));
 
         return $pdf->stream("muestra_$id.pdf");
     }

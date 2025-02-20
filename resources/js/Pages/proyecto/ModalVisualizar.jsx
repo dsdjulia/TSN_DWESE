@@ -26,7 +26,7 @@ export default function ModalVisualizar({ id, onClose, muestra }) {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="p-6 mx-auto space-y-6 bg-white border rounded-lg shadow-lg w-2/4 shadow-gray-500 relative max-lg:w-full h-full">
+            <div className="p-6 mx-auto  space-y-6 bg-white border rounded-lg shadow-lg w-2/4 shadow-gray-500 relative h-5/6 max-lg:w-full max-lg:h-full">
                 <button
                     className="absolute w-10 h-10 top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 font-extrabold"
                     onClick={onClose}

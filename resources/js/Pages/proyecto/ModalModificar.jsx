@@ -186,7 +186,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
     };
     console.log(muestra);
 
-    
+
 
     const [biopsiaHidden, setBiopsiaHidden] = useState("hidden"); // Aquí modifico el estado del campo complementario de la biopsia
     const [calidadHidden, setCalidadHidden] = useState("hidden"); // Aquí modifico el estado del campo complementario de la calidad
@@ -203,7 +203,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     const [interpretaciones, setInterpretaciones] = useState([]);
     const [isReady, setIsReady] = useState(false);
-    
+
 
     const user = JSON.parse(localStorage.getItem("usuarioActivo"));
     const idUser = user["id"];
@@ -271,7 +271,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
         }
     };
 
-    
+
     const recogerInterpretaciones = () => {
         const interpretaciones = document.querySelectorAll("#interpretacionAdicional");
 
@@ -313,7 +313,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
         setArrayImagenesCloudinary((arrayImagenesCloudinary) => arrayImagenesCloudinary.filter((img) => img.ruta !== photoDeletedCloudinary)); // quito del array la imagen eliminada
 
     };
-    
+
     const handleUpload = async () => {
 
         if (arrayImagenesUpload.length !== 0) { // Comprobamos que haya alguna imagen para subir
@@ -372,9 +372,9 @@ export default function ModalModificar({ id, onClose, muestra }) {
                         })),
                     ],
                 }));
-                
+
             } else { // Si solo hay imágenes nuevas
-                //! NO SE AÑADEN
+
                 console.log('Entra');
                 console.log(validPublicIds[0].public_id);
                 console.log(validPublicIds[0].secure_url);
@@ -389,8 +389,8 @@ export default function ModalModificar({ id, onClose, muestra }) {
                     ],
                 }));
             }
-            
-            
+
+
         } else { // Si no ha subido ninguna imagen nueva, añadimos las que hayan quedado
 
             setForm((prevForm) => ({
@@ -402,13 +402,13 @@ export default function ModalModificar({ id, onClose, muestra }) {
                     })),
                 ],
             }));
-            
+
         }
 
         setIsReady(true);
 
     };
-    
+
 
     const agregarInterpretacion = () => {
         setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
@@ -570,7 +570,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 flex-col">
-            <div className="p-6 mx-auto space-y-6 bg-white  rounded-lg shadow-lg w-2/3 shadow-gray-500 relative overflow-scroll border-white border-8 max-lg:w-full max-lg:h-full">
+            <div className="p-6 h-5/6 mx-auto space-y-6 bg-white  rounded-lg shadow-lg w-2/3 shadow-gray-500 relative overflow-scroll border-white border-8 max-lg:w-full max-lg:h-full">
                 <button
                     className="absolute w-10 h-10 top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 font-extrabold"
                     onClick={onClose}
@@ -850,7 +850,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
                                 </div>
 
                         </div>
-                        
+
                     <div className="flex justify-start gap-8 mt-4 max-xl:flex-col">
                         {
                             <Link

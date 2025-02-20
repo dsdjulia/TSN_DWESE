@@ -191,6 +191,22 @@ class MuestraController extends Controller
             return response()->json(["error" => $validator->errors()]);
         }
 
+        $interpretacionesAntiguas = Muestra_Interpretacion::where('idMuestra', $muestra->id)->delete();
+
+        $intepretaciones = $request->input('interpretacion');
+        // dd($intepretaciones);
+
+        foreach ($intepretaciones as $interpretacion) {
+            $dataInterpretacion = [
+                'descripcion' => $interpretacion['descripcion'],
+                'idMuestra' => $muestra->id, // Le doy el id de la muestra creada
+                'idInterpretacion' => $interpretacion['id'],
+            ];
+
+            $muestraInterpretacion = Muestra_Interpretacion::create($dataInterpretacion);
+            // dd($muestraInterpretacion);
+        }
+
         $muestra->update($data);
 
         
@@ -226,7 +242,7 @@ class MuestraController extends Controller
             'sede:id,nombre'
         ])->get();
 
-        return redirect()->route('muestras',$muestras);  
+        return redirect()->route('muestras');  
     }
 
     public function deleteMuestra($idMuestra){
@@ -257,10 +273,8 @@ class MuestraController extends Controller
             'sede:id,nombre'
         ])->get();
 
-        return response()->json([
-            'message' => 'Muestra eliminada correctamente',
-            'muestras' => $muestras
-        ]);
+        return redirect()->route('muestras',);  
+
     }
 
     public function validatorMuestras($datos){

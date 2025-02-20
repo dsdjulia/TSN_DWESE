@@ -12,6 +12,7 @@ export default function ModalEliminar({ muestra, onClose }) {
             onSuccess: showModificableAlert('Muestra eliminada', 'Muestra eliminada con éxito', 'success'),
             onError: (error) => showModificableAlert('Error al eliminar la muesta', `Error: ${error}`, 'error')
         })
+        onClose();
         
     }
 
@@ -27,7 +28,7 @@ export default function ModalEliminar({ muestra, onClose }) {
                     <div className="flex justify-around mt-4 max-xl:flex-col ">
                         <Link
                             className="px-4 py-2 bg-red-400 text-white rounded-lg shadow-md hover:bg-red-500 max-xl:w-full"
-                            onClick={() => {deleteMuestra(); onClose();}}
+                            onClick={() => {deleteMuestra();}}
                         >
                             Eliminar
 

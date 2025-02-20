@@ -24,10 +24,12 @@ class ImprimirController extends Controller
         $interpretaciones = Muestra_Interpretacion::where("idMuestra", "=", $id)->get();
         $descripcion = $interpretaciones->pluck('descripcion');
 
-        $imagen = Imagen::where("idMuestra", "=", $id)->get();
+        $imagen = Imagen::where("idMuestra", "=", $id)->first();
+        $ruta = $imagen ? $imagen->ruta : null; // Cloudinary ya guarda la URL completa
+        
+        $pdf = PDF::loadView('pdf.pdf', compact('muestra', 'formato', 'naturaleza', 'interpretaciones', 'imagen', 'ruta', 'descripcion'))
+        ->setOptions(['isRemoteEnabled' => true]);
 
-
-        $pdf = PDF::loadView('pdf.pdf', compact('muestra', 'formato', 'naturaleza', 'interpretaciones', 'imagen', 'descripcion'));
 
         return $pdf->stream("muestra_$id.pdf");
     }

@@ -100,8 +100,8 @@
     </style>
 </head>
 <header>
-    <img src="{{public_path('/img/medac.jpg')}}" id=fotoHeader alt="">
-    <img src="{{public_path('/img/fundacion.jpg')}}" id=fotoHeader alt="">
+    <img src="{{asset('/img/medac.jpg')}}" id=fotoHeader alt="">
+    <img src="{{asset('/img/fundacion.jpg')}}" id=fotoHeader alt="">
 </header>
 <body>
 
@@ -147,13 +147,17 @@
         </tr>
     </table>
 
-   {{$imagen}}
+<br><br><br>
+
+    @if($ruta)
+    <img src="{{ $ruta }}" alt="Imagen de la muestra" style="width: 300px; height: auto;">
+@endif
 
     
 </body>
 
 <footer>
-    <img src="{{public_path('/img/medac.jpg')}}" id=fotoFooter alt="">
-    <img src="{{public_path('/img/fundacion.jpg')}}" id=fotoFooter alt="">
+    <img src="{{asset('/img/medac.jpg')}}" id=fotoFooter alt="">
+    <img src="{{asset('/img/fundacion.jpg')}}" id=fotoFooter alt="">
 </footer>
 </html>

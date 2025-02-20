@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
-        <title>Programa de archivado para citodiagnóstico</title>
+        <title>Programa Citodiagnóstico</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

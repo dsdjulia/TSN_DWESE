@@ -22,12 +22,13 @@ class ImprimirController extends Controller
         $naturaleza = Tipo_naturaleza::where("id", "=", $muestra->idTipoNaturaleza)->first();
 
         $interpretaciones = Muestra_Interpretacion::where("idMuestra", "=", $id)->get();
-        $descripcion = $interpretaciones->pluck('descripcion');
+        $descripcion = $interpretaciones->get('descripcion');
 
-        $imagen = Imagen::where("idMuestra", "=", $id)->first();
-        $ruta = $imagen ? $imagen->ruta : null;
-        
-        $pdf = PDF::loadView('pdf.pdf', compact('muestra', 'formato', 'naturaleza', 'interpretaciones', 'imagen', 'ruta', 'descripcion'))
+        $imagenes = Imagen::where("idMuestra", "=", $id)->get();
+        $rutas = $imagenes->pluck('ruta')->toArray();
+
+                
+        $pdf = PDF::loadView('pdf.pdf', compact('muestra', 'formato', 'naturaleza', 'interpretaciones', 'imagenes', 'rutas', 'descripcion'))
         ->setOptions(['isRemoteEnabled' => true]);
 
 

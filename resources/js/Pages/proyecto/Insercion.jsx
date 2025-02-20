@@ -287,17 +287,14 @@ export default function Insercion({ auth }) {
     const handleUpload = async () => {
 
         if (arrayImagenesUpload.length !== 0) { // Comprobamos que haya alguna imagen para subir
-            const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dcdvxqsxn/image/upload`;
-            const uploadPreset = "default";
-
 
             const formData = new FormData();
             const uploadToCloudinary = async (image) => {
                 formData.append("file", image);
-                formData.append("upload_preset", uploadPreset); // Preset de subida
+                formData.append("upload_preset", 'default'); // Preset de subida
 
                 try {
-                    const response = await fetch(cloudinaryUrl, {
+                    const response = await fetch(`https://api.cloudinary.com/v1_1/dcdvxqsxn/image/upload`, {
                         method: "POST",
                         body: formData,
                     });
@@ -319,12 +316,13 @@ export default function Insercion({ auth }) {
 
             // Subimos las imagenes
             const uploadPromises = arrayImagenesUpload.map((image) => uploadToCloudinary(image));
+            // Esperamos a que se suban todas
             const publicIds = await Promise.all(uploadPromises);
 
-            // Filtramos los IDs públicos válidos y actualizamos el estado del formulario
+            // Filtramos los id válidos por si falla alguna subida
             const validPublicIds = publicIds.filter((id) => id !== null);
 
-            // Actualizamos el estado del formulario para enviar los IDs públicos al backend
+            // Los agregamos al formulario
             setForm((prevForm) => ({
                 ...prevForm,
                 imagenes: validPublicIds,

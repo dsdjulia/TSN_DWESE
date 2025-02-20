@@ -356,21 +356,48 @@ export default function ModalModificar({ id, onClose, muestra }) {
             const validPublicIds = publicIds.filter((id) => id !== null);
 
             console.log(validPublicIds);
+            console.log(arrayImagenesCloudinary);
 
-            // Actualizamos el estado del formulario para enviar los IDs públicos al backend
-            // setForm((prevForm) => ({
-            //     ...prevForm,
-            //     imagenes: validPublicIds,
-            // }));
+// Envío la unica informacion que guardamos en la BBDD, juntando la información de las imágenes ya subidas, con las nuevas
+            if(arrayImagenesCloudinary.length > 0) { // Si hay imágenes previas subidas
+                setForm((prevForm) => ({
+                    ...prevForm,
+                    imagenes: [
+                        ...validPublicIds.map((obj) => ({
+                            public_id: obj.public_id,
+                            secure_url: obj.secure_url,
+                        })),
+                        ...arrayImagenesCloudinary.map((obj) => ({
+                        public_id: obj.idPublica,
+                        secure_url: obj.ruta,
+                        })),
+                    ],
+                }));
+                
+            } else { // Si solo hay imágenes nuevas
+                //! NO SE AÑADEN
+                console.log('Aqui deberia entrar');
+                console.log(validPublicIds[0].public_id);
+                console.log(validPublicIds[0].secure_url);
 
-            // Envío la unica informacion que guardamos en la BBDD, juntando la información de las imágenes ya subidas, con las nuevas
+                setForm((prevForm) => ({
+                    ...prevForm,
+                    imagenes: [
+                        ...validPublicIds.map((obj) => ({
+                            public_id: obj.public_id,
+                            secure_url: obj.secure_url,
+                        })),
+                    ],
+                }));
+            }
+            
+            
+        } else { // Si no ha subido ninguna imagen nueva, añadimos las que quedan
+            console.log('Se ejecuta');
+            console.log(...arrayImagenesCloudinary);
             setForm((prevForm) => ({
                 ...prevForm,
                 imagenes: [
-                    ...validPublicIds.map((obj) => ({
-                        public_id: obj.public_id,
-                        secure_url: obj.secure_url,
-                    })),
                     ...arrayImagenesCloudinary.map((obj) => ({
                         public_id: obj.idPublica,
                         secure_url: obj.ruta,
@@ -378,22 +405,14 @@ export default function ModalModificar({ id, onClose, muestra }) {
                 ],
             }));
             
-        } else { // Si no ha subido ninguna imagen nueva, añadimos las que quedan
-            console.log('Se ejecuta');
-            console.log(arrayImagenesCloudinary);
-            setForm((prevForm) => ({
-                ...prevForm,
-                imagenes: [
-                    ...arrayImagenesCloudinary.map((obj) => ({
-                        public_id: obj.idPublica,
-                        secure_url: obj.ruta,
-                    })),
-                ],
-            }));
         }
 
-        setIsReady(true) // Una vez se hayan subido las fotos enviamos el form con los datos
+
+        setIsReady(true);
+
+
     };
+    
 
     const agregarInterpretacion = () => {
         setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
@@ -484,7 +503,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
         return true;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // if (validarFormulario()) {
@@ -494,7 +513,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
         // }
 
 
-        handleUpload();
+        await handleUpload();
         recogerInterpretaciones();
         showSuccessAlert();
 

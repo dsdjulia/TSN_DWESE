@@ -74,7 +74,7 @@ export default function Muestras({ auth, data }) {
                     <h1 className="text-lg font-semibold text-gray-700 mb-4">
                         Archivo de Muestras
                     </h1>
-                    <div className="w-full overflow-scroll">
+                    <div className="w-full overflow-auto max-xl:overflow-scroll ">
                     <table className="w-full border-collapse ">
                         <thead>
                             <tr className="bg-gray-200">

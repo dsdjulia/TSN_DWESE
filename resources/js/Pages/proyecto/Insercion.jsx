@@ -690,26 +690,26 @@ export default function Insercion({ auth }) {
 
                         <div className="mt-4 flex flex-wrap gap-4" id="containerImages">
 
-                        <div className="mt-4 flex flex-wrap gap-4">
-                            {/* Aqui voy añadiendo las nuevas fotos.*/}
-                            {arrayImagenes.map((photo) => (
-                                <div className="relative w-auto h-32 inline-block">
-                                    <img
-                                        src={photo.url}
-                                        name={photo.nombre}
-                                        className="w-auto h-32 object-cover rounded-lg"
-                                    />
-                                    <button
-                                        className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex items-center justify-center cursor-pointer"
-                                        onClick={handleDeletePhoto}
-                                    >
-                                        ✕
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
+                            <div className="mt-4 flex flex-wrap gap-4">
+                                {/* Aqui voy añadiendo las nuevas fotos.*/}
+                                {arrayImagenes.map((photo) => (
+                                    <div className="relative w-auto h-32 inline-block">
+                                        <img
+                                            src={photo.url}
+                                            name={photo.nombre}
+                                            className="w-auto h-32 object-cover rounded-lg"
+                                        />
+                                        <button
+                                            className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex items-center justify-center cursor-pointer"
+                                            onClick={handleDeletePhoto}
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
 
-                    </div>
+                        </div>
 
 
                         <div className="flex justify-start mt-4">

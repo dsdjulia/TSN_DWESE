@@ -64,12 +64,30 @@ class MuestraController extends Controller
         $data = [
             // Request
             'codigo' => $request->input('codigoMuestra')[0], // Le pasaba un array con 1 solo valor
-            'idTipoNaturaleza' => intval($request->input('tipoNaturaleza')[0]),
-            'idFormato' => intval($request->input('formato')[0]),
-            'idCalidad' => intval($request->input('calidad')[0]),
-            'descripcionCalidad' => $request->input('descripcionCalidad')[0] ?? null,
-            'organo' => $request->input('organo')[0] ?? null,
-            'fecha' => $request->input('fecha')[0], // Le pasaba un array con 1 solo valor
+            'idTipoNaturaleza' => is_array($request->input('tipoNaturaleza')) // Controlamos si llega como array dependiendo su procedencia
+                ? intval($request->input('tipoNaturaleza')[0]) 
+                : intval($request->input('tipoNaturaleza')),
+
+            'idFormato' => is_array($request->input('formato')) 
+                ? intval($request->input('formato')[0]) 
+                : intval($request->input('formato')),
+
+            'idCalidad' => is_array($request->input('calidad')) 
+                ? intval($request->input('calidad')[0]) 
+                : intval($request->input('calidad')),
+
+            'descripcionCalidad' => is_array($request->input('descripcionCalidad')) 
+                ? ($request->input('descripcionCalidad')[0] ?? null) 
+                : $request->input('descripcionCalidad'),
+
+            'organo' => is_array($request->input('organo')) 
+                ? ($request->input('organo')[0] ?? null) 
+                : $request->input('organo'),
+
+            'fecha' => is_array($request->input('fecha')) 
+                ? ($request->input('fecha')[0] ?? null) 
+                : $request->input('fecha'),
+
             
             // Local Storage
             'idUser' => intval($request->input('idUser')),
@@ -135,16 +153,35 @@ class MuestraController extends Controller
         $data = [
             // Request
             'codigo' => $request->input('codigoMuestra')[0], // Le pasaba un array con 1 solo valor
-            'idTipoNaturaleza' => intval($request->input('tipoNaturaleza')),
-            'idFormato' => intval($request->input('formato')),
-            'idCalidad' => intval($request->input('calidad')),
-            'descripcionCalidad' => $request->input('descripcionCalidad') ?? [],
-            'organo' => $request->input('organo'),
-            'fecha' => $request->input('fecha')[0], // Le pasaba un array con 1 solo valor
+            'idTipoNaturaleza' => is_array($request->input('tipoNaturaleza')) // Controlamos si llega como array dependiendo su procedencia
+                ? intval($request->input('tipoNaturaleza')[0]) 
+                : intval($request->input('tipoNaturaleza')),
+
+            'idFormato' => is_array($request->input('formato')) 
+                ? intval($request->input('formato')[0]) 
+                : intval($request->input('formato')),
+
+            'idCalidad' => is_array($request->input('calidad')) 
+                ? intval($request->input('calidad')[0]) 
+                : intval($request->input('calidad')),
+
+            'descripcionCalidad' => is_array($request->input('descripcionCalidad')) 
+                ? ($request->input('descripcionCalidad')[0] ?? null) 
+                : $request->input('descripcionCalidad'),
+
+            'organo' => is_array($request->input('organo')) 
+                ? ($request->input('organo')[0] ?? null) 
+                : $request->input('organo'),
+
+            'fecha' => is_array($request->input('fecha')) 
+                ? ($request->input('fecha')[0] ?? null) 
+                : $request->input('fecha'),
+
             
             // Local Storage
             'idUser' => intval($request->input('idUser')),
             'idSede' => intval($request->input('idSede')),
+            'created_at' => date("Y-m-d"),
             'updated_at' => date("Y-m-d"),
         ];
 
@@ -160,7 +197,7 @@ class MuestraController extends Controller
         if ($imgs) {
             $imagenesAntiguas = Imagen::where('idMuestra', $muestra->id)->get();
             foreach ($imagenesAntiguas as $imagen) {
-                Cloudinary::destroy($imagen->public_id);
+                Cloudinary::destroy(publicId: $imagen->public_id);
                 $imagen->delete();
             }
                 foreach ($imgs as $imagen) {

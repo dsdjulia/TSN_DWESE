@@ -47,6 +47,8 @@ Route::get('/test', function () {
 // CRUD redireccion Vistas
 Route::get('/muestras', [MuestraController::class, 'getAllJson'])->middleware(['auth', 'verified'])->name('muestras');
 Route::post('/muestra', [MuestraController::class, 'insertMuestra'])->middleware(['auth', 'verified'])->name('MuestrasController.insertarMuestra');
+Route::put('/muestra/{id}', [MuestraController::class, 'updateMuestra'])->middleware(['auth', 'verified'])->name('MuestrasController.updateMuestra');
+
 Route::delete('/muestra/{id}', [MuestraController::class, 'deleteMuestra'])->middleware(['auth', 'verified'])->name('MuestrasController.deleteMuestra');
 
 

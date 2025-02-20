@@ -199,7 +199,11 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
     const [arrayImagenes, setArrayImagenes] = useState([]);
     const [arrayImagenesUpload, setArrayImagenesUpload] = useState([]);
+    const [arrayImagenesCloudinary, setArrayImagenesCloudinary] = useState(muestra.imagenes);
+
     const [interpretaciones, setInterpretaciones] = useState([]);
+    const [isReady, setIsReady] = useState(false);
+    
 
     const user = JSON.parse(localStorage.getItem("usuarioActivo"));
     const idUser = user["id"];
@@ -267,30 +271,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
         }
     };
 
-    const handlePhotos = (photo) => {
-        const urlImagen = photo.target.files[0];
-        setArrayImagenes([...arrayImagenes, URL.createObjectURL(urlImagen)]); // Esto crea la url en el dispositivo que se usa
-
-        console.log(arrayImagenes);
-    };
-
-    const handleUploadPhotos = (photo) => {
-        // Con esto guardo el nombre del archivo, no se que debo guardar exactamente
-        const arrayFotos = photo.target.files;
-        arrayFotos.forEach((foto) => {
-            setArrayImagenesUpload([...arrayImagenesUpload, foto]);
-        });
-    };
-
-    const handleDeletePhoto = (seleccion) => {
-        const photoDeleted =
-            seleccion.target.parentElement.querySelector("img").src; // Guardamos la ruta de la imagen que hemos borrado
-        setArrayImagenes((arrayImagenes) =>
-            arrayImagenes.filter((img) => img !== photoDeleted)
-        ); // quito del array la imagen eliminada
-        console.log(arrayImagenes);
-    };
-
+    
     const recogerInterpretaciones = () => {
         const interpretaciones = document.querySelectorAll(
             "#interpretacionAdicional"
@@ -306,32 +287,102 @@ export default function ModalModificar({ id, onClose, muestra }) {
         });
     };
 
+    const handlePhotos = (photo) => { // Esto muestra las fotos subidas en la pagina
+        const urlImagen = photo.target.files[0]
+        setArrayImagenes([...arrayImagenes, {url: URL.createObjectURL(urlImagen), nombre: urlImagen.name}])
+
+    }
+
+    const handleUploadPhotos = (photo) => { // Con esto guardo cada foto que se suba
+        const fotoSeleccionada = photo.target.files[0]
+        setArrayImagenesUpload([...arrayImagenesUpload, fotoSeleccionada])
+    }
+
+    const handleDeletePhoto = (seleccion) => {
+
+        const nombreImagen = seleccion.target.parentElement.querySelector('img').name;
+        const photoDeleted = seleccion.target.parentElement.querySelector('img').src
+
+        setArrayImagenes((arrayImagenes) => arrayImagenes.filter((img) => img.url !== photoDeleted)); // quito del array la imagen eliminada
+        setArrayImagenesUpload((arrayImagenesUpload) => arrayImagenesUpload.filter((img) => img.name !== nombreImagen)); // filtro la imagen por el nombre
+
+    }
+
+    const handleDeletePhotoCloudinary = (seleccion) => {
+        const photoDeletedCloudinary = seleccion.target.parentElement.querySelector("img").src; // Guardamos la ruta de la imagen que hemos borrado
+        console.log(photoDeletedCloudinary);
+        setArrayImagenesCloudinary((arrayImagenesCloudinary) => arrayImagenesCloudinary.filter((img) => img.ruta !== photoDeletedCloudinary)); // quito del array la imagen eliminada
+
+    };
+    
     const handleUpload = async () => {
-        handleUploadPhotos();
 
-        if (arrayImagenesUpload.length !== 0) {
+        if (arrayImagenesUpload.length !== 0) { // Comprobamos que haya alguna imagen para subir
+            const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dcdvxqsxn/image/upload`;
+            const uploadPreset = "default";
+
+
             const formData = new FormData();
+            const uploadToCloudinary = async (image) => {
+                formData.append("file", image);
+                formData.append("upload_preset", uploadPreset); // Preset de subida
 
-            arrayImagenesUpload.forEach((image, index) => {
-                formData.append(`images[]`, image); // Enviar cada imagen
-            });
+                try {
+                    const response = await fetch(cloudinaryUrl, {
+                        method: "POST",
+                        body: formData,
+                    });
 
-            try {
-                const res = await fetch("/api/upload", {
-                    method: "POST",
-                    body: formData,
-                });
+                    const data = await response.json();
 
-                const data = await res.json();
-                console.log("Imágenes subidas con éxito:", data);
-            } catch (error) {
-                alert("Error subiendo las imágenes");
-            }
+                    if (response.ok) {
+                        console.log("Imagenes subidas con exito:", [data,data.url,data.public_id,data.original_filename]);
+                        return data; // Devolvemos los datos de la subida
+
+                    } else {
+                        console.error("Error al subir imagen:", data.error.message);
+                    }
+                } catch (error) {
+                    console.error("Error al conectar con Cloudinary:", error);
+                }
+                return null;
+            };
+
+            // Subimos las imagenes
+            const uploadPromises = arrayImagenesUpload.map((image) => uploadToCloudinary(image));
+            const publicIds = await Promise.all(uploadPromises);
+
+            // Filtramos los IDs públicos válidos y actualizamos el estado del formulario
+            const validPublicIds = publicIds.filter((id) => id !== null);
+
+            console.log(validPublicIds);
+
+            // Actualizamos el estado del formulario para enviar los IDs públicos al backend
+            // setForm((prevForm) => ({
+            //     ...prevForm,
+            //     imagenes: validPublicIds,
+            // }));
+
+            // Envío la unica informacion que guardamos en la BBDD, juntando la información de las imágenes ya subidas, con las nuevas
+            setForm((prevForm) => ({
+                ...prevForm,
+                imagenes: [
+                    ...validPublicIds.map((obj) => ({
+                        idPublica: obj.public_id,
+                        ruta: obj.secure_url,
+                    })),
+                    ...arrayImagenesCloudinary.map((obj) => ({
+                        idPublica: obj.idPublica,
+                        ruta: obj.ruta,
+                    })),
+                ],
+            }));
+            
         }
+        setIsReady(true) // Una vez se hayan subido las fotos enviamos el form con los datos
     };
 
     const agregarInterpretacion = () => {
-         console.log(interpretacionSeleccionada);
         setInterpretaciones([...interpretaciones, { id: interpretaciones.length}]);
     };
 
@@ -423,23 +474,38 @@ export default function ModalModificar({ id, onClose, muestra }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (validarFormulario()) {
-            recogerInterpretaciones();
-            handleUpload();
-            router.post("muestra", form);
-            showSuccessAlert();
-        }
+        // if (validarFormulario()) {
+        //     handleUpload();
+        //     recogerInterpretaciones();
+        //     showSuccessAlert();
+        // }
+
+
+        handleUpload();
+        recogerInterpretaciones();
+        showSuccessAlert();
+
     };
 
-    // console.log(form.tipoNaturaleza);
-
-
-
+    // Enviar los datos solo cuando form haya actualizado los datos
     useEffect(() => {
-        if (
-            muestra?.idTipoNaturaleza == "1" ||
-            muestra?.idTipoNaturaleza == "2"
-        ) {
+            // console.log(form);
+            if(isReady){ // Que solo se ejecute si es true
+
+                console.log(form);
+                router.put(`muestra/${muestra.id}`, form);
+                setIsReady(false)
+                onClose() // Cerramos el modal una vez se haya enviado la informacion
+            }
+    }, [isReady])
+
+
+
+    // Coloco todos los datos recibidos de la muestra
+    useEffect(() => {
+
+        // Comprobamos si se trata de una biopsia
+        if (muestra?.idTipoNaturaleza == "1" || muestra?.idTipoNaturaleza == "2") {
             setBiopsiaHidden(
                 "mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
             );
@@ -452,6 +518,7 @@ export default function ModalModificar({ id, onClose, muestra }) {
             setInterpretacionSeleccionada(datos[claveTipoEstudio].interpretacion);
         }
 
+        // Colocamos el tipo de estudio
         const tipoEstudios = {
             1: { nombre: "Citológico cérvico - vaginal" },
             2: { nombre: "Hematológico completo" },
@@ -462,20 +529,16 @@ export default function ModalModificar({ id, onClose, muestra }) {
 
         settipoEstudio(tipoEstudios[claveTipoEstudio].nombre);
 
+        // Comprobamos si la calidad tenía descripción
         if (muestra.calidad.nombre[muestra.calidad.nombre.length - 2] === ".") {
-            setCalidadHidden(
-                "mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-            );
+            setCalidadHidden("mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm");
         }
 
-        // Agrego las interpretaciones al array para poder eliminarlas
-        // setInterpretaciones((prevInterpretaciones) => [
-        //     ...prevInterpretaciones,
-        //     ...muestra.muestras_interpretaciones.map((interpretacion) => ({
-        //         id: interpretacion.id,
-        //     })),
-        // ]);
-    }, [muestra]); // Se ejecuta cuando cambia `muestra`
+
+
+    }, [muestra]); // Se ejecuta cuando carga la muestra recibida
+
+
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 flex-col">
@@ -706,58 +769,65 @@ export default function ModalModificar({ id, onClose, muestra }) {
                     <hr className="my-4 border-gray-300 mb-10 mt-10" />
 
                     <div>
-                        <label
-                            for="imagenes"
-                            className="block text-sm font-semibold text-gray-700"
-                        >
-                            Añadir imágenes
-                        </label>
-                        <input
-                            type="file"
-                            id="imagenes"
-                            name="imagenes"
-                            className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
-                            multiple
-                        />
-                    </div>
+                            <label
+                                for="imagenes"
+                                className="block text-sm font-semibold text-gray-700 mt-6"
+                            >
+                                Añadir imágenes
+                            </label>
+                            <input onChange={(e) => {handlePhotos(e), handleUploadPhotos(e)}}
+                                type="file"
+                                id="imagenes"
+                                name="imagenes"
+                                className="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm"
+                                multiple
+                            />
+                        </div>
 
-                    <div className="mt-4 space-x-4 flex">
-                        <div className="relative w-auto h-24 max-lg:h-12  inline-block">
-                            <img
-                                src="../public/muestra1.png"
-                                alt="Imagen 1"
-                                className="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
-                            />
-                            <a className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
-                                ✕
-                            </a>
+                        <div className="mt-4 flex flex-wrap gap-4" id="containerImages">
+
+                            <div className="mt-4 flex flex-wrap gap-4">
+                                {/* Aquí muestro las fotos guardadas de cloudinary */}
+                                {arrayImagenesCloudinary.map((photo) => (
+                                        <div className="relative w-auto h-32 inline-block">
+                                            <img
+                                                src={photo.ruta}
+                                                name={photo.idPublica}
+                                                className="w-auto h-32 object-cover rounded-lg"
+                                            />
+                                            <button
+                                                className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex items-center justify-center cursor-pointer"
+                                                onClick={handleDeletePhotoCloudinary}
+                                            >
+                                                ✕
+                                            </button>
+                                        </div>
+                                    ))}
+                                    {/* Aqui voy añadiendo las nuevas imágenes añadidas por el usuario.*/}
+                                    {arrayImagenes.map((photo) => (
+                                        <div className="relative w-auto h-32 inline-block">
+                                            <img
+                                                src={photo.url}
+                                                name={photo.nombre}
+                                                className="w-auto h-32 object-cover rounded-lg"
+                                            />
+                                            <button
+                                                className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex items-center justify-center cursor-pointer"
+                                                onClick={handleDeletePhoto}
+                                            >
+                                                ✕
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+
                         </div>
-                        <div className="relative w-auto h-24 max-lg:h-12 inline-block">
-                            <img
-                                src="../public/muestra2.png"
-                                alt="Imagen 2"
-                                className="w-auto h-24 max-lg:h-12  object-cover rounded-lg"
-                            />
-                            <a className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-6 h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
-                                ✕
-                            </a>
-                        </div>
-                        <div className="relative w-auto h-24 max-lg:h-12 inline-block">
-                            <img
-                                src="../public/muestra3.png"
-                                alt="Imagen 3"
-                                className="w-auto h-24 max-lg:h-12 object-cover rounded-lg "
-                            />
-                            <a className="font-extrabold absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 w-auto h-6 text-center flex flex-col align-middle justify-center cursor-pointer max-lg:hidden">
-                                ✕
-                            </a>
-                        </div>
-                    </div>
+                        
                     <div className="flex justify-start gap-8 mt-4 max-xl:flex-col">
                         {
                             <Link
                                 className="px-4 py-2 bg-[#0057B8] text-white rounded-lg shadow-md hover:bg-[#004494] max-xl:w-full text-center"
-                                onClick={onClose}
+                                onClick={(e) => {handleSubmit(e)}}
                             >
                                 Guardar Muestra
                             </Link>

@@ -8,7 +8,7 @@ export default function ModalEliminar({ muestra, onClose }) {
     console.log(muestra.id);
 
     const deleteMuestra = () => {
-        showModificableAlert('Muestra eliminada', 'Muestra eliminada con éxito', 'success');
+        // showModificableAlert('Muestra eliminada', 'Muestra eliminada con éxito', 'success');
         router.delete(`muestra/${muestra.id}`, {
             onSuccess: () => {
             },
